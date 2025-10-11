@@ -1,0 +1,79 @@
+.stat_block {
+    @apply flex items-center relative col-span-3 md:col-span-2 lg:col-span-6;
+    @apply rounded-xl px-3 py-2 md:p-3 lg:p-4 border border-white/20 backdrop-blur-md;
+    @apply bg-white/10 bg-gradient-to-br from-blue-500/10 to-green-500/10 shadow-xl;
+
+    & > .status_bar {
+        @apply hidden;
+    }
+
+    & > .icon {
+        @apply hidden sm:flex flex-shrink-0 items-center justify-center rounded-full shadow-md w-12 h-12;
+        @apply transition-colors duration-500 border border-white/20 bg-white/10 backdrop-blur-md;
+        @apply sm:mr-4;
+
+        & > svg {
+            @apply w-6 h-6 m-auto;
+        }
+    }
+
+    &:hover {
+        @apply border-white/30 shadow-2xl;
+        transform: translateY(-2px);
+        transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+}
+
+.terminal {
+    @apply flex flex-col w-full;
+
+    & .overflows_container {
+        @apply -ml-4 sm:ml-0;
+        width: calc(100% + 2rem);
+
+        @screen sm {
+            @apply w-full;
+        }
+    }
+
+    & > .container {
+        @apply relative rounded-t p-1 sm:p-2 min-h-[16rem] flex-1 font-mono text-sm;
+        @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+        @apply bg-gradient-to-br from-blue-500/10 to-green-500/10;
+
+        & #terminal {
+            @apply h-full;
+
+            &::-webkit-scrollbar-track {
+                @apply w-2;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                @apply bg-gray-900;
+            }
+        }
+    }
+
+    & .command_icon {
+        @apply flex items-center top-0 left-0 absolute z-10 select-none h-full px-3 transition-colors duration-100;
+    }
+
+    & .command_input {
+        @apply relative bg-white/10 px-2 text-neutral-100 pl-10 pr-4 py-2 w-full font-mono text-sm sm:rounded-b;
+        @apply backdrop-blur-md border border-white/20;
+        @apply focus:ring-0 outline-none focus-visible:outline-none;
+        @apply transition-colors duration-150;
+        @apply focus:border-white/30;
+    }
+
+    /* Status dot in top-right of console container */
+    & .status_dot {
+        @apply absolute top-2 right-2 w-2.5 h-2.5 rounded-full animate-pulse;
+    }
+}
+
+.chart_container {
+    @apply rounded-xl shadow-xl relative border border-white/20 backdrop-blur-md;
+    @apply bg-white/10 bg-gradient-to-br from-blue-500/10 to-green-500/10;
+    @apply overflow-hidden;
+}

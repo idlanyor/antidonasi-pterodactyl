@@ -1,0 +1,121 @@
+import React, { useEffect, useState } from 'react';
+import { Server } from '@/api/server/getServer';
+import getServers from '@/api/getServers';
+import ServerRow from '@/components/dashboard/ServerRow';
+import Spinner from '@/components/elements/Spinner';
+import PageContentBlock from '@/components/elements/PageContentBlock';
+import useFlash from '@/plugins/useFlash';
+import { useStoreState } from 'easy-peasy';
+import { usePersistedState } from '@/plugins/usePersistedState';
+import Switch from '@/components/elements/Switch';
+import Input from '@/components/elements/Input';
+import Select from '@/components/elements/Select';
+import tw from 'twin.macro';
+import useSWR from 'swr';
+import { PaginatedResult } from '@/api/http';
+import Pagination from '@/components/elements/Pagination';
+import { useLocation } from 'react-router-dom';
+
+export default () => {
+    const { search } = useLocation();
+    const defaultPage = Number(new URLSearchParams(search).get('page') || '1');
+
+    const [page, setPage] = useState(!isNaN(defaultPage) && defaultPage > 0 ? defaultPage : 1);
+    const [query, setQuery] = useState('');
+    const [sortKey, setSortKey] = useState<'nameAsc' | 'nameDesc' | 'status'>('nameAsc');
+    const { clearFlashes, clearAndAddHttpError } = useFlash();
+    const uuid = useStoreState((state) => state.user.data!.uuid);
+    const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
+    const [showOnlyAdmin, setShowOnlyAdmin] = usePersistedState(`${uuid}:show_all_servers`, false);
+
+    const { data: servers, error } = useSWR<PaginatedResult<Server>>(
+        ['/api/client/servers', showOnlyAdmin && rootAdmin, page],
+        () => getServers({ page, type: showOnlyAdmin && rootAdmin ? 'admin' : undefined })
+    );
+
+    useEffect(() => {
+        if (!servers) return;
+        if (servers.pagination.currentPage > 1 && !servers.items.length) {
+            setPage(1);
+        }
+    }, [servers?.pagination.currentPage]);
+
+    useEffect(() => {
+        // Don't use react-router to handle changing this part of the URL, otherwise it
+        // triggers a needless re-render. We just want to track this in the URL incase the
+        // user refreshes the page.
+        window.history.replaceState(null, document.title, `/${page <= 1 ? '' : `?page=${page}`}`);
+    }, [page]);
+
+    useEffect(() => {
+        if (error) clearAndAddHttpError({ key: 'dashboard', error });
+        if (!error) clearFlashes('dashboard');
+    }, [error]);
+
+    return (
+        <PageContentBlock title={'Dashboard'} showFlashKey={'dashboard'}>
+            <div css={tw`mb-4 flex flex-wrap items-center justify-between gap-3`}>
+                <div css={tw`flex items-baseline gap-3`}>
+                    <h2 css={tw`text-xl font-semibold text-neutral-100`}>Your Servers</h2>
+                    {servers && <span css={tw`text-xs text-neutral-300`}>({servers.items.length})</span>}
+                </div>
+                <div css={tw`flex items-center gap-3 w-full sm:w-auto`}>
+                    <div css={tw`flex-1 sm:flex-none min-w-[200px]`}>
+                        <Input
+                            placeholder={'Search by name...'}
+                            value={query}
+                            onChange={(e) => setQuery(e.currentTarget.value)}
+                            variant={'glass'}
+                        />
+                    </div>
+                    <Select value={sortKey} onChange={(e) => setSortKey(e.currentTarget.value as any)}>
+                        <option value={'nameAsc'}>Name A–Z</option>
+                        <option value={'nameDesc'}>Name Z–A</option>
+                        <option value={'status'}>Status</option>
+                    </Select>
+                    {rootAdmin && (
+                        <div css={tw`flex items-center ml-1`}>
+                            <p css={tw`uppercase text-2xs text-neutral-300 mr-2`}>
+                                {showOnlyAdmin ? "Others' servers" : 'Your servers'}
+                            </p>
+                            <Switch
+                                name={'show_all_servers'}
+                                defaultChecked={showOnlyAdmin}
+                                onChange={() => setShowOnlyAdmin((s) => !s)}
+                            />
+                        </div>
+                    )}
+                </div>
+            </div>
+            {!servers ? (
+                <Spinner centered size={'large'} />
+            ) : (
+                <Pagination data={servers} onPageSelect={setPage}>
+                    {({ items }) => {
+                        const filtered = items.filter((s) => s.name.toLowerCase().includes(query.trim().toLowerCase()));
+                        const sorted = filtered.sort((a, b) => {
+                            if (sortKey === 'nameAsc') return a.name.localeCompare(b.name);
+                            if (sortKey === 'nameDesc') return b.name.localeCompare(a.name);
+                            // status sort: running first, then others, offline last
+                            const rank = (st?: string) => (st === 'running' ? 0 : st ? 1 : 2);
+                            return rank(a.status as any) - rank(b.status as any);
+                        });
+                        return sorted.length > 0 ? (
+                            <div css={tw`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-4`}>
+                                {sorted.map((server) => (
+                                    <ServerRow key={server.uuid} server={server} />
+                                ))}
+                            </div>
+                        ) : (
+                            <p css={tw`text-center text-sm text-neutral-400`}>
+                                {showOnlyAdmin
+                                    ? 'There are no other servers to display.'
+                                    : 'There are no servers associated with your account.'}
+                            </p>
+                        );
+                    }}
+                </Pagination>
+            )}
+        </PageContentBlock>
+    );
+};

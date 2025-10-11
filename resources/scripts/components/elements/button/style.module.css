@@ -1,0 +1,112 @@
+.button {
+    @apply px-4 py-2 inline-flex items-center justify-center;
+    @apply rounded text-base font-semibold transition-all duration-100;
+    @apply focus:ring-[3px] focus:ring-offset-2 focus:ring-offset-gray-700 focus:ring-opacity-50;
+    color: #fff; /* default white for contrast in dark/glass cards */
+
+    /* Sizing Controls */
+    &.small {
+        @apply px-4 py-0 h-8 font-normal text-sm focus:ring-2;
+    }
+
+    &.large {
+        @apply px-5 py-3;
+    }
+
+    &.secondary {
+        @apply text-gray-50 bg-transparent;
+
+        &:disabled {
+            background: transparent !important;
+        }
+    }
+
+    &:disabled {
+        @apply cursor-not-allowed;
+    }
+
+    &.square {
+        @apply p-0 w-12 h-12;
+
+        &.small {
+            @apply w-8 h-8;
+        }
+    }
+
+    /* Oval shape */
+    &.oval {
+        @apply rounded-full;
+    }
+}
+
+.primary {
+    @apply bg-blue-600 text-blue-50;
+    @apply hover:bg-blue-500 active:bg-blue-500 focus:ring-blue-400 focus:ring-opacity-75;
+
+    &.secondary {
+        @apply hover:bg-blue-600 active:bg-blue-600;
+    }
+
+    &:disabled {
+        @apply bg-blue-500/75 text-blue-200/75;
+    }
+}
+
+/* Colorful palettes for primary variant (non-glass)
+   Use by adding classes conditionally in Button component */
+.palette-purpleRed {
+    background-image: linear-gradient(135deg, #a855f7, #ef4444);
+}
+.palette-indigoPink {
+    background-image: linear-gradient(135deg, #6366f1, #ec4899);
+}
+.palette-cyanBlue {
+    background-image: linear-gradient(135deg, #06b6d4, #2563eb);
+}
+.palette-sunset {
+    background-image: linear-gradient(135deg, #f59e0b, #f43f5e);
+}
+.palette-rainbow {
+    background-image: linear-gradient(90deg, #a855f7, #06b6d4, #f59e0b, #f43f5e);
+}
+
+.text {
+    @apply bg-gray-500 text-gray-50;
+    @apply hover:bg-gray-400 active:bg-gray-400 focus:ring-gray-300 focus:ring-opacity-50;
+
+    &.secondary {
+        @apply hover:bg-gray-500 active:bg-gray-500;
+    }
+
+    &:disabled {
+        @apply bg-gray-500/75 text-gray-200/75;
+    }
+}
+
+.danger {
+    @apply bg-red-600 text-gray-50;
+    @apply hover:bg-red-500 active:bg-red-500 focus:ring-red-400 focus:ring-opacity-75;
+
+    &.secondary {
+        @apply hover:bg-red-600 active:bg-red-600;
+    }
+
+    &:disabled {
+        @apply bg-red-600/75 text-red-50/75;
+    }
+}
+/* Glass appearance modifier */
+.glass {
+    backdrop-filter: blur(8px);
+    background-image: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(16, 185, 129, 0.2));
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+    }
+}
