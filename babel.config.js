@@ -3,7 +3,7 @@ module.exports = function (api) {
     const plugins = [
         'babel-plugin-macros',
         'styled-components',
-        'react-hot-loader/babel',
+        ...(api.env('production') ? [] : ['react-refresh/babel']),
         '@babel/transform-runtime',
         '@babel/transform-react-jsx',
         '@babel/proposal-class-properties',

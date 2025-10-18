@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const AssetsManifestPlugin = require('webpack-assets-manifest');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -15,7 +16,7 @@ module.exports = {
     performance: {
         hints: false,
     },
-    entry: ['react-hot-loader/patch', './resources/scripts/index.tsx'],
+    entry: ['./resources/scripts/index.tsx'],
     output: {
         path: path.join(__dirname, '/public/assets'),
         filename: isProduction ? 'bundle.[chunkhash:8].js' : 'bundle.[hash:8].js',
@@ -113,6 +114,7 @@ module.exports = {
                 files: `${path.join(__dirname, '/resources/scripts')}/**/*.{ts,tsx}`,
             }
         }),
+        !isProduction ? new ReactRefreshWebpackPlugin({ overlay: false }) : null,
         process.env.ANALYZE_BUNDLE ? new BundleAnalyzerPlugin({
             analyzerHost: '0.0.0.0',
             analyzerPort: 8081,

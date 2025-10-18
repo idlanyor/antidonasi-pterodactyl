@@ -2,7 +2,6 @@ import tw from 'twin.macro';
 import { createGlobalStyle } from 'styled-components/macro';
 
 export default createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
     body {
         ${tw`font-sans text-white`};
         font-family: 'Quicksand', 'IBM Plex Sans', 'Roboto', system-ui, sans-serif;

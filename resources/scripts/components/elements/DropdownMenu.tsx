@@ -2,6 +2,7 @@ import React, { createRef } from 'react';
 import styled from 'styled-components/macro';
 import tw from 'twin.macro';
 import Fade from '@/components/elements/Fade';
+import Portal from '@/components/elements/Portal';
 
 interface Props {
     children: React.ReactNode;
@@ -19,6 +20,7 @@ export const DropdownButtonRow = styled.button<{ danger?: boolean }>`
 
 interface State {
     posX: number;
+    posY: number;
     visible: boolean;
 }
 
@@ -27,6 +29,7 @@ class DropdownMenu extends React.PureComponent<Props, State> {
 
     state: State = {
         posX: 0,
+        posY: 0,
         visible: false,
     };
 
@@ -41,6 +44,7 @@ class DropdownMenu extends React.PureComponent<Props, State> {
             document.addEventListener('click', this.windowListener);
             document.addEventListener('contextmenu', this.contextMenuListener);
             menu.style.left = `${Math.round(this.state.posX - menu.clientWidth)}px`;
+            menu.style.top = `${Math.round(this.state.posY)}px`;
         }
 
         if (!this.state.visible && prevState.visible) {
@@ -55,7 +59,7 @@ class DropdownMenu extends React.PureComponent<Props, State> {
 
     onClickHandler = (e: React.MouseEvent<any, MouseEvent>) => {
         e.preventDefault();
-        this.triggerMenu(e.clientX);
+        this.triggerMenu({ x: e.clientX, y: e.clientY });
     };
 
     contextMenuListener = () => this.setState({ visible: false });
@@ -76,9 +80,10 @@ class DropdownMenu extends React.PureComponent<Props, State> {
         }
     };
 
-    triggerMenu = (posX: number) =>
+    triggerMenu = (pos: { x: number; y: number }) =>
         this.setState((s) => ({
-            posX: !s.visible ? posX : s.posX,
+            posX: !s.visible ? pos.x : s.posX,
+            posY: !s.visible ? pos.y : s.posY,
             visible: !s.visible,
         }));
 
@@ -87,17 +92,19 @@ class DropdownMenu extends React.PureComponent<Props, State> {
             <div>
                 {this.props.renderToggle(this.onClickHandler)}
                 <Fade timeout={150} in={this.state.visible} unmountOnExit>
-                    <div
-                        ref={this.menu}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            this.setState({ visible: false });
-                        }}
-                        style={{ width: '12rem' }}
-                        css={tw`absolute bg-white p-2 rounded border border-neutral-700 shadow-lg text-neutral-500 z-50`}
-                    >
-                        {this.props.children}
-                    </div>
+                    <Portal>
+                        <div
+                            ref={this.menu}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                this.setState({ visible: false });
+                            }}
+                            style={{ width: '12rem', position: 'fixed' }}
+                            css={tw`p-2 rounded border border-neutral-700 shadow-lg z-50 bg-black text-neutral-100`}
+                        >
+                            {this.props.children}
+                        </div>
+                    </Portal>
                 </Fade>
             </div>
         );
