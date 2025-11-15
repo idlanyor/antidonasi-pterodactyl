@@ -56,8 +56,29 @@ export default () => {
         <PageContentBlock title={'Dashboard'} showFlashKey={'dashboard'}>
             <div css={tw`mb-4 flex flex-wrap items-center justify-between gap-3`}>
                 <div css={tw`flex items-baseline gap-3`}>
-                    <h2 css={tw`text-xl font-semibold text-neutral-100`}>Your Servers</h2>
-                    {servers && <span css={tw`text-xs text-neutral-300`}>({servers.items.length})</span>}
+                    <h2
+                        css={tw`text-xl font-bold`}
+                        style={{
+                            color: '#ffd700',
+                            textShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
+                            fontFamily: 'monospace',
+                            letterSpacing: '0.1em',
+                        }}
+                    >
+                        YOUR_SERVERS
+                    </h2>
+                    {servers && (
+                        <span
+                            css={tw`text-xs`}
+                            style={{
+                                color: '#ff3333',
+                                textShadow: '0 0 8px rgba(255, 51, 51, 0.5)',
+                                fontFamily: 'monospace',
+                            }}
+                        >
+                            [{servers.items.length}]
+                        </span>
+                    )}
                 </div>
                 <div css={tw`flex items-center gap-3 w-full sm:w-auto`}>
                     <div css={tw`flex-1 sm:flex-none min-w-[200px]`}>
@@ -66,16 +87,38 @@ export default () => {
                             value={query}
                             onChange={(e) => setQuery(e.currentTarget.value)}
                             variant={'glass'}
+                            style={{
+                                background: 'rgba(20, 10, 10, 0.8)',
+                                border: '1px solid rgba(255, 215, 0, 0.3)',
+                                color: '#ffd700',
+                                fontFamily: 'monospace',
+                            }}
                         />
                     </div>
-                    <Select value={sortKey} onChange={(e) => setSortKey(e.currentTarget.value as any)}>
+                    <Select
+                        value={sortKey}
+                        onChange={(e) => setSortKey(e.currentTarget.value as any)}
+                        style={{
+                            background: 'rgba(20, 10, 10, 0.8)',
+                            border: '1px solid rgba(255, 215, 0, 0.3)',
+                            color: '#ffd700',
+                            fontFamily: 'monospace',
+                        }}
+                    >
                         <option value={'nameAsc'}>Name A–Z</option>
                         <option value={'nameDesc'}>Name Z–A</option>
                         <option value={'status'}>Status</option>
                     </Select>
                     {rootAdmin && (
                         <div css={tw`flex items-center ml-1`}>
-                            <p css={tw`uppercase text-2xs text-neutral-300 mr-2`}>
+                            <p
+                                css={tw`uppercase text-2xs mr-2`}
+                                style={{
+                                    color: 'rgba(255, 215, 0, 0.7)',
+                                    fontFamily: 'monospace',
+                                    letterSpacing: '0.05em',
+                                }}
+                            >
                                 {showOnlyAdmin ? "Others' servers" : 'Your servers'}
                             </p>
                             <Switch
@@ -107,10 +150,17 @@ export default () => {
                                 ))}
                             </div>
                         ) : (
-                            <p css={tw`text-center text-sm text-neutral-400`}>
+                            <p
+                                css={tw`text-center text-sm`}
+                                style={{
+                                    color: 'rgba(255, 51, 51, 0.7)',
+                                    fontFamily: 'monospace',
+                                    textShadow: '0 0 8px rgba(255, 51, 51, 0.3)',
+                                }}
+                            >
                                 {showOnlyAdmin
-                                    ? 'There are no other servers to display.'
-                                    : 'There are no servers associated with your account.'}
+                                    ? '>> No other servers found_'
+                                    : '>> No servers associated with your account_'}
                             </p>
                         );
                     }}

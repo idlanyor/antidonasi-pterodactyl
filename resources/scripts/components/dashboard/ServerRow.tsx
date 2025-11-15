@@ -17,42 +17,78 @@ const isAlarmState = (current: number, limit: number): boolean => limit > 0 && c
 
 const Icon = memo(
     styled(FontAwesomeIcon)<{ $alarm: boolean }>`
-        ${(props) => (props.$alarm ? tw`text-red-400` : tw`text-neutral-200`)};
+        ${(props) => (props.$alarm ? 'color: #ff3333;' : 'color: #ffd700;')};
+        filter: ${(props) =>
+            props.$alarm
+                ? 'drop-shadow(0 0 6px rgba(255, 51, 51, 0.6))'
+                : 'drop-shadow(0 0 6px rgba(255, 215, 0, 0.6))'};
     `,
     isEqual
 );
 
 const IconDescription = styled.p<{ $alarm: boolean }>`
     ${tw`text-sm ml-2`};
-    ${(props) => (props.$alarm ? tw`text-white` : tw`text-neutral-100`)};
+    ${(props) =>
+        props.$alarm
+            ? 'color: #ff3333; text-shadow: 0 0 8px rgba(255, 51, 51, 0.5);'
+            : 'color: #ffd700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);'};
+    font-family: monospace;
 `;
 
 const pulse = keyframes`
-  0% { opacity: 0.45; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.08); }
-  100% { opacity: 0.45; transform: scale(1); }
+  0% { opacity: 0.6; transform: scale(1); box-shadow: 0 0 10px currentColor; }
+  50% { opacity: 1; transform: scale(1.15); box-shadow: 0 0 20px currentColor; }
+  100% { opacity: 0.6; transform: scale(1); box-shadow: 0 0 10px currentColor; }
+`;
+
+const glitchFlicker = keyframes`
+    0%, 100% { opacity: 1; }
+    96% { opacity: 1; }
+    97% { opacity: 0.9; transform: translateX(-1px); }
+    98% { opacity: 1; transform: translateX(0); }
+    99% { opacity: 0.95; transform: translateX(0.5px); }
 `;
 
 const StatusIndicatorBox = styled(GreyRowBox)<{ $status: ServerPowerState | undefined }>`
     ${tw`relative flex flex-col space-y-3`};
-    ${tw`rounded-2xl p-5`};
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    ${tw`rounded-lg p-5`};
+    background: rgba(20, 10, 10, 0.85) !important;
+    border: 1px solid rgba(255, 215, 0, 0.3) !important;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.15), 0 0 40px rgba(255, 51, 51, 0.1);
+    animation: ${glitchFlicker} 12s infinite;
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: rgba(255, 215, 0, 0.6) !important;
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.3), 0 0 60px rgba(255, 51, 51, 0.2);
+        transform: translateY(-3px);
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ffd700, #ff3333, transparent);
+        opacity: 0.6;
+    }
 
     & .status-dot {
         position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 10px;
-        height: 10px;
+        top: 12px;
+        right: 12px;
+        width: 12px;
+        height: 12px;
         border-radius: 9999px;
         animation: ${pulse} 1.4s ease-in-out infinite;
         ${({ $status }) =>
             !$status || $status === 'offline'
-                ? tw`bg-red-500`
+                ? 'background: #ff3333; box-shadow: 0 0 15px rgba(255, 51, 51, 0.8);'
                 : $status === 'running'
-                ? tw`bg-green-500`
-                : tw`bg-yellow-500`};
+                ? 'background: #00ff88; box-shadow: 0 0 15px rgba(0, 255, 136, 0.8);'
+                : 'background: #ffff00; box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);'};
     }
 `;
 
@@ -112,21 +148,58 @@ export default ({ server, className }: { server: Server; className?: string }) =
         >
             {/* Header: icon + name + description */}
             <div css={tw`flex items-center`}>
-                <div className={'icon mr-4'}>
+                <div
+                    className={'icon mr-4'}
+                    style={{
+                        color: '#ffd700',
+                        filter: 'drop-shadow(0 0 8px rgba(255, 215, 0, 0.6))',
+                    }}
+                >
                     <FontAwesomeIcon icon={faServer} />
                 </div>
                 <div css={tw`flex-1 min-w-0`}>
-                    <p css={tw`text-lg break-words font-semibold`}>{server.name}</p>
+                    <p
+                        css={tw`text-lg break-words font-bold`}
+                        style={{
+                            color: '#ffd700',
+                            textShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
+                            fontFamily: 'monospace',
+                            letterSpacing: '0.05em',
+                        }}
+                    >
+                        {server.name}
+                    </p>
                     {!!server.description && (
-                        <p css={tw`text-sm text-neutral-100 break-words line-clamp-2`}>{server.description}</p>
+                        <p
+                            css={tw`text-sm break-words line-clamp-2`}
+                            style={{
+                                color: 'rgba(255, 215, 0, 0.7)',
+                                fontFamily: 'monospace',
+                            }}
+                        >
+                            {server.description}
+                        </p>
                     )}
                 </div>
             </div>
 
             {/* Endpoint */}
-            <div css={tw`flex items-center text-sm text-neutral-400`}>
-                <FontAwesomeIcon icon={faEthernet} css={tw`text-blue-300`} />
-                <p css={tw`ml-2 truncate text-neutral-100`}>
+            <div css={tw`flex items-center text-sm`}>
+                <FontAwesomeIcon
+                    icon={faEthernet}
+                    style={{
+                        color: '#ff3333',
+                        filter: 'drop-shadow(0 0 6px rgba(255, 51, 51, 0.6))',
+                    }}
+                />
+                <p
+                    css={tw`ml-2 truncate`}
+                    style={{
+                        color: '#ff3333',
+                        textShadow: '0 0 8px rgba(255, 51, 51, 0.4)',
+                        fontFamily: 'monospace',
+                    }}
+                >
                     {server.allocations
                         .filter((alloc) => alloc.isDefault)
                         .map((allocation) => (
@@ -170,7 +243,12 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {stats.cpuUsagePercent.toFixed(2)} %
                                 </IconDescription>
                             </div>
-                            <p css={tw`text-2xs text-neutral-300 text-center mt-1`}>of {cpuLimit}</p>
+                            <p
+                                css={tw`text-2xs text-center mt-1`}
+                                style={{ color: 'rgba(255, 215, 0, 0.5)', fontFamily: 'monospace' }}
+                            >
+                                of {cpuLimit}
+                            </p>
                         </div>
                         <div>
                             <div css={tw`flex justify-center`}>
@@ -179,7 +257,12 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {bytesToString(stats.memoryUsageInBytes)}
                                 </IconDescription>
                             </div>
-                            <p css={tw`text-2xs text-neutral-300 text-center mt-1`}>of {memoryLimit}</p>
+                            <p
+                                css={tw`text-2xs text-center mt-1`}
+                                style={{ color: 'rgba(255, 215, 0, 0.5)', fontFamily: 'monospace' }}
+                            >
+                                of {memoryLimit}
+                            </p>
                         </div>
                         <div>
                             <div css={tw`flex justify-center`}>
@@ -188,7 +271,12 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {bytesToString(stats.diskUsageInBytes)}
                                 </IconDescription>
                             </div>
-                            <p css={tw`text-2xs text-neutral-300 text-center mt-1`}>of {diskLimit}</p>
+                            <p
+                                css={tw`text-2xs text-center mt-1`}
+                                style={{ color: 'rgba(255, 215, 0, 0.5)', fontFamily: 'monospace' }}
+                            >
+                                of {diskLimit}
+                            </p>
                         </div>
                     </div>
                 )}

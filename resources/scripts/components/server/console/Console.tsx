@@ -20,25 +20,25 @@ import 'xterm/css/xterm.css';
 import styles from './style.module.css';
 
 const theme = {
-    background: th`colors.black`.toString(),
-    cursor: 'transparent',
-    black: th`colors.black`.toString(),
-    red: '#E54B4B',
-    green: '#9ECE58',
-    yellow: '#FAED70',
-    blue: '#396FE2',
-    magenta: '#BB80B3',
-    cyan: '#2DDAFD',
+    background: 'rgba(15, 10, 10, 0.95)',
+    cursor: '#ffd700',
+    black: '#140a0a',
+    red: '#ff3333',
+    green: '#00ff88',
+    yellow: '#ffff00',
+    blue: '#ffcc00',
+    magenta: '#ff3333',
+    cyan: '#ffd700',
     white: '#d0d0d0',
-    brightBlack: 'rgba(255, 255, 255, 0.2)',
-    brightRed: '#FF5370',
-    brightGreen: '#C3E88D',
-    brightYellow: '#FFCB6B',
-    brightBlue: '#82AAFF',
-    brightMagenta: '#C792EA',
-    brightCyan: '#89DDFF',
+    brightBlack: 'rgba(255, 215, 0, 0.3)',
+    brightRed: '#ff6666',
+    brightGreen: '#33ff99',
+    brightYellow: '#ffff66',
+    brightBlue: '#ffdd33',
+    brightMagenta: '#ff6666',
+    brightCyan: '#ffe033',
     brightWhite: '#ffffff',
-    selection: '#FAF089',
+    selection: 'rgba(255, 215, 0, 0.3)',
 };
 
 const terminalProps: ITerminalOptions = {
@@ -222,16 +222,44 @@ export default () => {
             >
                 <div className={'flex items-center justify-between mb-2 px-2'}>
                     <div className={'flex items-baseline space-x-2 min-w-0'}>
-                        <h3 className={'text-sm font-semibold text-neutral-100 truncate'}>{serverName}</h3>
+                        <h3
+                            className={'text-sm font-bold truncate'}
+                            style={{
+                                color: '#ffd700',
+                                textShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
+                                fontFamily: 'monospace',
+                                letterSpacing: '0.05em',
+                            }}
+                        >
+                            {serverName}
+                        </h3>
                         <span
-                            className={classNames(
-                                'text-2xs px-2 py-0.5 rounded-full border',
-                                status === 'running'
-                                    ? 'bg-green-500/20 text-green-200 border-green-400/40'
+                            className={'text-2xs px-2 py-0.5 rounded-full border'}
+                            style={{
+                                fontFamily: 'monospace',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.1em',
+                                ...(status === 'running'
+                                    ? {
+                                          background: 'rgba(0, 255, 136, 0.2)',
+                                          color: '#00ff88',
+                                          borderColor: 'rgba(0, 255, 136, 0.5)',
+                                          boxShadow: '0 0 10px rgba(0, 255, 136, 0.3)',
+                                      }
                                     : status === 'offline'
-                                    ? 'bg-red-500/20 text-red-200 border-red-400/40'
-                                    : 'bg-yellow-500/20 text-yellow-200 border-yellow-400/40'
-                            )}
+                                    ? {
+                                          background: 'rgba(255, 51, 51, 0.2)',
+                                          color: '#ff3333',
+                                          borderColor: 'rgba(255, 51, 51, 0.5)',
+                                          boxShadow: '0 0 10px rgba(255, 51, 51, 0.3)',
+                                      }
+                                    : {
+                                          background: 'rgba(255, 255, 0, 0.2)',
+                                          color: '#ffff00',
+                                          borderColor: 'rgba(255, 255, 0, 0.5)',
+                                          boxShadow: '0 0 10px rgba(255, 255, 0, 0.3)',
+                                      }),
+                            }}
                         >
                             {status || 'unknown'}
                         </span>
@@ -239,31 +267,67 @@ export default () => {
                     <div className={'flex items-center space-x-2'}>
                         <button
                             onClick={onClear}
-                            className={classNames(
-                                'px-2 py-1 text-2xs rounded-full',
-                                'bg-white/10 text-neutral-100 border border-white/20 backdrop-blur-md',
-                                'hover:border-white/30'
-                            )}
+                            className={'px-3 py-1 text-2xs rounded backdrop-blur-md transition-all duration-200'}
+                            style={{
+                                background: 'rgba(255, 215, 0, 0.1)',
+                                color: '#ffd700',
+                                border: '1px solid rgba(255, 215, 0, 0.3)',
+                                fontFamily: 'monospace',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em',
+                            }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.6)';
+                                e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.4)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+                                e.currentTarget.style.boxShadow = 'none';
+                            }}
                         >
                             Clear
                         </button>
                         <button
                             onClick={onToggleSearch}
-                            className={classNames(
-                                'px-2 py-1 text-2xs rounded-full',
-                                'bg-white/10 text-neutral-100 border border-white/20 backdrop-blur-md',
-                                'hover:border-white/30'
-                            )}
+                            className={'px-3 py-1 text-2xs rounded backdrop-blur-md transition-all duration-200'}
+                            style={{
+                                background: 'rgba(255, 215, 0, 0.1)',
+                                color: '#ffd700',
+                                border: '1px solid rgba(255, 215, 0, 0.3)',
+                                fontFamily: 'monospace',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em',
+                            }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.6)';
+                                e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.4)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+                                e.currentTarget.style.boxShadow = 'none';
+                            }}
                         >
                             Find
                         </button>
                         <button
                             onClick={onScrollBottom}
-                            className={classNames(
-                                'px-2 py-1 text-2xs rounded-full',
-                                'bg-white/10 text-neutral-100 border border-white/20 backdrop-blur-md',
-                                'hover:border-white/30'
-                            )}
+                            className={'px-3 py-1 text-2xs rounded backdrop-blur-md transition-all duration-200'}
+                            style={{
+                                background: 'rgba(255, 215, 0, 0.1)',
+                                color: '#ffd700',
+                                border: '1px solid rgba(255, 215, 0, 0.3)',
+                                fontFamily: 'monospace',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em',
+                            }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.6)';
+                                e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.4)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+                                e.currentTarget.style.boxShadow = 'none';
+                            }}
                         >
                             Bottom
                         </button>
@@ -273,10 +337,14 @@ export default () => {
                     <div id={styles.terminal} ref={ref} />
                 </div>
                 <div
-                    className={classNames('status_dot', {
-                        'bg-red-500': !connected || !instance,
-                        'bg-green-500': connected,
-                    })}
+                    className={'status_dot'}
+                    style={{
+                        background: !connected || !instance ? '#ff3333' : '#00ff88',
+                        boxShadow:
+                            !connected || !instance
+                                ? '0 0 15px rgba(255, 51, 51, 0.8)'
+                                : '0 0 15px rgba(0, 255, 136, 0.8)',
+                    }}
                 />
             </div>
             {canSendCommands && (

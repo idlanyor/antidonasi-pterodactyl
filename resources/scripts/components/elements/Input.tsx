@@ -19,21 +19,28 @@ const light = css<Props>`
 `;
 
 const checkboxStyle = css<Props>`
-    ${tw`bg-neutral-500 cursor-pointer appearance-none inline-block align-middle select-none flex-shrink-0 w-4 h-4 text-primary-400 border border-neutral-300 rounded-sm`};
+    ${tw`cursor-pointer appearance-none inline-block align-middle select-none flex-shrink-0 w-4 h-4 border rounded-sm`};
+    background: rgba(10, 10, 20, 0.8);
+    border-color: rgba(0, 255, 255, 0.4);
+    color: #00ffff;
     color-adjust: exact;
     background-origin: border-box;
-    transition: all 75ms linear, box-shadow 25ms linear;
+    transition: all 150ms ease, box-shadow 100ms ease;
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
 
     &:checked {
         ${tw`border-transparent bg-no-repeat bg-center`};
-        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-        background-color: currentColor;
+        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%2300ffff' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+        background-color: rgba(0, 255, 255, 0.2);
         background-size: 100% 100%;
+        border-color: rgba(0, 255, 255, 0.6);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
     }
 
     &:focus {
-        ${tw`outline-none border-primary-300`};
-        box-shadow: 0 0 0 1px rgba(9, 103, 210, 0.25);
+        ${tw`outline-none`};
+        border-color: rgba(0, 255, 255, 0.7);
+        box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.3);
     }
 `;
 
@@ -41,12 +48,26 @@ const inputStyle = css<Props>`
     // Reset to normal styling.
     resize: none;
     ${tw`appearance-none outline-none w-full min-w-0`};
-    ${tw`p-3 border-2 rounded text-sm transition-all duration-150`};
-    ${tw`bg-neutral-600 border-neutral-500 hover:border-neutral-400 text-neutral-200 shadow-none focus:ring-0`};
+    ${tw`p-3 rounded text-sm transition-all duration-200`};
+    background: rgba(10, 10, 20, 0.8);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #00ffff;
+    font-family: monospace;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+
+    &::placeholder {
+        color: rgba(0, 255, 255, 0.4);
+    }
+
+    &:hover {
+        border-color: rgba(0, 255, 255, 0.5);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    }
 
     & + .input-help {
         ${tw`mt-1 text-xs`};
-        ${(props) => (props.hasError ? tw`text-red-200` : tw`text-neutral-200`)};
+        color: ${(props) => (props.hasError ? '#ff0084' : 'rgba(0, 255, 255, 0.6)')};
+        font-family: monospace;
     }
 
     &:required,
@@ -55,26 +76,45 @@ const inputStyle = css<Props>`
     }
 
     &:not(:disabled):not(:read-only):focus {
-        ${tw`shadow-md border-primary-300 ring-2 ring-primary-400 ring-opacity-50`};
-        ${(props) => props.hasError && tw`border-red-300 ring-red-200`};
+        border-color: rgba(0, 255, 255, 0.7);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.05);
+        ${(props) =>
+            props.hasError &&
+            css`
+                border-color: rgba(255, 0, 132, 0.7);
+                box-shadow: 0 0 20px rgba(255, 0, 132, 0.3), inset 0 0 10px rgba(255, 0, 132, 0.05);
+            `};
     }
 
     &:disabled {
-        ${tw`opacity-75`};
+        ${tw`opacity-50`};
+        cursor: not-allowed;
     }
 
     ${(props) => props.isLight && light};
-    ${(props) => props.hasError && tw`text-red-100 border-red-400 hover:border-red-300`};
+    ${(props) =>
+        props.hasError &&
+        css`
+            color: #ff0084;
+            border-color: rgba(255, 0, 132, 0.5);
+            &:hover {
+                border-color: rgba(255, 0, 132, 0.7);
+            }
+        `};
 `;
 
 const glassStyle = css<Props>`
-    ${tw`bg-white/10 border-white/20 text-white backdrop-blur-md`};
-    background-image: linear-gradient(135deg, rgba(59, 130, 246, 0.22), rgba(16, 185, 129, 0.16));
+    ${tw`backdrop-blur-md`};
+    background: rgba(10, 10, 20, 0.7);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #00ffff;
     &:hover {
-        ${tw`border-white/30`};
+        border-color: rgba(0, 255, 255, 0.5);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
     }
     &:not(:disabled):not(:read-only):focus {
-        ${tw`ring-2 ring-primary-400/50 border-white/40`};
+        border-color: rgba(0, 255, 255, 0.7);
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
     }
 `;
 

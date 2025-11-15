@@ -90,15 +90,37 @@ export default () => {
             ) : (
                 <>
                     {!files.length ? (
-                        <p css={tw`text-sm text-neutral-400 text-center`}>This directory seems to be empty.</p>
+                        <p
+                            css={tw`text-sm text-center`}
+                            style={{
+                                color: 'rgba(255, 51, 51, 0.7)',
+                                fontFamily: 'monospace',
+                                textShadow: '0 0 8px rgba(255, 51, 51, 0.3)',
+                            }}
+                        >
+                            &gt;&gt; Directory is empty_
+                        </p>
                     ) : (
                         <CSSTransition classNames={'fade'} timeout={150} appear in>
                             <div>
                                 {files.length > 250 && (
-                                    <div css={tw`rounded bg-yellow-400 mb-px p-3`}>
-                                        <p css={tw`text-yellow-900 text-sm text-center`}>
-                                            This directory is too large to display in the browser, limiting the output
-                                            to the first 250 files.
+                                    <div
+                                        css={tw`rounded mb-px p-3`}
+                                        style={{
+                                            background: 'rgba(255, 255, 0, 0.1)',
+                                            border: '1px solid rgba(255, 255, 0, 0.3)',
+                                            boxShadow: '0 0 15px rgba(255, 255, 0, 0.2)',
+                                        }}
+                                    >
+                                        <p
+                                            css={tw`text-sm text-center`}
+                                            style={{
+                                                color: '#ffff00',
+                                                fontFamily: 'monospace',
+                                                textShadow: '0 0 8px rgba(255, 255, 0, 0.4)',
+                                            }}
+                                        >
+                                            [WARNING] Directory too large - limiting to first 250 files
                                         </p>
                                     </div>
                                 )}

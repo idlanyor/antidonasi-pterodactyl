@@ -13,7 +13,7 @@ import tw from 'twin.macro';
 
 const DashboardBackground = styled.div`
     ${tw`min-h-screen w-full relative`};
-    background: linear-gradient(135deg, rgba(7, 16, 36, 1) 0%, rgba(9, 35, 24, 1) 100%);
+    background: linear-gradient(135deg, rgba(15, 10, 10, 1) 0%, rgba(20, 10, 15, 1) 50%, rgba(15, 10, 10, 1) 100%);
     overflow: hidden;
 
     &::before,
@@ -21,27 +21,41 @@ const DashboardBackground = styled.div`
         content: '';
         position: absolute;
         border-radius: 50%;
-        filter: blur(70px);
-        opacity: 0.4;
+        filter: blur(80px);
+        opacity: 0.5;
         pointer-events: none;
+        animation: pulse 8s ease-in-out infinite;
     }
 
-    /* Blue glow top-left */
+    @keyframes pulse {
+        0%,
+        100% {
+            transform: scale(1);
+            opacity: 0.5;
+        }
+        50% {
+            transform: scale(1.1);
+            opacity: 0.7;
+        }
+    }
+
+    /* Yellow glow top-left */
     &::before {
-        width: 620px;
-        height: 620px;
-        top: -180px;
-        left: -180px;
-        background: radial-gradient(closest-side, rgba(59, 130, 246, 0.55), rgba(59, 130, 246, 0));
+        width: 700px;
+        height: 700px;
+        top: -200px;
+        left: -200px;
+        background: radial-gradient(closest-side, rgba(255, 215, 0, 0.4), rgba(255, 215, 0, 0));
     }
 
-    /* Green glow bottom-right */
+    /* Red glow bottom-right */
     &::after {
-        width: 560px;
-        height: 560px;
-        right: -160px;
-        bottom: -160px;
-        background: radial-gradient(closest-side, rgba(16, 185, 129, 0.45), rgba(16, 185, 129, 0));
+        width: 600px;
+        height: 600px;
+        right: -180px;
+        bottom: -180px;
+        background: radial-gradient(closest-side, rgba(255, 51, 51, 0.35), rgba(255, 51, 51, 0));
+        animation-delay: 1s;
     }
 `;
 

@@ -25,16 +25,34 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
                     {children}
                 </ContentContainer>
                 <ContentContainer css={tw`mb-4`}>
-                    <p css={tw`text-center text-neutral-500 text-xs`}>
+                    <p
+                        css={tw`text-center text-xs`}
+                        style={{
+                            color: 'rgba(255, 215, 0, 0.5)',
+                            fontFamily: 'monospace',
+                            letterSpacing: '0.05em',
+                        }}
+                    >
                         <a
                             rel={'noopener nofollow noreferrer'}
                             href={'https://pterodactyl.io'}
                             target={'_blank'}
-                            css={tw`no-underline text-neutral-500 hover:text-neutral-300`}
+                            css={tw`no-underline`}
+                            style={{
+                                color: 'rgba(255, 215, 0, 0.5)',
+                            }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.color = '#ffd700';
+                                e.currentTarget.style.textShadow = '0 0 10px rgba(255, 215, 0, 0.5)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.color = 'rgba(255, 215, 0, 0.5)';
+                                e.currentTarget.style.textShadow = 'none';
+                            }}
                         >
-                            Pterodactyl&reg;
+                            &lt;PTERODACTYL/&gt;
                         </a>
-                        &nbsp;&copy; 2015 - {new Date().getFullYear()}
+                        &nbsp;// 2015 - {new Date().getFullYear()}
                     </p>
                 </ContentContainer>
             </>

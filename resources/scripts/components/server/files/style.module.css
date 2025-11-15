@@ -3,6 +3,21 @@
 
     & button {
         @apply w-full first:col-span-2 sm:first:col-span-1;
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 51, 51, 0.1)) !important;
+        border: 1px solid rgba(255, 215, 0, 0.3) !important;
+        color: #ffd700 !important;
+        font-family: monospace;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 51, 51, 0.2)) !important;
+            border-color: rgba(255, 215, 0, 0.6) !important;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+            transform: translateY(-2px);
+        }
     }
 
     @screen md {
@@ -15,13 +30,23 @@
 }
 
 .file_row {
-    @apply flex items-center cursor-pointer rounded-lg mb-2 text-sm no-underline border border-white/10;
-    @apply bg-white/5 backdrop-blur-md;
+    @apply flex items-center cursor-pointer rounded-lg mb-2 text-sm no-underline;
+    @apply backdrop-blur-md;
     @apply transition-all duration-150;
-    @apply hover:bg-white/10 hover:border-white/20 hover:shadow-lg;
+    background: rgba(20, 10, 10, 0.7);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+
+    &:hover {
+        background: rgba(255, 215, 0, 0.1);
+        border-color: rgba(255, 215, 0, 0.5);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        transform: translateX(5px);
+    }
 
     & > .details {
-        @apply flex flex-1 items-center text-white no-underline px-4 py-3 overflow-hidden truncate;
+        @apply flex flex-1 items-center no-underline px-4 py-3 overflow-hidden truncate;
+        color: #ffd700;
+        font-family: monospace;
 
         &:not(a) {
             @apply cursor-default;

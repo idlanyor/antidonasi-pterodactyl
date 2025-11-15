@@ -31,9 +31,23 @@ const Container = styled.div`
 `;
 
 const blobPulse = keyframes`
-    0% { transform: translateY(0) scale(1); opacity: 0.18; }
-    50% { transform: translateY(-6px) scale(1.03); opacity: 0.25; }
-    100% { transform: translateY(0) scale(1); opacity: 0.18; }
+    0% { transform: translateY(0) scale(1); opacity: 0.3; }
+    50% { transform: translateY(-8px) scale(1.05); opacity: 0.5; }
+    100% { transform: translateY(0) scale(1); opacity: 0.3; }
+`;
+
+const glitchFlicker = keyframes`
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.8; transform: translateX(-2px); }
+    94% { opacity: 1; transform: translateX(0); }
+    95% { opacity: 0.9; transform: translateX(1px); }
+    96% { opacity: 1; transform: translateX(0); }
+`;
+
+const scanline = keyframes`
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
 `;
 
 const BackgroundBlobs = styled.div`
@@ -43,93 +57,189 @@ const BackgroundBlobs = styled.div`
     &::after {
         content: '';
         position: absolute;
-        filter: blur(42px);
+        filter: blur(60px);
         border-radius: 50%;
-        animation: ${blobPulse} 10s ease-in-out infinite;
+        animation: ${blobPulse} 8s ease-in-out infinite;
         will-change: transform, opacity;
     }
     &::before {
-        width: 320px;
-        height: 320px;
-        background: radial-gradient(closest-side, rgba(59, 130, 246, 0.45), rgba(59, 130, 246, 0));
-        top: -80px;
-        left: -80px;
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(closest-side, rgba(255, 215, 0, 0.4), rgba(255, 215, 0, 0));
+        top: -100px;
+        left: -100px;
     }
     &::after {
-        width: 280px;
-        height: 280px;
-        background: radial-gradient(closest-side, rgba(16, 185, 129, 0.35), rgba(16, 185, 129, 0));
-        bottom: -70px;
-        right: -70px;
-        animation-delay: 0.8s;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(closest-side, rgba(255, 51, 51, 0.4), rgba(255, 51, 51, 0));
+        bottom: -80px;
+        right: -80px;
+        animation-delay: 1s;
     }
 `;
 
 const Card = styled(motion.div)`
-    ${tw`w-full bg-white shadow-xl rounded-2xl p-6 mx-1 border`};
-    border-color: rgba(59, 130, 246, 0.2);
+    ${tw`w-full shadow-2xl rounded-lg p-6 mx-1 border`};
+    background: rgba(20, 10, 10, 0.95);
+    border-color: rgba(255, 215, 0, 0.3);
     z-index: 1;
     transition: transform 250ms ease, box-shadow 250ms ease;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.2), 0 0 60px rgba(255, 51, 51, 0.1);
+    animation: ${glitchFlicker} 10s infinite;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ffd700, #ff3333, transparent);
+        opacity: 0.8;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.1) 50%);
+        background-size: 100% 4px;
+        pointer-events: none;
+        opacity: 0.1;
+    }
 `;
 
 const NeonStyles = styled.div`
     ${tw`relative`};
-    /* Blue & white theme */
+    /* Cyberpunk neon theme - Yellow/Red */
     .auth-label {
-        color: #1d4ed8 !important; /* blue-700 */
+        color: #ffd700 !important; /* neon yellow */
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        font-family: monospace;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-size: 0.75rem;
     }
     .auth-input {
-        background-color: #ffffff !important;
-        color: #0f172a !important; /* slate-900 */
-        border: 1px solid rgba(59, 130, 246, 0.6) !important; /* blue-500 */
-        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        background-color: rgba(20, 10, 10, 0.8) !important;
+        color: #ffd700 !important;
+        border: 1px solid rgba(255, 215, 0, 0.4) !important;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+        font-family: monospace;
+
+        &::placeholder {
+            color: rgba(255, 215, 0, 0.4) !important;
+        }
     }
     .auth-input:focus {
-        border-color: rgba(37, 99, 235, 0.95) !important; /* blue-600 */
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25) !important; /* blue-500 ring */
+        border-color: #ffd700 !important;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255, 215, 0, 0.1) !important;
     }
     .auth-input.auth-error {
-        border-color: rgba(239, 68, 68, 0.95) !important; /* red-600 */
-        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important; /* red ring */
+        border-color: #ff3333 !important;
+        box-shadow: 0 0 20px rgba(255, 51, 51, 0.4), inset 0 0 10px rgba(255, 51, 51, 0.1) !important;
     }
     .auth-button {
-        color: #ffffff !important;
-        border: 1px solid rgba(37, 99, 235, 0.8) !important;
-        background-image: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: #000000 !important;
+        font-weight: bold;
+        border: 2px solid #ffd700 !important;
+        background: linear-gradient(135deg, #ffd700, #ffcc00) !important;
         text-transform: uppercase;
-        letter-spacing: 0.04em;
-        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+        letter-spacing: 0.15em;
+        font-family: monospace;
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.2);
+        text-shadow: none;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: ${scanline} 3s linear infinite;
+        }
     }
     .auth-button:hover {
-        filter: brightness(1.05);
-        transform: translateY(-1px);
+        background: linear-gradient(135deg, #ff3333, #cc0000) !important;
+        border-color: #ff3333 !important;
+        box-shadow: 0 0 40px rgba(255, 51, 51, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px) scale(1.02);
     }
     .auth-link {
-        color: #2563eb !important; /* blue-600 */
+        color: #ff3333 !important;
+        text-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+        font-family: monospace;
+        letter-spacing: 0.05em;
     }
     .auth-link:hover {
-        color: #1d4ed8 !important; /* blue-700 */
-        text-decoration: underline;
+        color: #ffd700 !important;
+        text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        text-decoration: none;
     }
 `;
 
 export default forwardRef<HTMLFormElement, Props>(({ ...props }, ref) => (
     <Container>
-        <div className={'flex items-center bg-white justify-center mb-6 rounded-xl mx-2'}>
-            <div className={'flex items-center space-x-4 py-5 px-2'}>
+        <div
+            className={'flex items-center justify-center mb-6 rounded-lg mx-2 border'}
+            style={{
+                background: 'rgba(20, 10, 10, 0.9)',
+                borderColor: 'rgba(255, 51, 51, 0.3)',
+                boxShadow: '0 0 20px rgba(255, 51, 51, 0.2)',
+            }}
+        >
+            <div className={'flex items-center space-x-4 py-5 px-4'}>
                 <img
                     src={'https://files.catbox.moe/5lzdmq.png'}
                     alt={'Antidonasi Creative'}
-                    className={'w-20 h-20 rounded-full object-cover shadow-md'}
+                    className={'w-20 h-20 rounded-full object-cover'}
+                    style={{
+                        boxShadow: '0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 51, 51, 0.3)',
+                        border: '2px solid rgba(255, 215, 0, 0.5)',
+                    }}
                 />
                 <div>
-                    <p className={'text-xl font-semibold leading-tight text-primary-700 lg:text-xl'}>
-                        Antidonasi Creative
+                    <p
+                        className={'text-xl font-bold leading-tight lg:text-xl'}
+                        style={{
+                            color: '#ffd700',
+                            textShadow: '0 0 10px rgba(255, 215, 0, 0.7)',
+                            fontFamily: 'monospace',
+                            letterSpacing: '0.1em',
+                        }}
+                    >
+                        ANTIDONASI CREATIVE
                     </p>
-                    <p className={'text-xs text-primary-500 tracking-wide lg:text-sm'}>
+                    <p
+                        className={'text-xs tracking-wide lg:text-sm'}
+                        style={{
+                            color: '#ff3333',
+                            textShadow: '0 0 8px rgba(255, 51, 51, 0.5)',
+                            fontFamily: 'monospace',
+                        }}
+                    >
                         Layanan VPS dan Panel Pterodactyl
                     </p>
-                    <p className={'text-xs text-primary-500 tracking-wide lg:text-sm'}>Murah dan Terpercaya</p>
+                    <p
+                        className={'text-xs tracking-wide lg:text-sm'}
+                        style={{
+                            color: 'rgba(255, 215, 0, 0.7)',
+                            fontFamily: 'monospace',
+                        }}
+                    >
+                        &gt;&gt; Murah dan Terpercaya_
+                    </p>
                 </div>
             </div>
         </div>
@@ -137,18 +247,29 @@ export default forwardRef<HTMLFormElement, Props>(({ ...props }, ref) => (
         <Form {...props} ref={ref}>
             <BackgroundBlobs />
             <Card
-                initial={{ opacity: 0, y: 16, scale: 0.98 }}
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                whileHover={{ y: -3, boxShadow: '0 14px 35px rgba(0,0,0,0.16)' }}
-                transition={{ duration: 0.45, ease: 'easeOut' }}
+                whileHover={{
+                    y: -5,
+                    boxShadow: '0 0 50px rgba(255, 215, 0, 0.4), 0 0 80px rgba(255, 51, 51, 0.2)',
+                }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
             >
                 <NeonStyles>
                     <div css={tw`w-full`}>{props.children}</div>
                 </NeonStyles>
             </Card>
         </Form>
-        <p css={tw`text-center text-primary-500 text-xs mt-4`}>
-            © {new Date().getFullYear()} Antidonasi Creative — All rights reserved
+        <p
+            css={tw`text-center text-xs mt-4`}
+            style={{
+                color: 'rgba(255, 215, 0, 0.6)',
+                textShadow: '0 0 5px rgba(255, 215, 0, 0.3)',
+                fontFamily: 'monospace',
+                letterSpacing: '0.05em',
+            }}
+        >
+            &lt;/ {new Date().getFullYear()} ANTIDONASI CREATIVE — ALL_RIGHTS_RESERVED /&gt;
         </p>
     </Container>
 ));

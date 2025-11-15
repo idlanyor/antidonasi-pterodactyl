@@ -17,26 +17,29 @@ const RightNavigation = styled.div`
     & > a,
     & > button,
     & > .navigation-link {
-        ${tw`flex items-center h-full no-underline text-neutral-300 px-6 cursor-pointer transition-all duration-150`};
+        ${tw`flex items-center h-full no-underline px-6 cursor-pointer transition-all duration-150`};
+        color: rgba(255, 215, 0, 0.8);
 
         &:active,
         &:hover {
-            ${tw`text-neutral-100`};
-            background: rgba(255, 255, 255, 0.05);
+            color: #ffd700;
+            background: rgba(255, 215, 0, 0.1);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
         &:active,
         &:hover,
         &.active {
-            box-shadow: inset 0 -2px #a855f7; /* purple-500 */
+            box-shadow: inset 0 -2px #ffd700;
         }
     }
 `;
 const NavWrapper = styled.div`
     ${tw`w-full shadow-md overflow-x-auto`};
-    background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(239, 68, 68, 0.1));
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 51, 51, 0.06));
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.1);
 `;
 
 export default () => {
@@ -59,9 +62,13 @@ export default () => {
                 <div id={'logo'} className={'flex-1'}>
                     <Link
                         to={'/'}
-                        className={
-                            'text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150'
-                        }
+                        className={'text-2xl font-header px-4 no-underline transition-colors duration-150'}
+                        style={{
+                            color: '#ffd700',
+                            textShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
+                            fontFamily: 'monospace',
+                            letterSpacing: '0.1em',
+                        }}
                     >
                         {name}
                     </Link>

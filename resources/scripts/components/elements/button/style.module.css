@@ -1,8 +1,18 @@
 .button {
     @apply px-4 py-2 inline-flex items-center justify-center;
-    @apply rounded text-base font-semibold transition-all duration-100;
+    @apply rounded text-base font-semibold transition-all duration-200;
     @apply focus:ring-[3px] focus:ring-offset-2 focus:ring-offset-gray-700 focus:ring-opacity-50;
-    color: #fff; /* default white for contrast in dark/glass cards */
+    color: #ffd700;
+    font-family: monospace;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+    }
 
     /* Sizing Controls */
     &.small {
@@ -14,7 +24,8 @@
     }
 
     &.secondary {
-        @apply text-gray-50 bg-transparent;
+        @apply bg-transparent;
+        color: #ffd700;
 
         &:disabled {
             background: transparent !important;
@@ -23,6 +34,7 @@
 
     &:disabled {
         @apply cursor-not-allowed;
+        opacity: 0.5;
     }
 
     &.square {
@@ -40,73 +52,178 @@
 }
 
 .primary {
-    @apply bg-blue-600 text-blue-50;
-    @apply hover:bg-blue-500 active:bg-blue-500 focus:ring-blue-400 focus:ring-opacity-75;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 204, 0, 0.3));
+    color: #ffd700;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+
+    &:hover {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 204, 0, 0.4));
+        border-color: rgba(255, 215, 0, 0.6);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    }
+
+    &:active {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.4), rgba(255, 204, 0, 0.5));
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.4);
+    }
 
     &.secondary {
-        @apply hover:bg-blue-600 active:bg-blue-600;
+        &:hover {
+            background: rgba(255, 215, 0, 0.1);
+        }
+        &:active {
+            background: rgba(255, 215, 0, 0.2);
+        }
     }
 
     &:disabled {
-        @apply bg-blue-500/75 text-blue-200/75;
+        background: rgba(255, 215, 0, 0.1);
+        color: rgba(255, 215, 0, 0.4);
+        border-color: rgba(255, 215, 0, 0.2);
     }
 }
 
-/* Colorful palettes for primary variant (non-glass)
-   Use by adding classes conditionally in Button component */
+/* Cyberpunk palettes */
 .palette-purpleRed {
-    background-image: linear-gradient(135deg, #a855f7, #ef4444);
+    background-image: linear-gradient(135deg, rgba(255, 51, 51, 0.3), rgba(255, 102, 102, 0.3));
+    color: #ff3333;
+    border-color: rgba(255, 51, 51, 0.4);
+    box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+
+    &:hover {
+        box-shadow: 0 0 25px rgba(255, 51, 51, 0.5);
+        border-color: rgba(255, 51, 51, 0.6);
+    }
 }
 .palette-indigoPink {
-    background-image: linear-gradient(135deg, #6366f1, #ec4899);
+    background-image: linear-gradient(135deg, rgba(255, 51, 51, 0.2), rgba(255, 102, 102, 0.3));
+    color: #ff6666;
+    border-color: rgba(255, 51, 51, 0.4);
+    box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+
+    &:hover {
+        box-shadow: 0 0 25px rgba(255, 51, 51, 0.5);
+        border-color: rgba(255, 51, 51, 0.6);
+    }
 }
 .palette-cyanBlue {
-    background-image: linear-gradient(135deg, #06b6d4, #2563eb);
+    background-image: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 204, 0, 0.3));
+    color: #ffd700;
+    border-color: rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+
+    &:hover {
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        border-color: rgba(255, 215, 0, 0.7);
+    }
 }
 .palette-sunset {
-    background-image: linear-gradient(135deg, #f59e0b, #f43f5e);
+    background-image: linear-gradient(135deg, rgba(255, 255, 0, 0.3), rgba(255, 153, 0, 0.3));
+    color: #ffff00;
+    border-color: rgba(255, 255, 0, 0.5);
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
+
+    &:hover {
+        box-shadow: 0 0 25px rgba(255, 255, 0, 0.5);
+        border-color: rgba(255, 255, 0, 0.7);
+    }
 }
 .palette-rainbow {
-    background-image: linear-gradient(90deg, #a855f7, #06b6d4, #f59e0b, #f43f5e);
+    background-image: linear-gradient(90deg, rgba(255, 51, 51, 0.3), rgba(255, 215, 0, 0.3), rgba(255, 255, 0, 0.3));
+    color: #ffffff;
+    border-color: rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+
+    &:hover {
+        box-shadow: 0 0 30px rgba(255, 51, 51, 0.4), 0 0 30px rgba(255, 215, 0, 0.4);
+    }
 }
 
 .text {
-    @apply bg-gray-500 text-gray-50;
-    @apply hover:bg-gray-400 active:bg-gray-400 focus:ring-gray-300 focus:ring-opacity-50;
+    background: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+
+    &:hover {
+        background: rgba(255, 215, 0, 0.2);
+        border-color: rgba(255, 215, 0, 0.5);
+    }
+
+    &:active {
+        background: rgba(255, 215, 0, 0.3);
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+    }
 
     &.secondary {
-        @apply hover:bg-gray-500 active:bg-gray-500;
+        &:hover {
+            background: rgba(255, 215, 0, 0.15);
+        }
+        &:active {
+            background: rgba(255, 215, 0, 0.2);
+        }
     }
 
     &:disabled {
-        @apply bg-gray-500/75 text-gray-200/75;
+        background: rgba(255, 215, 0, 0.05);
+        color: rgba(255, 215, 0, 0.3);
     }
 }
 
 .danger {
-    @apply bg-red-600 text-gray-50;
-    @apply hover:bg-red-500 active:bg-red-500 focus:ring-red-400 focus:ring-opacity-75;
+    background: linear-gradient(135deg, rgba(255, 51, 51, 0.3), rgba(255, 102, 102, 0.3));
+    color: #ff3333;
+    border: 1px solid rgba(255, 51, 51, 0.5);
+    box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+
+    &:hover {
+        background: linear-gradient(135deg, rgba(255, 51, 51, 0.4), rgba(255, 102, 102, 0.4));
+        border-color: rgba(255, 51, 51, 0.7);
+        box-shadow: 0 0 25px rgba(255, 51, 51, 0.5);
+    }
+
+    &:active {
+        background: linear-gradient(135deg, rgba(255, 51, 51, 0.5), rgba(255, 102, 102, 0.5));
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.4);
+    }
 
     &.secondary {
-        @apply hover:bg-red-600 active:bg-red-600;
+        &:hover {
+            background: rgba(255, 51, 51, 0.2);
+        }
+        &:active {
+            background: rgba(255, 51, 51, 0.3);
+        }
     }
 
     &:disabled {
-        @apply bg-red-600/75 text-red-50/75;
+        background: rgba(255, 51, 51, 0.1);
+        color: rgba(255, 51, 51, 0.4);
+        border-color: rgba(255, 51, 51, 0.2);
     }
 }
-/* Glass appearance modifier */
+/* Cyberpunk glass appearance modifier */
 .glass {
-    backdrop-filter: blur(8px);
-    background-image: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(16, 185, 129, 0.2));
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(10px);
+    background-image: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 51, 51, 0.1));
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
 
     &:hover {
-        border-color: rgba(255, 255, 255, 0.28);
+        border-color: rgba(255, 215, 0, 0.5);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
     }
 
     &:focus {
         outline: none;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.4);
     }
 }
