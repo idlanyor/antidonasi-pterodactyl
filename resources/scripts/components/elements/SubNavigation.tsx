@@ -3,9 +3,9 @@ import tw from 'twin.macro';
 
 const SubNavigation = styled.div`
     ${tw`w-full shadow overflow-x-auto`};
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.06), rgba(255, 51, 51, 0.04));
+    background: linear-gradient(135deg, rgba(245, 133, 41, 0.9), rgba(221, 42, 123, 0.9));
     backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 215, 0, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
 
     & > div {
         ${tw`flex items-center text-sm mx-auto px-2`};
@@ -14,24 +14,27 @@ const SubNavigation = styled.div`
         & > a,
         & > div {
             ${tw`inline-block py-3 px-4 no-underline whitespace-nowrap transition-all duration-150`};
-            color: rgba(255, 215, 0, 0.7);
-            font-family: monospace;
-            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.85);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            letter-spacing: 0.02em;
+            font-weight: 500;
 
             &:not(:first-of-type) {
                 ${tw`ml-2`};
             }
 
             &:hover {
-                color: #ffd700;
-                text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
             }
 
             &:active,
             &.active {
-                color: #ffd700;
-                text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-                box-shadow: inset 0 -2px #ffd700;
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.15);
+                box-shadow: inset 0 -2px rgba(255, 255, 255, 0.8);
+                border-radius: 8px;
             }
         }
     }

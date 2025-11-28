@@ -13,49 +13,27 @@ import tw from 'twin.macro';
 
 const DashboardBackground = styled.div`
     ${tw`min-h-screen w-full relative`};
-    background: linear-gradient(135deg, rgba(15, 10, 10, 1) 0%, rgba(20, 10, 15, 1) 50%, rgba(15, 10, 10, 1) 100%);
+    background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
     overflow: hidden;
 
-    &::before,
+    &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 20% 80%, rgba(245, 133, 41, 0.4) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(221, 42, 123, 0.4) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(129, 52, 175, 0.3) 0%, transparent 50%);
+        opacity: 0.6;
+    }
+
     &::after {
         content: '';
         position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
-        opacity: 0.5;
-        pointer-events: none;
-        animation: pulse 8s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-        0%,
-        100% {
-            transform: scale(1);
-            opacity: 0.5;
-        }
-        50% {
-            transform: scale(1.1);
-            opacity: 0.7;
-        }
-    }
-
-    /* Yellow glow top-left */
-    &::before {
-        width: 700px;
-        height: 700px;
-        top: -200px;
-        left: -200px;
-        background: radial-gradient(closest-side, rgba(255, 215, 0, 0.4), rgba(255, 215, 0, 0));
-    }
-
-    /* Red glow bottom-right */
-    &::after {
-        width: 600px;
-        height: 600px;
-        right: -180px;
-        bottom: -180px;
-        background: radial-gradient(closest-side, rgba(255, 51, 51, 0.35), rgba(255, 51, 51, 0));
-        animation-delay: 1s;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.1;
     }
 `;
 

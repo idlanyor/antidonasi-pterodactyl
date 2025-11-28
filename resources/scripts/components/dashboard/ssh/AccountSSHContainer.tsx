@@ -34,7 +34,7 @@ export default () => {
                 <ContentBox title={'SSH Keys'} css={tw`flex-1 overflow-hidden mt-8 md:mt-0 md:ml-8`}>
                     <SpinnerOverlay visible={!data && isValidating} />
                     {!data || !data.length ? (
-                        <p css={tw`text-center text-sm text-white`}>
+                        <p css={tw`text-center text-sm py-4`} style={{ color: 'rgba(0, 0, 0, 0.6)' }}>
                             {!data ? 'Loading...' : 'No SSH Keys exist for this account.'}
                         </p>
                     ) : (
@@ -44,11 +44,18 @@ export default () => {
                                 css={[tw`flex space-x-4 items-center`, index > 0 && tw`mt-2`]}
                                 $variant={'glass'}
                             >
-                                <FontAwesomeIcon icon={faKey} css={tw`text-white`} />
+                                <FontAwesomeIcon icon={faKey} style={{ color: '#f58529' }} />
                                 <div css={tw`flex-1`}>
-                                    <p css={tw`text-sm break-words font-medium`}>{key.name}</p>
-                                    <p css={tw`text-xs mt-1 font-mono truncate text-white`}>SHA256:{key.fingerprint}</p>
-                                    <p css={tw`text-xs mt-1 text-white uppercase`}>
+                                    <p css={tw`text-sm break-words font-medium`} style={{ color: '#000000' }}>
+                                        {key.name}
+                                    </p>
+                                    <p
+                                        css={tw`text-xs mt-1 font-mono truncate`}
+                                        style={{ color: 'rgba(0, 0, 0, 0.7)' }}
+                                    >
+                                        SHA256:{key.fingerprint}
+                                    </p>
+                                    <p css={tw`text-xs mt-1 uppercase`} style={{ color: 'rgba(0, 0, 0, 0.6)' }}>
                                         Added on:&nbsp;
                                         {format(key.createdAt, 'MMM do, yyyy HH:mm')}
                                     </p>

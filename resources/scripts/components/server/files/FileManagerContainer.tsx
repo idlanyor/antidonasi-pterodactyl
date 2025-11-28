@@ -91,36 +91,36 @@ export default () => {
                 <>
                     {!files.length ? (
                         <p
-                            css={tw`text-sm text-center`}
+                            css={tw`text-sm text-center py-8`}
                             style={{
-                                color: 'rgba(255, 51, 51, 0.7)',
+                                color: 'rgba(0, 0, 0, 0.6)',
                                 fontFamily: 'monospace',
-                                textShadow: '0 0 8px rgba(255, 51, 51, 0.3)',
+                                fontSize: '14px',
                             }}
                         >
-                            &gt;&gt; Directory is empty_
+                            Directory is empty
                         </p>
                     ) : (
                         <CSSTransition classNames={'fade'} timeout={150} appear in>
                             <div>
                                 {files.length > 250 && (
                                     <div
-                                        css={tw`rounded mb-px p-3`}
+                                        css={tw`rounded mb-3 p-4`}
                                         style={{
-                                            background: 'rgba(255, 255, 0, 0.1)',
-                                            border: '1px solid rgba(255, 255, 0, 0.3)',
-                                            boxShadow: '0 0 15px rgba(255, 255, 0, 0.2)',
+                                            background:
+                                                'linear-gradient(135deg, rgba(245, 133, 41, 0.2), rgba(221, 42, 123, 0.15))',
+                                            border: '2px solid rgba(245, 133, 41, 0.5)',
+                                            boxShadow: '0 4px 15px rgba(245, 133, 41, 0.25)',
                                         }}
                                     >
                                         <p
-                                            css={tw`text-sm text-center`}
+                                            css={tw`text-sm text-center font-semibold`}
                                             style={{
-                                                color: '#ffff00',
-                                                fontFamily: 'monospace',
-                                                textShadow: '0 0 8px rgba(255, 255, 0, 0.4)',
+                                                color: '#000000',
+                                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
                                             }}
                                         >
-                                            [WARNING] Directory too large - limiting to first 250 files
+                                            ⚠️ Warning: Directory too large - showing first 250 files only
                                         </p>
                                     </div>
                                 )}

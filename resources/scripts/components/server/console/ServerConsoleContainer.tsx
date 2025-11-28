@@ -37,10 +37,10 @@ const ServerConsoleContainer = () => {
                     <h1
                         className={'font-header text-2xl leading-relaxed line-clamp-1'}
                         style={{
-                            color: '#ffd700',
-                            textShadow: '0 0 15px rgba(255, 215, 0, 0.5)',
+                            color: '#000000',
                             fontFamily: 'monospace',
                             letterSpacing: '0.1em',
+                            fontWeight: 'bold',
                         }}
                     >
                         {name}
@@ -48,7 +48,7 @@ const ServerConsoleContainer = () => {
                     <p
                         className={'text-sm line-clamp-2'}
                         style={{
-                            color: 'rgba(255, 51, 51, 0.8)',
+                            color: 'rgba(0, 0, 0, 0.7)',
                             fontFamily: 'monospace',
                         }}
                     >

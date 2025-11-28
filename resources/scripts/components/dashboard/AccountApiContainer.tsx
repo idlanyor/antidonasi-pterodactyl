@@ -60,7 +60,7 @@ export default () => {
                         All requests using the <Code>{deleteIdentifier}</Code> key will be invalidated.
                     </Dialog.Confirm>
                     {keys.length === 0 ? (
-                        <p css={tw`text-center text-sm text-white`}>
+                        <p css={tw`text-center text-sm py-4`} style={{ color: 'rgba(0, 0, 0, 0.6)' }}>
                             {loading ? 'Loading...' : 'No API keys exist for this account.'}
                         </p>
                     ) : (
@@ -70,23 +70,34 @@ export default () => {
                                 css={[tw`flex items-center`, index > 0 && tw`mt-2`]}
                                 $variant={'glass'}
                             >
-                                <FontAwesomeIcon icon={faKey} css={tw`text-white`} />
+                                <FontAwesomeIcon icon={faKey} style={{ color: '#f58529' }} />
                                 <div css={tw`ml-4 flex-1 overflow-hidden`}>
-                                    <p css={tw`text-sm break-words`}>{key.description}</p>
-                                    <p css={tw`text-2xs text-white uppercase`}>
+                                    <p css={tw`text-sm break-words`} style={{ color: '#000000', fontWeight: 400 }}>
+                                        {key.description}
+                                    </p>
+                                    <p css={tw`text-2xs uppercase`} style={{ color: 'rgba(0, 0, 0, 0.6)' }}>
                                         Last used:&nbsp;
                                         {key.lastUsedAt ? format(key.lastUsedAt, 'MMM do, yyyy HH:mm') : 'Never'}
                                     </p>
                                 </div>
                                 <p css={tw`text-sm ml-4 hidden md:block`}>
-                                    <code css={tw`font-mono py-1 px-2 bg-neutral-900 rounded text-white`}>
+                                    <code
+                                        css={tw`font-mono py-1 px-2 rounded`}
+                                        style={{
+                                            background: 'rgba(221, 42, 123, 0.15)',
+                                            color: '#000000',
+                                            border: '1px solid rgba(221, 42, 123, 0.3)',
+                                            fontWeight: 400,
+                                        }}
+                                    >
                                         {key.identifier}
                                     </code>
                                 </p>
                                 <button css={tw`ml-4 p-2 text-sm`} onClick={() => setDeleteIdentifier(key.identifier)}>
                                     <FontAwesomeIcon
                                         icon={faTrashAlt}
-                                        css={tw`text-white hover:text-red-400 transition-colors duration-150`}
+                                        css={tw`transition-colors duration-150`}
+                                        style={{ color: '#dc2626' }}
                                     />
                                 </button>
                             </GreyRowBox>

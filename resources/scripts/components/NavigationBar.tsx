@@ -18,28 +18,27 @@ const RightNavigation = styled.div`
     & > button,
     & > .navigation-link {
         ${tw`flex items-center h-full no-underline px-6 cursor-pointer transition-all duration-150`};
-        color: rgba(255, 215, 0, 0.8);
+        color: rgba(255, 255, 255, 0.9);
 
         &:active,
         &:hover {
-            color: #ffd700;
-            background: rgba(255, 215, 0, 0.1);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.15);
         }
 
         &:active,
         &:hover,
         &.active {
-            box-shadow: inset 0 -2px #ffd700;
+            box-shadow: inset 0 -2px rgba(255, 255, 255, 0.8);
         }
     }
 `;
 const NavWrapper = styled.div`
     ${tw`w-full shadow-md overflow-x-auto`};
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 51, 51, 0.06));
+    background: linear-gradient(135deg, rgba(245, 133, 41, 0.95), rgba(221, 42, 123, 0.95));
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 `;
 
 export default () => {
@@ -64,10 +63,10 @@ export default () => {
                         to={'/'}
                         className={'text-2xl font-header px-4 no-underline transition-colors duration-150'}
                         style={{
-                            color: '#ffd700',
-                            textShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
-                            fontFamily: 'monospace',
-                            letterSpacing: '0.1em',
+                            color: '#ffffff',
+                            fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                            letterSpacing: '0.02em',
+                            fontWeight: 700,
                         }}
                     >
                         {name}

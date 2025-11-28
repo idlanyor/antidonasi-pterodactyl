@@ -35,7 +35,16 @@ const RenameServerBox = () => {
                     </FormikFieldWrapper>
                 </div>
                 <div css={tw`mt-6 text-right`}>
-                    <Button type={'submit'} shape={2} palette={'cyanBlue'} appearance={'glass'}>
+                    <Button
+                        type={'submit'}
+                        shape={2}
+                        style={{
+                            background: 'linear-gradient(135deg, #f58529, #dd2a7b)',
+                            border: '2px solid rgba(245, 133, 41, 0.6)',
+                            color: '#ffffff',
+                            fontWeight: 600,
+                        }}
+                    >
                         Save
                     </Button>
                 </div>

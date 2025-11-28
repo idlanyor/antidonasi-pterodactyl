@@ -59,7 +59,15 @@ export default () => {
                             <Field name={'publicKey'} as={CustomTextarea} variant={'glass'} />
                         </FormikFieldWrapper>
                         <div css={tw`flex justify-end mt-6`}>
-                            <Button shape={'oval'} palette={'indigoPink'} variant={'glass'}>
+                            <Button
+                                shape={'oval'}
+                                style={{
+                                    background: 'linear-gradient(135deg, #f58529, #dd2a7b)',
+                                    border: '2px solid rgba(245, 133, 41, 0.6)',
+                                    color: '#ffffff',
+                                    fontWeight: 600,
+                                }}
+                            >
                                 Save
                             </Button>
                         </div>

@@ -54,7 +54,12 @@ export default ({ className }: PowerButtonProps) => {
                     disabled={status !== 'offline'}
                     onClick={onButtonClick.bind(this, 'start')}
                     shape={2}
-                    palette={'cyanBlue'}
+                    style={{
+                        background: 'linear-gradient(135deg, #10b981, #059669)',
+                        border: '2px solid #065f46',
+                        color: '#ffffff',
+                        fontWeight: 600,
+                    }}
                 >
                     Start
                 </Button>
@@ -65,7 +70,12 @@ export default ({ className }: PowerButtonProps) => {
                     disabled={!status}
                     onClick={onButtonClick.bind(this, 'restart')}
                     shape={2}
-                    palette={'indigoPink'}
+                    style={{
+                        background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                        border: '2px solid #92400e',
+                        color: '#ffffff',
+                        fontWeight: 600,
+                    }}
                 >
                     Restart
                 </Button>
@@ -76,6 +86,12 @@ export default ({ className }: PowerButtonProps) => {
                     disabled={status === 'offline'}
                     onClick={onButtonClick.bind(this, killable ? 'kill' : 'stop')}
                     shape={2}
+                    style={{
+                        background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                        border: '2px solid #991b1b',
+                        color: '#ffffff',
+                        fontWeight: 600,
+                    }}
                 >
                     {killable ? 'Kill' : 'Stop'}
                 </Button.Danger>

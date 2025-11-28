@@ -11,27 +11,41 @@ import tw from 'twin.macro';
 
 const AuthBackground = styled.div`
     ${tw`min-h-screen w-full relative`};
-    background: radial-gradient(1200px 600px at 10% -10%, rgba(59, 130, 246, 0.25), transparent),
-        radial-gradient(900px 500px at 110% 110%, rgba(16, 185, 129, 0.18), transparent),
-        linear-gradient(135deg, rgba(5, 12, 24, 1) 0%, rgba(6, 21, 15, 1) 100%);
+    background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
     overflow: hidden;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 20% 80%, rgba(245, 133, 41, 0.4) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(221, 42, 123, 0.4) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(129, 52, 175, 0.3) 0%, transparent 50%);
+        opacity: 0.6;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.1;
+    }
 `;
 
 const CenterWrap = styled.div`
     ${tw`min-h-screen w-full flex items-center justify-center`};
     position: relative;
     z-index: 1;
+    padding: 1rem 0.5rem;
 `;
 
 const ColorOrbs = styled.div`
     ${tw`absolute inset-0 pointer-events-none`};
     z-index: 0;
-    background: radial-gradient(220px 220px at 12% 22%, rgba(59, 130, 246, 0.18), transparent 65%),
-        radial-gradient(160px 160px at 80% 18%, rgba(236, 72, 153, 0.16), transparent 65%),
-        radial-gradient(200px 200px at 24% 80%, rgba(16, 185, 129, 0.16), transparent 65%),
-        radial-gradient(140px 140px at 88% 78%, rgba(245, 158, 11, 0.14), transparent 65%),
-        radial-gradient(180px 180px at 50% 10%, rgba(99, 102, 241, 0.12), transparent 65%);
-    filter: blur(30px);
 `;
 
 export default () => {

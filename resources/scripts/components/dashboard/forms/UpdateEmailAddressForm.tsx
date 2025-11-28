@@ -67,7 +67,15 @@ export default () => {
                             />
                         </div>
                         <div css={tw`mt-6`}>
-                            <Button disabled={isSubmitting || !isValid} appearance={'glass'}>
+                            <Button
+                                disabled={isSubmitting || !isValid}
+                                style={{
+                                    background: 'linear-gradient(135deg, #f58529, #dd2a7b)',
+                                    border: '2px solid rgba(245, 133, 41, 0.6)',
+                                    color: '#ffffff',
+                                    fontWeight: 600,
+                                }}
+                            >
                                 Update Email
                             </Button>
                         </div>

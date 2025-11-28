@@ -12,264 +12,268 @@ type Props = React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, 
 
 const Container = styled.div`
     position: relative;
-    ${breakpoint('sm')`
-        ${tw`w-4/5 mx-auto`}
-    `};
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 1rem;
 
     ${breakpoint('md')`
-        ${tw`p-10`}
-    `};
-
-    ${breakpoint('lg')`
-        ${tw`w-3/5`}
-    `};
-
-    ${breakpoint('xl')`
-        ${tw`w-full`}
-        max-width: 700px;
+        max-width: 500px;
     `};
 `;
 
-const blobPulse = keyframes`
-    0% { transform: translateY(0) scale(1); opacity: 0.3; }
-    50% { transform: translateY(-8px) scale(1.05); opacity: 0.5; }
-    100% { transform: translateY(0) scale(1); opacity: 0.3; }
+const gradientShift = keyframes`
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 `;
 
-const glitchFlicker = keyframes`
-    0%, 100% { opacity: 1; }
-    92% { opacity: 1; }
-    93% { opacity: 0.8; transform: translateX(-2px); }
-    94% { opacity: 1; transform: translateX(0); }
-    95% { opacity: 0.9; transform: translateX(1px); }
-    96% { opacity: 1; transform: translateX(0); }
-`;
-
-const scanline = keyframes`
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-`;
-
-const BackgroundBlobs = styled.div`
-    ${tw`absolute inset-0 pointer-events-none`};
-    z-index: 0;
-    &::before,
-    &::after {
-        content: '';
-        position: absolute;
-        filter: blur(60px);
-        border-radius: 50%;
-        animation: ${blobPulse} 8s ease-in-out infinite;
-        will-change: transform, opacity;
-    }
-    &::before {
-        width: 350px;
-        height: 350px;
-        background: radial-gradient(closest-side, rgba(255, 215, 0, 0.4), rgba(255, 215, 0, 0));
-        top: -100px;
-        left: -100px;
-    }
-    &::after {
-        width: 300px;
-        height: 300px;
-        background: radial-gradient(closest-side, rgba(255, 51, 51, 0.4), rgba(255, 51, 51, 0));
-        bottom: -80px;
-        right: -80px;
-        animation-delay: 1s;
-    }
+const float = keyframes`
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
 `;
 
 const Card = styled(motion.div)`
-    ${tw`w-full shadow-2xl rounded-lg p-6 mx-1 border`};
-    background: rgba(20, 10, 10, 0.95);
-    border-color: rgba(255, 215, 0, 0.3);
+    ${tw`w-full`};
+    padding: 1.5rem 1.25rem;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(245, 133, 41, 0.2), 0 6px 18px rgba(221, 42, 123, 0.15),
+        0 0 0 1px rgba(245, 133, 41, 0.15);
     z-index: 1;
-    transition: transform 250ms ease, box-shadow 250ms ease;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.2), 0 0 60px rgba(255, 51, 51, 0.1);
-    animation: ${glitchFlicker} 10s infinite;
+    position: relative;
+    overflow: hidden;
+
+    ${breakpoint('md')`
+        padding: 1.75rem 1.75rem;
+    `};
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #f58529 0%, #dd2a7b 33%, #8134af 66%, #f58529 100%);
+        background-size: 200% 100%;
+        animation: ${gradientShift} 3s linear infinite;
+    }
+`;
+
+const ModernStyles = styled.div`
+    ${tw`relative`};
+
+    .auth-label {
+        color: #2d3748 !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        font-size: 0.8rem;
+        margin-bottom: 0.4rem;
+        transition: all 0.2s ease;
+    }
+
+    .auth-input {
+        background: rgba(247, 250, 252, 0.8) !important;
+        color: #2d3748 !important;
+        border: 2px solid #e2e8f0 !important;
+        box-shadow: none;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 0.9rem;
+        padding: 0.7rem 0.875rem;
+        border-radius: 10px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &::placeholder {
+            color: #a0aec0 !important;
+        }
+
+        &:hover {
+            border-color: #cbd5e0 !important;
+            background: rgba(255, 255, 255, 0.9) !important;
+        }
+    }
+
+    .auth-input:focus {
+        border-color: #dd2a7b !important;
+        background: #ffffff !important;
+        box-shadow: 0 0 0 3px rgba(221, 42, 123, 0.15) !important;
+        transform: translateY(-1px);
+    }
+
+    .auth-input.auth-error {
+        border-color: #fc8181 !important;
+        box-shadow: 0 0 0 3px rgba(252, 129, 129, 0.1) !important;
+    }
+
+    .auth-button {
+        color: #ffffff !important;
+        font-weight: 600;
+        border: none !important;
+        background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%) !important;
+        letter-spacing: 0.025em;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 0.95rem;
+        padding: 0.75rem 1.5rem !important;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(245, 133, 41, 0.35), 0 4px 12px rgba(221, 42, 123, 0.25);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        &:hover::before {
+            left: 100%;
+        }
+    }
+
+    .auth-button:hover {
+        background: linear-gradient(135deg, #8134af 0%, #dd2a7b 50%, #f58529 100%) !important;
+        box-shadow: 0 12px 30px rgba(245, 133, 41, 0.45), 0 6px 18px rgba(221, 42, 123, 0.35);
+        transform: translateY(-2px);
+    }
+
+    .auth-button:active {
+        transform: translateY(0px);
+    }
+
+    .auth-link {
+        color: #dd2a7b !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        display: inline-block;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #f58529, #dd2a7b, #8134af);
+            transition: width 0.3s ease;
+        }
+    }
+
+    .auth-link:hover {
+        color: #8134af !important;
+        text-decoration: none;
+
+        &::after {
+            width: 100%;
+        }
+    }
+`;
+
+const LogoContainer = styled(motion.div)`
+    background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(245, 133, 41, 0.35), 0 8px 20px rgba(221, 42, 123, 0.25);
     position: relative;
     overflow: hidden;
 
     &::before {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #ffd700, #ff3333, transparent);
-        opacity: 0.8;
-    }
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.1) 50%);
-        background-size: 100% 4px;
-        pointer-events: none;
-        opacity: 0.1;
-    }
-`;
-
-const NeonStyles = styled.div`
-    ${tw`relative`};
-    /* Cyberpunk neon theme - Yellow/Red */
-    .auth-label {
-        color: #ffd700 !important; /* neon yellow */
-        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        font-family: monospace;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        font-size: 0.75rem;
-    }
-    .auth-input {
-        background-color: rgba(20, 10, 10, 0.8) !important;
-        color: #ffd700 !important;
-        border: 1px solid rgba(255, 215, 0, 0.4) !important;
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
-        font-family: monospace;
-
-        &::placeholder {
-            color: rgba(255, 215, 0, 0.4) !important;
-        }
-    }
-    .auth-input:focus {
-        border-color: #ffd700 !important;
-        box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255, 215, 0, 0.1) !important;
-    }
-    .auth-input.auth-error {
-        border-color: #ff3333 !important;
-        box-shadow: 0 0 20px rgba(255, 51, 51, 0.4), inset 0 0 10px rgba(255, 51, 51, 0.1) !important;
-    }
-    .auth-button {
-        color: #000000 !important;
-        font-weight: bold;
-        border: 2px solid #ffd700 !important;
-        background: linear-gradient(135deg, #ffd700, #ffcc00) !important;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        font-family: monospace;
-        box-shadow: 0 0 30px rgba(255, 215, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.2);
-        text-shadow: none;
-        position: relative;
-        overflow: hidden;
-
-        &::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            animation: ${scanline} 3s linear infinite;
-        }
-    }
-    .auth-button:hover {
-        background: linear-gradient(135deg, #ff3333, #cc0000) !important;
-        border-color: #ff3333 !important;
-        box-shadow: 0 0 40px rgba(255, 51, 51, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px) scale(1.02);
-    }
-    .auth-link {
-        color: #ff3333 !important;
-        text-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
-        font-family: monospace;
-        letter-spacing: 0.05em;
-    }
-    .auth-link:hover {
-        color: #ffd700 !important;
-        text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
-        text-decoration: none;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+        animation: ${float} 6s ease-in-out infinite;
     }
 `;
 
 export default forwardRef<HTMLFormElement, Props>(({ ...props }, ref) => (
     <Container>
-        <div
-            className={'flex items-center justify-center mb-6 rounded-lg mx-2 border'}
-            style={{
-                background: 'rgba(20, 10, 10, 0.9)',
-                borderColor: 'rgba(255, 51, 51, 0.3)',
-                boxShadow: '0 0 20px rgba(255, 51, 51, 0.2)',
-            }}
+        <LogoContainer
+            className={'flex items-center justify-center mb-4'}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-            <div className={'flex items-center space-x-4 py-5 px-4'}>
-                <img
+            <div className={'flex items-center space-x-3 py-4 px-5'}>
+                <motion.img
                     src={'https://files.catbox.moe/5lzdmq.png'}
                     alt={'Antidonasi Creative'}
-                    className={'w-20 h-20 rounded-full object-cover'}
+                    className={'w-12 h-12 rounded-full object-cover'}
                     style={{
-                        boxShadow: '0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 51, 51, 0.3)',
-                        border: '2px solid rgba(255, 215, 0, 0.5)',
+                        boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)',
+                        border: '2px solid rgba(255, 255, 255, 0.3)',
                     }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
                 />
                 <div>
-                    <p
-                        className={'text-xl font-bold leading-tight lg:text-xl'}
+                    <motion.p
+                        className={'text-base font-bold leading-tight'}
                         style={{
-                            color: '#ffd700',
-                            textShadow: '0 0 10px rgba(255, 215, 0, 0.7)',
-                            fontFamily: 'monospace',
-                            letterSpacing: '0.1em',
+                            color: '#ffffff',
+                            fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                            letterSpacing: '0.02em',
+                            fontWeight: 700,
                         }}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1, duration: 0.5 }}
                     >
                         ANTIDONASI CREATIVE
-                    </p>
-                    <p
-                        className={'text-xs tracking-wide lg:text-sm'}
+                    </motion.p>
+                    <motion.p
+                        className={'text-xs mt-0.5'}
                         style={{
-                            color: '#ff3333',
-                            textShadow: '0 0 8px rgba(255, 51, 51, 0.5)',
-                            fontFamily: 'monospace',
+                            color: 'rgba(255, 255, 255, 0.9)',
+                            fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                            fontWeight: 400,
                         }}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.2, duration: 0.5 }}
                     >
                         Layanan VPS dan Panel Pterodactyl
-                    </p>
-                    <p
-                        className={'text-xs tracking-wide lg:text-sm'}
-                        style={{
-                            color: 'rgba(255, 215, 0, 0.7)',
-                            fontFamily: 'monospace',
-                        }}
-                    >
-                        &gt;&gt; Murah dan Terpercaya_
-                    </p>
+                    </motion.p>
                 </div>
             </div>
-        </div>
-        <FlashMessageRender css={tw`mb-2 px-1`} />
+        </LogoContainer>
+        <FlashMessageRender css={tw`mb-3 px-1`} />
         <Form {...props} ref={ref}>
-            <BackgroundBlobs />
             <Card
                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                whileHover={{
-                    y: -5,
-                    boxShadow: '0 0 50px rgba(255, 215, 0, 0.4), 0 0 80px rgba(255, 51, 51, 0.2)',
-                }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
+                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
             >
-                <NeonStyles>
+                <ModernStyles>
                     <div css={tw`w-full`}>{props.children}</div>
-                </NeonStyles>
+                </ModernStyles>
             </Card>
         </Form>
-        <p
+        <motion.p
             css={tw`text-center text-xs mt-4`}
             style={{
-                color: 'rgba(255, 215, 0, 0.6)',
-                textShadow: '0 0 5px rgba(255, 215, 0, 0.3)',
-                fontFamily: 'monospace',
-                letterSpacing: '0.05em',
+                color: '#000000ff',
+                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                fontWeight: 400,
             }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
         >
-            &lt;/ {new Date().getFullYear()} ANTIDONASI CREATIVE — ALL_RIGHTS_RESERVED /&gt;
-        </p>
+            © {new Date().getFullYear()} Antidonasi Creative
+        </motion.p>
     </Container>
 ));

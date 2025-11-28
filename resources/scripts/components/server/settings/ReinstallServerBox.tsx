@@ -48,20 +48,24 @@ export default () => {
                 Your server will be stopped and some files may be deleted or modified during this process, are you sure
                 you wish to continue?
             </Dialog.Confirm>
-            <p css={tw`text-sm text-white`}>
+            <p css={tw`text-sm`} style={{ color: 'rgba(0, 0, 0, 0.8)', lineHeight: '1.5' }}>
                 Reinstalling your server will stop it, and then re-run the installation script that initially set it
                 up.&nbsp;
-                <strong css={tw`font-medium`}>
+                <strong css={tw`font-medium`} style={{ color: '#dc2626' }}>
                     Some files may be deleted or modified during this process, please back up your data before
                     continuing.
                 </strong>
             </p>
             <div css={tw`mt-6 text-right`}>
                 <Button.Danger
-                    variant={Button.Variants.Secondary}
                     onClick={() => setModalVisible(true)}
                     shape={2}
-                    appearance={'glass'}
+                    style={{
+                        background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                        border: '2px solid #991b1b',
+                        color: '#ffffff',
+                        fontWeight: 600,
+                    }}
                 >
                     Reinstall Server
                 </Button.Danger>

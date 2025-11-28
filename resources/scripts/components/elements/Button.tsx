@@ -10,7 +10,7 @@ interface Props {
     isSecondary?: boolean;
     variant?: 'default' | 'glass';
     shape?: 'default' | 'oval';
-    palette?: 'purpleRed' | 'indigoPink' | 'cyanBlue' | 'sunset' | 'rainbow';
+    palette?: 'purpleRed' | 'indigoPink' | 'cyanBlue' | 'sunset' | 'rainbow' | 'instagram';
 }
 
 const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
@@ -19,12 +19,12 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         ((!props.isSecondary && !props.color) || props.color === 'primary') &&
         css<Props>`
-            ${(props) =>
-                !props.isSecondary &&
-                tw`bg-gradient-to-br from-primary-400 to-primary-600 border-primary-700 text-white shadow-md`};
+            ${tw`text-white border-transparent shadow-md`};
+            background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
 
             &:hover:not(:disabled) {
-                ${tw`bg-gradient-to-br from-primary-500 to-primary-700 border-primary-800 shadow-lg`};
+                filter: brightness(1.1);
+                ${tw`shadow-lg`};
             }
         `};
 
@@ -83,13 +83,33 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         props.isSecondary &&
         css<Props>`
-            ${tw`border-neutral-500 bg-transparent text-neutral-200 backdrop-blur-sm`};
+            ${tw`text-white backdrop-blur-md`};
+            background: rgba(255, 255, 255, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 
             &:hover:not(:disabled) {
-                ${tw`border-neutral-400 text-neutral-100 bg-neutral-500/10`};
-                ${(props) => props.color === 'red' && tw`bg-red-500/20 border-red-500 text-red-50`};
-                ${(props) => props.color === 'primary' && tw`bg-primary-500/20 border-primary-500 text-primary-50`};
-                ${(props) => props.color === 'green' && tw`bg-green-500/20 border-green-500 text-green-50`};
+                background: rgba(255, 255, 255, 0.35);
+                border-color: rgba(255, 255, 255, 0.7);
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+                ${(props) =>
+                    props.color === 'red' &&
+                    css`
+                        background: rgba(252, 129, 129, 0.35);
+                        border-color: #fc8181;
+                    `};
+                ${(props) =>
+                    props.color === 'primary' &&
+                    css`
+                        background: linear-gradient(135deg, rgba(245, 133, 41, 0.4), rgba(221, 42, 123, 0.4));
+                        border-color: rgba(245, 133, 41, 0.8);
+                    `};
+                ${(props) =>
+                    props.color === 'green' &&
+                    css`
+                        background: rgba(72, 187, 120, 0.35);
+                        border-color: #48bb78;
+                    `};
             }
         `};
 
@@ -97,28 +117,31 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         props.variant === 'glass' &&
         css`
-            ${tw`bg-white/10 border-white/20 text-neutral-100 backdrop-blur-md`};
+            ${tw`bg-white/20 text-neutral-100 backdrop-blur-md`};
+            border: 2px solid rgba(255, 255, 255, 0.5);
             background-image: linear-gradient(
                 135deg,
                 ${props.palette === 'indigoPink'
-                    ? 'rgba(99,102,241,0.20), rgba(236,72,153,0.16)'
+                    ? 'rgba(245,133,41,0.30), rgba(221,42,123,0.25)'
                     : props.palette === 'cyanBlue'
-                    ? 'rgba(6,182,212,0.20), rgba(37,99,235,0.16)'
+                    ? 'rgba(221,42,123,0.30), rgba(129,52,175,0.25)'
                     : props.palette === 'sunset'
-                    ? 'rgba(245,158,11,0.22), rgba(244,63,94,0.16)'
+                    ? 'rgba(245,133,41,0.32), rgba(221,42,123,0.25)'
                     : props.palette === 'rainbow'
-                    ? 'rgba(59,130,246,0.20), rgba(16,185,129,0.18)'
-                    : 'rgba(59,130,246,0.22), rgba(16,185,129,0.16)'}
+                    ? 'rgba(245,133,41,0.30), rgba(221,42,123,0.25), rgba(129,52,175,0.28)'
+                    : props.palette === 'instagram'
+                    ? 'rgba(245,133,41,0.32), rgba(221,42,123,0.28), rgba(129,52,175,0.25)'
+                    : 'rgba(245,133,41,0.32), rgba(129,52,175,0.25)'}
             );
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             &:hover:not(:disabled) {
-                ${tw`border-white/30`};
+                border-color: rgba(255, 255, 255, 0.7);
                 transform: translateY(-1px);
-                box-shadow: 0 12px 26px rgba(0, 0, 0, 0.16);
+                box-shadow: 0 12px 26px rgba(0, 0, 0, 0.25);
             }
             &:active:not(:disabled) {
                 transform: translateY(0);
-                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
             }
         `};
 
@@ -138,9 +161,9 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
         props.palette === 'indigoPink' &&
         css`
             ${tw`text-white border-transparent`};
-            background-image: linear-gradient(135deg, #6366f1, #ec4899);
+            background-image: linear-gradient(135deg, #f58529, #dd2a7b);
             &:hover:not(:disabled) {
-                filter: brightness(1.05);
+                filter: brightness(1.1);
             }
         `};
 
@@ -149,9 +172,9 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
         props.palette === 'cyanBlue' &&
         css`
             ${tw`text-white border-transparent`};
-            background-image: linear-gradient(135deg, #06b6d4, #2563eb);
+            background-image: linear-gradient(135deg, #dd2a7b, #8134af);
             &:hover:not(:disabled) {
-                filter: brightness(1.05);
+                filter: brightness(1.1);
             }
         `};
 
@@ -174,6 +197,17 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
             background-image: linear-gradient(90deg, #a855f7, #06b6d4, #f59e0b, #f43f5e);
             &:hover:not(:disabled) {
                 filter: brightness(1.05);
+            }
+        `};
+
+    ${(props) =>
+        !props.variant &&
+        props.palette === 'instagram' &&
+        css`
+            ${tw`text-white border-transparent`};
+            background-image: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+            &:hover:not(:disabled) {
+                filter: brightness(1.1);
             }
         `};
 

@@ -6,7 +6,7 @@ export default createGlobalStyle`
         ${tw`font-sans text-white`};
         font-family: 'Quicksand', 'IBM Plex Sans', 'Roboto', system-ui, sans-serif;
         letter-spacing: 0.015em;
-        background: linear-gradient(135deg, rgba(7, 16, 36, 1) 0%, rgba(9, 35, 24, 1) 100%);
+        background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
         background-attachment: fixed;
         min-height: 100vh;
     }

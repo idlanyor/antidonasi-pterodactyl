@@ -95,17 +95,48 @@ const MassActionsBar = () => {
                 <Portal>
                     <div className={'pointer-events-none fixed bottom-0 mb-6 flex justify-center w-full z-50'}>
                         <Fade timeout={75} in={selectedFiles.length > 0} unmountOnExit>
-                            <div css={tw`flex items-center space-x-4 pointer-events-auto rounded p-4 bg-black/50`}>
-                                <Button onClick={() => setShowMove(true)} shape={2} palette={'cyanBlue'}>
+                            <div
+                                css={tw`flex items-center space-x-4 pointer-events-auto rounded-lg p-4`}
+                                style={{
+                                    background: 'rgba(20, 10, 20, 0.95)',
+                                    border: '2px solid rgba(245, 133, 41, 0.5)',
+                                    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)',
+                                    backdropFilter: 'blur(12px)',
+                                }}
+                            >
+                                <Button
+                                    onClick={() => setShowMove(true)}
+                                    shape={2}
+                                    style={{
+                                        background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                                        border: '2px solid #1d4ed8',
+                                        color: '#ffffff',
+                                        fontWeight: 600,
+                                    }}
+                                >
                                     Move
                                 </Button>
-                                <Button onClick={onClickCompress} shape={2} palette={'cyanBlue'}>
+                                <Button
+                                    onClick={onClickCompress}
+                                    shape={2}
+                                    style={{
+                                        background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+                                        border: '2px solid #6d28d9',
+                                        color: '#ffffff',
+                                        fontWeight: 600,
+                                    }}
+                                >
                                     Archive
                                 </Button>
                                 <Button.Danger
-                                    variant={Button.Variants.Secondary}
                                     onClick={() => setShowConfirm(true)}
                                     shape={2}
+                                    style={{
+                                        background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                                        border: '2px solid #991b1b',
+                                        color: '#ffffff',
+                                        fontWeight: 600,
+                                    }}
                                 >
                                     Delete
                                 </Button.Danger>

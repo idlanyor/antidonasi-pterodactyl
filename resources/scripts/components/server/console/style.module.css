@@ -1,9 +1,9 @@
 .stat_block {
     @apply flex items-center relative col-span-3 md:col-span-2 lg:col-span-6;
     @apply rounded-lg px-3 py-2 md:p-3 lg:p-4 backdrop-blur-md;
-    background: rgba(20, 10, 10, 0.85);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.15), 0 0 40px rgba(255, 51, 51, 0.1);
+    background: rgba(20, 10, 20, 0.85);
+    border: 2px solid rgba(245, 133, 41, 0.4);
+    box-shadow: 0 0 20px rgba(245, 133, 41, 0.2), 0 0 40px rgba(221, 42, 123, 0.15);
 
     & > .status_bar {
         @apply hidden;
@@ -13,20 +13,20 @@
         @apply hidden sm:flex flex-shrink-0 items-center justify-center rounded-full w-12 h-12;
         @apply transition-colors duration-500 backdrop-blur-md;
         @apply sm:mr-4;
-        background: rgba(255, 215, 0, 0.1);
-        border: 1px solid rgba(255, 215, 0, 0.3);
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-        color: #ffd700;
+        background: linear-gradient(135deg, rgba(245, 133, 41, 0.2), rgba(221, 42, 123, 0.15));
+        border: 2px solid rgba(245, 133, 41, 0.4);
+        box-shadow: 0 0 15px rgba(245, 133, 41, 0.3);
+        color: #f58529;
 
         & > svg {
             @apply w-6 h-6 m-auto;
-            filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.6));
+            filter: drop-shadow(0 0 6px rgba(245, 133, 41, 0.6));
         }
     }
 
     &:hover {
-        border-color: rgba(255, 215, 0, 0.6);
-        box-shadow: 0 0 30px rgba(255, 215, 0, 0.3), 0 0 60px rgba(255, 51, 51, 0.2);
+        border-color: rgba(245, 133, 41, 0.7);
+        box-shadow: 0 0 30px rgba(245, 133, 41, 0.4), 0 0 60px rgba(221, 42, 123, 0.3);
         transform: translateY(-3px);
         transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
     }
@@ -47,9 +47,9 @@
     & > .container {
         @apply relative rounded-t p-1 sm:p-2 min-h-[16rem] flex-1 font-mono text-sm;
         @apply backdrop-blur-md;
-        background: rgba(15, 10, 10, 0.95);
-        border: 1px solid rgba(255, 215, 0, 0.3);
-        box-shadow: 0 0 30px rgba(255, 215, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.5);
+        background: rgba(15, 10, 20, 0.95);
+        border: 2px solid rgba(245, 133, 41, 0.4);
+        box-shadow: 0 0 30px rgba(245, 133, 41, 0.25), inset 0 0 50px rgba(0, 0, 0, 0.5);
 
         &::before {
             content: '';
@@ -57,8 +57,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ffd700, #ff3333, transparent);
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #f58529, #dd2a7b, #8134af, transparent);
             opacity: 0.8;
             z-index: 10;
         }
@@ -68,11 +68,11 @@
 
             &::-webkit-scrollbar-track {
                 @apply w-2;
-                background: rgba(255, 215, 0, 0.1);
+                background: rgba(245, 133, 41, 0.1);
             }
 
             &::-webkit-scrollbar-thumb {
-                background: rgba(255, 215, 0, 0.4);
+                background: linear-gradient(135deg, rgba(245, 133, 41, 0.6), rgba(221, 42, 123, 0.5));
                 border-radius: 4px;
             }
         }
@@ -80,8 +80,8 @@
 
     & .command_icon {
         @apply flex items-center top-0 left-0 absolute z-10 select-none h-full px-3 transition-colors duration-100;
-        color: #ffd700;
-        filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.6));
+        color: #f58529;
+        filter: drop-shadow(0 0 6px rgba(245, 133, 41, 0.6));
     }
 
     & .command_input {
@@ -89,17 +89,18 @@
         @apply backdrop-blur-md;
         @apply focus:ring-0 outline-none focus-visible:outline-none;
         @apply transition-colors duration-150;
-        background: rgba(20, 10, 10, 0.9);
-        border: 1px solid rgba(255, 215, 0, 0.3);
-        color: #ffd700;
+        background: rgba(20, 10, 20, 0.95);
+        border: 2px solid rgba(245, 133, 41, 0.4);
+        border-top: none;
+        color: #f58529;
 
         &::placeholder {
-            color: rgba(255, 215, 0, 0.4);
+            color: rgba(245, 133, 41, 0.5);
         }
 
         &:focus {
-            border-color: rgba(255, 215, 0, 0.6);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            border-color: rgba(245, 133, 41, 0.7);
+            box-shadow: 0 0 20px rgba(245, 133, 41, 0.4);
         }
     }
 
@@ -113,7 +114,7 @@
 .chart_container {
     @apply rounded-lg relative backdrop-blur-md;
     @apply overflow-hidden;
-    background: rgba(20, 10, 10, 0.85);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.15), 0 0 40px rgba(255, 51, 51, 0.1);
+    background: rgba(20, 10, 20, 0.85);
+    border: 2px solid rgba(245, 133, 41, 0.4);
+    box-shadow: 0 0 20px rgba(245, 133, 41, 0.2), 0 0 40px rgba(221, 42, 123, 0.15);
 }

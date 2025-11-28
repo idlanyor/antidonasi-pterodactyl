@@ -76,7 +76,15 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
                             <Field name={'allowedIps'} as={CustomTextarea} variant={'glass'} />
                         </FormikFieldWrapper>
                         <div css={tw`flex justify-end mt-6`}>
-                            <Button shape={'oval'} palette={'cyanBlue'} variant={'glass'}>
+                            <Button
+                                shape={'oval'}
+                                style={{
+                                    background: 'linear-gradient(135deg, #f58529, #dd2a7b)',
+                                    border: '2px solid rgba(245, 133, 41, 0.6)',
+                                    color: '#ffffff',
+                                    fontWeight: 600,
+                                }}
+                            >
                                 Create
                             </Button>
                         </div>

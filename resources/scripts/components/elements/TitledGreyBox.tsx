@@ -15,24 +15,24 @@ interface Props {
 
 const Container = styled.div<{ glass?: boolean }>`
     ${tw`rounded-lg`};
-    background: rgba(10, 10, 20, 0.85);
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.15), 0 0 40px rgba(255, 0, 132, 0.1);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(245, 133, 41, 0.2);
+    box-shadow: 0 8px 25px rgba(245, 133, 41, 0.15), 0 4px 15px rgba(221, 42, 123, 0.08);
     backdrop-filter: blur(10px);
-    color: #00ffff;
+    color: #2d3748;
     transition: all 0.3s ease;
 
     &:hover {
-        border-color: rgba(0, 255, 255, 0.5);
-        box-shadow: 0 0 30px rgba(0, 255, 255, 0.25), 0 0 60px rgba(255, 0, 132, 0.15);
+        border-color: rgba(245, 133, 41, 0.3);
+        box-shadow: 0 12px 35px rgba(245, 133, 41, 0.2), 0 6px 20px rgba(221, 42, 123, 0.1);
     }
 `;
 
 const Header = styled.div<{ glass?: boolean }>`
     ${tw`rounded-t-lg p-3`};
-    background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 132, 0.1));
-    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-    color: #00ffff;
+    background: linear-gradient(135deg, rgba(245, 133, 41, 0.1), rgba(221, 42, 123, 0.08));
+    border-bottom: 1px solid rgba(245, 133, 41, 0.15);
+    color: #f58529;
     position: relative;
 
     &::before {
@@ -41,9 +41,9 @@ const Header = styled.div<{ glass?: boolean }>`
         top: 0;
         left: 0;
         right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #00ffff, #ff0084, transparent);
-        opacity: 0.6;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #f58529, #dd2a7b, #8134af, transparent);
+        opacity: 0.7;
     }
 `;
 
@@ -52,12 +52,11 @@ const TitledGreyBox = ({ icon, title, children, className, glass }: Props) => (
         <Header glass={glass}>
             {typeof title === 'string' ? (
                 <p
-                    css={tw`text-sm uppercase`}
+                    css={tw`text-sm uppercase font-semibold`}
                     style={{
-                        color: '#00ffff',
-                        textShadow: '0 0 10px rgba(0, 255, 255, 0.5)',
-                        fontFamily: 'monospace',
-                        letterSpacing: '0.1em',
+                        color: '#f58529',
+                        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                        letterSpacing: '0.05em',
                     }}
                 >
                     {icon && (
@@ -65,8 +64,7 @@ const TitledGreyBox = ({ icon, title, children, className, glass }: Props) => (
                             icon={icon}
                             css={tw`mr-2`}
                             style={{
-                                color: '#ff0084',
-                                filter: 'drop-shadow(0 0 6px rgba(255, 0, 132, 0.6))',
+                                color: '#dd2a7b',
                             }}
                         />
                     )}

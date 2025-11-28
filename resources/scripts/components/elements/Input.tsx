@@ -66,8 +66,8 @@ const inputStyle = css<Props>`
 
     & + .input-help {
         ${tw`mt-1 text-xs`};
-        color: ${(props) => (props.hasError ? '#ff0084' : 'rgba(0, 255, 255, 0.6)')};
-        font-family: monospace;
+        color: ${(props) => (props.hasError ? '#dc2626' : 'rgba(0, 0, 0, 0.6)')};
+        line-height: 1.4;
     }
 
     &:required,

@@ -21,24 +21,24 @@ import styles from './style.module.css';
 
 const theme = {
     background: 'rgba(15, 10, 10, 0.95)',
-    cursor: '#ffd700',
+    cursor: '#f58529',
     black: '#140a0a',
     red: '#ff3333',
     green: '#00ff88',
     yellow: '#ffff00',
-    blue: '#ffcc00',
-    magenta: '#ff3333',
-    cyan: '#ffd700',
+    blue: '#8134af',
+    magenta: '#dd2a7b',
+    cyan: '#f58529',
     white: '#d0d0d0',
-    brightBlack: 'rgba(255, 215, 0, 0.3)',
+    brightBlack: 'rgba(245, 133, 41, 0.3)',
     brightRed: '#ff6666',
     brightGreen: '#33ff99',
     brightYellow: '#ffff66',
-    brightBlue: '#ffdd33',
-    brightMagenta: '#ff6666',
-    brightCyan: '#ffe033',
+    brightBlue: '#8134af',
+    brightMagenta: '#dd2a7b',
+    brightCyan: '#f58529',
     brightWhite: '#ffffff',
-    selection: 'rgba(255, 215, 0, 0.3)',
+    selection: 'rgba(245, 133, 41, 0.3)',
 };
 
 const terminalProps: ITerminalOptions = {
@@ -225,10 +225,10 @@ export default () => {
                         <h3
                             className={'text-sm font-bold truncate'}
                             style={{
-                                color: '#ffd700',
-                                textShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
-                                fontFamily: 'monospace',
-                                letterSpacing: '0.05em',
+                                color: '#f58529',
+                                textShadow: '0 0 10px rgba(245, 133, 41, 0.5)',
+                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                                letterSpacing: '0.02em',
                             }}
                         >
                             {serverName}
@@ -269,19 +269,19 @@ export default () => {
                             onClick={onClear}
                             className={'px-3 py-1 text-2xs rounded backdrop-blur-md transition-all duration-200'}
                             style={{
-                                background: 'rgba(255, 215, 0, 0.1)',
-                                color: '#ffd700',
-                                border: '1px solid rgba(255, 215, 0, 0.3)',
-                                fontFamily: 'monospace',
+                                background: 'rgba(245, 133, 41, 0.1)',
+                                color: '#f58529',
+                                border: '1px solid rgba(245, 133, 41, 0.3)',
+                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
                                 textTransform: 'uppercase',
                                 letterSpacing: '0.05em',
                             }}
                             onMouseOver={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.6)';
-                                e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.4)';
+                                e.currentTarget.style.borderColor = 'rgba(245, 133, 41, 0.6)';
+                                e.currentTarget.style.boxShadow = '0 0 15px rgba(245, 133, 41, 0.4)';
                             }}
                             onMouseOut={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+                                e.currentTarget.style.borderColor = 'rgba(245, 133, 41, 0.3)';
                                 e.currentTarget.style.boxShadow = 'none';
                             }}
                         >
@@ -291,19 +291,19 @@ export default () => {
                             onClick={onToggleSearch}
                             className={'px-3 py-1 text-2xs rounded backdrop-blur-md transition-all duration-200'}
                             style={{
-                                background: 'rgba(255, 215, 0, 0.1)',
-                                color: '#ffd700',
-                                border: '1px solid rgba(255, 215, 0, 0.3)',
-                                fontFamily: 'monospace',
+                                background: 'rgba(221, 42, 123, 0.1)',
+                                color: '#dd2a7b',
+                                border: '1px solid rgba(221, 42, 123, 0.3)',
+                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
                                 textTransform: 'uppercase',
                                 letterSpacing: '0.05em',
                             }}
                             onMouseOver={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.6)';
-                                e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.4)';
+                                e.currentTarget.style.borderColor = 'rgba(221, 42, 123, 0.6)';
+                                e.currentTarget.style.boxShadow = '0 0 15px rgba(221, 42, 123, 0.4)';
                             }}
                             onMouseOut={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+                                e.currentTarget.style.borderColor = 'rgba(221, 42, 123, 0.3)';
                                 e.currentTarget.style.boxShadow = 'none';
                             }}
                         >
@@ -313,19 +313,19 @@ export default () => {
                             onClick={onScrollBottom}
                             className={'px-3 py-1 text-2xs rounded backdrop-blur-md transition-all duration-200'}
                             style={{
-                                background: 'rgba(255, 215, 0, 0.1)',
-                                color: '#ffd700',
-                                border: '1px solid rgba(255, 215, 0, 0.3)',
-                                fontFamily: 'monospace',
+                                background: 'rgba(129, 52, 175, 0.1)',
+                                color: '#8134af',
+                                border: '1px solid rgba(129, 52, 175, 0.3)',
+                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
                                 textTransform: 'uppercase',
                                 letterSpacing: '0.05em',
                             }}
                             onMouseOver={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.6)';
-                                e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 215, 0, 0.4)';
+                                e.currentTarget.style.borderColor = 'rgba(129, 52, 175, 0.6)';
+                                e.currentTarget.style.boxShadow = '0 0 15px rgba(129, 52, 175, 0.4)';
                             }}
                             onMouseOut={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+                                e.currentTarget.style.borderColor = 'rgba(129, 52, 175, 0.3)';
                                 e.currentTarget.style.boxShadow = 'none';
                             }}
                         >

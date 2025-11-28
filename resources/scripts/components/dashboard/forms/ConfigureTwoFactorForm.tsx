@@ -30,18 +30,34 @@ export default () => {
             <SetupTOTPDialog open={visible === 'enable'} onClose={() => setVisible(null)} onTokens={onTokens} />
             <RecoveryTokensDialog tokens={tokens} open={tokens.length > 0} onClose={() => setTokens([])} />
             <DisableTOTPDialog open={visible === 'disable'} onClose={() => setVisible(null)} />
-            <p css={tw`text-sm text-white`}>
+            <p css={tw`text-sm`} style={{ color: 'rgba(0, 0, 0, 0.8)', lineHeight: '1.5' }}>
                 {isEnabled
                     ? 'Two-step verification is currently enabled on your account.'
                     : 'You do not currently have two-step verification enabled on your account. Click the button below to begin configuring it.'}
             </p>
             <div css={tw`mt-6`}>
                 {isEnabled ? (
-                    <Button.Danger onClick={() => setVisible('disable')} appearance={'glass'}>
+                    <Button.Danger
+                        onClick={() => setVisible('disable')}
+                        style={{
+                            background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                            border: '2px solid #991b1b',
+                            color: '#ffffff',
+                            fontWeight: 600,
+                        }}
+                    >
                         Disable Two-Step
                     </Button.Danger>
                 ) : (
-                    <Button onClick={() => setVisible('enable')} appearance={'glass'}>
+                    <Button
+                        onClick={() => setVisible('enable')}
+                        style={{
+                            background: 'linear-gradient(135deg, #f58529, #dd2a7b)',
+                            border: '2px solid rgba(245, 133, 41, 0.6)',
+                            color: '#ffffff',
+                            fontWeight: 600,
+                        }}
+                    >
                         Enable Two-Step
                     </Button>
                 )}
