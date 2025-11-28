@@ -60,13 +60,25 @@ const VariableBox = ({ variable }: Props) => {
     return (
         <TitledGreyBox
             title={
-                <p className='text-sm uppercase'>
+                <p className='text-sm uppercase' style={{ color: '#000000', fontWeight: 700 }}>
                     {!variable.isEditable && (
-                        <span className='bg-neutral-700 text-xs py-1 px-2 rounded-full mr-2 mb-1'>Read Only</span>
+                        <span
+                            className='text-xs py-1 px-2 rounded-full mr-2 mb-1'
+                            style={{
+                                background: 'rgba(255, 255, 255, 0.3)',
+                                color: '#000000',
+                                fontWeight: 600,
+                                border: '1px solid rgba(0, 0, 0, 0.2)',
+                            }}
+                        >
+                            Read Only
+                        </span>
                     )}
                     {variable.name}
                 </p>
             }
+            glass
+            className={'transition-transform transform-gpu duration-200 hover:-translate-y-0.5 hover:shadow-lg'}
         >
             <FlashMessageRender byKey={FLASH_KEY} className='mb-2 md:mb-4' />
             <InputSpinner visible={loading}>
@@ -94,6 +106,7 @@ const VariableBox = ({ variable }: Props) => {
                         {selectValues.length > 0 ? (
                             <>
                                 <Select
+                                    variant='glass'
                                     onChange={(e) => setVariableValue(e.target.value)}
                                     name={variable.envVariable}
                                     defaultValue={variable.serverValue ?? variable.defaultValue}
@@ -112,6 +125,7 @@ const VariableBox = ({ variable }: Props) => {
                         ) : (
                             <>
                                 <Input
+                                    variant='glass'
                                     onKeyUp={(e) => {
                                         if (canEdit && variable.isEditable) {
                                             setVariableValue(e.currentTarget.value);
@@ -128,7 +142,9 @@ const VariableBox = ({ variable }: Props) => {
                 )}
             </InputSpinner>
 
-            <p className='mt-1 text-xs text-neutral-300'>{variable.description}</p>
+            <p className='mt-1 text-xs' style={{ color: 'rgba(0, 0, 0, 0.7)', lineHeight: '1.4' }}>
+                {variable.description}
+            </p>
         </TitledGreyBox>
     );
 };

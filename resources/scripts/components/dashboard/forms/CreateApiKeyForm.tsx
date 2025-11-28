@@ -64,7 +64,7 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
                             description={'A description of this API key.'}
                             css={tw`mb-6`}
                         >
-                            <Field name={'description'} as={Input} />
+                            <Field name={'description'} as={Input} variant={'glass'} />
                         </FormikFieldWrapper>
                         <FormikFieldWrapper
                             label={'Allowed IPs'}
@@ -73,10 +73,20 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
                                 'Leave blank to allow any IP address to use this API key, otherwise provide each IP address on a new line.'
                             }
                         >
-                            <Field name={'allowedIps'} as={CustomTextarea} />
+                            <Field name={'allowedIps'} as={CustomTextarea} variant={'glass'} />
                         </FormikFieldWrapper>
                         <div css={tw`flex justify-end mt-6`}>
-                            <Button>Create</Button>
+                            <Button
+                                shape={'oval'}
+                                style={{
+                                    background: 'linear-gradient(135deg, #f58529, #dd2a7b)',
+                                    border: '2px solid rgba(245, 133, 41, 0.6)',
+                                    color: '#ffffff',
+                                    fontWeight: 600,
+                                }}
+                            >
+                                Create
+                            </Button>
                         </div>
                     </Form>
                 )}

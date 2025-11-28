@@ -16,6 +16,12 @@ export default createGlobalStyle`
     body {
         ${tw`font-sans bg-neutral-800 text-neutral-200`};
         letter-spacing: 0.015em;
+<<<<<<< HEAD
+=======
+        background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
+        background-attachment: fixed;
+        min-height: 100vh;
+>>>>>>> f74ae431a (ganti tema)
     }
 
     h1, h2, h3, h4, h5, h6 {

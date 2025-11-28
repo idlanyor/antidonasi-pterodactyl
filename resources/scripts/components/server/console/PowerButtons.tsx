@@ -53,20 +53,45 @@ export default ({ className }: PowerButtonProps) => {
                     className={'flex-1'}
                     disabled={status !== 'offline'}
                     onClick={onButtonClick.bind(this, 'start')}
+                    shape={2}
+                    style={{
+                        background: 'linear-gradient(135deg, #10b981, #059669)',
+                        border: '2px solid #065f46',
+                        color: '#ffffff',
+                        fontWeight: 600,
+                    }}
                 >
                     Start
                 </Button>
             </Can>
             <Can action={'control.restart'}>
-                <Button.Text className={'flex-1'} disabled={!status} onClick={onButtonClick.bind(this, 'restart')}>
+                <Button
+                    className={'flex-1'}
+                    disabled={!status}
+                    onClick={onButtonClick.bind(this, 'restart')}
+                    shape={2}
+                    style={{
+                        background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                        border: '2px solid #92400e',
+                        color: '#ffffff',
+                        fontWeight: 600,
+                    }}
+                >
                     Restart
-                </Button.Text>
+                </Button>
             </Can>
             <Can action={'control.stop'}>
                 <Button.Danger
                     className={'flex-1'}
                     disabled={status === 'offline'}
                     onClick={onButtonClick.bind(this, killable ? 'kill' : 'stop')}
+                    shape={2}
+                    style={{
+                        background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                        border: '2px solid #991b1b',
+                        color: '#ffffff',
+                        fontWeight: 600,
+                    }}
                 >
                     {killable ? 'Kill' : 'Stop'}
                 </Button.Danger>

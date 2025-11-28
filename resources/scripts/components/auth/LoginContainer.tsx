@@ -5,7 +5,7 @@ import LoginFormContainer from '@/components/auth/LoginFormContainer';
 import { useStoreState } from 'easy-peasy';
 import { Formik, FormikHelpers } from 'formik';
 import { object, string } from 'yup';
-import Field from '@/components/elements/Field';
+import AuthField from '@/components/auth/AuthField';
 import tw from 'twin.macro';
 import Button from '@/components/elements/Button';
 import Reaptcha from 'reaptcha';
@@ -75,15 +75,59 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
                 <LoginFormContainer title={'Login to Continue'} css={tw`w-full flex`}>
-                    <Field light type={'text'} label={'Username or Email'} name={'username'} disabled={isSubmitting} />
-                    <div css={tw`mt-6`}>
-                        <Field light type={'password'} label={'Password'} name={'password'} disabled={isSubmitting} />
+                    <div css={tw`mb-6 text-center`}>
+                        <h1
+                            css={tw`text-2xl font-bold mb-1`}
+                            style={{
+                                color: '#1a202c',
+                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                                letterSpacing: '-0.02em',
+                                fontWeight: 700,
+                            }}
+                        >
+                            Welcome Back
+                        </h1>
+                        <p
+                            css={tw`text-sm`}
+                            style={{
+                                color: '#718096',
+                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                                fontWeight: 400,
+                            }}
+                        >
+                            Sign in to access your control panel
+                        </p>
                     </div>
+
+                    <div css={tw`space-y-4`}>
+                        <AuthField
+                            name={'username'}
+                            label={'Username or Email'}
+                            type={'text'}
+                            placeholder={'Enter your username or email'}
+                            disabled={isSubmitting}
+                        />
+                        <AuthField
+                            name={'password'}
+                            label={'Password'}
+                            type={'password'}
+                            placeholder={'Enter your password'}
+                            disabled={isSubmitting}
+                        />
+                    </div>
+
                     <div css={tw`mt-6`}>
-                        <Button type={'submit'} size={'xlarge'} isLoading={isSubmitting} disabled={isSubmitting}>
-                            Login
+                        <Button
+                            type={'submit'}
+                            size={'xlarge'}
+                            isLoading={isSubmitting}
+                            disabled={isSubmitting}
+                            className={'auth-button'}
+                        >
+                            {isSubmitting ? 'Signing In...' : 'Sign In'}
                         </Button>
                     </div>
+
                     {recaptchaEnabled && (
                         <Reaptcha
                             ref={ref}
@@ -99,12 +143,10 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                             }}
                         />
                     )}
-                    <div css={tw`mt-6 text-center`}>
-                        <Link
-                            to={'/auth/password'}
-                            css={tw`text-xs text-neutral-500 tracking-wide no-underline uppercase hover:text-neutral-600`}
-                        >
-                            Forgot password?
+
+                    <div css={tw`mt-5 text-center`}>
+                        <Link to={'/auth/password'} css={tw`text-sm no-underline`} className={'auth-link'}>
+                            Forgot your password?
                         </Link>
                     </div>
                 </LoginFormContainer>

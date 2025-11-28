@@ -70,6 +70,7 @@ export default () => {
                                 type={'password'}
                                 name={'current'}
                                 label={'Current Password'}
+                                variant={'glass'}
                             />
                             <div css={tw`mt-6`}>
                                 <Field
@@ -80,6 +81,7 @@ export default () => {
                                     description={
                                         'Your new password should be at least 8 characters in length and unique to this website.'
                                     }
+                                    variant={'glass'}
                                 />
                             </div>
                             <div css={tw`mt-6`}>
@@ -88,10 +90,21 @@ export default () => {
                                     type={'password'}
                                     name={'confirmPassword'}
                                     label={'Confirm New Password'}
+                                    variant={'glass'}
                                 />
                             </div>
                             <div css={tw`mt-6`}>
-                                <Button disabled={isSubmitting || !isValid}>Update Password</Button>
+                                <Button
+                                    disabled={isSubmitting || !isValid}
+                                    style={{
+                                        background: 'linear-gradient(135deg, #f58529, #dd2a7b)',
+                                        border: '2px solid rgba(245, 133, 41, 0.6)',
+                                        color: '#ffffff',
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    Update Password
+                                </Button>
                             </div>
                         </Form>
                     </React.Fragment>

@@ -11,7 +11,7 @@ import tw from 'twin.macro';
 import isEqual from 'react-fast-compare';
 import SelectFileCheckbox from '@/components/server/files/SelectFileCheckbox';
 import { usePermissions } from '@/plugins/usePermissions';
-import { join } from 'pathe';
+import { join } from 'path';
 import { bytesToString } from '@/lib/formatters';
 import styles from './style.module.css';
 
@@ -40,12 +40,16 @@ const FileObjectRow = ({ file }: { file: FileObject }) => (
         key={file.name}
         onContextMenu={(e) => {
             e.preventDefault();
-            window.dispatchEvent(new CustomEvent(`pterodactyl:files:ctx:${file.key}`, { detail: e.clientX }));
+            window.dispatchEvent(
+                new CustomEvent(`pterodactyl:files:ctx:${file.key}`, {
+                    detail: { x: e.clientX, y: e.clientY },
+                })
+            );
         }}
     >
         <SelectFileCheckbox name={file.name} />
         <Clickable file={file}>
-            <div css={tw`flex-none text-neutral-400 ml-6 mr-4 text-lg pl-3`}>
+            <div css={tw`flex-none ml-6 mr-4 text-lg pl-3`} style={{ color: file.isFile ? '#dd2a7b' : '#f58529' }}>
                 {file.isFile ? (
                     <FontAwesomeIcon
                         icon={file.isSymlink ? faFileImport : file.isArchiveType() ? faFileArchive : faFileAlt}
@@ -54,9 +58,17 @@ const FileObjectRow = ({ file }: { file: FileObject }) => (
                     <FontAwesomeIcon icon={faFolder} />
                 )}
             </div>
-            <div css={tw`flex-1 truncate`}>{file.name}</div>
-            {file.isFile && <div css={tw`w-1/6 text-right mr-4 hidden sm:block`}>{bytesToString(file.size)}</div>}
-            <div css={tw`w-1/5 text-right mr-4 hidden md:block`} title={file.modifiedAt.toString()}>
+            <div css={tw`flex-1 truncate text-white`}>{file.name}</div>
+            {file.isFile && (
+                <div css={tw`w-1/6 text-right mr-4 hidden sm:block`} style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                    {bytesToString(file.size)}
+                </div>
+            )}
+            <div
+                css={tw`w-1/5 text-right mr-4 hidden md:block`}
+                style={{ color: 'rgba(255, 255, 255, 0.6)' }}
+                title={file.modifiedAt.toString()}
+            >
                 {Math.abs(differenceInHours(file.modifiedAt, new Date())) > 48
                     ? format(file.modifiedAt, 'MMM do, yyyy h:mma')
                     : formatDistanceToNow(file.modifiedAt, { addSuffix: true })}

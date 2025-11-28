@@ -63,12 +63,21 @@ const NetworkContainer = () => {
                         <Can action={'allocation.create'}>
                             <SpinnerOverlay visible={loading} />
                             <div css={tw`mt-6 sm:flex items-center justify-end`}>
-                                <p css={tw`text-sm text-neutral-300 mb-4 sm:mr-6 sm:mb-0`}>
-                                    You are currently using {data.length} of {allocationLimit} allowed allocations for
-                                    this server.
+                                <p css={tw`text-sm mb-4 sm:mr-6 sm:mb-0`} style={{ color: 'rgba(0, 0, 0, 0.8)' }}>
+                                    You are currently using <strong>{data.length}</strong> of{' '}
+                                    <strong>{allocationLimit}</strong> allowed allocations for this server.
                                 </p>
                                 {allocationLimit > data.length && (
-                                    <Button css={tw`w-full sm:w-auto`} color={'primary'} onClick={onCreateAllocation}>
+                                    <Button
+                                        css={tw`w-full sm:w-auto`}
+                                        style={{
+                                            background: 'linear-gradient(135deg, #f58529, #dd2a7b)',
+                                            border: '2px solid rgba(245, 133, 41, 0.6)',
+                                            color: '#ffffff',
+                                            fontWeight: 600,
+                                        }}
+                                        onClick={onCreateAllocation}
+                                    >
                                         Create Allocation
                                     </Button>
                                 )}

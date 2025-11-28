@@ -15,6 +15,7 @@ import Input from '@/components/elements/Input';
 import setSelectedDockerImage from '@/api/server/setSelectedDockerImage';
 import InputSpinner from '@/components/elements/InputSpinner';
 import useFlash from '@/plugins/useFlash';
+import Fade from '@/components/elements/Fade';
 
 const StartupContainer = () => {
     const [loading, setLoading] = useState(false);
@@ -84,50 +85,86 @@ const StartupContainer = () => {
         )
     ) : (
         <ServerContentBlock title={'Startup Settings'} showFlashKey={'startup:image'}>
-            <div css={tw`md:flex`}>
-                <TitledGreyBox title={'Startup Command'} css={tw`flex-1`}>
-                    <div css={tw`px-1 py-2`}>
-                        <p css={tw`font-mono bg-neutral-900 rounded py-2 px-4`}>{data.invocation}</p>
-                    </div>
-                </TitledGreyBox>
-                <TitledGreyBox title={'Docker Image'} css={tw`flex-1 lg:flex-none lg:w-1/3 mt-8 md:mt-0 md:ml-10`}>
-                    {Object.keys(data.dockerImages).length > 1 && !isCustomImage ? (
-                        <>
-                            <InputSpinner visible={loading}>
-                                <Select
-                                    disabled={Object.keys(data.dockerImages).length < 2}
-                                    onChange={updateSelectedDockerImage}
-                                    defaultValue={variables.dockerImage}
-                                >
-                                    {Object.keys(data.dockerImages).map((key) => (
-                                        <option key={data.dockerImages[key]} value={data.dockerImages[key]}>
-                                            {key}
-                                        </option>
-                                    ))}
-                                </Select>
-                            </InputSpinner>
-                            <p css={tw`text-xs text-neutral-300 mt-2`}>
-                                This is an advanced feature allowing you to select a Docker image to use when running
-                                this server instance.
+            <Fade in appear timeout={200}>
+                <div css={tw`md:flex md:items-stretch md:space-x-10`}>
+                    <TitledGreyBox
+                        title={'Startup Command'}
+                        css={tw`flex-1`}
+                        className={
+                            'transition-transform transform-gpu duration-200 hover:-translate-y-0.5 hover:shadow-lg'
+                        }
+                        glass
+                    >
+                        <div css={tw`px-1 py-2`}>
+                            <p
+                                css={tw`font-mono rounded py-2 px-4 break-words whitespace-normal`}
+                                style={{
+                                    background: 'rgba(0, 0, 0, 0.05)',
+                                    color: '#000000',
+                                    border: '1px solid rgba(0, 0, 0, 0.1)',
+                                }}
+                                title={data.invocation}
+                            >
+                                {data.invocation}
                             </p>
-                        </>
-                    ) : (
-                        <>
-                            <Input disabled readOnly value={variables.dockerImage} />
-                            {isCustomImage && (
-                                <p css={tw`text-xs text-neutral-300 mt-2`}>
-                                    This {"server's"} Docker image has been manually set by an administrator and cannot
-                                    be changed through this UI.
+                        </div>
+                    </TitledGreyBox>
+                    <TitledGreyBox
+                        title={'Docker Image'}
+                        css={tw`flex-1 lg:flex-none lg:w-1/3 mt-8 md:mt-0`}
+                        className={
+                            'transition-transform transform-gpu duration-200 hover:-translate-y-0.5 hover:shadow-lg'
+                        }
+                        glass
+                    >
+                        {Object.keys(data.dockerImages).length > 1 && !isCustomImage ? (
+                            <>
+                                <InputSpinner visible={loading}>
+                                    <Select
+                                        variant='glass'
+                                        disabled={Object.keys(data.dockerImages).length < 2}
+                                        onChange={updateSelectedDockerImage}
+                                        defaultValue={variables.dockerImage}
+                                    >
+                                        {Object.keys(data.dockerImages).map((key) => (
+                                            <option key={data.dockerImages[key]} value={data.dockerImages[key]}>
+                                                {key}
+                                            </option>
+                                        ))}
+                                    </Select>
+                                </InputSpinner>
+                                <p css={tw`text-xs mt-2`} style={{ color: 'rgba(0, 0, 0, 0.7)', lineHeight: '1.4' }}>
+                                    This is an advanced feature allowing you to select a Docker image to use when
+                                    running this server instance.
                                 </p>
-                            )}
-                        </>
-                    )}
-                </TitledGreyBox>
-            </div>
-            <h3 css={tw`mt-8 mb-2 text-2xl`}>Variables</h3>
-            <div css={tw`grid gap-8 md:grid-cols-2`}>
-                {data.variables.map((variable) => (
-                    <VariableBox key={variable.envVariable} variable={variable} />
+                            </>
+                        ) : (
+                            <>
+                                <Input variant='glass' disabled readOnly value={variables.dockerImage} />
+                                {isCustomImage && (
+                                    <p
+                                        css={tw`text-xs mt-2`}
+                                        style={{ color: 'rgba(0, 0, 0, 0.7)', lineHeight: '1.4' }}
+                                    >
+                                        This {"server's"} Docker image has been manually set by an administrator and
+                                        cannot be changed through this UI.
+                                    </p>
+                                )}
+                            </>
+                        )}
+                    </TitledGreyBox>
+                </div>
+            </Fade>
+            <h3 css={tw`mt-8 mb-2 text-2xl`} style={{ color: '#000000', fontWeight: 700 }}>
+                Variables
+            </h3>
+            <div css={tw`grid gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3`}>
+                {data.variables.map((variable, i) => (
+                    <Fade key={variable.envVariable} in appear timeout={180}>
+                        <div style={{ transitionDelay: `${i * 40}ms` }}>
+                            <VariableBox variable={variable} />
+                        </div>
+                    </Fade>
                 ))}
             </div>
         </ServerContentBlock>

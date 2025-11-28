@@ -6,7 +6,7 @@ import { faCogs, faLayerGroup, faSignOutAlt } from '@fortawesome/free-solid-svg-
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import SearchContainer from '@/components/dashboard/search/SearchContainer';
-import tw, { theme } from 'twin.macro';
+import tw from 'twin.macro';
 import styled from 'styled-components/macro';
 import http from '@/api/http';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
@@ -17,19 +17,28 @@ const RightNavigation = styled.div`
     & > a,
     & > button,
     & > .navigation-link {
-        ${tw`flex items-center h-full no-underline text-neutral-300 px-6 cursor-pointer transition-all duration-150`};
+        ${tw`flex items-center h-full no-underline px-6 cursor-pointer transition-all duration-150`};
+        color: rgba(255, 255, 255, 0.9);
 
         &:active,
         &:hover {
-            ${tw`text-neutral-100 bg-black`};
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.15);
         }
 
         &:active,
         &:hover,
         &.active {
-            box-shadow: inset 0 -2px ${theme`colors.cyan.600`.toString()};
+            box-shadow: inset 0 -2px rgba(255, 255, 255, 0.8);
         }
     }
+`;
+const NavWrapper = styled.div`
+    ${tw`w-full shadow-md overflow-x-auto`};
+    background: linear-gradient(135deg, rgba(245, 133, 41, 0.95), rgba(221, 42, 123, 0.95));
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 `;
 
 export default () => {
@@ -46,15 +55,19 @@ export default () => {
     };
 
     return (
-        <div className={'w-full bg-neutral-900 shadow-md overflow-x-auto'}>
+        <NavWrapper>
             <SpinnerOverlay visible={isLoggingOut} />
             <div className={'mx-auto w-full flex items-center h-[3.5rem] max-w-[1200px]'}>
                 <div id={'logo'} className={'flex-1'}>
                     <Link
                         to={'/'}
-                        className={
-                            'text-2xl font-header font-medium px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150'
-                        }
+                        className={'text-2xl font-header px-4 no-underline transition-colors duration-150'}
+                        style={{
+                            color: '#ffffff',
+                            fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                            letterSpacing: '0.02em',
+                            fontWeight: 700,
+                        }}
                     >
                         {name}
                     </Link>
@@ -87,6 +100,6 @@ export default () => {
                     </Tooltip>
                 </RightNavigation>
             </div>
-        </div>
+        </NavWrapper>
     );
 };

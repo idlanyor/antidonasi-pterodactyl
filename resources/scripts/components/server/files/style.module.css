@@ -3,6 +3,21 @@
 
     & button {
         @apply w-full first:col-span-2 sm:first:col-span-1;
+        background: linear-gradient(135deg, #f58529, #dd2a7b) !important;
+        border: 2px solid rgba(245, 133, 41, 0.6) !important;
+        color: #ffffff !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(245, 133, 41, 0.3);
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: linear-gradient(135deg, #ff9f40, #f54a8a) !important;
+            border-color: rgba(245, 133, 41, 0.8) !important;
+            box-shadow: 0 6px 20px rgba(245, 133, 41, 0.5);
+            transform: translateY(-2px);
+        }
     }
 
     @screen md {
@@ -15,11 +30,23 @@
 }
 
 .file_row {
-    @apply flex items-center cursor-pointer bg-neutral-700 rounded-sm mb-px text-sm no-underline;
-    @apply hover:text-neutral-100 hover:bg-neutral-600;
+    @apply flex items-center cursor-pointer rounded-lg mb-2 text-sm no-underline;
+    @apply backdrop-blur-md;
+    @apply transition-all duration-150;
+    background: rgba(20, 10, 20, 0.7);
+    border: 2px solid rgba(245, 133, 41, 0.3);
+
+    &:hover {
+        background: rgba(245, 133, 41, 0.15);
+        border-color: rgba(245, 133, 41, 0.6);
+        box-shadow: 0 4px 15px rgba(245, 133, 41, 0.25);
+        transform: translateX(5px);
+    }
 
     & > .details {
-        @apply flex flex-1 items-center text-neutral-300 no-underline px-4 py-2 overflow-hidden truncate;
+        @apply flex flex-1 items-center no-underline px-4 py-3 overflow-hidden truncate;
+        color: #ffffff;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
         &:not(a) {
             @apply cursor-default;

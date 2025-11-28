@@ -4,7 +4,6 @@ import { FitAddon } from 'xterm-addon-fit';
 import { SearchAddon } from 'xterm-addon-search';
 import { SearchBarAddon } from 'xterm-addon-search-bar';
 import { WebLinksAddon } from 'xterm-addon-web-links';
-import { Unicode11Addon } from 'xterm-addon-unicode11';
 import { ScrollDownHelperAddon } from '@/plugins/XtermScrollDownHelperAddon';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import { ServerContext } from '@/state/server';
@@ -21,25 +20,25 @@ import 'xterm/css/xterm.css';
 import styles from './style.module.css';
 
 const theme = {
-    background: th`colors.black`.toString(),
-    cursor: 'transparent',
-    black: th`colors.black`.toString(),
-    red: '#E54B4B',
-    green: '#9ECE58',
-    yellow: '#FAED70',
-    blue: '#396FE2',
-    magenta: '#BB80B3',
-    cyan: '#2DDAFD',
+    background: 'rgba(15, 10, 10, 0.95)',
+    cursor: '#f58529',
+    black: '#140a0a',
+    red: '#ff3333',
+    green: '#00ff88',
+    yellow: '#ffff00',
+    blue: '#8134af',
+    magenta: '#dd2a7b',
+    cyan: '#f58529',
     white: '#d0d0d0',
-    brightBlack: 'rgba(255, 255, 255, 0.2)',
-    brightRed: '#FF5370',
-    brightGreen: '#C3E88D',
-    brightYellow: '#FFCB6B',
-    brightBlue: '#82AAFF',
-    brightMagenta: '#C792EA',
-    brightCyan: '#89DDFF',
+    brightBlack: 'rgba(245, 133, 41, 0.3)',
+    brightRed: '#ff6666',
+    brightGreen: '#33ff99',
+    brightYellow: '#ffff66',
+    brightBlue: '#8134af',
+    brightMagenta: '#dd2a7b',
+    brightCyan: '#f58529',
     brightWhite: '#ffffff',
-    selection: '#FAF089',
+    selection: 'rgba(245, 133, 41, 0.3)',
 };
 
 const terminalProps: ITerminalOptions = {
@@ -60,11 +59,12 @@ export default () => {
     const searchAddon = new SearchAddon();
     const searchBar = new SearchBarAddon({ searchAddon });
     const webLinksAddon = new WebLinksAddon();
-    const unicode11Addon = new Unicode11Addon();
     const scrollDownHelperAddon = new ScrollDownHelperAddon();
     const { connected, instance } = ServerContext.useStoreState((state) => state.socket);
     const [canSendCommands] = usePermissions(['control.console']);
     const serverId = ServerContext.useStoreState((state) => state.server.data!.id);
+    const serverName = ServerContext.useStoreState((state) => state.server.data!.name);
+    const status = ServerContext.useStoreState((state) => state.status.value);
     const isTransferring = ServerContext.useStoreState((state) => state.server.data!.isTransferring);
     const [history, setHistory] = usePersistedState<string[]>(`${serverId}:command_history`, []);
     const [historyIndex, setHistoryIndex] = useState(-1);
@@ -129,14 +129,9 @@ export default () => {
             terminal.loadAddon(searchAddon);
             terminal.loadAddon(searchBar);
             terminal.loadAddon(webLinksAddon);
-            terminal.loadAddon(unicode11Addon);
             terminal.loadAddon(scrollDownHelperAddon);
 
             terminal.open(ref.current);
-
-            // Activate Unicode 11 for proper emoji and special character width handling
-            terminal.unicode.activeVersion = '11';
-
             fitAddon.fit();
             searchBar.addNewStyle(zIndex);
 
@@ -198,15 +193,159 @@ export default () => {
         };
     }, [connected, instance]);
 
+    const onClear = () => {
+        if (terminal.element) terminal.clear();
+    };
+
+    const onToggleSearch = () => {
+        // SearchBarAddon doesn't expose state, just toggle behaviors
+        // Show the bar if hidden; hide if visible by triggering Escape
+        // We rely on a simple heuristic: try show(), then blur to hide
+        try {
+            if (searchBar && searchBar.show) {
+                searchBar.show();
+            }
+        } catch {
+            return;
+        }
+    };
+
+    const onScrollBottom = () => {
+        if (terminal.element) terminal.scrollToBottom();
+    };
+
     return (
         <div className={classNames(styles.terminal, 'relative')}>
             <SpinnerOverlay visible={!connected} size={'large'} />
             <div
                 className={classNames(styles.container, styles.overflows_container, { 'rounded-b': !canSendCommands })}
             >
+                <div className={'flex items-center justify-between mb-2 px-2'}>
+                    <div className={'flex items-baseline space-x-2 min-w-0'}>
+                        <h3
+                            className={'text-sm font-bold truncate'}
+                            style={{
+                                color: '#f58529',
+                                textShadow: '0 0 10px rgba(245, 133, 41, 0.5)',
+                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                                letterSpacing: '0.02em',
+                            }}
+                        >
+                            {serverName}
+                        </h3>
+                        <span
+                            className={'text-2xs px-2 py-0.5 rounded-full border'}
+                            style={{
+                                fontFamily: 'monospace',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.1em',
+                                ...(status === 'running'
+                                    ? {
+                                          background: 'rgba(0, 255, 136, 0.2)',
+                                          color: '#00ff88',
+                                          borderColor: 'rgba(0, 255, 136, 0.5)',
+                                          boxShadow: '0 0 10px rgba(0, 255, 136, 0.3)',
+                                      }
+                                    : status === 'offline'
+                                    ? {
+                                          background: 'rgba(255, 51, 51, 0.2)',
+                                          color: '#ff3333',
+                                          borderColor: 'rgba(255, 51, 51, 0.5)',
+                                          boxShadow: '0 0 10px rgba(255, 51, 51, 0.3)',
+                                      }
+                                    : {
+                                          background: 'rgba(255, 255, 0, 0.2)',
+                                          color: '#ffff00',
+                                          borderColor: 'rgba(255, 255, 0, 0.5)',
+                                          boxShadow: '0 0 10px rgba(255, 255, 0, 0.3)',
+                                      }),
+                            }}
+                        >
+                            {status || 'unknown'}
+                        </span>
+                    </div>
+                    <div className={'flex items-center space-x-2'}>
+                        <button
+                            onClick={onClear}
+                            className={'px-3 py-1 text-2xs rounded backdrop-blur-md transition-all duration-200'}
+                            style={{
+                                background: 'rgba(245, 133, 41, 0.1)',
+                                color: '#f58529',
+                                border: '1px solid rgba(245, 133, 41, 0.3)',
+                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em',
+                            }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.borderColor = 'rgba(245, 133, 41, 0.6)';
+                                e.currentTarget.style.boxShadow = '0 0 15px rgba(245, 133, 41, 0.4)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.borderColor = 'rgba(245, 133, 41, 0.3)';
+                                e.currentTarget.style.boxShadow = 'none';
+                            }}
+                        >
+                            Clear
+                        </button>
+                        <button
+                            onClick={onToggleSearch}
+                            className={'px-3 py-1 text-2xs rounded backdrop-blur-md transition-all duration-200'}
+                            style={{
+                                background: 'rgba(221, 42, 123, 0.1)',
+                                color: '#dd2a7b',
+                                border: '1px solid rgba(221, 42, 123, 0.3)',
+                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em',
+                            }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.borderColor = 'rgba(221, 42, 123, 0.6)';
+                                e.currentTarget.style.boxShadow = '0 0 15px rgba(221, 42, 123, 0.4)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.borderColor = 'rgba(221, 42, 123, 0.3)';
+                                e.currentTarget.style.boxShadow = 'none';
+                            }}
+                        >
+                            Find
+                        </button>
+                        <button
+                            onClick={onScrollBottom}
+                            className={'px-3 py-1 text-2xs rounded backdrop-blur-md transition-all duration-200'}
+                            style={{
+                                background: 'rgba(129, 52, 175, 0.1)',
+                                color: '#8134af',
+                                border: '1px solid rgba(129, 52, 175, 0.3)',
+                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em',
+                            }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.borderColor = 'rgba(129, 52, 175, 0.6)';
+                                e.currentTarget.style.boxShadow = '0 0 15px rgba(129, 52, 175, 0.4)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.borderColor = 'rgba(129, 52, 175, 0.3)';
+                                e.currentTarget.style.boxShadow = 'none';
+                            }}
+                        >
+                            Bottom
+                        </button>
+                    </div>
+                </div>
                 <div className={'h-full'}>
                     <div id={styles.terminal} ref={ref} />
                 </div>
+                <div
+                    className={'status_dot'}
+                    style={{
+                        background: !connected || !instance ? '#ff3333' : '#00ff88',
+                        boxShadow:
+                            !connected || !instance
+                                ? '0 0 15px rgba(255, 51, 51, 0.8)'
+                                : '0 0 15px rgba(0, 255, 136, 0.8)',
+                    }}
+                />
             </div>
             {canSendCommands && (
                 <div className={classNames('relative', styles.overflows_container)}>

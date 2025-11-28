@@ -56,17 +56,28 @@ export default () => {
                 <React.Fragment>
                     <SpinnerOverlay size={'large'} visible={isSubmitting} />
                     <Form css={tw`m-0`}>
-                        <Field id={'current_email'} type={'email'} name={'email'} label={'Email'} />
+                        <Field id={'current_email'} type={'email'} name={'email'} label={'Email'} variant={'glass'} />
                         <div css={tw`mt-6`}>
                             <Field
                                 id={'confirm_password'}
                                 type={'password'}
                                 name={'password'}
                                 label={'Confirm Password'}
+                                variant={'glass'}
                             />
                         </div>
                         <div css={tw`mt-6`}>
-                            <Button disabled={isSubmitting || !isValid}>Update Email</Button>
+                            <Button
+                                disabled={isSubmitting || !isValid}
+                                style={{
+                                    background: 'linear-gradient(135deg, #f58529, #dd2a7b)',
+                                    border: '2px solid rgba(245, 133, 41, 0.6)',
+                                    color: '#ffffff',
+                                    fontWeight: 600,
+                                }}
+                            >
+                                Update Email
+                            </Button>
                         </div>
                     </Form>
                 </React.Fragment>

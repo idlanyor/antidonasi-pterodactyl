@@ -90,15 +90,37 @@ export default () => {
             ) : (
                 <>
                     {!files.length ? (
-                        <p css={tw`text-sm text-neutral-400 text-center`}>This directory seems to be empty.</p>
+                        <p
+                            css={tw`text-sm text-center py-8`}
+                            style={{
+                                color: 'rgba(0, 0, 0, 0.6)',
+                                fontFamily: 'monospace',
+                                fontSize: '14px',
+                            }}
+                        >
+                            Directory is empty
+                        </p>
                     ) : (
                         <CSSTransition classNames={'fade'} timeout={150} appear in>
                             <div>
                                 {files.length > 250 && (
-                                    <div css={tw`rounded bg-yellow-400 mb-px p-3`}>
-                                        <p css={tw`text-yellow-900 text-sm text-center`}>
-                                            This directory is too large to display in the browser, limiting the output
-                                            to the first 250 files.
+                                    <div
+                                        css={tw`rounded mb-3 p-4`}
+                                        style={{
+                                            background:
+                                                'linear-gradient(135deg, rgba(245, 133, 41, 0.2), rgba(221, 42, 123, 0.15))',
+                                            border: '2px solid rgba(245, 133, 41, 0.5)',
+                                            boxShadow: '0 4px 15px rgba(245, 133, 41, 0.25)',
+                                        }}
+                                    >
+                                        <p
+                                            css={tw`text-sm text-center font-semibold`}
+                                            style={{
+                                                color: '#000000',
+                                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                                            }}
+                                        >
+                                            ⚠️ Warning: Directory too large - showing first 250 files only
                                         </p>
                                     </div>
                                 )}

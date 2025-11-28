@@ -46,11 +46,15 @@ const DeleteAllocationButton = ({ allocation }: Props) => {
                 This allocation will be immediately removed from your server.
             </Dialog.Confirm>
             <Button.Danger
-                variant={Button.Variants.Secondary}
                 size={Button.Sizes.Small}
                 shape={Button.Shapes.IconSquare}
                 type={'button'}
                 onClick={() => setConfirm(true)}
+                style={{
+                    background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                    border: '2px solid #991b1b',
+                    color: '#ffffff',
+                }}
             >
                 <Icon icon={faTrashAlt} css={tw`w-3 h-auto`} />
             </Button.Danger>
