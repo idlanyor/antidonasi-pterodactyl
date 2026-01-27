@@ -14,6 +14,7 @@ export default createGlobalStyle`
     }
 
     body {
+<<<<<<< HEAD
         ${tw`font-sans bg-neutral-800 text-neutral-200`};
         letter-spacing: 0.015em;
 <<<<<<< HEAD
@@ -30,6 +31,23 @@ export default createGlobalStyle`
 
     p {
         ${tw`text-neutral-200 leading-snug font-sans`};
+=======
+        ${tw`font-sans text-neutral-300 bg-neutral-900`};
+        font-family: 'Inter', 'Quicksand', 'IBM Plex Sans', 'Roboto', system-ui, sans-serif;
+        letter-spacing: 0.015em;
+        min-height: 100vh;
+        background-color: #171717; /* Neutral 900 */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        ${tw`font-medium tracking-normal font-header text-neutral-100`};
+        font-family: 'Inter', 'Quicksand', 'IBM Plex Sans', 'Roboto', system-ui, sans-serif;
+    }
+
+    p {
+        ${tw`text-neutral-400 leading-relaxed font-sans`};
+        font-family: 'Inter', 'Quicksand', 'IBM Plex Sans', 'Roboto', system-ui, sans-serif;
+>>>>>>> 957b2587f (theme baru ygy)
     }
 
     form {
@@ -53,28 +71,22 @@ export default createGlobalStyle`
     /* Scroll Bar Style */
     ::-webkit-scrollbar {
         background: none;
-        width: 16px;
-        height: 16px;
+        width: 8px;
+        height: 8px;
     }
 
     ::-webkit-scrollbar-thumb {
-        border: solid 0 rgb(0 0 0 / 0%);
-        border-right-width: 4px;
-        border-left-width: 4px;
-        -webkit-border-radius: 9px 4px;
-        -webkit-box-shadow: inset 0 0 0 1px hsl(211, 10%, 53%), inset 0 0 0 4px hsl(209deg 18% 30%);
+        ${tw`bg-neutral-700 rounded-full`};
+        border: 2px solid transparent;
+        background-clip: content-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        ${tw`bg-neutral-600`};
     }
 
     ::-webkit-scrollbar-track-piece {
         margin: 4px 0;
-    }
-
-    ::-webkit-scrollbar-thumb:horizontal {
-        border-right-width: 0;
-        border-left-width: 0;
-        border-top-width: 4px;
-        border-bottom-width: 4px;
-        -webkit-border-radius: 4px 9px;
     }
 
     ::-webkit-scrollbar-corner {

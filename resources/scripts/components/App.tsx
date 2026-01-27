@@ -18,6 +18,7 @@ import Spinner from '@/components/elements/Spinner';
 const DashboardRouter = lazy(() => import(/* webpackChunkName: "dashboard" */ '@/routers/DashboardRouter'));
 const ServerRouter = lazy(() => import(/* webpackChunkName: "server" */ '@/routers/ServerRouter'));
 const AuthenticationRouter = lazy(() => import(/* webpackChunkName: "auth" */ '@/routers/AuthenticationRouter'));
+const PricingPage = lazy(() => import(/* webpackChunkName: "pricing" */ '@/components/PricingPage'));
 
 interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
@@ -67,6 +68,11 @@ const App = () => {
                             <Route path={'/auth'}>
                                 <Spinner.Suspense>
                                     <AuthenticationRouter />
+                                </Spinner.Suspense>
+                            </Route>
+                            <Route path={'/pricing'}>
+                                <Spinner.Suspense>
+                                    <PricingPage />
                                 </Spinner.Suspense>
                             </Route>
                             <AuthenticatedRoute path={'/server/:id'}>

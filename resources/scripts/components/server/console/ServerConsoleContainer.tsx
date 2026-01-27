@@ -34,26 +34,10 @@ const ServerConsoleContainer = () => {
             )}
             <div className={'grid grid-cols-4 gap-4 mb-4'}>
                 <div className={'hidden sm:block sm:col-span-2 lg:col-span-3 pr-4'}>
-                    <h1
-                        className={'font-header text-2xl leading-relaxed line-clamp-1'}
-                        style={{
-                            color: '#000000',
-                            fontFamily: 'monospace',
-                            letterSpacing: '0.1em',
-                            fontWeight: 'bold',
-                        }}
-                    >
+                    <h1 className={'font-header text-2xl leading-relaxed line-clamp-1 text-neutral-100 font-semibold'}>
                         {name}
                     </h1>
-                    <p
-                        className={'text-sm line-clamp-2'}
-                        style={{
-                            color: 'rgba(0, 0, 0, 0.7)',
-                            fontFamily: 'monospace',
-                        }}
-                    >
-                        {description}
-                    </p>
+                    <p className={'text-sm line-clamp-2 text-neutral-400'}>{description}</p>
                 </div>
                 <div className={'col-span-4 sm:col-span-2 lg:col-span-1 self-end'}>
                     <Can action={['control.start', 'control.stop', 'control.restart']} matchAny>

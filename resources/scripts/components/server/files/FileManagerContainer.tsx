@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { httpErrorToHuman } from '@/api/http';
 import { CSSTransition } from 'react-transition-group';
 import Spinner from '@/components/elements/Spinner';
@@ -90,37 +92,17 @@ export default () => {
             ) : (
                 <>
                     {!files.length ? (
-                        <p
-                            css={tw`text-sm text-center py-8`}
-                            style={{
-                                color: 'rgba(0, 0, 0, 0.6)',
-                                fontFamily: 'monospace',
-                                fontSize: '14px',
-                            }}
-                        >
-                            Directory is empty
-                        </p>
+                        <p css={tw`text-sm text-center py-8 text-neutral-400`}>Directory is empty</p>
                     ) : (
                         <CSSTransition classNames={'fade'} timeout={150} appear in>
                             <div>
                                 {files.length > 250 && (
-                                    <div
-                                        css={tw`rounded mb-3 p-4`}
-                                        style={{
-                                            background:
-                                                'linear-gradient(135deg, rgba(245, 133, 41, 0.2), rgba(221, 42, 123, 0.15))',
-                                            border: '2px solid rgba(245, 133, 41, 0.5)',
-                                            boxShadow: '0 4px 15px rgba(245, 133, 41, 0.25)',
-                                        }}
-                                    >
+                                    <div css={tw`rounded mb-3 p-4 bg-neutral-900 border border-neutral-700`}>
                                         <p
-                                            css={tw`text-sm text-center font-semibold`}
-                                            style={{
-                                                color: '#000000',
-                                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-                                            }}
+                                            css={tw`text-sm text-center font-semibold text-yellow-400 inline-flex items-center gap-2 justify-center`}
                                         >
-                                            ⚠️ Warning: Directory too large - showing first 250 files only
+                                            <FontAwesomeIcon icon={faExclamationTriangle} />
+                                            Warning: Directory too large - showing first 250 files only
                                         </p>
                                     </div>
                                 )}

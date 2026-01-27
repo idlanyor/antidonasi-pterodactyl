@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBoxOpen, faGlobe, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Server } from '@/api/server/getServer';
 import getServers from '@/api/getServers';
 import ServerRow from '@/components/dashboard/ServerRow';
@@ -9,10 +11,29 @@ import { useStoreState } from 'easy-peasy';
 import { usePersistedState } from '@/plugins/usePersistedState';
 import Switch from '@/components/elements/Switch';
 import tw from 'twin.macro';
+import styled from 'styled-components/macro';
 import useSWR from 'swr';
 import { PaginatedResult } from '@/api/http';
 import Pagination from '@/components/elements/Pagination';
 import { useLocation } from 'react-router-dom';
+
+const HeaderSection = styled.div`
+    ${tw`mb-6 p-6 rounded-xl border`};
+    background-color: #111827;
+    border-color: #1f2937;
+`;
+
+const FilterWrapper = styled.div`
+    ${tw`flex items-center gap-3 px-4 py-2 rounded-lg border`};
+    background-color: #111827;
+    border-color: #374151;
+`;
+
+const EmptyStateWrapper = styled.div`
+    ${tw`flex flex-col items-center justify-center py-20 px-4 rounded-xl border`};
+    background-color: #111827;
+    border-color: #1f2937;
+`;
 
 export default () => {
     const { search } = useLocation();
@@ -53,43 +74,26 @@ export default () => {
     return (
         <PageContentBlock title={'Dashboard'} showFlashKey={'dashboard'}>
             {/* Header Section */}
-            <div
-                css={tw`mb-6 p-6 rounded-xl`}
-                style={{
-                    background:
-                        'linear-gradient(135deg, rgba(245, 133, 41, 0.15), rgba(221, 42, 123, 0.12), rgba(129, 52, 175, 0.1))',
-                    border: '2px solid rgba(245, 133, 41, 0.3)',
-                    boxShadow: '0 8px 25px rgba(245, 133, 41, 0.2)',
-                }}
-            >
+            <HeaderSection>
                 {/* Search and Filter Controls */}
                 <div css={tw`flex flex-wrap gap-3`}>
                     {rootAdmin && (
-                        <div
-                            css={tw`flex items-center gap-3 px-4 py-2 rounded-lg`}
-                            style={{
-                                background: 'rgba(255, 255, 255, 0.7)',
-                                border: '2px solid rgba(129, 52, 175, 0.3)',
-                            }}
-                        >
+                        <FilterWrapper>
                             <p
-                                css={tw`text-xs font-semibold`}
-                                style={{
-                                    color: '#8134af',
-                                    letterSpacing: '0.05em',
-                                }}
+                                css={tw`text-xs font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-2`}
                             >
-                                {showOnlyAdmin ? '🌐 All Servers' : '👤 My Servers'}
+                                <FontAwesomeIcon icon={showOnlyAdmin ? faGlobe : faUser} />
+                                {showOnlyAdmin ? 'All Servers' : 'My Servers'}
                             </p>
                             <Switch
                                 name={'show_all_servers'}
                                 defaultChecked={showOnlyAdmin}
                                 onChange={() => setShowOnlyAdmin((s) => !s)}
                             />
-                        </div>
+                        </FilterWrapper>
                     )}
                 </div>
-            </div>
+            </HeaderSection>
             {/* Server List */}
             {!servers ? (
                 <div css={tw`flex justify-center items-center py-20`}>
@@ -120,45 +124,19 @@ export default () => {
                                 ))}
                             </div>
                         ) : (
-                            <div
-                                css={tw`flex flex-col items-center justify-center py-20 px-4 rounded-xl`}
-                                style={{
-                                    background:
-                                        'linear-gradient(135deg, rgba(245, 133, 41, 0.1), rgba(221, 42, 123, 0.08))',
-                                    border: '2px dashed rgba(245, 133, 41, 0.3)',
-                                }}
-                            >
-                                <div
-                                    css={tw`text-6xl mb-4`}
-                                    style={{
-                                        filter: 'grayscale(1) opacity(0.5)',
-                                    }}
-                                >
-                                    📦
+                            <EmptyStateWrapper>
+                                <div css={tw`text-5xl mb-4 opacity-30`}>
+                                    <FontAwesomeIcon icon={faBoxOpen} />
                                 </div>
-                                <p
-                                    css={tw`text-xl font-bold mb-2`}
-                                    style={{
-                                        color: '#2d3748',
-                                        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-                                    }}
-                                >
-                                    No Servers Found
-                                </p>
-                                <p
-                                    css={tw`text-sm text-center`}
-                                    style={{
-                                        color: 'rgba(0, 0, 0, 0.6)',
-                                        maxWidth: '400px',
-                                    }}
-                                >
+                                <p css={tw`text-xl font-bold mb-2 text-neutral-200`}>No Servers Found</p>
+                                <p css={tw`text-sm text-center text-neutral-500 max-w-[400px]`}>
                                     {showOnlyAdmin
                                         ? 'No other servers are available to display.'
                                         : query
                                         ? `No servers match your search "${query}"`
                                         : "You don't have any servers yet."}
                                 </p>
-                            </div>
+                            </EmptyStateWrapper>
                         );
                     }}
                 </Pagination>

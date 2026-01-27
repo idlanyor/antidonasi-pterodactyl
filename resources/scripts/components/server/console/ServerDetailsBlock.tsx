@@ -26,7 +26,7 @@ const getBackgroundColor = (value: number, max: number | null): string | undefin
         if (delta > 0.9) {
             return 'bg-red-500';
         }
-        return 'bg-yellow-500';
+        return 'bg-amber-400';
     }
 
     return undefined;
@@ -128,10 +128,10 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
                 <Limit limit={textLimits.disk}>{bytesToString(stats.disk)}</Limit>
             </StatBlock>
             <StatBlock icon={faCloudDownloadAlt} title={'Network (Inbound)'}>
-                {status === 'offline' ? <span className={'text-gray-400'}>Offline</span> : bytesToString(stats.rx)}
+                {status === 'offline' ? <span className={'text-neutral-500'}>Offline</span> : bytesToString(stats.rx)}
             </StatBlock>
             <StatBlock icon={faCloudUploadAlt} title={'Network (Outbound)'}>
-                {status === 'offline' ? <span className={'text-gray-400'}>Offline</span> : bytesToString(stats.tx)}
+                {status === 'offline' ? <span className={'text-neutral-500'}>Offline</span> : bytesToString(stats.tx)}
             </StatBlock>
         </div>
     );

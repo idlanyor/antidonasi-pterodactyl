@@ -98,20 +98,20 @@ const MassActionsBar = () => {
                             <div
                                 css={tw`flex items-center space-x-4 pointer-events-auto rounded-lg p-4`}
                                 style={{
-                                    background: 'rgba(20, 10, 20, 0.95)',
-                                    border: '2px solid rgba(245, 133, 41, 0.5)',
-                                    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)',
-                                    backdropFilter: 'blur(12px)',
+                                    background: '#111827',
+                                    border: '1px solid #374151',
+                                    boxShadow: 'none',
                                 }}
                             >
                                 <Button
                                     onClick={() => setShowMove(true)}
                                     shape={2}
                                     style={{
-                                        background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                                        border: '2px solid #1d4ed8',
+                                        backgroundColor: '#3b82f6',
+                                        border: '1px solid #2563eb',
                                         color: '#ffffff',
                                         fontWeight: 600,
+                                        boxShadow: 'none',
                                     }}
                                 >
                                     Move
@@ -120,10 +120,11 @@ const MassActionsBar = () => {
                                     onClick={onClickCompress}
                                     shape={2}
                                     style={{
-                                        background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
-                                        border: '2px solid #6d28d9',
+                                        backgroundColor: '#8b5cf6',
+                                        border: '1px solid #7c3aed',
                                         color: '#ffffff',
                                         fontWeight: 600,
+                                        boxShadow: 'none',
                                     }}
                                 >
                                     Archive
@@ -132,10 +133,11 @@ const MassActionsBar = () => {
                                     onClick={() => setShowConfirm(true)}
                                     shape={2}
                                     style={{
-                                        background: 'linear-gradient(135deg, #ef4444, #dc2626)',
-                                        border: '2px solid #991b1b',
+                                        backgroundColor: '#ef4444',
+                                        border: '1px solid #dc2626',
                                         color: '#ffffff',
                                         fontWeight: 600,
+                                        boxShadow: 'none',
                                     }}
                                 >
                                     Delete

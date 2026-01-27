@@ -49,7 +49,7 @@ const FileObjectRow = ({ file }: { file: FileObject }) => (
     >
         <SelectFileCheckbox name={file.name} />
         <Clickable file={file}>
-            <div css={tw`flex-none ml-6 mr-4 text-lg pl-3`} style={{ color: file.isFile ? '#dd2a7b' : '#f58529' }}>
+            <div css={tw`flex-none ml-6 mr-4 text-lg pl-3`} style={{ color: file.isFile ? '#60a5fa' : '#34d399' }}>
                 {file.isFile ? (
                     <FontAwesomeIcon
                         icon={file.isSymlink ? faFileImport : file.isArchiveType() ? faFileArchive : faFileAlt}
@@ -58,17 +58,11 @@ const FileObjectRow = ({ file }: { file: FileObject }) => (
                     <FontAwesomeIcon icon={faFolder} />
                 )}
             </div>
-            <div css={tw`flex-1 truncate text-white`}>{file.name}</div>
+            <div css={tw`flex-1 truncate text-neutral-100`}>{file.name}</div>
             {file.isFile && (
-                <div css={tw`w-1/6 text-right mr-4 hidden sm:block`} style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                    {bytesToString(file.size)}
-                </div>
+                <div css={tw`w-1/6 text-right mr-4 hidden sm:block text-neutral-400`}>{bytesToString(file.size)}</div>
             )}
-            <div
-                css={tw`w-1/5 text-right mr-4 hidden md:block`}
-                style={{ color: 'rgba(255, 255, 255, 0.6)' }}
-                title={file.modifiedAt.toString()}
-            >
+            <div css={tw`w-1/5 text-right mr-4 hidden md:block text-neutral-500`} title={file.modifiedAt.toString()}>
                 {Math.abs(differenceInHours(file.modifiedAt, new Date())) > 48
                     ? format(file.modifiedAt, 'MMM do, yyyy h:mma')
                     : formatDistanceToNow(file.modifiedAt, { addSuffix: true })}

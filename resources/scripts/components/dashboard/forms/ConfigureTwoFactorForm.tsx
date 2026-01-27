@@ -30,7 +30,7 @@ export default () => {
             <SetupTOTPDialog open={visible === 'enable'} onClose={() => setVisible(null)} onTokens={onTokens} />
             <RecoveryTokensDialog tokens={tokens} open={tokens.length > 0} onClose={() => setTokens([])} />
             <DisableTOTPDialog open={visible === 'disable'} onClose={() => setVisible(null)} />
-            <p css={tw`text-sm`} style={{ color: 'rgba(0, 0, 0, 0.8)', lineHeight: '1.5' }}>
+            <p css={tw`text-sm text-neutral-300`} style={{ lineHeight: '1.5' }}>
                 {isEnabled
                     ? 'Two-step verification is currently enabled on your account.'
                     : 'You do not currently have two-step verification enabled on your account. Click the button below to begin configuring it.'}
@@ -52,10 +52,11 @@ export default () => {
                     <Button
                         onClick={() => setVisible('enable')}
                         style={{
-                            background: 'linear-gradient(135deg, #f58529, #dd2a7b)',
-                            border: '2px solid rgba(245, 133, 41, 0.6)',
+                            backgroundColor: '#3b82f6',
+                            border: '1px solid #2563eb',
                             color: '#ffffff',
                             fontWeight: 600,
+                            boxShadow: 'none',
                         }}
                     >
                         Enable Two-Step

@@ -55,10 +55,11 @@ export default ({ className }: PowerButtonProps) => {
                     onClick={onButtonClick.bind(this, 'start')}
                     shape={2}
                     style={{
-                        background: 'linear-gradient(135deg, #10b981, #059669)',
-                        border: '2px solid #065f46',
+                        backgroundColor: '#10b981',
+                        border: '1px solid #0f9f75',
                         color: '#ffffff',
                         fontWeight: 600,
+                        boxShadow: 'none',
                     }}
                 >
                     Start
@@ -71,10 +72,11 @@ export default ({ className }: PowerButtonProps) => {
                     onClick={onButtonClick.bind(this, 'restart')}
                     shape={2}
                     style={{
-                        background: 'linear-gradient(135deg, #f59e0b, #d97706)',
-                        border: '2px solid #92400e',
+                        backgroundColor: '#f59e0b',
+                        border: '1px solid #d97706',
                         color: '#ffffff',
                         fontWeight: 600,
+                        boxShadow: 'none',
                     }}
                 >
                     Restart
@@ -87,10 +89,11 @@ export default ({ className }: PowerButtonProps) => {
                     onClick={onButtonClick.bind(this, killable ? 'kill' : 'stop')}
                     shape={2}
                     style={{
-                        background: 'linear-gradient(135deg, #ef4444, #dc2626)',
-                        border: '2px solid #991b1b',
+                        backgroundColor: '#ef4444',
+                        border: '1px solid #dc2626',
                         color: '#ffffff',
                         fontWeight: 600,
+                        boxShadow: 'none',
                     }}
                 >
                     {killable ? 'Kill' : 'Stop'}

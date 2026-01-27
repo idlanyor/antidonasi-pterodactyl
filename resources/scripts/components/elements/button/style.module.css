@@ -6,12 +6,12 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     letter-spacing: 0.02em;
     text-transform: none;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #374151;
+    box-shadow: none;
 
     &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        transform: translateY(-1px);
+        box-shadow: none;
     }
 
     /* Sizing Controls */
@@ -60,14 +60,14 @@
 }
 
 .primary {
-    background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
+    background: #3b82f6;
     color: #ffffff;
-    border: 1px solid transparent;
-    box-shadow: 0 8px 20px rgba(245, 133, 41, 0.3), 0 4px 12px rgba(221, 42, 123, 0.25);
+    border: 1px solid #2563eb;
+    box-shadow: none;
 
     &:hover {
-        filter: brightness(1.1);
-        box-shadow: 0 12px 30px rgba(245, 133, 41, 0.4), 0 6px 18px rgba(221, 42, 123, 0.35);
+        background: #2563eb;
+        box-shadow: none;
     }
 
     &:active {
@@ -76,20 +76,20 @@
     }
 
     &:focus {
-        box-shadow: 0 0 0 3px rgba(245, 133, 41, 0.4);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
     }
 
     &.secondary {
         background: rgba(255, 255, 255, 0.25);
         backdrop-filter: blur(10px);
-        border: 2px solid rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.5);
 
         &:hover {
-            background: linear-gradient(135deg, rgba(245, 133, 41, 0.35), rgba(221, 42, 123, 0.35));
-            border-color: rgba(245, 133, 41, 0.7);
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.7);
         }
         &:active {
-            background: linear-gradient(135deg, rgba(245, 133, 41, 0.45), rgba(221, 42, 123, 0.45));
+            background: rgba(255, 255, 255, 0.35);
         }
     }
 
@@ -102,58 +102,58 @@
 
 /* Instagram palettes */
 .palette-purpleRed {
-    background-image: linear-gradient(135deg, #8134af, #dd2a7b);
+    background: #8b5cf6;
     color: #ffffff;
-    border-color: transparent;
-    box-shadow: 0 8px 20px rgba(129, 52, 175, 0.3);
+    border-color: #7c3aed;
+    box-shadow: none;
 
     &:hover {
-        filter: brightness(1.1);
-        box-shadow: 0 12px 30px rgba(129, 52, 175, 0.4);
+        background: #7c3aed;
+        box-shadow: none;
     }
 }
 .palette-indigoPink {
-    background-image: linear-gradient(135deg, #f58529, #dd2a7b);
+    background: #6366f1;
     color: #ffffff;
-    border-color: transparent;
-    box-shadow: 0 8px 20px rgba(245, 133, 41, 0.3), 0 4px 12px rgba(221, 42, 123, 0.25);
+    border-color: #4f46e5;
+    box-shadow: none;
 
     &:hover {
-        filter: brightness(1.1);
-        box-shadow: 0 12px 30px rgba(245, 133, 41, 0.4), 0 6px 18px rgba(221, 42, 123, 0.35);
+        background: #4f46e5;
+        box-shadow: none;
     }
 }
 .palette-cyanBlue {
-    background-image: linear-gradient(135deg, #dd2a7b, #8134af);
+    background: #3b82f6;
     color: #ffffff;
-    border-color: transparent;
-    box-shadow: 0 8px 20px rgba(221, 42, 123, 0.3), 0 4px 12px rgba(129, 52, 175, 0.25);
+    border-color: #2563eb;
+    box-shadow: none;
 
     &:hover {
-        filter: brightness(1.1);
-        box-shadow: 0 12px 30px rgba(221, 42, 123, 0.4), 0 6px 18px rgba(129, 52, 175, 0.35);
+        background: #2563eb;
+        box-shadow: none;
     }
 }
 .palette-sunset {
-    background-image: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+    background: #f59e0b;
     color: #ffffff;
-    border-color: transparent;
-    box-shadow: 0 8px 20px rgba(245, 133, 41, 0.3), 0 4px 12px rgba(221, 42, 123, 0.2);
+    border-color: #d97706;
+    box-shadow: none;
 
     &:hover {
-        filter: brightness(1.1);
-        box-shadow: 0 12px 30px rgba(245, 133, 41, 0.4), 0 6px 18px rgba(221, 42, 123, 0.3);
+        background: #d97706;
+        box-shadow: none;
     }
 }
 .palette-rainbow {
-    background-image: linear-gradient(90deg, #f58529, #dd2a7b, #8134af);
+    background: #06b6d4;
     color: #ffffff;
-    border-color: transparent;
-    box-shadow: 0 8px 20px rgba(245, 133, 41, 0.3);
+    border-color: #0891b2;
+    box-shadow: none;
 
     &:hover {
-        filter: brightness(1.1);
-        box-shadow: 0 12px 30px rgba(245, 133, 41, 0.4), 0 6px 18px rgba(221, 42, 123, 0.35);
+        background: #0891b2;
+        box-shadow: none;
     }
 }
 
@@ -193,69 +193,59 @@
 }
 
 .danger {
-    background: linear-gradient(135deg, rgba(255, 51, 51, 0.4), rgba(255, 102, 102, 0.4));
+    background: #ef4444;
     color: #ffffff;
-    border: 2px solid rgba(255, 51, 51, 0.7);
-    box-shadow: 0 0 15px rgba(255, 51, 51, 0.4);
+    border: 1px solid #dc2626;
+    box-shadow: none;
 
     &:hover {
-        background: linear-gradient(135deg, rgba(255, 51, 51, 0.5), rgba(255, 102, 102, 0.5));
-        border-color: rgba(255, 51, 51, 0.9);
-        box-shadow: 0 0 25px rgba(255, 51, 51, 0.6);
+        background: #dc2626;
+        border-color: #b91c1c;
+        box-shadow: none;
     }
 
     &:active {
-        background: linear-gradient(135deg, rgba(255, 51, 51, 0.6), rgba(255, 102, 102, 0.6));
+        background: #b91c1c;
     }
 
     &:focus {
-        box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.5);
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.4);
     }
 
     &.secondary {
-        background: rgba(255, 51, 51, 0.25);
-        border: 2px solid rgba(255, 51, 51, 0.5);
+        background: rgba(239, 68, 68, 0.25);
+        border: 1px solid rgba(239, 68, 68, 0.5);
 
         &:hover {
-            background: rgba(255, 51, 51, 0.35);
-            border-color: rgba(255, 51, 51, 0.7);
+            background: rgba(239, 68, 68, 0.35);
+            border-color: rgba(239, 68, 68, 0.7);
         }
         &:active {
-            background: rgba(255, 51, 51, 0.45);
+            background: rgba(239, 68, 68, 0.45);
         }
     }
 
     &:disabled {
-        background: rgba(255, 51, 51, 0.15);
+        background: rgba(239, 68, 68, 0.15);
         color: rgba(255, 255, 255, 0.5);
-        border-color: rgba(255, 51, 51, 0.3);
+        border-color: rgba(239, 68, 68, 0.3);
     }
 }
 /* Instagram glass appearance modifier */
 .glass {
     backdrop-filter: blur(12px);
-    background-image: linear-gradient(
-        135deg,
-        rgba(245, 133, 41, 0.25),
-        rgba(221, 42, 123, 0.2),
-        rgba(129, 52, 175, 0.18)
-    );
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: none;
 
     &:hover {
         border-color: rgba(255, 255, 255, 0.6);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-        background-image: linear-gradient(
-            135deg,
-            rgba(245, 133, 41, 0.35),
-            rgba(221, 42, 123, 0.3),
-            rgba(129, 52, 175, 0.25)
-        );
+        box-shadow: none;
+        background: rgba(255, 255, 255, 0.28);
     }
 
     &:focus {
         outline: none;
-        box-shadow: 0 0 0 3px rgba(245, 133, 41, 0.5);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
     }
 }

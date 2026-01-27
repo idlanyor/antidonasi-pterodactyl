@@ -19,12 +19,13 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         ((!props.isSecondary && !props.color) || props.color === 'primary') &&
         css<Props>`
-            ${tw`text-white border-transparent shadow-md`};
-            background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
+            ${tw`text-white border-transparent`};
+            background-color: #3b82f6;
+            border-color: #2563eb;
+            box-shadow: none;
 
             &:hover:not(:disabled) {
-                filter: brightness(1.1);
-                ${tw`shadow-lg`};
+                background-color: #2563eb;
             }
         `};
 
@@ -101,8 +102,8 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
                 ${(props) =>
                     props.color === 'primary' &&
                     css`
-                        background: linear-gradient(135deg, rgba(245, 133, 41, 0.4), rgba(221, 42, 123, 0.4));
-                        border-color: rgba(245, 133, 41, 0.8);
+                        background: rgba(59, 130, 246, 0.3);
+                        border-color: rgba(96, 165, 250, 0.7);
                     `};
                 ${(props) =>
                     props.color === 'green' &&
@@ -119,29 +120,14 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
         css`
             ${tw`bg-white/20 text-neutral-100 backdrop-blur-md`};
             border: 2px solid rgba(255, 255, 255, 0.5);
-            background-image: linear-gradient(
-                135deg,
-                ${props.palette === 'indigoPink'
-                    ? 'rgba(245,133,41,0.30), rgba(221,42,123,0.25)'
-                    : props.palette === 'cyanBlue'
-                    ? 'rgba(221,42,123,0.30), rgba(129,52,175,0.25)'
-                    : props.palette === 'sunset'
-                    ? 'rgba(245,133,41,0.32), rgba(221,42,123,0.25)'
-                    : props.palette === 'rainbow'
-                    ? 'rgba(245,133,41,0.30), rgba(221,42,123,0.25), rgba(129,52,175,0.28)'
-                    : props.palette === 'instagram'
-                    ? 'rgba(245,133,41,0.32), rgba(221,42,123,0.28), rgba(129,52,175,0.25)'
-                    : 'rgba(245,133,41,0.32), rgba(129,52,175,0.25)'}
-            );
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: none;
             &:hover:not(:disabled) {
                 border-color: rgba(255, 255, 255, 0.7);
-                transform: translateY(-1px);
-                box-shadow: 0 12px 26px rgba(0, 0, 0, 0.25);
+                background-color: rgba(255, 255, 255, 0.28);
             }
             &:active:not(:disabled) {
-                transform: translateY(0);
-                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+                background-color: rgba(255, 255, 255, 0.22);
             }
         `};
 
@@ -161,9 +147,10 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
         props.palette === 'indigoPink' &&
         css`
             ${tw`text-white border-transparent`};
-            background-image: linear-gradient(135deg, #f58529, #dd2a7b);
+            background-color: #6366f1;
+            border-color: #4f46e5;
             &:hover:not(:disabled) {
-                filter: brightness(1.1);
+                background-color: #4f46e5;
             }
         `};
 
@@ -172,9 +159,10 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
         props.palette === 'cyanBlue' &&
         css`
             ${tw`text-white border-transparent`};
-            background-image: linear-gradient(135deg, #dd2a7b, #8134af);
+            background-color: #3b82f6;
+            border-color: #2563eb;
             &:hover:not(:disabled) {
-                filter: brightness(1.1);
+                background-color: #2563eb;
             }
         `};
 
@@ -205,9 +193,10 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
         props.palette === 'instagram' &&
         css`
             ${tw`text-white border-transparent`};
-            background-image: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+            background-color: #f59e0b;
+            border-color: #d97706;
             &:hover:not(:disabled) {
-                filter: brightness(1.1);
+                background-color: #d97706;
             }
         `};
 

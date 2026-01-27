@@ -70,10 +70,11 @@ export default () => {
                             <Button
                                 disabled={isSubmitting || !isValid}
                                 style={{
-                                    background: 'linear-gradient(135deg, #f58529, #dd2a7b)',
-                                    border: '2px solid rgba(245, 133, 41, 0.6)',
+                                    backgroundColor: '#3b82f6',
+                                    border: '1px solid #2563eb',
                                     color: '#ffffff',
                                     fontWeight: 600,
+                                    boxShadow: 'none',
                                 }}
                             >
                                 Update Email
