@@ -14,16 +14,21 @@ type Props = Readonly<
 >;
 
 const Glass = styled.div`
-    ${tw`p-4 rounded-xl relative border`};
-    background: #111827;
-    border-color: #1f2937;
-    box-shadow: none;
+    ${tw`p-6 rounded-2xl relative border`};
+    background: linear-gradient(145deg, #111827, #1f2937);
+    border-color: #374151;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     color: #e5e7eb;
+    transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+    &:hover {
+        border-color: #4b5563;
+    }
 `;
 
 const ContentBox = ({ title, borderColor, showFlashes, showLoadingOverlay, children, ...props }: Props) => (
     <div {...props}>
-        {title && <h2 css={tw`mb-4 px-1 text-2xl text-neutral-100 font-semibold`}>{title}</h2>}
+        {title && <h2 css={tw`mb-4 px-2 text-xl text-neutral-100 font-bold tracking-tight`}>{title}</h2>}
         {showFlashes && (
             <FlashMessageRender byKey={typeof showFlashes === 'string' ? showFlashes : undefined} css={tw`mb-4`} />
         )}

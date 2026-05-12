@@ -14,37 +14,26 @@ interface Props {
 }
 
 const Container = styled.div<{ glass?: boolean }>`
-    ${tw`rounded-lg`};
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(245, 133, 41, 0.2);
-    box-shadow: 0 8px 25px rgba(245, 133, 41, 0.15), 0 4px 15px rgba(221, 42, 123, 0.08);
-    backdrop-filter: blur(10px);
-    color: #2d3748;
+    ${tw`rounded-2xl`};
+    background: rgba(17, 24, 39, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(16px);
+    color: #e5e7eb;
     transition: all 0.3s ease;
 
     &:hover {
-        border-color: rgba(245, 133, 41, 0.3);
-        box-shadow: 0 12px 35px rgba(245, 133, 41, 0.2), 0 6px 20px rgba(221, 42, 123, 0.1);
+        border-color: rgba(99, 102, 241, 0.3);
+        background: rgba(17, 24, 39, 0.8);
     }
 `;
 
 const Header = styled.div<{ glass?: boolean }>`
-    ${tw`rounded-t-lg p-3`};
-    background: linear-gradient(135deg, rgba(245, 133, 41, 0.1), rgba(221, 42, 123, 0.08));
-    border-bottom: 1px solid rgba(245, 133, 41, 0.15);
-    color: #f58529;
+    ${tw`rounded-t-2xl p-4 lg:p-5`};
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #ffffff;
     position: relative;
-
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, transparent, #f58529, #dd2a7b, #8134af, transparent);
-        opacity: 0.7;
-    }
 `;
 
 const TitledGreyBox = ({ icon, title, children, className, glass }: Props) => (
@@ -52,29 +41,19 @@ const TitledGreyBox = ({ icon, title, children, className, glass }: Props) => (
         <Header glass={glass}>
             {typeof title === 'string' ? (
                 <p
-                    css={tw`text-sm uppercase font-semibold`}
+                    css={tw`text-sm uppercase font-bold tracking-widest`}
                     style={{
-                        color: '#f58529',
-                        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-                        letterSpacing: '0.05em',
+                        color: '#ffffff',
                     }}
                 >
-                    {icon && (
-                        <FontAwesomeIcon
-                            icon={icon}
-                            css={tw`mr-2`}
-                            style={{
-                                color: '#dd2a7b',
-                            }}
-                        />
-                    )}
+                    {icon && <FontAwesomeIcon icon={icon} css={tw`mr-3 text-indigo-400`} />}
                     {title}
                 </p>
             ) : (
                 title
             )}
         </Header>
-        <div css={tw`p-3`}>{children}</div>
+        <div css={tw`p-4 lg:p-6`}>{children}</div>
     </Container>
 );
 

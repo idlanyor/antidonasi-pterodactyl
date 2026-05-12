@@ -30,7 +30,7 @@ export default () => {
             <SetupTOTPDialog open={visible === 'enable'} onClose={() => setVisible(null)} onTokens={onTokens} />
             <RecoveryTokensDialog tokens={tokens} open={tokens.length > 0} onClose={() => setTokens([])} />
             <DisableTOTPDialog open={visible === 'disable'} onClose={() => setVisible(null)} />
-            <p css={tw`text-sm text-neutral-300`} style={{ lineHeight: '1.5' }}>
+            <p css={tw`text-sm text-neutral-100 leading-relaxed`}>
                 {isEnabled
                     ? 'Two-step verification is currently enabled on your account.'
                     : 'You do not currently have two-step verification enabled on your account. Click the button below to begin configuring it.'}
@@ -40,10 +40,13 @@ export default () => {
                     <Button.Danger
                         onClick={() => setVisible('disable')}
                         style={{
-                            background: 'linear-gradient(135deg, #ef4444, #dc2626)',
-                            border: '2px solid #991b1b',
+                            background: 'linear-gradient(135deg, #ff4d4d, #f87171)',
+                            border: '1px solid #dc2626',
                             color: '#ffffff',
                             fontWeight: 600,
+                            boxShadow: '0 4px 6px -1px rgba(239, 68, 68, 0.5)',
+                            borderRadius: '0.5rem',
+                            padding: '0.625rem 1.25rem',
                         }}
                     >
                         Disable Two-Step
@@ -52,11 +55,13 @@ export default () => {
                     <Button
                         onClick={() => setVisible('enable')}
                         style={{
-                            backgroundColor: '#3b82f6',
-                            border: '1px solid #2563eb',
+                            background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                            border: '1px solid #1d4ed8',
                             color: '#ffffff',
                             fontWeight: 600,
-                            boxShadow: 'none',
+                            boxShadow: '0 4px 6px -1px rgba(59, 130, 246, 0.5)',
+                            borderRadius: '0.5rem',
+                            padding: '0.625rem 1.25rem',
                         }}
                     >
                         Enable Two-Step

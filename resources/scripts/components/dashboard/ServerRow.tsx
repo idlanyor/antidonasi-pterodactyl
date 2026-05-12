@@ -31,7 +31,7 @@ const isAlarmState = (current: number, limit: number): boolean => limit > 0 && c
 
 const Icon = memo(
     styled(FontAwesomeIcon)<{ $alarm: boolean }>`
-        ${(props) => (props.$alarm ? 'color: #ef4444;' : 'color: #3b82f6;')};
+        ${(props) => (props.$alarm ? 'color: #ff4d4d;' : 'color: #6366f1;')};
     `,
     isEqual
 );
@@ -43,60 +43,69 @@ const pulse = keyframes`
 `;
 
 const StatusIndicatorBox = styled(GreyRowBox)<{ $status: ServerPowerState | undefined }>`
-    ${tw`relative flex flex-col lg:flex-row lg:items-stretch`};
-    ${tw`rounded-xl p-0 transition-all duration-200`};
-    ${tw`bg-neutral-900 border border-neutral-800`};
+    ${tw`relative flex flex-col h-full`};
+    ${tw`rounded-2xl p-0 transition-all duration-300`};
+    background: rgba(17, 24, 39, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     overflow: hidden;
 
     &:hover {
-        ${tw`border-neutral-700 bg-neutral-900`};
-        transform: translateY(-1px);
-    }
-
-    @media (max-width: 1023px) {
-        gap: 0;
+        background: rgba(17, 24, 39, 0.8);
+        border-color: rgba(99, 102, 241, 0.3);
+        transform: translateY(-4px);
+        box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.3);
     }
 
     & .status-badge {
-        ${tw`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1.5`};
+        ${tw`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-2 mt-2`};
         ${({ $status }) => {
             if (!$status || $status === 'offline') {
-                return 'background-color: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.35);';
+                return 'background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2);';
             }
             if ($status === 'running') {
-                return 'background-color: rgba(34, 197, 94, 0.12); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.35);';
+                return 'background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2);';
             }
-            return 'background-color: rgba(234, 179, 8, 0.12); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.35);';
+            return 'background: rgba(234, 179, 8, 0.1); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.2);';
         }};
     }
 
     & .status-dot {
-        ${tw`w-1.5 h-1.5 rounded-full`};
+        ${tw`w-2 h-2 rounded-full`};
         animation: ${pulse} 2s ease-in-out infinite;
         ${({ $status }) =>
             !$status || $status === 'offline'
-                ? tw`bg-red-500`
+                ? tw`bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]`
                 : $status === 'running'
-                ? tw`bg-green-500`
-                : tw`bg-yellow-500`};
+                ? tw`bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]`
+                : tw`bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.5)]`};
     }
 
     & .section-left {
-        ${tw`flex items-center gap-3 p-3 lg:p-4 lg:w-64 lg:flex-shrink-0`};
-        ${tw`border-b lg:border-b-0 lg:border-r border-neutral-800`};
+        ${tw`flex items-start gap-4 p-5`};
+        ${tw`border-b`};
+        border-color: rgba(255, 255, 255, 0.05);
     }
 
     & .section-middle {
-        ${tw`flex-1 p-3 lg:p-4 bg-transparent`};
+        ${tw`flex-1 p-5 bg-transparent`};
     }
 
     & .section-right {
-        ${tw`p-3 lg:p-4 lg:w-[400px] lg:flex-shrink-0`};
-        ${tw`border-t lg:border-t-0 lg:border-l border-neutral-800`};
+        ${tw`p-5 mt-auto`};
+        ${tw`border-t`};
+        border-color: rgba(255, 255, 255, 0.05);
     }
 
     & .info-card {
-        ${tw`px-3 py-2 rounded-lg bg-neutral-800 border border-neutral-700`};
+        ${tw`px-4 py-3 rounded-xl transition-colors duration-200 mb-2 last:mb-0`};
+        background: rgba(10, 10, 20, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+
+        &:hover {
+            background: rgba(10, 10, 20, 0.5);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
     }
 
     & .stat-item {
@@ -174,9 +183,9 @@ export default ({ server, className }: { server: Server; className?: string }) =
             {/* Left Section: Icon + Name */}
             <div className='section-left'>
                 <div
-                    css={tw`flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-lg flex-shrink-0 bg-neutral-900 border border-neutral-700`}
+                    css={tw`flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-2xl flex-shrink-0 bg-indigo-500/10 border border-indigo-500/20 shadow-[0_0_15px_rgba(99,102,241,0.1)]`}
                 >
-                    <FontAwesomeIcon icon={faServer} css={tw`text-neutral-400 text-[11px]`} />
+                    <FontAwesomeIcon icon={faServer} css={tw`text-indigo-400 text-sm`} />
                 </div>
                 <div css={tw`flex-1 min-w-0`}>
                     <div className={'desktop-main'}>
@@ -243,7 +252,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                     {/* Endpoint */}
                     <div className='info-card'>
                         <div css={tw`flex items-center gap-1.5 mb-1`}>
-                            <FontAwesomeIcon icon={faEthernet} css={tw`text-blue-400 text-[10px]`} />
+                            <FontAwesomeIcon icon={faEthernet} css={tw`text-indigo-400 text-[10px]`} />
                             <span css={tw`text-[10px] font-bold uppercase tracking-wider text-neutral-500`}>
                                 Endpoint
                             </span>
@@ -322,7 +331,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                         )}
                     </div>
                 ) : (
-                    <div css={tw`grid grid-cols-1 sm:grid-cols-3 gap-3`}>
+                    <div css={tw`grid grid-cols-3 gap-3`}>
                         {/* CPU */}
                         <div className='stat-item'>
                             <div css={tw`flex items-center justify-between mb-1`}>
@@ -338,7 +347,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {stats.cpuUsagePercent.toFixed(0)}%
                                 </span>
                             </div>
-                            <div css={tw`w-full h-1.5 rounded-full overflow-hidden bg-neutral-900`}>
+                            <div css={tw`w-full h-1.5 rounded-full overflow-hidden bg-black/40`}>
                                 <div
                                     css={tw`h-full rounded-full transition-all duration-500`}
                                     style={{
@@ -346,7 +355,10 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                             (stats.cpuUsagePercent / (server.limits.cpu || 100)) * 100,
                                             100
                                         )}%`,
-                                        background: alarms.cpu ? '#ef4444' : '#3b82f6',
+                                        background: alarms.cpu ? '#ff4d4d' : 'linear-gradient(90deg, #6366f1, #818cf8)',
+                                        boxShadow: alarms.cpu
+                                            ? '0 0 10px rgba(255, 77, 77, 0.3)'
+                                            : '0 0 10px rgba(99, 102, 241, 0.3)',
                                     }}
                                 />
                             </div>
@@ -373,7 +385,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {bytesToString(stats.memoryUsageInBytes)}
                                 </span>
                             </div>
-                            <div css={tw`w-full h-1.5 rounded-full overflow-hidden bg-neutral-900`}>
+                            <div css={tw`w-full h-1.5 rounded-full overflow-hidden bg-black/40`}>
                                 <div
                                     css={tw`h-full rounded-full transition-all duration-500`}
                                     style={{
@@ -381,7 +393,12 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                             (stats.memoryUsageInBytes / mbToBytes(server.limits.memory || 1024)) * 100,
                                             100
                                         )}%`,
-                                        background: alarms.memory ? '#ef4444' : '#3b82f6',
+                                        background: alarms.memory
+                                            ? '#ff4d4d'
+                                            : 'linear-gradient(90deg, #6366f1, #818cf8)',
+                                        boxShadow: alarms.memory
+                                            ? '0 0 10px rgba(255, 77, 77, 0.3)'
+                                            : '0 0 10px rgba(99, 102, 241, 0.3)',
                                     }}
                                 />
                             </div>
@@ -405,7 +422,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     {bytesToString(stats.diskUsageInBytes)}
                                 </span>
                             </div>
-                            <div css={tw`w-full h-1.5 rounded-full overflow-hidden bg-neutral-900`}>
+                            <div css={tw`w-full h-1.5 rounded-full overflow-hidden bg-black/40`}>
                                 <div
                                     css={tw`h-full rounded-full transition-all duration-500`}
                                     style={{
@@ -413,7 +430,12 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                             (stats.diskUsageInBytes / mbToBytes(server.limits.disk || 1024)) * 100,
                                             100
                                         )}%`,
-                                        background: alarms.disk ? '#ef4444' : '#3b82f6',
+                                        background: alarms.disk
+                                            ? '#ff4d4d'
+                                            : 'linear-gradient(90deg, #6366f1, #818cf8)',
+                                        boxShadow: alarms.disk
+                                            ? '0 0 10px rgba(255, 77, 77, 0.3)'
+                                            : '0 0 10px rgba(99, 102, 241, 0.3)',
                                     }}
                                 />
                             </div>

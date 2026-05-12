@@ -81,7 +81,16 @@ export default () => {
                             <NewDirectoryButton />
                             <UploadButton />
                             <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
-                                <Button>New File</Button>
+                                <Button
+                                    style={{
+                                        background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+                                        border: '1px solid #4338ca',
+                                        borderRadius: '0.75rem',
+                                        boxShadow: '0 4px 6px -1px rgba(99, 102, 241, 0.3)',
+                                    }}
+                                >
+                                    New File
+                                </Button>
                             </NavLink>
                         </div>
                     </Can>
@@ -92,14 +101,16 @@ export default () => {
             ) : (
                 <>
                     {!files.length ? (
-                        <p css={tw`text-sm text-center py-8 text-neutral-400`}>Directory is empty</p>
+                        <p css={tw`text-sm text-center py-12 text-neutral-500`}>Directory is empty</p>
                     ) : (
                         <CSSTransition classNames={'fade'} timeout={150} appear in>
                             <div>
                                 {files.length > 250 && (
-                                    <div css={tw`rounded mb-3 p-4 bg-neutral-900 border border-neutral-700`}>
+                                    <div
+                                        css={tw`rounded-xl mb-4 p-4 bg-yellow-500/10 border border-yellow-500/20 shadow-[0_0_15px_rgba(234,179,8,0.05)]`}
+                                    >
                                         <p
-                                            css={tw`text-sm text-center font-semibold text-yellow-400 inline-flex items-center gap-2 justify-center`}
+                                            css={tw`text-xs text-center font-bold text-yellow-400 uppercase tracking-widest inline-flex items-center gap-3 justify-center`}
                                         >
                                             <FontAwesomeIcon icon={faExclamationTriangle} />
                                             Warning: Directory too large - showing first 250 files only

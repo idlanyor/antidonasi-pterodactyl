@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import { styles as btnStyles } from '@/components/elements/button/index';
 import { XCircleIcon } from '@heroicons/react/solid';
 import useLocationHash from '@/plugins/useLocationHash';
+import styles from './ServerActivityLog.module.css';
 
 export default () => {
     const { hash } = useLocationHash();
@@ -35,7 +36,7 @@ export default () => {
         <ServerContentBlock title={'Activity Log'}>
             <FlashMessageRender byKey={'server:activity'} />
             {(filters.filters?.event || filters.filters?.ip) && (
-                <div className={'flex justify-end mb-2'}>
+                <div className={'flex justify-end mb-4'}>
                     <Link
                         to={'#'}
                         className={classNames(btnStyles.button, btnStyles.text, 'w-full sm:w-auto')}
@@ -50,12 +51,20 @@ export default () => {
             ) : !data?.items.length ? (
                 <p className={'text-sm text-center text-gray-400'}>No activity logs available for this server.</p>
             ) : (
-                <div className={'bg-gray-700'}>
-                    {data?.items.map((activity) => (
-                        <ActivityLogEntry key={activity.id} activity={activity}>
-                            <span />
-                        </ActivityLogEntry>
-                    ))}
+                <div className={styles.auroraContainer}>
+                    <div className={styles.auroraBackground}>
+                        <div className={classNames(styles.auroraBlob, styles.auroraBlob1)} />
+                        <div className={classNames(styles.auroraBlob, styles.auroraBlob2)} />
+                        <div className={classNames(styles.auroraBlob, styles.auroraBlob3)} />
+                        <div className={classNames(styles.auroraBlob, styles.auroraBlob4)} />
+                    </div>
+                    <div className={styles.content}>
+                        {data?.items.map((activity) => (
+                            <ActivityLogEntry key={activity.id} activity={activity}>
+                                <span />
+                            </ActivityLogEntry>
+                        ))}
+                    </div>
                 </div>
             )}
             {data && (

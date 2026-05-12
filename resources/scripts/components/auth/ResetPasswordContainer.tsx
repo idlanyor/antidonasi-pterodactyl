@@ -8,7 +8,7 @@ import { Actions, useStoreActions } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import { Formik, FormikHelpers } from 'formik';
 import { object, ref, string } from 'yup';
-import Field from '@/components/elements/Field';
+import AuthField from '@/components/auth/AuthField';
 import Input from '@/components/elements/Input';
 import tw from 'twin.macro';
 import Button from '@/components/elements/Button';
@@ -63,31 +63,41 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
             {({ isSubmitting }) => (
                 <LoginFormContainer title={'Reset Password'} css={tw`w-full flex`}>
                     <div>
-                        <label>Email</label>
-                        <Input value={email} isLight disabled />
+                        <label className={'text-neutral-400 font-medium text-xs uppercase tracking-wider mb-2 block'}>
+                            Email
+                        </label>
+                        <Input value={email} disabled className={'auth-input'} />
                     </div>
                     <div css={tw`mt-6`}>
-                        <Field
-                            light
-                            label={'New Password'}
+                        <AuthField
                             name={'password'}
+                            label={'New Password'}
                             type={'password'}
+                            placeholder={'Enter a new password'}
                             description={'Passwords must be at least 8 characters in length.'}
                         />
                     </div>
                     <div css={tw`mt-6`}>
-                        <Field light label={'Confirm New Password'} name={'passwordConfirmation'} type={'password'} />
+                        <AuthField
+                            name={'passwordConfirmation'}
+                            label={'Confirm New Password'}
+                            type={'password'}
+                            placeholder={'Confirm your new password'}
+                        />
                     </div>
-                    <div css={tw`mt-6`}>
-                        <Button size={'xlarge'} type={'submit'} disabled={isSubmitting} isLoading={isSubmitting}>
+                    <div css={tw`mt-2`}>
+                        <Button
+                            size={'xlarge'}
+                            type={'submit'}
+                            disabled={isSubmitting}
+                            isLoading={isSubmitting}
+                            className={'auth-button'}
+                        >
                             Reset Password
                         </Button>
                     </div>
                     <div css={tw`mt-6 text-center`}>
-                        <Link
-                            to={'/auth/login'}
-                            css={tw`text-xs text-neutral-500 tracking-wide no-underline uppercase hover:text-neutral-600`}
-                        >
+                        <Link to={'/auth/login'} css={tw`no-underline`} className={'auth-link'}>
                             Return to Login
                         </Link>
                     </div>

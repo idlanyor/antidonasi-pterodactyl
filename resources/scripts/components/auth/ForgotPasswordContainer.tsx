@@ -5,7 +5,7 @@ import requestPasswordResetEmail from '@/api/auth/requestPasswordResetEmail';
 import { httpErrorToHuman } from '@/api/http';
 import LoginFormContainer from '@/components/auth/LoginFormContainer';
 import { useStoreState } from 'easy-peasy';
-import Field from '@/components/elements/Field';
+import AuthField from '@/components/auth/AuthField';
 import { Formik, FormikHelpers } from 'formik';
 import { object, string } from 'yup';
 import tw from 'twin.macro';
@@ -73,17 +73,23 @@ export default () => {
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
                 <LoginFormContainer title={'Request Password Reset'} css={tw`w-full flex`}>
-                    <Field
-                        light
+                    <AuthField
+                        name={'email'}
                         label={'Email'}
+                        type={'email'}
+                        placeholder={'Enter your email address'}
                         description={
                             'Enter your account email address to receive instructions on resetting your password.'
                         }
-                        name={'email'}
-                        type={'email'}
                     />
-                    <div css={tw`mt-6`}>
-                        <Button type={'submit'} size={'xlarge'} disabled={isSubmitting} isLoading={isSubmitting}>
+                    <div css={tw`mt-2`}>
+                        <Button
+                            type={'submit'}
+                            size={'xlarge'}
+                            disabled={isSubmitting}
+                            isLoading={isSubmitting}
+                            className={'auth-button'}
+                        >
                             Send Email
                         </Button>
                     </div>
@@ -103,10 +109,7 @@ export default () => {
                         />
                     )}
                     <div css={tw`mt-6 text-center`}>
-                        <Link
-                            to={'/auth/login'}
-                            css={tw`text-xs text-neutral-500 tracking-wide uppercase no-underline hover:text-neutral-700`}
-                        >
+                        <Link to={'/auth/login'} css={tw`no-underline`} className={'auth-link'}>
                             Return to Login
                         </Link>
                     </div>

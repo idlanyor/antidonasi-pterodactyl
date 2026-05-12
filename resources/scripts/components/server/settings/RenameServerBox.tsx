@@ -34,19 +34,20 @@ const RenameServerBox = () => {
                         <FormikField as={Textarea} name={'description'} rows={3} variant={'glass'} />
                     </FormikFieldWrapper>
                 </div>
-                <div css={tw`mt-6 text-right`}>
+                <div css={tw`mt-8 text-right`}>
                     <Button
                         type={'submit'}
-                        shape={2}
                         style={{
-                            backgroundColor: '#3b82f6',
-                            border: '1px solid #2563eb',
+                            background: 'linear-gradient(135deg, #6366f1, #4f46e5)',
+                            border: '1px solid #4338ca',
                             color: '#ffffff',
                             fontWeight: 600,
-                            boxShadow: 'none',
+                            borderRadius: '0.75rem',
+                            padding: '0.625rem 2rem',
+                            boxShadow: '0 4px 6px -1px rgba(99, 102, 241, 0.3)',
                         }}
                     >
-                        Save
+                        Save Changes
                     </Button>
                 </div>
             </Form>

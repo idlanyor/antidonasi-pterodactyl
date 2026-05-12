@@ -97,11 +97,13 @@ export default () => {
                                 <Button
                                     disabled={isSubmitting || !isValid}
                                     style={{
-                                        backgroundColor: '#3b82f6',
-                                        border: '1px solid #2563eb',
+                                        background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                                        border: '1px solid #1d4ed8',
                                         color: '#ffffff',
                                         fontWeight: 600,
-                                        boxShadow: 'none',
+                                        boxShadow: '0 4px 6px -1px rgba(59, 130, 246, 0.5)',
+                                        borderRadius: '0.5rem',
+                                        padding: '0.625rem 1.25rem',
                                     }}
                                 >
                                     Update Password

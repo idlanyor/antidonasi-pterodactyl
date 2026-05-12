@@ -49,29 +49,30 @@ export default () => {
                             <div css={tw`mt-6 flex items-center`}>
                                 <div css={tw`flex-1`}>
                                     <div
-                                        css={tw`p-3 rounded`}
+                                        css={tw`p-4 rounded-xl`}
                                         style={{
-                                            borderLeft: '4px solid #06b6d4',
-                                            background: 'rgba(6, 182, 212, 0.1)',
+                                            borderLeft: '4px solid #6366f1',
+                                            background: 'rgba(99, 102, 241, 0.1)',
                                         }}
                                     >
-                                        <p css={tw`text-xs`} style={{ color: '#000000', lineHeight: '1.4' }}>
+                                        <p css={tw`text-xs leading-relaxed text-neutral-300`}>
                                             Your SFTP password is the same as the password you use to access this panel.
                                         </p>
                                     </div>
                                 </div>
                                 <div css={tw`ml-4`}>
                                     <a href={`sftp://${username}.${id}@${ip(sftp.ip)}:${sftp.port}`}>
-                                        <Button.Text
+                                        <Button
                                             style={{
-                                                background: 'rgba(245, 133, 41, 0.2)',
-                                                border: '2px solid rgba(245, 133, 41, 0.5)',
-                                                color: '#000000',
+                                                background: 'linear-gradient(135deg, #6366f1, #4f46e5)',
+                                                border: '1px solid #4338ca',
+                                                color: '#ffffff',
                                                 fontWeight: 600,
+                                                borderRadius: '0.75rem',
                                             }}
                                         >
                                             Launch SFTP
-                                        </Button.Text>
+                                        </Button>
                                     </a>
                                 </div>
                             </div>
@@ -79,13 +80,13 @@ export default () => {
                     </Can>
                     <TitledGreyBox title={'Debug Information'} css={tw`mb-6 md:mb-10`} glass>
                         <div css={tw`flex items-center justify-between text-sm`}>
-                            <p style={{ color: '#000000', fontWeight: 600 }}>Node</p>
+                            <p css={tw`text-neutral-400 font-medium`}>Node</p>
                             <code
-                                css={tw`font-mono rounded py-1 px-2`}
+                                css={tw`font-mono rounded-lg py-1 px-3`}
                                 style={{
-                                    background: 'rgba(245, 133, 41, 0.15)',
-                                    color: '#000000',
-                                    border: '1px solid rgba(245, 133, 41, 0.3)',
+                                    background: 'rgba(99, 102, 241, 0.1)',
+                                    color: '#818cf8',
+                                    border: '1px solid rgba(99, 102, 241, 0.2)',
                                     fontWeight: 600,
                                 }}
                             >
@@ -93,14 +94,14 @@ export default () => {
                             </code>
                         </div>
                         <CopyOnClick text={uuid}>
-                            <div css={tw`flex items-center justify-between mt-2 text-sm`}>
-                                <p style={{ color: '#000000', fontWeight: 600 }}>Server ID</p>
+                            <div css={tw`flex items-center justify-between mt-4 text-sm`}>
+                                <p css={tw`text-neutral-400 font-medium`}>Server ID</p>
                                 <code
-                                    css={tw`font-mono rounded py-1 px-2`}
+                                    css={tw`font-mono rounded-lg py-1 px-3`}
                                     style={{
-                                        background: 'rgba(221, 42, 123, 0.15)',
-                                        color: '#000000',
-                                        border: '1px solid rgba(221, 42, 123, 0.3)',
+                                        background: 'rgba(168, 85, 247, 0.1)',
+                                        color: '#c084fc',
+                                        border: '1px solid rgba(168, 85, 247, 0.2)',
                                         fontWeight: 600,
                                     }}
                                 >

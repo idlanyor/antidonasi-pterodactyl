@@ -11,17 +11,18 @@ type Props = React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, 
 };
 
 const Container = styled.div`
-    ${tw`flex flex-col items-center justify-center min-h-screen`};
-    width: 100%;
-    max-width: 380px;
+    ${tw`flex flex-col items-center justify-center w-full`};
     margin: 0 auto;
-    padding: 1.25rem;
 `;
 
 const Card = styled(motion.div)`
     ${tw`w-full`};
-    padding: 1.25rem;
-    ${tw`bg-neutral-900 border border-neutral-800 rounded-xl`};
+    padding: 2.5rem 2rem;
+    background: rgba(17, 24, 39, 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     z-index: 1;
     position: relative;
 `;
@@ -30,16 +31,17 @@ const ModernStyles = styled.div`
     ${tw`relative`};
 
     .auth-label {
-        ${tw`text-neutral-300 font-normal text-sm mb-2 block normal-case tracking-normal`} !important;
-        text-transform: none !important;
-        letter-spacing: normal !important;
-        color: #d4d4d4 !important;
+        ${tw`text-neutral-400 font-medium text-xs mb-2 block uppercase tracking-wider`} !important;
+        color: #9ca3af !important;
     }
 
     .auth-input {
-        ${tw`w-full bg-neutral-900 text-neutral-100 border border-neutral-800 rounded-md px-3 py-2 text-sm transition-all duration-200`};
-        ${tw`focus:border-blue-500 focus:ring-0 outline-none`};
-        padding-left: 0.75rem !important; /* Override StyledInput padding if icon is not used */
+        ${tw`w-full text-neutral-100 border border-neutral-800 rounded-xl px-4 py-3 text-sm transition-all duration-200`};
+        background-color: rgba(17, 24, 39, 0.5);
+        ${tw`focus:border-indigo-500 focus:ring-4 outline-none`};
+        &:focus {
+            --tw-ring-color: rgba(99, 102, 241, 0.1);
+        }
 
         &::placeholder {
             ${tw`text-neutral-600`};
@@ -47,51 +49,93 @@ const ModernStyles = styled.div`
     }
 
     .auth-input.auth-error {
-        ${tw`border-red-500`};
+        ${tw`focus:border-red-500 focus:ring-red-500`};
+        border-color: rgba(239, 68, 68, 0.5);
+        &:focus {
+            --tw-ring-opacity: 0.1;
+        }
     }
 
     .auth-button {
-        ${tw`w-full bg-blue-600 text-white font-semibold rounded-md py-2 text-sm transition-all duration-200 mt-4`};
-        ${tw`hover:bg-blue-500 active:bg-blue-700`};
+        ${tw`w-full text-white font-bold rounded-xl py-3 text-sm transition-all duration-300 mt-6 shadow-lg`};
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        border: none;
+        box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.2), 0 4px 6px -2px rgba(99, 102, 241, 0.1);
+
+        &:hover {
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4), 0 10px 10px -5px rgba(99, 102, 241, 0.2);
+            transform: translateY(-1px);
+            filter: brightness(1.1);
+        }
+        &:active {
+            transform: translateY(0);
+        }
+
+        &:disabled {
+            ${tw`opacity-50 cursor-not-allowed`};
+            transform: none;
+        }
     }
 
     .auth-link {
-        ${tw`text-blue-400 text-xs hover:underline transition-all duration-200`};
+        ${tw`text-indigo-400 text-xs font-medium hover:text-indigo-300 transition-all duration-200`};
     }
 `;
 
 const LogoWrapper = styled(motion.div)`
-    ${tw`mb-6 flex flex-col items-center`};
+    ${tw`mb-8 flex flex-col items-center`};
+
+    img {
+        ${tw`w-16 h-16 rounded-2xl mb-4 shadow-2xl`};
+        background: rgba(255, 255, 255, 0.05);
+        padding: 0.5rem;
+    }
+
+    h1 {
+        ${tw`text-2xl font-bold text-white tracking-tight text-center`};
+    }
+
+    p {
+        ${tw`text-neutral-400 text-sm mt-1 text-center`};
+    }
 `;
 
 export default forwardRef<HTMLFormElement, Props>(({ ...props }, ref) => (
     <Container>
-        <LogoWrapper initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <img src={'https://files.catbox.moe/5lzdmq.png'} alt={'Logo'} className={'w-12 h-12 rounded-full mb-4'} />
-            <h1 className={'text-xl font-semibold text-neutral-100 tracking-tight'}>Sign in to Antidonasi</h1>
+        <LogoWrapper initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <img src={'https://files.catbox.moe/5lzdmq.png'} alt={'Logo'} />
+            <h1>Welcome back!</h1>
+            <p>Please enter your details to sign in.</p>
         </LogoWrapper>
         <FlashMessageRender css={tw`mb-4 w-full`} />
         <Form {...props} ref={ref} className={'w-full'}>
-            <Card initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+            <Card
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4 }}
+            >
                 <ModernStyles>
                     <div css={tw`w-full`}>{props.children}</div>
                 </ModernStyles>
             </Card>
         </Form>
-        <div className={'mt-4 w-full border border-neutral-800 rounded-lg p-4 text-center bg-neutral-900'}>
+        <div className={'mt-8 w-full text-center'}>
             <p className={'text-sm text-neutral-400'}>
                 Lihat paket dan harga:{' '}
-                <Link to={'/pricing'} className={'text-blue-400 hover:underline'}>
+                <Link
+                    to={'/pricing'}
+                    className={'text-indigo-400 hover:text-indigo-300 font-medium underline underline-offset-4'}
+                    style={{ textDecorationColor: 'rgba(129, 140, 248, 0.3)' }}
+                >
                     Pricelist Panel
                 </Link>
-                .
             </p>
         </div>
         <motion.p
-            css={tw`text-center text-xs mt-8 text-neutral-600`}
+            css={tw`text-center text-[10px] mt-12 text-neutral-600 uppercase tracking-[0.2em] font-medium`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.6 }}
         >
             &copy; {new Date().getFullYear()} Antidonasi Creative
         </motion.p>

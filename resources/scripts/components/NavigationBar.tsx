@@ -17,17 +17,21 @@ const RightNavigation = styled.div`
     & > a,
     & > button,
     & > .navigation-link {
-        ${tw`flex items-center h-full no-underline px-3 cursor-pointer transition-all duration-150`};
-        ${tw`text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800`};
+        ${tw`flex items-center h-full no-underline px-4 cursor-pointer transition-all duration-200`};
+        ${tw`text-neutral-400 hover:text-indigo-400`};
 
         &:active,
         &.active {
-            ${tw`text-neutral-100 bg-neutral-800`};
+            ${tw`text-indigo-400`};
+            background: rgba(99, 102, 241, 0.05);
         }
     }
 `;
 const NavWrapper = styled.div`
-    ${tw`w-full bg-neutral-900 border-b border-neutral-800 shadow-sm`};
+    ${tw`w-full sticky top-0 z-50`};
+    background: rgba(11, 15, 26, 0.8);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 `;
 
 export default () => {

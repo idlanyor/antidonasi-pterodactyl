@@ -22,25 +22,46 @@ import { ServerContext } from '@/state/server';
 import routes from '@/routers/routes';
 
 const SidebarWrapper = styled.aside`
-    ${tw`hidden md:block w-60 bg-neutral-900 border-r border-neutral-800 flex-shrink-0`};
+    ${tw`hidden md:block w-64 flex-shrink-0 z-40`};
+    background: rgba(11, 15, 26, 0.6);
+    backdrop-filter: blur(12px);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
 `;
 
 const SidebarInner = styled.div`
-    ${tw`sticky top-0 h-screen flex flex-col`};
+    ${tw`sticky top-12 h-[calc(100vh-3rem)] flex flex-col`};
 `;
 
 const NavItem = styled(NavLink)`
-    ${tw`flex items-center gap-3 px-4 py-3 text-sm text-neutral-400 no-underline transition-colors duration-150`};
-    ${tw`hover:text-neutral-100 hover:bg-neutral-800`};
+    ${tw`flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-neutral-400 no-underline transition-all duration-200`};
+
+    &:hover {
+        ${tw`text-neutral-100`};
+        background: rgba(255, 255, 255, 0.03);
+    }
 
     &.active {
-        ${tw`text-neutral-100 bg-neutral-800`};
+        ${tw`text-indigo-400`};
+        background: rgba(99, 102, 241, 0.08);
+        border-right: 3px solid #6366f1;
+    }
+
+    & svg {
+        ${tw`w-4 h-4 transition-transform duration-200`};
+    }
+
+    &:hover svg {
+        transform: scale(1.1);
     }
 `;
 
 const ExternalLink = styled.a`
-    ${tw`flex items-center gap-3 px-4 py-3 text-sm text-neutral-400 no-underline transition-colors duration-150`};
-    ${tw`hover:text-neutral-100 hover:bg-neutral-800`};
+    ${tw`flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-neutral-400 no-underline transition-all duration-200`};
+
+    &:hover {
+        ${tw`text-neutral-100`};
+        background: rgba(255, 255, 255, 0.03);
+    }
 `;
 
 const iconMap: Record<string, any> = {
@@ -73,8 +94,8 @@ export default () => {
     return (
         <SidebarWrapper>
             <SidebarInner>
-                <div css={tw`px-4 py-3 border-b border-neutral-800`}>
-                    <p css={tw`text-xs uppercase tracking-wider text-neutral-500`}>Server</p>
+                <div css={tw`px-6 py-5`}>
+                    <p css={tw`text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-500`}>Manage Server</p>
                 </div>
                 <nav css={tw`flex-1 py-3 flex flex-col`}>
                     {items.map((route) => {

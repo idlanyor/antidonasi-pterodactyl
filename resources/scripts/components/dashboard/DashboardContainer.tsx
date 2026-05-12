@@ -18,21 +18,36 @@ import Pagination from '@/components/elements/Pagination';
 import { useLocation } from 'react-router-dom';
 
 const HeaderSection = styled.div`
-    ${tw`mb-6 p-6 rounded-xl border`};
-    background-color: #111827;
-    border-color: #1f2937;
+    ${tw`mb-10 p-8 rounded-2xl border`};
+    background: rgba(17, 24, 39, 0.7);
+    backdrop-filter: blur(16px);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+`;
+
+const TitleWrapper = styled.div`
+    ${tw`mb-8`};
+
+    h1 {
+        ${tw`text-3xl font-bold text-white tracking-tight`};
+    }
+
+    p {
+        ${tw`text-neutral-400 mt-2 text-sm`};
+    }
 `;
 
 const FilterWrapper = styled.div`
-    ${tw`flex items-center gap-3 px-4 py-2 rounded-lg border`};
-    background-color: #111827;
-    border-color: #374151;
+    ${tw`flex items-center gap-4 px-4 py-2 rounded-xl border`};
+    background: rgba(10, 10, 20, 0.5);
+    border-color: rgba(255, 255, 255, 0.05);
 `;
 
 const EmptyStateWrapper = styled.div`
-    ${tw`flex flex-col items-center justify-center py-20 px-4 rounded-xl border`};
-    background-color: #111827;
-    border-color: #1f2937;
+    ${tw`flex flex-col items-center justify-center py-24 px-4 rounded-2xl border`};
+    background: rgba(17, 24, 39, 0.4);
+    backdrop-filter: blur(8px);
+    border-color: rgba(255, 255, 255, 0.05);
 `;
 
 export default () => {
@@ -73,17 +88,23 @@ export default () => {
 
     return (
         <PageContentBlock title={'Dashboard'} showFlashKey={'dashboard'}>
+            <TitleWrapper>
+                <h1>Server Overview</h1>
+                <p>Welcome back! You can manage all your instances here.</p>
+            </TitleWrapper>
+
             {/* Header Section */}
             <HeaderSection>
                 {/* Search and Filter Controls */}
-                <div css={tw`flex flex-wrap gap-3`}>
+                <div css={tw`flex flex-wrap items-center justify-between gap-4`}>
+                    <div css={tw`flex-1 max-w-md`}>{/* You can add a search input here later if needed */}</div>
                     {rootAdmin && (
                         <FilterWrapper>
                             <p
-                                css={tw`text-xs font-semibold uppercase tracking-wider text-neutral-400 flex items-center gap-2`}
+                                css={tw`text-xs font-bold uppercase tracking-widest text-neutral-400 flex items-center gap-3`}
                             >
-                                <FontAwesomeIcon icon={showOnlyAdmin ? faGlobe : faUser} />
-                                {showOnlyAdmin ? 'All Servers' : 'My Servers'}
+                                <FontAwesomeIcon icon={showOnlyAdmin ? faGlobe : faUser} css={tw`text-indigo-400`} />
+                                {showOnlyAdmin ? 'Viewing All Servers' : 'Viewing My Servers'}
                             </p>
                             <Switch
                                 name={'show_all_servers'}
@@ -111,7 +132,7 @@ export default () => {
                             return rank(a.status as any) - rank(b.status as any);
                         });
                         return sorted.length > 0 ? (
-                            <div css={tw`flex flex-col gap-3`}>
+                            <div css={tw`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`}>
                                 {sorted.map((server, index) => (
                                     <div
                                         key={server.uuid}

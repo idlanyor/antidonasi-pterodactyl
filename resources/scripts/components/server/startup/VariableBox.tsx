@@ -60,15 +60,15 @@ const VariableBox = ({ variable }: Props) => {
     return (
         <TitledGreyBox
             title={
-                <p className='text-sm uppercase' style={{ color: '#000000', fontWeight: 700 }}>
+                <p className='text-sm uppercase' style={{ color: '#ffffff', fontWeight: 700 }}>
                     {!variable.isEditable && (
                         <span
                             className='text-xs py-1 px-2 rounded-full mr-2 mb-1'
                             style={{
-                                background: 'rgba(255, 255, 255, 0.3)',
-                                color: '#000000',
+                                background: 'rgba(255, 255, 255, 0.1)',
+                                color: '#ffffff',
                                 fontWeight: 600,
-                                border: '1px solid rgba(0, 0, 0, 0.2)',
+                                border: '1px solid rgba(255, 255, 255, 0.2)',
                             }}
                         >
                             Read Only
@@ -142,7 +142,7 @@ const VariableBox = ({ variable }: Props) => {
                 )}
             </InputSpinner>
 
-            <p className='mt-1 text-xs' style={{ color: 'rgba(0, 0, 0, 0.7)', lineHeight: '1.4' }}>
+            <p className='mt-1 text-xs' style={{ color: '#ffffff', lineHeight: '1.4' }}>
                 {variable.description}
             </p>
         </TitledGreyBox>

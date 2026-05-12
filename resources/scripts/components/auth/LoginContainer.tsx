@@ -84,8 +84,15 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                         />
                         <div>
                             <div className={'flex items-center justify-between mb-2'}>
-                                <label className={'text-neutral-200 font-normal text-sm'}>Password</label>
-                                <Link to={'/auth/password'} className={'text-blue-400 text-xs hover:text-blue-300'}>
+                                <label className={'text-neutral-400 font-medium text-xs uppercase tracking-wider'}>
+                                    Password
+                                </label>
+                                <Link
+                                    to={'/auth/password'}
+                                    className={
+                                        'text-indigo-400 text-xs font-medium hover:text-indigo-300 transition-all duration-200'
+                                    }
+                                >
                                     Forgot password?
                                 </Link>
                             </div>
@@ -98,7 +105,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                         </div>
                     </div>
 
-                    <div css={tw`mt-4`}>
+                    <div css={tw`mt-2`}>
                         <Button
                             type={'submit'}
                             size={'xlarge'}
