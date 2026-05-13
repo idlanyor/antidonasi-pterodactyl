@@ -138,10 +138,12 @@ const LandingPage = () => {
                             <PrimaryButton to={'/dashboard'}>Go to Dashboard</PrimaryButton>
                         ) : (
                             <>
-                                <SecondaryButton to={'/auth/login'} css={tw`hidden sm:inline-flex`}>
+                                <SecondaryButton to={'/auth/login'} css={tw`inline-flex`}>
                                     Sign In
                                 </SecondaryButton>
-                                <PrimaryButton to={'/auth/register'}>Get Started</PrimaryButton>
+                                <PrimaryButton to={'/auth/register'} css={tw`hidden sm:inline-flex`}>
+                                    Get Started
+                                </PrimaryButton>
                             </>
                         )}
                     </ActionButtons>
@@ -165,8 +167,13 @@ const LandingPage = () => {
                             to={isAuthenticated ? '/dashboard' : '/auth/register'}
                             css={tw`w-full sm:w-auto px-10 py-4 text-base`}
                         >
-                            Get Started Now
+                            {isAuthenticated ? 'Go to Dashboard' : 'Get Started Now'}
                         </PrimaryButton>
+                        {!isAuthenticated && (
+                            <SecondaryButton to={'/auth/login'} css={tw`w-full sm:w-auto px-10 py-4 text-base`}>
+                                Sign In
+                            </SecondaryButton>
+                        )}
                         <SecondaryButton to={'/pricing'} css={tw`w-full sm:w-auto px-10 py-4 text-base`}>
                             View Pricing
                         </SecondaryButton>

@@ -68,7 +68,7 @@ const App = () => {
                         <Switch>
                             <Route path={'/'} exact>
                                 <Spinner.Suspense>
-                                    <LandingPage />
+                                    {PterodactylUser ? <DashboardRouter /> : <LandingPage />}
                                 </Spinner.Suspense>
                             </Route>
                             <Route path={'/auth'}>
