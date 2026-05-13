@@ -92,6 +92,10 @@ module.exports = {
             '@definitions': path.join(__dirname, '/resources/scripts/api/definitions'),
             '@feature': path.join(__dirname, '/resources/scripts/components/server/features'),
         },
+        fallback: {
+            path: require.resolve('path-browserify'),
+            events: require.resolve('events/'),
+        },
         symlinks: false,
     },
     externals: {
