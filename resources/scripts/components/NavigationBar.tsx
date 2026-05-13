@@ -17,21 +17,27 @@ const RightNavigation = styled.div`
     & > a,
     & > button,
     & > .navigation-link {
-        ${tw`flex items-center h-full no-underline px-4 cursor-pointer transition-all duration-200`};
-        ${tw`text-neutral-400 hover:text-indigo-400`};
+        ${tw`flex items-center h-full no-underline px-4 cursor-pointer transition-all duration-300 relative`};
+        ${tw`text-brand-slate font-bold text-sm`};
 
-        &:active,
+        &:hover:not(:disabled) {
+            ${tw`text-accent-purple bg-neutral-50`};
+            background-color: #f8fafc;
+        }
+
         &.active {
-            ${tw`text-indigo-400`};
-            background: rgba(99, 102, 241, 0.05);
+            ${tw`text-accent-purple`};
+            &::after {
+                content: '';
+                ${tw`absolute bottom-0 left-0 w-full h-[2px] bg-accent-purple`};
+            }
         }
     }
 `;
 const NavWrapper = styled.div`
     ${tw`w-full sticky top-0 z-50`};
-    background: rgba(11, 15, 26, 0.8);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #ffffff;
+    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
 `;
 
 export default () => {
@@ -50,16 +56,14 @@ export default () => {
     return (
         <NavWrapper>
             <SpinnerOverlay visible={isLoggingOut} />
-            <div className={'mx-auto w-full flex items-center h-[3rem] max-w-[1200px]'}>
+            <div className={'mx-auto w-full flex items-center h-16 max-w-[1280px] px-6'}>
                 <div id={'logo'} className={'flex-1'}>
                     <Link
-                        to={'/'}
-                        className={'text-lg font-header px-4 no-underline transition-colors duration-150'}
+                        to={'/dashboard'}
+                        className={'text-xl font-black no-underline transition-colors duration-150 text-brand-navy'}
                         style={{
-                            color: '#f5f5f5',
-                            fontFamily: "'Inter', system-ui, sans-serif",
-                            letterSpacing: '-0.02em',
-                            fontWeight: 600,
+                            fontFamily: "'Satoshi', sans-serif",
+                            letterSpacing: '-0.03em',
                         }}
                     >
                         {name}
@@ -68,7 +72,12 @@ export default () => {
                 <RightNavigation className={'flex h-full items-center justify-center'}>
                     <SearchContainer />
                     <Tooltip placement={'bottom'} content={'Dashboard'}>
-                        <NavLink to={'/'} exact>
+                        <NavLink
+                            to={'/dashboard'}
+                            isActive={(match, location) =>
+                                location.pathname === '/' || location.pathname === '/dashboard'
+                            }
+                        >
                             <FontAwesomeIcon icon={faLayerGroup} />
                         </NavLink>
                     </Tooltip>
@@ -81,7 +90,7 @@ export default () => {
                     )}
                     <Tooltip placement={'bottom'} content={'Account Settings'}>
                         <NavLink to={'/account'}>
-                            <span className={'flex items-center w-5 h-5'}>
+                            <span className={'flex items-center w-6 h-6'}>
                                 <Avatar.User />
                             </span>
                         </NavLink>

@@ -12,7 +12,9 @@ const ToggleContainer = styled.div`
         ${tw`hidden`};
 
         &:checked + label {
-            ${tw`bg-primary-500 border-primary-700 shadow-none`};
+            ${tw`bg-accent-purple border-accent-purple shadow-none`};
+            background-color: #7c3aed;
+            border-color: #7c3aed;
         }
 
         &:checked + label:before {
@@ -21,17 +23,16 @@ const ToggleContainer = styled.div`
     }
 
     & > label {
-        ${tw`mb-0 block overflow-hidden cursor-pointer bg-neutral-400 border border-neutral-700 rounded-full h-6 shadow-inner`};
-        transition: all 75ms linear;
+        ${tw`mb-0 block overflow-hidden cursor-pointer bg-neutral-200 border border-neutral-300 rounded-full h-6 shadow-inner transition-all duration-300`};
+        background-color: #e2e8f0;
+        border-color: #cbd5e1;
 
         &::before {
-            ${tw`absolute block bg-white border h-5 w-5 rounded-full`};
+            ${tw`absolute block bg-white border h-5 w-5 rounded-full shadow-sm`};
             top: 0.125rem;
             right: calc(50% + 0.125rem);
-            //width: 1.25rem;
-            //height: 1.25rem;
             content: '';
-            transition: all 75ms ease-in;
+            transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
         }
     }
 `;
@@ -67,11 +68,14 @@ const Switch = ({ name, label, description, defaultChecked, readOnly, onChange, 
             {(label || description) && (
                 <div css={tw`ml-4 w-full`}>
                     {label && (
-                        <Label css={[tw`cursor-pointer`, !!description && tw`mb-0`]} htmlFor={uuid}>
+                        <Label
+                            css={[tw`cursor-pointer font-black text-brand-navy`, !!description && tw`mb-0`]}
+                            htmlFor={uuid}
+                        >
                             {label}
                         </Label>
                     )}
-                    {description && <p css={tw`text-neutral-400 text-sm mt-2`}>{description}</p>}
+                    {description && <p css={tw`text-brand-slate text-sm mt-1 font-bold`}>{description}</p>}
                 </div>
             )}
         </div>

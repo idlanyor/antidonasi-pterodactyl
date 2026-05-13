@@ -23,16 +23,16 @@ const BottomNav = styled.nav`
 `;
 
 const BottomNavInner = styled.div`
-    ${tw`bg-neutral-900 border border-neutral-800 rounded-2xl px-2 py-2 flex items-center gap-2 overflow-x-auto`};
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    ${tw`bg-white border border-neutral-200 rounded-2xl px-2 py-2 flex items-center gap-2 overflow-x-auto`};
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
 `;
 
 const BottomItem = styled(NavLink)`
-    ${tw`flex flex-col items-center justify-center text-[10px] text-neutral-400 no-underline px-2 py-1 rounded-lg min-w-[64px]`};
-    ${tw`transition-colors duration-150`};
+    ${tw`flex flex-col items-center justify-center text-[10px] text-brand-slate no-underline px-2 py-2 rounded-xl min-w-[64px] font-bold tracking-wide`};
+    ${tw`transition-all duration-300`};
 
     &.active {
-        ${tw`text-neutral-100 bg-neutral-800`};
+        ${tw`text-accent-purple bg-neutral-50`};
     }
 `;
 

@@ -11,6 +11,9 @@ import Button from '@/components/elements/Button';
 import Reaptcha from 'reaptcha';
 import useFlash from '@/plugins/useFlash';
 
+import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 interface Values {
     username: string;
     password: string;
@@ -47,7 +50,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
             .then((response) => {
                 if (response.complete) {
                     // @ts-expect-error this is valid
-                    window.location = response.intended || '/';
+                    window.location = response.intended || '/dashboard';
                     return;
                 }
 
@@ -75,24 +78,18 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
                 <LoginFormContainer css={tw`w-full flex`}>
-                    <div css={tw`space-y-4`}>
+                    <div css={tw`space-y-6`}>
                         <AuthField
                             name={'username'}
                             label={'Username or email address'}
                             type={'text'}
+                            icon={<FontAwesomeIcon icon={faUser} />}
                             disabled={isSubmitting}
                         />
                         <div>
                             <div className={'flex items-center justify-between mb-2'}>
-                                <label className={'text-neutral-400 font-medium text-xs uppercase tracking-wider'}>
-                                    Password
-                                </label>
-                                <Link
-                                    to={'/auth/password'}
-                                    className={
-                                        'text-indigo-400 text-xs font-medium hover:text-indigo-300 transition-all duration-200'
-                                    }
-                                >
+                                <label className={'text-brand-navy font-bold text-sm tracking-tight'}>Password</label>
+                                <Link to={'/auth/password'} className={'auth-link'}>
                                     Forgot password?
                                 </Link>
                             </div>
@@ -100,21 +97,22 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                                 name={'password'}
                                 label={''} // Label handled above for GitHub style
                                 type={'password'}
+                                icon={<FontAwesomeIcon icon={faLock} />}
                                 disabled={isSubmitting}
                             />
                         </div>
                     </div>
 
-                    <div css={tw`mt-2`}>
-                        <Button
-                            type={'submit'}
-                            size={'xlarge'}
-                            isLoading={isSubmitting}
-                            disabled={isSubmitting}
-                            className={'auth-button'}
-                        >
-                            {isSubmitting ? 'Signing in...' : 'Sign in'}
+                    <div css={tw`mt-8`}>
+                        <Button type={'submit'} size={'xlarge'} isLoading={isSubmitting} disabled={isSubmitting}>
+                            {isSubmitting ? 'Signing in...' : 'Sign in to Account'}
                         </Button>
+                    </div>
+
+                    <div css={tw`mt-4 text-center`}>
+                        <Link to={'/auth/register'} css={tw`text-xs text-neutral-500 font-bold hover:text-neutral-700`}>
+                            Don&apos;t have an account? Create one
+                        </Link>
                     </div>
 
                     {recaptchaEnabled && (

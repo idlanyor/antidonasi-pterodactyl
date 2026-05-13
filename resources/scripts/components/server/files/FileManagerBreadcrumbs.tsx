@@ -40,17 +40,12 @@ export default ({ renderLeft, withinFileEditor, isNewFile }: Props) => {
     return (
         <div
             css={tw`flex flex-grow-0 items-center text-sm overflow-x-hidden`}
-            style={{ color: 'rgba(255, 255, 255, 0.5)', fontFamily: "'Inter', system-ui, sans-serif" }}
+            style={{ color: '#64748B', fontFamily: "'Satoshi', sans-serif" }}
         >
-            {renderLeft || <div css={tw`w-12`} />}/
-            <span css={tw`px-1`} style={{ color: '#ffffff', fontWeight: 600 }}>
-                home
-            </span>
-            /
+            {renderLeft || <div css={tw`w-12`} />}/<span css={tw`px-1 text-brand-navy font-black`}>home</span>/
             <NavLink
                 to={`/server/${id}/files`}
-                css={tw`px-1 no-underline transition-colors duration-200 hover:text-indigo-400`}
-                style={{ color: '#ffffff', fontWeight: 600 }}
+                css={tw`px-1 no-underline transition-colors duration-300 hover:text-accent-purple text-brand-navy font-black`}
             >
                 container
             </NavLink>
@@ -60,24 +55,21 @@ export default ({ renderLeft, withinFileEditor, isNewFile }: Props) => {
                     <React.Fragment key={index}>
                         <NavLink
                             to={`/server/${id}/files#${encodePathSegments(crumb.path)}`}
-                            css={tw`px-1 no-underline transition-colors duration-200 hover:text-indigo-300`}
-                            style={{ color: '#818cf8', fontWeight: 600 }}
+                            css={tw`px-1 no-underline transition-colors duration-300 hover:text-accent-purple text-accent-purple font-black`}
                         >
                             {crumb.name}
                         </NavLink>
                         /
                     </React.Fragment>
                 ) : (
-                    <span key={index} css={tw`px-1`} style={{ color: '#c084fc', fontWeight: 700 }}>
+                    <span key={index} css={tw`px-1 text-accent-purple font-black opacity-60`}>
                         {crumb.name}
                     </span>
                 )
             )}
             {file && (
                 <React.Fragment>
-                    <span css={tw`px-1`} style={{ color: '#ffffff', fontWeight: 700 }}>
-                        {file}
-                    </span>
+                    <span css={tw`px-1 text-brand-navy font-black`}>{file}</span>
                 </React.Fragment>
             )}
         </div>

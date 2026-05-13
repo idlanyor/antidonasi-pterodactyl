@@ -8,20 +8,24 @@ import ScheduleCronRow from '@/components/server/schedules/ScheduleCronRow';
 
 export default ({ schedule }: { schedule: Schedule }) => (
     <>
-        <div css={tw`hidden md:block`}>
-            <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
+        <div
+            css={tw`hidden md:flex items-center justify-center w-12 h-12 rounded-xl bg-accent-purple bg-opacity-10 text-accent-purple`}
+        >
+            <FontAwesomeIcon icon={faCalendarAlt} />
         </div>
-        <div css={tw`flex-1 md:ml-4`}>
-            <p>{schedule.name}</p>
-            <p css={tw`text-xs text-neutral-400`}>
+        <div css={tw`flex-1 md:ml-6`}>
+            <p css={tw`text-base font-black text-brand-navy tracking-tight`}>{schedule.name}</p>
+            <p css={tw`text-xs text-brand-slate font-bold mt-0.5`}>
                 Last run at: {schedule.lastRunAt ? format(schedule.lastRunAt, "MMM do 'at' h:mma") : 'never'}
             </p>
         </div>
         <div>
             <p
                 css={[
-                    tw`py-1 px-3 rounded text-xs uppercase text-white sm:hidden`,
-                    schedule.isActive ? tw`bg-green-600` : tw`bg-neutral-400`,
+                    tw`py-1.5 px-4 rounded-full text-[10px] font-black uppercase tracking-widest sm:hidden`,
+                    schedule.isActive
+                        ? tw`bg-status-success bg-opacity-10 text-status-success`
+                        : tw`bg-neutral-100 text-brand-slate`,
                 ]}
             >
                 {schedule.isActive ? 'Active' : 'Inactive'}
@@ -31,8 +35,12 @@ export default ({ schedule }: { schedule: Schedule }) => (
         <div>
             <p
                 css={[
-                    tw`py-1 px-3 rounded text-xs uppercase text-white hidden sm:block`,
-                    schedule.isActive && !schedule.isProcessing ? tw`bg-green-600` : tw`bg-neutral-400`,
+                    tw`py-1.5 px-4 rounded-full text-[10px] font-black uppercase tracking-widest hidden sm:block`,
+                    schedule.isActive && !schedule.isProcessing
+                        ? tw`bg-status-success bg-opacity-10 text-status-success`
+                        : schedule.isProcessing
+                        ? tw`bg-status-warning bg-opacity-10 text-status-warning`
+                        : tw`bg-neutral-100 text-brand-slate`,
                 ]}
             >
                 {schedule.isProcessing ? 'Processing' : schedule.isActive ? 'Active' : 'Inactive'}

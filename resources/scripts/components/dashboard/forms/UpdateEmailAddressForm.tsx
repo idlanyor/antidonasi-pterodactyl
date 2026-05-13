@@ -7,7 +7,7 @@ import Field from '@/components/elements/Field';
 import { httpErrorToHuman } from '@/api/http';
 import { ApplicationStore } from '@/state';
 import tw from 'twin.macro';
-import { Button } from '@/components/elements/button/index';
+import Button from '@/components/elements/Button';
 
 interface Values {
     email: string;
@@ -56,29 +56,17 @@ export default () => {
                 <React.Fragment>
                     <SpinnerOverlay size={'large'} visible={isSubmitting} />
                     <Form css={tw`m-0`}>
-                        <Field id={'current_email'} type={'email'} name={'email'} label={'Email'} variant={'glass'} />
+                        <Field id={'current_email'} type={'email'} name={'email'} label={'Email'} />
                         <div css={tw`mt-6`}>
                             <Field
                                 id={'confirm_password'}
                                 type={'password'}
                                 name={'password'}
                                 label={'Confirm Password'}
-                                variant={'glass'}
                             />
                         </div>
-                        <div css={tw`mt-6`}>
-                            <Button
-                                disabled={isSubmitting || !isValid}
-                                style={{
-                                    background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                                    border: '1px solid #1d4ed8',
-                                    color: '#ffffff',
-                                    fontWeight: 600,
-                                    boxShadow: '0 4px 6px -1px rgba(59, 130, 246, 0.5)',
-                                    borderRadius: '0.5rem',
-                                    padding: '0.625rem 1.25rem',
-                                }}
-                            >
+                        <div css={tw`mt-8 text-right`}>
+                            <Button disabled={isSubmitting || !isValid} size={'large'} css={tw`w-full sm:w-auto`}>
                                 Update Email
                             </Button>
                         </div>

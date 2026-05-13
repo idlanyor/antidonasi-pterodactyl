@@ -23,44 +23,43 @@ import routes from '@/routers/routes';
 
 const SidebarWrapper = styled.aside`
     ${tw`hidden md:block w-64 flex-shrink-0 z-40`};
-    background: rgba(11, 15, 26, 0.6);
-    backdrop-filter: blur(12px);
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8e0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 `;
 
 const SidebarInner = styled.div`
-    ${tw`sticky top-12 h-[calc(100vh-3rem)] flex flex-col`};
+    ${tw`sticky top-16 h-[calc(100vh-4rem)] flex flex-col`};
 `;
 
 const NavItem = styled(NavLink)`
-    ${tw`flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-neutral-400 no-underline transition-all duration-200`};
+    ${tw`flex items-center gap-4 px-6 py-4 text-sm font-bold text-brand-slate no-underline transition-all duration-300 relative`};
 
     &:hover {
-        ${tw`text-neutral-100`};
-        background: rgba(255, 255, 255, 0.03);
+        ${tw`text-brand-navy bg-neutral-50`};
+        background-color: #f8fafc;
     }
 
     &.active {
-        ${tw`text-indigo-400`};
-        background: rgba(99, 102, 241, 0.08);
-        border-right: 3px solid #6366f1;
+        ${tw`text-accent-purple`};
+        background-color: rgba(124, 58, 237, 0.05);
+        &::after {
+            content: '';
+            ${tw`absolute right-0 top-0 h-full w-[3px] bg-accent-purple`};
+        }
     }
 
     & svg {
         ${tw`w-4 h-4 transition-transform duration-200`};
     }
-
-    &:hover svg {
-        transform: scale(1.1);
-    }
 `;
 
 const ExternalLink = styled.a`
-    ${tw`flex items-center gap-4 px-6 py-3.5 text-sm font-medium text-neutral-400 no-underline transition-all duration-200`};
+    ${tw`flex items-center gap-4 px-6 py-4 text-sm font-bold text-brand-slate no-underline transition-all duration-300`};
 
     &:hover {
-        ${tw`text-neutral-100`};
-        background: rgba(255, 255, 255, 0.03);
+        ${tw`text-brand-navy bg-neutral-50`};
+        background-color: #f8fafc;
     }
 `;
 
@@ -94,8 +93,8 @@ export default () => {
     return (
         <SidebarWrapper>
             <SidebarInner>
-                <div css={tw`px-6 py-5`}>
-                    <p css={tw`text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-500`}>Manage Server</p>
+                <div css={tw`px-6 py-6`}>
+                    <p css={tw`text-[11px] uppercase font-black tracking-[0.2em] text-brand-navy`}>Management</p>
                 </div>
                 <nav css={tw`flex-1 py-3 flex flex-col`}>
                     {items.map((route) => {

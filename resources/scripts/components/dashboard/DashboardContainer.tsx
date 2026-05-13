@@ -17,37 +17,46 @@ import { PaginatedResult } from '@/api/http';
 import Pagination from '@/components/elements/Pagination';
 import { useLocation } from 'react-router-dom';
 
-const HeaderSection = styled.div`
-    ${tw`mb-10 p-8 rounded-2xl border`};
-    background: rgba(17, 24, 39, 0.7);
-    backdrop-filter: blur(16px);
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-`;
-
 const TitleWrapper = styled.div`
-    ${tw`mb-8`};
+    ${tw`relative mb-12 p-10 md:p-16 rounded-3xl overflow-hidden`};
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
+    border: 1px solid rgba(124, 58, 237, 0.1);
+    box-shadow: 0 10px 30px 0 rgba(15, 23, 42, 0.05);
 
     h1 {
-        ${tw`text-3xl font-bold text-white tracking-tight`};
+        ${tw`text-4xl md:text-5xl lg:text-6xl font-black text-brand-navy tracking-tight leading-tight max-w-2xl`};
+        font-family: 'Satoshi', sans-serif;
     }
 
     p {
-        ${tw`text-neutral-400 mt-2 text-sm`};
+        ${tw`text-brand-slate mt-4 text-lg md:text-xl font-bold leading-relaxed max-w-xl`};
+    }
+
+    &::after {
+        content: '';
+        ${tw`absolute top-0 right-0 w-1/2 h-full opacity-30 pointer-events-none hidden md:block`};
+        background: radial-gradient(circle at 100% 50%, rgba(236, 72, 153, 0.2) 0%, transparent 70%);
     }
 `;
 
+const HeaderSection = styled.div`
+    ${tw`mb-12 p-10 rounded-3xl border shadow-lg`};
+    background: #ffffff;
+    border-color: #e2e8f0;
+    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
+`;
+
 const FilterWrapper = styled.div`
-    ${tw`flex items-center gap-4 px-4 py-2 rounded-xl border`};
-    background: rgba(10, 10, 20, 0.5);
-    border-color: rgba(255, 255, 255, 0.05);
+    ${tw`flex items-center gap-4 px-6 py-3 rounded-2xl border`};
+    background: #f1f5f9;
+    border-color: #e2e8f0;
 `;
 
 const EmptyStateWrapper = styled.div`
-    ${tw`flex flex-col items-center justify-center py-24 px-4 rounded-2xl border`};
-    background: rgba(17, 24, 39, 0.4);
-    backdrop-filter: blur(8px);
-    border-color: rgba(255, 255, 255, 0.05);
+    ${tw`flex flex-col items-center justify-center py-32 px-6 rounded-3xl border`};
+    background: #ffffff;
+    border-color: #e2e8f0;
+    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
 `;
 
 export default () => {
@@ -92,19 +101,29 @@ export default () => {
                 <h1>Server Overview</h1>
                 <p>Welcome back! You can manage all your instances here.</p>
             </TitleWrapper>
-
             {/* Header Section */}
             <HeaderSection>
                 {/* Search and Filter Controls */}
-                <div css={tw`flex flex-wrap items-center justify-between gap-4`}>
-                    <div css={tw`flex-1 max-w-md`}>{/* You can add a search input here later if needed */}</div>
+                <div css={tw`flex flex-wrap items-center justify-between gap-6`}>
+                    <div css={tw`flex-1 max-w-md`}>
+                        <div css={tw`relative`}>
+                            <div css={tw`absolute left-4 top-1/2 transform -translate-y-1/2 text-brand-slate`}>
+                                <FontAwesomeIcon icon={faBoxOpen} />
+                            </div>
+                            <input
+                                type={'text'}
+                                placeholder={'Search servers...'}
+                                css={tw`w-full bg-neutral-100 border border-neutral-200 rounded-2xl py-4 pl-12 pr-4 text-brand-navy font-bold focus:bg-white focus:border-accent-purple transition-all outline-none`}
+                            />
+                        </div>
+                    </div>
                     {rootAdmin && (
                         <FilterWrapper>
                             <p
-                                css={tw`text-xs font-bold uppercase tracking-widest text-neutral-400 flex items-center gap-3`}
+                                css={tw`text-sm font-black uppercase tracking-widest text-brand-slate flex items-center gap-3`}
                             >
-                                <FontAwesomeIcon icon={showOnlyAdmin ? faGlobe : faUser} css={tw`text-indigo-400`} />
-                                {showOnlyAdmin ? 'Viewing All Servers' : 'Viewing My Servers'}
+                                <FontAwesomeIcon icon={showOnlyAdmin ? faGlobe : faUser} css={tw`text-accent-purple`} />
+                                {showOnlyAdmin ? 'Global View' : 'Personal View'}
                             </p>
                             <Switch
                                 name={'show_all_servers'}
@@ -132,12 +151,14 @@ export default () => {
                             return rank(a.status as any) - rank(b.status as any);
                         });
                         return sorted.length > 0 ? (
-                            <div css={tw`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`}>
+                            <div css={tw`flex flex-col gap-4`}>
                                 {sorted.map((server, index) => (
                                     <div
                                         key={server.uuid}
                                         style={{
-                                            animation: `fadeInUp 0.5s ease-out ${index * 0.05}s both`,
+                                            animation: `fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${
+                                                index * 0.05
+                                            }s both`,
                                         }}
                                     >
                                         <ServerRow server={server} />
@@ -146,11 +167,11 @@ export default () => {
                             </div>
                         ) : (
                             <EmptyStateWrapper>
-                                <div css={tw`text-5xl mb-4 opacity-30`}>
+                                <div css={tw`text-7xl mb-6 text-neutral-200`}>
                                     <FontAwesomeIcon icon={faBoxOpen} />
                                 </div>
-                                <p css={tw`text-xl font-bold mb-2 text-neutral-200`}>No Servers Found</p>
-                                <p css={tw`text-sm text-center text-neutral-500 max-w-[400px]`}>
+                                <h2 css={tw`text-2xl font-black mb-3 text-brand-navy`}>No Servers Found</h2>
+                                <p css={tw`text-brand-slate text-center max-w-[400px] font-bold`}>
                                     {showOnlyAdmin
                                         ? 'No other servers are available to display.'
                                         : query

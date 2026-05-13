@@ -1,15 +1,23 @@
 .icons {
-    @apply flex space-x-1 mx-2 transition-colors duration-100 text-gray-400;
+    @apply flex space-x-1 mx-2 transition-all duration-300;
+    color: theme('colors.brand-slate');
 
     & svg {
-        @apply px-1 py-px cursor-pointer hover:text-gray-50 h-5 w-auto;
+        @apply px-1 py-px cursor-pointer h-6 w-auto;
+        &:hover {
+            color: theme('colors.accent-purple');
+        }
     }
 }
 
 .description {
-    @apply mt-1 text-sm break-words line-clamp-2 pr-4;
+    @apply mt-2 text-sm break-words line-clamp-2 pr-4;
+    color: theme('colors.brand-navy');
+    font-weight: 700;
+    font-family: 'Satoshi', sans-serif;
 
     & strong {
-        @apply text-gray-50 font-semibold break-all;
+        color: theme('colors.brand-navy');
+        @apply font-black break-all;
     }
 }

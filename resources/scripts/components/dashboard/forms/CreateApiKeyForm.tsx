@@ -62,9 +62,9 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
                             label={'Description'}
                             name={'description'}
                             description={'A description of this API key.'}
-                            css={tw`mb-6`}
+                            css={tw`mb-8`}
                         >
-                            <Field name={'description'} as={Input} variant={'glass'} />
+                            <Field name={'description'} as={Input} />
                         </FormikFieldWrapper>
                         <FormikFieldWrapper
                             label={'Allowed IPs'}
@@ -73,20 +73,11 @@ export default ({ onKeyCreated }: { onKeyCreated: (key: ApiKey) => void }) => {
                                 'Leave blank to allow any IP address to use this API key, otherwise provide each IP address on a new line.'
                             }
                         >
-                            <Field name={'allowedIps'} as={CustomTextarea} variant={'glass'} />
+                            <Field name={'allowedIps'} as={CustomTextarea} />
                         </FormikFieldWrapper>
-                        <div css={tw`flex justify-end mt-6`}>
-                            <Button
-                                shape={'oval'}
-                                style={{
-                                    backgroundColor: '#3b82f6',
-                                    border: '1px solid #2563eb',
-                                    color: '#ffffff',
-                                    fontWeight: 600,
-                                    boxShadow: 'none',
-                                }}
-                            >
-                                Create
+                        <div css={tw`flex justify-end mt-8`}>
+                            <Button size={'large'} css={tw`w-full sm:w-auto`}>
+                                Create API Key
                             </Button>
                         </div>
                     </Form>

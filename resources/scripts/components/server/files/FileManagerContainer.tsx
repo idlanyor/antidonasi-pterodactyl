@@ -83,10 +83,15 @@ export default () => {
                             <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
                                 <Button
                                     style={{
-                                        background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-                                        border: '1px solid #4338ca',
+                                        background: 'linear-gradient(135deg, #EC4899 0%, #7C3AED 100%)',
+                                        border: 'none',
                                         borderRadius: '0.75rem',
-                                        boxShadow: '0 4px 6px -1px rgba(99, 102, 241, 0.3)',
+                                        boxShadow: '0 14px 30px 0 rgba(168, 85, 247, 0.24)',
+                                        color: '#FFFFFF',
+                                        fontWeight: 900,
+                                        fontSize: '12px',
+                                        textTransform: 'uppercase',
+                                        letterSpacing: '0.05em',
                                     }}
                                 >
                                     New File
@@ -101,19 +106,19 @@ export default () => {
             ) : (
                 <>
                     {!files.length ? (
-                        <p css={tw`text-sm text-center py-12 text-neutral-500`}>Directory is empty</p>
+                        <p css={tw`text-sm text-center py-32 text-brand-slate font-bold`}>This directory is empty.</p>
                     ) : (
                         <CSSTransition classNames={'fade'} timeout={150} appear in>
                             <div>
                                 {files.length > 250 && (
                                     <div
-                                        css={tw`rounded-xl mb-4 p-4 bg-yellow-500/10 border border-yellow-500/20 shadow-[0_0_15px_rgba(234,179,8,0.05)]`}
+                                        css={tw`rounded-xl mb-4 p-4 bg-status-warning bg-opacity-10 border border-status-warning border-opacity-20 shadow-sm`}
                                     >
                                         <p
-                                            css={tw`text-xs text-center font-bold text-yellow-400 uppercase tracking-widest inline-flex items-center gap-3 justify-center`}
+                                            css={tw`text-xs text-center font-black text-status-warning uppercase tracking-widest inline-flex items-center gap-3 justify-center`}
                                         >
                                             <FontAwesomeIcon icon={faExclamationTriangle} />
-                                            Warning: Directory too large - showing first 250 files only
+                                            Notice: Large directory - showing first 250 files only.
                                         </p>
                                     </div>
                                 )}

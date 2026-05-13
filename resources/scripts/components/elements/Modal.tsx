@@ -22,7 +22,8 @@ export interface ModalProps extends RequiredModalProps {
 
 export const ModalMask = styled.div`
     ${tw`fixed z-50 overflow-auto flex w-full inset-0`};
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
 `;
 
 const ModalContainer = styled.div<{ alignTop?: boolean }>`
@@ -42,15 +43,15 @@ const ModalContainer = styled.div<{ alignTop?: boolean }>`
     margin-bottom: auto;
 
     & > .close-icon {
-        ${tw`absolute right-0 p-2 text-white cursor-pointer opacity-50 transition-all duration-150 ease-linear hover:opacity-100`};
-        top: -2.5rem;
+        ${tw`absolute right-0 p-2 text-white cursor-pointer opacity-80 transition-all duration-300 ease-linear hover:opacity-100`};
+        top: -3rem;
 
         &:hover {
-            ${tw`transform rotate-90`}
+            ${tw`transform rotate-90 scale-110`}
         }
 
         & > svg {
-            ${tw`w-6 h-6`};
+            ${tw`w-8 h-8`};
         }
     }
 `;
@@ -113,7 +114,7 @@ const Modal: React.FC<ModalProps> = ({
                                 <path
                                     strokeLinecap={'round'}
                                     strokeLinejoin={'round'}
-                                    strokeWidth={'2'}
+                                    strokeWidth={'2.5'}
                                     d={'M6 18L18 6M6 6l12 12'}
                                 />
                             </svg>
@@ -122,15 +123,16 @@ const Modal: React.FC<ModalProps> = ({
                     {showSpinnerOverlay && (
                         <Fade timeout={150} appear in>
                             <div
-                                css={tw`absolute w-full h-full rounded flex items-center justify-center`}
-                                style={{ background: 'hsla(211, 10%, 53%, 0.35)', zIndex: 9999 }}
+                                css={tw`absolute w-full h-full rounded-xl flex items-center justify-center`}
+                                style={{ background: 'rgba(255, 255, 255, 0.6)', zIndex: 9999 }}
                             >
                                 <Spinner />
                             </div>
                         </Fade>
                     )}
                     <div
-                        css={tw`bg-neutral-800 p-3 sm:p-4 md:p-6 rounded shadow-md overflow-y-scroll transition-all duration-150`}
+                        css={tw`bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-xl overflow-y-scroll transition-all duration-300 border border-neutral-200`}
+                        style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}
                     >
                         {children}
                     </div>

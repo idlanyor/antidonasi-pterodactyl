@@ -6,7 +6,7 @@ import { faNetworkWired } from '@fortawesome/free-solid-svg-icons';
 import InputSpinner from '@/components/elements/InputSpinner';
 import { Textarea } from '@/components/elements/Input';
 import Can from '@/components/elements/Can';
-import { Button } from '@/components/elements/button/index';
+import Button from '@/components/elements/Button';
 import GreyRowBox from '@/components/elements/GreyRowBox';
 import { Allocation } from '@/api/server/getServer';
 import styled from 'styled-components/macro';
@@ -22,9 +22,9 @@ import { ip } from '@/lib/formatters';
 import Code from '@/components/elements/Code';
 
 const Label = styled.label`
-    ${tw`uppercase text-xs mt-1 block px-1 select-none transition-colors duration-150`}
-    color: rgba(0, 0, 0, 0.6);
-    font-weight: 600;
+    ${tw`uppercase text-[10px] mt-1 block px-1 select-none transition-colors duration-150`}
+    color: #64748B;
+    font-weight: 700;
     letter-spacing: 0.05em;
 `;
 
@@ -63,24 +63,24 @@ const AllocationRow = ({ allocation }: Props) => {
     };
 
     return (
-        <GreyRowBox $hoverable={false} className={'flex-wrap md:flex-nowrap mt-2'}>
+        <GreyRowBox $hoverable={false} className={'flex-wrap md:flex-nowrap'}>
             <div className={'flex items-center w-full md:w-auto'}>
-                <div className={'pl-4 pr-6'} style={{ color: '#f58529' }}>
+                <div className={'pl-4 pr-6'} style={{ color: '#7C3AED' }}>
                     <FontAwesomeIcon icon={faNetworkWired} />
                 </div>
-                <div className={'mr-4 flex-1 md:w-40'}>
+                <div className={'mr-4 flex-1 md:w-48'}>
                     {allocation.alias ? (
                         <CopyOnClick text={allocation.alias}>
-                            <Code>{allocation.alias}</Code>
+                            <Code dark>{allocation.alias}</Code>
                         </CopyOnClick>
                     ) : (
                         <CopyOnClick text={ip(allocation.ip)}>
-                            <Code>{ip(allocation.ip)}</Code>
+                            <Code dark>{ip(allocation.ip)}</Code>
                         </CopyOnClick>
                     )}
                     <Label>{allocation.alias ? 'Hostname' : 'IP Address'}</Label>
                 </div>
-                <div className={'w-16 md:w-24 overflow-hidden'}>
+                <div className={'w-16 md:w-28 overflow-hidden'}>
                     <Code>{allocation.port}</Code>
                     <Label>Port</Label>
                 </div>
@@ -89,48 +89,35 @@ const AllocationRow = ({ allocation }: Props) => {
                 <InputSpinner visible={loading}>
                     <Textarea
                         style={{
-                            background: 'rgba(255, 255, 255, 0.7)',
-                            borderColor: 'rgba(245, 133, 41, 0.3)',
-                            color: '#000000',
+                            background: '#FFFFFF',
+                            borderColor: '#E2E8F0',
+                            color: '#0F172A',
+                            borderRadius: '10px',
+                            minHeight: '44px',
+                            padding: '10px 14px',
                         }}
-                        placeholder={'Notes'}
+                        placeholder={'Add notes for this allocation...'}
                         defaultValue={allocation.notes || undefined}
                         onChange={(e) => setAllocationNotes(e.currentTarget.value)}
                     />
                 </InputSpinner>
             </div>
-            <div className={'flex justify-end space-x-4 mt-4 w-full md:mt-0 md:w-48'}>
+            <div className={'flex justify-end items-center gap-3 mt-4 w-full md:mt-0 md:ml-6 md:w-auto'}>
                 {allocation.isDefault ? (
-                    <Button
-                        size={Button.Sizes.Small}
-                        style={{
-                            background: 'linear-gradient(135deg, #10b981, #059669)',
-                            border: '2px solid #065f46',
-                            color: '#ffffff',
-                            fontWeight: 600,
-                        }}
-                        disabled
+                    <span
+                        css={tw`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest bg-status-success bg-opacity-10 text-status-success border border-status-success border-opacity-20`}
                     >
                         Primary
-                    </Button>
+                    </span>
                 ) : (
                     <>
                         <Can action={'allocation.delete'}>
                             <DeleteAllocationButton allocation={allocation.id} />
                         </Can>
                         <Can action={'allocation.update'}>
-                            <Button.Text
-                                size={Button.Sizes.Small}
-                                onClick={setPrimaryAllocation}
-                                style={{
-                                    background: 'rgba(245, 133, 41, 0.2)',
-                                    border: '2px solid rgba(245, 133, 41, 0.5)',
-                                    color: '#000000',
-                                    fontWeight: 600,
-                                }}
-                            >
+                            <Button isSecondary size={'small'} onClick={setPrimaryAllocation}>
                                 Make Primary
-                            </Button.Text>
+                            </Button>
                         </Can>
                     </>
                 )}

@@ -7,7 +7,7 @@ import { StaticContext } from 'react-router';
 import { useFormikContext, withFormik } from 'formik';
 import useFlash from '@/plugins/useFlash';
 import { FlashStore } from '@/state/flashes';
-import Field from '@/components/elements/Field';
+import AuthField from '@/components/auth/AuthField';
 import tw from 'twin.macro';
 import Button from '@/components/elements/Button';
 
@@ -29,10 +29,9 @@ const LoginCheckpointContainer = () => {
     return (
         <LoginFormContainer title={'Device Checkpoint'} css={tw`w-full flex`}>
             <div css={tw`mt-6`}>
-                <Field
-                    light
+                <AuthField
                     name={isMissingDevice ? 'recoveryCode' : 'code'}
-                    title={isMissingDevice ? 'Recovery Code' : 'Authentication Code'}
+                    label={isMissingDevice ? 'Recovery Code' : 'Authentication Code'}
                     description={
                         isMissingDevice
                             ? 'Enter one of the recovery codes generated when you setup 2-Factor authentication on this account in order to continue.'
@@ -43,8 +42,14 @@ const LoginCheckpointContainer = () => {
                     autoFocus
                 />
             </div>
-            <div css={tw`mt-6`}>
-                <Button size={'xlarge'} type={'submit'} disabled={isSubmitting} isLoading={isSubmitting}>
+            <div css={tw`mt-8`}>
+                <Button
+                    size={'xlarge'}
+                    type={'submit'}
+                    disabled={isSubmitting}
+                    isLoading={isSubmitting}
+                    css={tw`w-full`}
+                >
                     Continue
                 </Button>
             </div>
@@ -55,16 +60,14 @@ const LoginCheckpointContainer = () => {
                         setFieldValue('recoveryCode', '');
                         setIsMissingDevice((s) => !s);
                     }}
-                    css={tw`cursor-pointer text-xs text-neutral-500 tracking-wide uppercase no-underline hover:text-neutral-700`}
+                    css={tw`cursor-pointer text-xs tracking-wide uppercase no-underline`}
+                    className={'auth-link'}
                 >
                     {!isMissingDevice ? "I've Lost My Device" : 'I Have My Device'}
                 </span>
             </div>
             <div css={tw`mt-6 text-center`}>
-                <Link
-                    to={'/auth/login'}
-                    css={tw`text-xs text-neutral-500 tracking-wide uppercase no-underline hover:text-neutral-700`}
-                >
+                <Link to={'/auth/login'} css={tw`text-xs tracking-wide uppercase no-underline`} className={'auth-link'}>
                     Return to Login
                 </Link>
             </div>
@@ -78,7 +81,7 @@ const EnhancedForm = withFormik<Props, Values>({
             .then((response) => {
                 if (response.complete) {
                     // @ts-expect-error this is valid
-                    window.location = response.intended || '/';
+                    window.location = response.intended || '/dashboard';
                     return;
                 }
 

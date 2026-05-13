@@ -49,7 +49,7 @@ export default ({ scheduleId, onDeleted }: Props) => {
                 All tasks will be removed and any running processes will be terminated.
             </Dialog.Confirm>
             <Button.Danger
-                variant={Button.Variants.Secondary}
+                isSecondary
                 className={'flex-1 sm:flex-none mr-4 border-transparent'}
                 onClick={() => setVisible(true)}
             >

@@ -72,7 +72,7 @@ export default ({
                         open={open}
                         onClose={onDialogClose}
                     >
-                        <div className={'fixed inset-0 bg-gray-900/50 z-40'} />
+                        <div className={'fixed inset-0 bg-brand-navy/60 z-40 backdrop-blur-sm'} />
                         <div className={'fixed inset-0 overflow-y-auto z-50'}>
                             <div
                                 ref={container}
@@ -110,12 +110,7 @@ export default ({
                                     {/* Keep this below the other buttons so that it isn't the default focus if they're present. */}
                                     {!hideCloseIcon && (
                                         <div className={'absolute right-0 top-0 m-4'}>
-                                            <Button.Text
-                                                size={Button.Sizes.Small}
-                                                shape={Button.Shapes.IconSquare}
-                                                onClick={onClose}
-                                                className={'group'}
-                                            >
+                                            <Button.Text size={'small'} onClick={onClose} className={'group'}>
                                                 <XIcon className={styles.close_icon} />
                                             </Button.Text>
                                         </div>

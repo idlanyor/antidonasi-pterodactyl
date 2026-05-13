@@ -32,16 +32,20 @@ const ServerConsoleContainer = () => {
                         : 'This server is currently being transferred to another node and all actions are unavailable.'}
                 </Alert>
             )}
-            <div className={'grid grid-cols-4 gap-4 mb-4'}>
+            <div className={'grid grid-cols-4 gap-4 mb-8'}>
                 <div className={'hidden sm:block sm:col-span-2 lg:col-span-3 pr-4'}>
-                    <h1 className={'font-header text-2xl leading-relaxed line-clamp-1 text-neutral-100 font-semibold'}>
+                    <h1
+                        className={
+                            'font-header text-4xl leading-tight line-clamp-1 text-brand-navy font-black tracking-tight'
+                        }
+                    >
                         {name}
                     </h1>
-                    <p className={'text-sm line-clamp-2 text-neutral-400'}>{description}</p>
+                    <p className={'text-base line-clamp-2 text-brand-slate font-bold mt-1'}>{description}</p>
                 </div>
                 <div className={'col-span-4 sm:col-span-2 lg:col-span-1 self-end'}>
                     <Can action={['control.start', 'control.stop', 'control.restart']} matchAny>
-                        <PowerButtons className={'flex sm:justify-end space-x-2'} />
+                        <PowerButtons className={'flex sm:justify-end space-x-3'} />
                     </Can>
                 </div>
             </div>

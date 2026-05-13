@@ -1,58 +1,74 @@
 .menu {
-  @apply relative inline-block text-left;
+    @apply relative inline-block text-left;
 
-  & .button {
-    @apply inline-flex justify-center items-center w-full py-2 text-neutral-100 rounded-md;
-    @apply transition-all duration-100;
+    & .button {
+        @apply inline-flex justify-center items-center w-full py-2.5 px-4 rounded-xl font-bold;
+        @apply transition-all duration-300;
+        @apply bg-neutral-100;
+        color: theme('colors.brand-navy');
 
-    &:hover, &[aria-expanded="true"] {
-      @apply bg-neutral-600 text-white;
+        &:hover,
+        &[aria-expanded='true'] {
+            @apply bg-neutral-200;
+            color: theme('colors.brand-navy');
+        }
+
+        &:focus,
+        &:active {
+            @apply ring-4 ring-opacity-10;
+            --tw-ring-color: theme('colors.accent-purple');
+        }
+
+        & svg {
+            @apply w-5 h-5 transition-transform duration-300;
+        }
+
+        &[aria-expanded='true'] svg[data-animated='true'] {
+            @apply rotate-180;
+        }
     }
 
-    &:focus, &:focus-within, &:active {
-      @apply ring-2 ring-opacity-50 ring-neutral-300 text-white;
+    & .items_container {
+        @apply absolute right-0 mt-3 origin-top-right bg-white rounded-xl z-50 border border-neutral-200;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        min-width: 12rem;
+        padding: 0.5rem;
     }
-
-    & svg {
-      @apply w-5 h-5 transition-transform duration-75;
-    }
-
-    &[aria-expanded="true"] svg[data-animated="true"] {
-      @apply rotate-180;
-    }
-  }
-
-  & .items_container {
-    @apply absolute right-0 mt-2 origin-top-right bg-neutral-900 rounded z-10;
-  }
 }
 
 .menu_item {
-  @apply flex items-center rounded w-full px-2 py-2;
-
-  & svg {
-    @apply w-4 h-4 mr-4 text-neutral-300;
-  }
-
-  &:hover, &:focus {
-    @apply bg-blue-500 text-blue-50;
+    @apply flex items-center rounded-lg w-full px-4 py-3 text-sm font-black transition-all duration-300;
+    color: theme('colors.brand-navy');
 
     & svg {
-      @apply text-blue-50;
+        @apply w-4 h-4 mr-3;
+        color: theme('colors.brand-slate');
     }
-  }
 
-  &.danger {
-    &:hover, &:focus {
-      @apply bg-red-500 text-red-50;
+    &:hover,
+    &:focus {
+        @apply bg-neutral-50;
+        color: theme('colors.accent-purple');
 
-      & svg {
-        @apply text-red-50;
-      }
+        & svg {
+            color: theme('colors.accent-purple');
+        }
     }
-  }
 
-  &.disabled {
-    @apply cursor-not-allowed hover:bg-neutral-800 opacity-30 focus:bg-transparent focus:hover:bg-neutral-800;
-  }
+    &.danger {
+        color: theme('colors.status-error');
+        &:hover,
+        &:focus {
+            @apply bg-red-50;
+            color: theme('colors.status-error');
+
+            & svg {
+                color: theme('colors.status-error');
+            }
+        }
+    }
+
+    &.disabled {
+        @apply cursor-not-allowed opacity-30;
+    }
 }

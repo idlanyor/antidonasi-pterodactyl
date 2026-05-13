@@ -105,7 +105,6 @@ const MassActionsBar = () => {
                             >
                                 <Button
                                     onClick={() => setShowMove(true)}
-                                    shape={2}
                                     style={{
                                         backgroundColor: '#3b82f6',
                                         border: '1px solid #2563eb',
@@ -118,7 +117,6 @@ const MassActionsBar = () => {
                                 </Button>
                                 <Button
                                     onClick={onClickCompress}
-                                    shape={2}
                                     style={{
                                         backgroundColor: '#8b5cf6',
                                         border: '1px solid #7c3aed',
@@ -131,7 +129,6 @@ const MassActionsBar = () => {
                                 </Button>
                                 <Button.Danger
                                     onClick={() => setShowConfirm(true)}
-                                    shape={2}
                                     style={{
                                         backgroundColor: '#ef4444',
                                         border: '1px solid #dc2626',

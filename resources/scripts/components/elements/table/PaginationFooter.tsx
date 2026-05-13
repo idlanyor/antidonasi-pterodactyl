@@ -31,9 +31,8 @@ const PaginationFooter = ({ pagination, className, onPageSelect }: Props) => {
     }
 
     const buttonProps = (page: number) => ({
-        size: Button.Sizes.Small,
-        shape: Button.Shapes.IconSquare,
-        variant: Button.Variants.Secondary,
+        size: 'small' as const,
+        isSecondary: true,
         onClick: () => onPageSelect(page),
     });
 
@@ -58,9 +57,7 @@ const PaginationFooter = ({ pagination, className, onPageSelect }: Props) => {
                             {value}
                         </Button.Text>
                     ))}
-                    <Button size={Button.Sizes.Small} shape={Button.Shapes.IconSquare}>
-                        {current}
-                    </Button>
+                    <Button size={'small'}>{current}</Button>
                     {pages.next.map((value) => (
                         <Button.Text key={`next-${value}`} {...buttonProps(value)}>
                             {value}

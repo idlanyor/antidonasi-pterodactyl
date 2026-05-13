@@ -24,28 +24,27 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
                     {showFlashKey && <FlashMessageRender byKey={showFlashKey} css={tw`mb-4`} />}
                     {children}
                 </ContentContainer>
-                <ContentContainer css={tw`mb-4`}>
+                <ContentContainer css={tw`mb-12`}>
                     <p
-                        css={tw`text-center text-xs`}
+                        css={tw`text-center text-[10px] uppercase font-black tracking-[0.2em]`}
                         style={{
-                            color: 'rgba(163, 163, 163, 0.3)',
-                            fontFamily: 'system-ui, sans-serif',
-                            letterSpacing: '0.02em',
+                            color: '#CBD5E1',
+                            fontFamily: "'Satoshi', sans-serif",
                         }}
                     >
                         <a
                             rel={'noopener nofollow noreferrer'}
                             href={'https://pterodactyl.io'}
                             target={'_blank'}
-                            css={tw`no-underline`}
+                            css={tw`no-underline transition-colors duration-300`}
                             style={{
-                                color: 'rgba(163, 163, 163, 0.3)',
+                                color: '#CBD5E1',
                             }}
                             onMouseOver={(e) => {
-                                e.currentTarget.style.color = 'rgba(163, 163, 163, 0.6)';
+                                e.currentTarget.style.color = '#7C3AED';
                             }}
                             onMouseOut={(e) => {
-                                e.currentTarget.style.color = 'rgba(163, 163, 163, 0.3)';
+                                e.currentTarget.style.color = '#CBD5E1';
                             }}
                         >
                             PTERODACTYL

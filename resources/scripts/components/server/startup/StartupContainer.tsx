@@ -86,22 +86,15 @@ const StartupContainer = () => {
     ) : (
         <ServerContentBlock title={'Startup Settings'} showFlashKey={'startup:image'}>
             <Fade in appear timeout={200}>
-                <div css={tw`md:flex md:items-stretch md:space-x-10`}>
-                    <TitledGreyBox
-                        title={'Startup Command'}
-                        css={tw`flex-1`}
-                        className={
-                            'transition-transform transform-gpu duration-200 hover:-translate-y-0.5 hover:shadow-lg'
-                        }
-                        glass
-                    >
+                <div css={tw`md:flex md:items-stretch md:space-x-8`}>
+                    <TitledGreyBox title={'Startup Command'} css={tw`flex-1`}>
                         <div css={tw`px-1 py-2`}>
                             <p
-                                css={tw`font-mono rounded py-2 px-4 break-words whitespace-normal`}
+                                css={tw`font-mono rounded-xl py-4 px-6 break-words whitespace-normal text-sm font-bold`}
                                 style={{
-                                    background: 'rgba(255, 255, 255, 0.05)',
-                                    color: '#ffffff',
-                                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                                    background: '#F8FAFC',
+                                    color: '#0F172A',
+                                    border: '1px solid #E2E8F0',
                                 }}
                                 title={data.invocation}
                             >
@@ -109,19 +102,11 @@ const StartupContainer = () => {
                             </p>
                         </div>
                     </TitledGreyBox>
-                    <TitledGreyBox
-                        title={'Docker Image'}
-                        css={tw`flex-1 lg:flex-none lg:w-1/3 mt-8 md:mt-0`}
-                        className={
-                            'transition-transform transform-gpu duration-200 hover:-translate-y-0.5 hover:shadow-lg'
-                        }
-                        glass
-                    >
+                    <TitledGreyBox title={'Docker Image'} css={tw`flex-1 lg:flex-none lg:w-1/3 mt-8 md:mt-0`}>
                         {Object.keys(data.dockerImages).length > 1 && !isCustomImage ? (
                             <>
                                 <InputSpinner visible={loading}>
                                     <Select
-                                        variant='glass'
                                         disabled={Object.keys(data.dockerImages).length < 2}
                                         onChange={updateSelectedDockerImage}
                                         defaultValue={variables.dockerImage}
@@ -133,16 +118,16 @@ const StartupContainer = () => {
                                         ))}
                                     </Select>
                                 </InputSpinner>
-                                <p css={tw`text-xs mt-2`} style={{ color: '#ffffff', lineHeight: '1.4' }}>
+                                <p css={tw`text-xs mt-3 text-brand-slate font-bold leading-relaxed`}>
                                     This is an advanced feature allowing you to select a Docker image to use when
                                     running this server instance.
                                 </p>
                             </>
                         ) : (
                             <>
-                                <Input variant='glass' disabled readOnly value={variables.dockerImage} />
+                                <Input disabled readOnly value={variables.dockerImage} />
                                 {isCustomImage && (
-                                    <p css={tw`text-xs mt-2`} style={{ color: '#ffffff', lineHeight: '1.4' }}>
+                                    <p css={tw`text-xs mt-3 text-brand-slate font-bold leading-relaxed`}>
                                         This {"server's"} Docker image has been manually set by an administrator and
                                         cannot be changed through this UI.
                                     </p>
@@ -152,10 +137,8 @@ const StartupContainer = () => {
                     </TitledGreyBox>
                 </div>
             </Fade>
-            <h3 css={tw`mt-8 mb-2 text-2xl`} style={{ color: '#ffffff', fontWeight: 700 }}>
-                Variables
-            </h3>
-            <div css={tw`grid gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3`}>
+            <h3 css={tw`mt-12 mb-6 text-3xl font-black text-brand-navy tracking-tight`}>Variables</h3>
+            <div css={tw`grid gap-8 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3`}>
                 {data.variables.map((variable, i) => (
                     <Fade key={variable.envVariable} in appear timeout={180}>
                         <div style={{ transitionDelay: `${i * 40}ms` }}>

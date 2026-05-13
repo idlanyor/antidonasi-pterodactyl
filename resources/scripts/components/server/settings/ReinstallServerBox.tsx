@@ -6,7 +6,7 @@ import { Actions, useStoreActions } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import { httpErrorToHuman } from '@/api/http';
 import tw from 'twin.macro';
-import { Button } from '@/components/elements/button/index';
+import Button from '@/components/elements/Button';
 import { Dialog } from '@/components/elements/dialog';
 
 export default () => {
@@ -37,7 +37,7 @@ export default () => {
     }, []);
 
     return (
-        <TitledGreyBox title={'Reinstall Server'} css={tw`relative`} glass>
+        <TitledGreyBox title={'Reinstall Server'} css={tw`relative`}>
             <Dialog.Confirm
                 open={modalVisible}
                 title={'Confirm server reinstallation'}
@@ -48,29 +48,18 @@ export default () => {
                 Your server will be stopped and some files may be deleted or modified during this process, are you sure
                 you wish to continue?
             </Dialog.Confirm>
-            <p css={tw`text-sm leading-relaxed text-neutral-400`}>
+            <p css={tw`text-sm leading-relaxed text-brand-slate font-bold`}>
                 Reinstalling your server will stop it, and then re-run the installation script that initially set it
                 up.&nbsp;
-                <strong css={tw`font-bold text-red-400`}>
+                <strong css={tw`font-black text-status-error`}>
                     Some files may be deleted or modified during this process, please back up your data before
                     continuing.
                 </strong>
             </p>
-            <div css={tw`mt-8 text-right`}>
-                <Button.Danger
-                    onClick={() => setModalVisible(true)}
-                    style={{
-                        background: 'linear-gradient(135deg, #ff4d4d, #f87171)',
-                        border: '1px solid #dc2626',
-                        color: '#ffffff',
-                        fontWeight: 600,
-                        borderRadius: '0.75rem',
-                        padding: '0.625rem 2rem',
-                        boxShadow: '0 4px 6px -1px rgba(239, 68, 68, 0.4)',
-                    }}
-                >
+            <div css={tw`mt-10 text-right`}>
+                <Button color={'red'} size={'large'} onClick={() => setModalVisible(true)} css={tw`w-full sm:w-auto`}>
                     Reinstall Server
-                </Button.Danger>
+                </Button>
             </div>
         </TitledGreyBox>
     );

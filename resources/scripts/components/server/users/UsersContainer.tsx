@@ -51,12 +51,18 @@ export default () => {
         <ServerContentBlock title={'Users'}>
             <FlashMessageRender byKey={'users'} css={tw`mb-4`} />
             {!subusers.length ? (
-                <p css={tw`text-center text-sm text-neutral-300`}>It looks like you don&apos;t have any subusers.</p>
+                <p css={tw`text-center py-20 text-sm text-brand-slate font-bold`}>
+                    It looks like you don&apos;t have any subusers.
+                </p>
             ) : (
-                subusers.map((subuser) => <UserRow key={subuser.uuid} subuser={subuser} />)
+                <div css={tw`flex flex-col gap-3`}>
+                    {subusers.map((subuser) => (
+                        <UserRow key={subuser.uuid} subuser={subuser} />
+                    ))}
+                </div>
             )}
             <Can action={'user.create'}>
-                <div css={tw`flex justify-end mt-6`}>
+                <div css={tw`flex justify-end mt-12`}>
                     <AddSubuserButton />
                 </div>
             </Can>

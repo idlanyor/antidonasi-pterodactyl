@@ -210,54 +210,49 @@ export default () => {
         }
     };
 
-    const onScrollBottom = () => {
-        if (terminal.element) terminal.scrollToBottom();
-    };
+    // const onScrollBottom = () => {
+    //     if (terminal.element) terminal.scrollToBottom();
+    // };
 
     return (
         <div className={classNames(styles.terminal, 'relative')}>
             <SpinnerOverlay visible={!connected} size={'large'} />
             <div
                 className={classNames(styles.container, styles.overflows_container, { 'rounded-b': !canSendCommands })}
+                style={{
+                    backgroundColor: '#0F172A',
+                    border: '1px solid #E2E8F0',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    boxShadow: '0 -10px 30px 0 rgba(15, 23, 42, 0.08)',
+                }}
             >
-                <div className={'flex items-center justify-between mb-2 px-2'}>
-                    <div className={'flex items-baseline space-x-2 min-w-0'}>
+                <div className={'flex items-center justify-between mb-4 p-4 bg-white border-b border-neutral-100'}>
+                    <div className={'flex items-baseline space-x-3 min-w-0'}>
                         <h3
-                            className={'text-sm font-bold truncate'}
+                            className={'text-sm font-black truncate text-brand-navy tracking-tight'}
                             style={{
-                                color: '#f58529',
-                                textShadow: '0 0 10px rgba(245, 133, 41, 0.5)',
-                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-                                letterSpacing: '0.02em',
+                                fontFamily: "'Satoshi', sans-serif",
                             }}
                         >
                             {serverName}
                         </h3>
                         <span
-                            className={'text-2xs px-2 py-0.5 rounded-full border'}
+                            className={'text-[10px] px-3 py-1 rounded-full font-black uppercase tracking-widest'}
                             style={{
-                                fontFamily: 'monospace',
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.1em',
                                 ...(status === 'running'
                                     ? {
-                                          background: 'rgba(0, 255, 136, 0.2)',
-                                          color: '#00ff88',
-                                          borderColor: 'rgba(0, 255, 136, 0.5)',
-                                          boxShadow: '0 0 10px rgba(0, 255, 136, 0.3)',
+                                          background: '#DCFCE7',
+                                          color: '#10B981',
                                       }
                                     : status === 'offline'
                                     ? {
-                                          background: 'rgba(255, 51, 51, 0.2)',
-                                          color: '#ff3333',
-                                          borderColor: 'rgba(255, 51, 51, 0.5)',
-                                          boxShadow: '0 0 10px rgba(255, 51, 51, 0.3)',
+                                          background: '#FEE2E2',
+                                          color: '#EF4444',
                                       }
                                     : {
-                                          background: 'rgba(255, 255, 0, 0.2)',
-                                          color: '#ffff00',
-                                          borderColor: 'rgba(255, 255, 0, 0.5)',
-                                          boxShadow: '0 0 10px rgba(255, 255, 0, 0.3)',
+                                          background: '#FEF3C7',
+                                          color: '#F59E0B',
                                       }),
                             }}
                         >
@@ -267,90 +262,44 @@ export default () => {
                     <div className={'flex items-center space-x-2'}>
                         <button
                             onClick={onClear}
-                            className={'px-3 py-1 text-2xs rounded backdrop-blur-md transition-all duration-200'}
+                            className={
+                                'px-3 py-1.5 text-[10px] rounded-lg font-black uppercase tracking-widest transition-all duration-300'
+                            }
                             style={{
-                                background: 'rgba(245, 133, 41, 0.1)',
-                                color: '#f58529',
-                                border: '1px solid rgba(245, 133, 41, 0.3)',
-                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.05em',
-                            }}
-                            onMouseOver={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(245, 133, 41, 0.6)';
-                                e.currentTarget.style.boxShadow = '0 0 15px rgba(245, 133, 41, 0.4)';
-                            }}
-                            onMouseOut={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(245, 133, 41, 0.3)';
-                                e.currentTarget.style.boxShadow = 'none';
+                                background: '#F1F5F9',
+                                color: '#64748B',
+                                border: '1px solid #E2E8F0',
+                                fontFamily: "'Satoshi', sans-serif",
                             }}
                         >
                             Clear
                         </button>
                         <button
                             onClick={onToggleSearch}
-                            className={'px-3 py-1 text-2xs rounded backdrop-blur-md transition-all duration-200'}
+                            className={
+                                'px-3 py-1.5 text-[10px] rounded-lg font-black uppercase tracking-widest transition-all duration-300'
+                            }
                             style={{
-                                background: 'rgba(221, 42, 123, 0.1)',
-                                color: '#dd2a7b',
-                                border: '1px solid rgba(221, 42, 123, 0.3)',
-                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.05em',
-                            }}
-                            onMouseOver={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(221, 42, 123, 0.6)';
-                                e.currentTarget.style.boxShadow = '0 0 15px rgba(221, 42, 123, 0.4)';
-                            }}
-                            onMouseOut={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(221, 42, 123, 0.3)';
-                                e.currentTarget.style.boxShadow = 'none';
+                                background: '#F1F5F9',
+                                color: '#64748B',
+                                border: '1px solid #E2E8F0',
+                                fontFamily: "'Satoshi', sans-serif",
                             }}
                         >
                             Find
                         </button>
-                        <button
-                            onClick={onScrollBottom}
-                            className={'px-3 py-1 text-2xs rounded backdrop-blur-md transition-all duration-200'}
-                            style={{
-                                background: 'rgba(129, 52, 175, 0.1)',
-                                color: '#8134af',
-                                border: '1px solid rgba(129, 52, 175, 0.3)',
-                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.05em',
-                            }}
-                            onMouseOver={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(129, 52, 175, 0.6)';
-                                e.currentTarget.style.boxShadow = '0 0 15px rgba(129, 52, 175, 0.4)';
-                            }}
-                            onMouseOut={(e) => {
-                                e.currentTarget.style.borderColor = 'rgba(129, 52, 175, 0.3)';
-                                e.currentTarget.style.boxShadow = 'none';
-                            }}
-                        >
-                            Bottom
-                        </button>
                     </div>
                 </div>
-                <div className={'h-full'}>
+                <div className={'h-full px-4 pb-4'}>
                     <div id={styles.terminal} ref={ref} />
                 </div>
-                <div
-                    className={'status_dot'}
-                    style={{
-                        background: !connected || !instance ? '#ff3333' : '#00ff88',
-                        boxShadow:
-                            !connected || !instance
-                                ? '0 0 15px rgba(255, 51, 51, 0.8)'
-                                : '0 0 15px rgba(0, 255, 136, 0.8)',
-                    }}
-                />
             </div>
             {canSendCommands && (
-                <div className={classNames('relative', styles.overflows_container)}>
+                <div className={classNames('relative mt-4')}>
                     <input
-                        className={classNames('peer', styles.command_input)}
+                        className={classNames(
+                            'peer w-full bg-white border border-neutral-200 rounded-xl py-4 pl-12 pr-4 text-brand-navy font-bold focus:border-accent-purple transition-all outline-none shadow-sm'
+                        )}
                         type={'text'}
                         placeholder={'Type a command...'}
                         aria-label={'Console command input.'}
@@ -361,11 +310,10 @@ export default () => {
                     />
                     <div
                         className={classNames(
-                            'text-gray-100 peer-focus:text-gray-50 peer-focus:animate-pulse',
-                            styles.command_icon
+                            'absolute left-4 top-1/2 transform -translate-y-1/2 text-brand-slate peer-focus:text-accent-purple'
                         )}
                     >
-                        <ChevronDoubleRightIcon className={'w-4 h-4'} />
+                        <ChevronDoubleRightIcon className={'w-5 h-5'} />
                     </div>
                 </div>
             )}

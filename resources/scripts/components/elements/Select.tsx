@@ -7,27 +7,17 @@ interface Props {
 }
 
 const glassStyle = css<Props>`
-    ${tw`backdrop-blur-md`};
-    background-color: rgba(10, 10, 20, 0.7);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    color: #ffffff;
-    &:hover {
-        border-color: rgba(59, 130, 246, 0.5);
-        box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-    }
-    &:not(:disabled):not(:read-only):focus {
-        border-color: rgba(59, 130, 246, 0.7);
-        box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
-    }
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
 `;
 
 const Select = styled.select<Props>`
-    ${tw`block p-3 pr-8 rounded w-full text-sm transition-all duration-200 ease-linear`};
-    background-color: rgba(10, 10, 20, 0.8);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    color: #ffffff;
-    font-family: 'Inter', system-ui, sans-serif;
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
+    ${tw`block p-4 pr-10 rounded-xl w-full text-base transition-all duration-300 font-medium`};
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+    font-family: 'Satoshi', sans-serif;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px;
 
     &,
     &:hover:not(:disabled),
@@ -37,9 +27,9 @@ const Select = styled.select<Props>`
 
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-size: 1rem;
+    background-size: 1.25rem;
     background-repeat: no-repeat;
-    background-position-x: calc(100% - 0.75rem);
+    background-position-x: calc(100% - 1rem);
     background-position-y: center;
 
     &::-ms-expand {
@@ -47,23 +37,22 @@ const Select = styled.select<Props>`
     }
 
     & option {
-        background-color: rgba(10, 10, 20, 0.95);
-        color: #ffffff;
+        background-color: #ffffff;
+        color: #0f172a;
     }
 
     ${(props) =>
         !props.hideDropdownArrow &&
         css`
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='%233b82f6' d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/%3e%3c/svg%3e ");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='%2364748B' d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/%3e%3c/svg%3e ");
 
             &:hover:not(:disabled) {
-                border-color: rgba(59, 130, 246, 0.5);
-                box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+                border-color: #cbd5e1;
             }
 
             &:focus {
-                border-color: rgba(59, 130, 246, 0.7);
-                box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+                border-color: #7c3aed;
+                box-shadow: rgba(168, 85, 247, 0.25) 0px 0px 0px 3px;
             }
         `};
 

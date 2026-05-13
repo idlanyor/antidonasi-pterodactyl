@@ -32,7 +32,7 @@ const RunScheduleButton = ({ schedule }: { schedule: Schedule }) => {
         <>
             <SpinnerOverlay visible={loading} size={'large'} />
             <Button
-                variant={Button.Variants.Secondary}
+                isSecondary
                 className={'flex-1 sm:flex-none'}
                 disabled={schedule.isProcessing}
                 onClick={onTriggerExecute}

@@ -56,29 +56,22 @@ const NetworkContainer = () => {
                 <Spinner size={'large'} centered />
             ) : (
                 <>
-                    {data.map((allocation) => (
-                        <AllocationRow key={`${allocation.ip}:${allocation.port}`} allocation={allocation} />
-                    ))}
+                    <div css={tw`flex flex-col gap-3`}>
+                        {data.map((allocation) => (
+                            <AllocationRow key={`${allocation.ip}:${allocation.port}`} allocation={allocation} />
+                        ))}
+                    </div>
                     {allocationLimit > 0 && (
                         <Can action={'allocation.create'}>
                             <SpinnerOverlay visible={loading} />
-                            <div css={tw`mt-6 sm:flex items-center justify-end`}>
-                                <p css={tw`text-sm mb-4 sm:mr-6 sm:mb-0`} style={{ color: 'rgba(0, 0, 0, 0.8)' }}>
-                                    You are currently using <strong>{data.length}</strong> of{' '}
-                                    <strong>{allocationLimit}</strong> allowed allocations for this server.
+                            <div css={tw`mt-12 sm:flex items-center justify-end`}>
+                                <p css={tw`text-sm mb-4 sm:mr-8 sm:mb-0 text-brand-slate font-bold`}>
+                                    You are currently using <span className={'text-brand-navy'}>{data.length}</span> of{' '}
+                                    <span className={'text-brand-navy'}>{allocationLimit}</span> allowed allocations for
+                                    this server.
                                 </p>
                                 {allocationLimit > data.length && (
-                                    <Button
-                                        css={tw`w-full sm:w-auto`}
-                                        style={{
-                                            backgroundColor: '#3b82f6',
-                                            border: '1px solid #2563eb',
-                                            color: '#ffffff',
-                                            fontWeight: 600,
-                                            boxShadow: 'none',
-                                        }}
-                                        onClick={onCreateAllocation}
-                                    >
+                                    <Button css={tw`w-full sm:w-auto`} size={'large'} onClick={onCreateAllocation}>
                                         Create Allocation
                                     </Button>
                                 )}

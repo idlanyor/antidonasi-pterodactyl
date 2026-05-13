@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 `;
 
 const Icon = styled.div`
-    ${tw`absolute left-3 top-1/2 transform -translate-y-1/2 text-primary-300`};
+    ${tw`absolute left-4 top-1/2 transform -translate-y-1/2 text-brand-slate`};
     pointer-events: none;
     & svg {
         ${tw`w-5 h-5`}
@@ -30,7 +30,7 @@ const Icon = styled.div`
 `;
 
 const StyledInput = styled(Input)`
-    padding-left: 2.5rem; /* leave space for icon */
+    ${tw`pl-[56px]`} !important;
 `;
 
 const AuthField: React.FC<Props> = ({
@@ -59,22 +59,19 @@ const AuthField: React.FC<Props> = ({
                         {...field}
                         type={type}
                         placeholder={placeholder}
-                        className={`auth-input ${touched[field.name] && errors[field.name] ? 'auth-error' : ''}`}
+                        hasError={!!(touched[field.name] && errors[field.name])}
                         autoComplete={autoComplete}
                         autoFocus={autoFocus}
                         disabled={disabled}
                     />
                 </Wrapper>
                 {touched[field.name] && errors[field.name] ? (
-                    <p
-                        className={'input-help error'}
-                        style={{ color: '#ff4d4d', marginTop: '0.5rem', fontSize: '0.75rem' }}
-                    >
+                    <p className={'input-help error'} css={tw`mt-2 text-status-error text-xs font-bold`}>
                         {(errors[field.name] as string).charAt(0).toUpperCase() +
                             (errors[field.name] as string).slice(1)}
                     </p>
                 ) : description ? (
-                    <p className={'input-help'} style={{ color: '#9ca3af', marginTop: '0.5rem', fontSize: '0.75rem' }}>
+                    <p className={'input-help'} css={tw`mt-2 text-brand-slate text-xs font-bold`}>
                         {description}
                     </p>
                 ) : null}

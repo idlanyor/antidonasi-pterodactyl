@@ -57,7 +57,7 @@ const FileUploadList = () => {
                 </div>
             ))}
             <Dialog.Footer>
-                <Button.Danger variant={Button.Variants.Secondary} onClick={() => clearFileUploads()}>
+                <Button.Danger isSecondary onClick={() => clearFileUploads()}>
                     Cancel Uploads
                 </Button.Danger>
                 <Button.Text onClick={close}>Close</Button.Text>

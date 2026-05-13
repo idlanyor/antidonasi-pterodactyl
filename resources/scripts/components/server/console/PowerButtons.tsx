@@ -53,13 +53,17 @@ export default ({ className }: PowerButtonProps) => {
                     className={'flex-1'}
                     disabled={status !== 'offline'}
                     onClick={onButtonClick.bind(this, 'start')}
-                    shape={2}
                     style={{
-                        backgroundColor: '#10b981',
-                        border: '1px solid #0f9f75',
-                        color: '#ffffff',
-                        fontWeight: 600,
-                        boxShadow: 'none',
+                        backgroundColor: '#10B981',
+                        border: 'none',
+                        color: '#FFFFFF',
+                        fontWeight: 900,
+                        borderRadius: '10px',
+                        padding: '0.75rem 1.5rem',
+                        fontSize: '12px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        boxShadow: '0 4px 6px -1px rgba(16, 185, 129, 0.2)',
                     }}
                 >
                     Start
@@ -70,13 +74,17 @@ export default ({ className }: PowerButtonProps) => {
                     className={'flex-1'}
                     disabled={!status}
                     onClick={onButtonClick.bind(this, 'restart')}
-                    shape={2}
                     style={{
-                        backgroundColor: '#f59e0b',
-                        border: '1px solid #d97706',
-                        color: '#ffffff',
-                        fontWeight: 600,
-                        boxShadow: 'none',
+                        backgroundColor: '#F59E0B',
+                        border: 'none',
+                        color: '#FFFFFF',
+                        fontWeight: 900,
+                        borderRadius: '10px',
+                        padding: '0.75rem 1.5rem',
+                        fontSize: '12px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        boxShadow: '0 4px 6px -1px rgba(245, 158, 11, 0.2)',
                     }}
                 >
                     Restart
@@ -87,13 +95,17 @@ export default ({ className }: PowerButtonProps) => {
                     className={'flex-1'}
                     disabled={status === 'offline'}
                     onClick={onButtonClick.bind(this, killable ? 'kill' : 'stop')}
-                    shape={2}
                     style={{
-                        backgroundColor: '#ef4444',
-                        border: '1px solid #dc2626',
-                        color: '#ffffff',
-                        fontWeight: 600,
-                        boxShadow: 'none',
+                        backgroundColor: '#EF4444',
+                        border: 'none',
+                        color: '#FFFFFF',
+                        fontWeight: 900,
+                        borderRadius: '10px',
+                        padding: '0.75rem 1.5rem',
+                        fontSize: '12px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        boxShadow: '0 4px 6px -1px rgba(239, 68, 68, 0.2)',
                     }}
                 >
                     {killable ? 'Kill' : 'Stop'}

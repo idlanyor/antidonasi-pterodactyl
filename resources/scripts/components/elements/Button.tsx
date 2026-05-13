@@ -14,196 +14,98 @@ interface Props {
 }
 
 const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
-    ${tw`relative inline-block rounded-lg p-2 tracking-wide text-sm transition-all duration-200 border shadow-sm`};
+    ${tw`relative inline-flex items-center justify-center font-bold transition-all duration-300 border-none outline-none cursor-pointer`};
+    font-family: 'Satoshi', sans-serif;
 
+    /* Sizes */
+    ${(props) => (!props.size || props.size === 'small') && tw`px-5 py-2.5 text-[12px] rounded-lg h-[36px]`};
+    ${(props) => props.size === 'large' && tw`px-6 py-2.5 text-[12px] rounded-[4px] h-[40px]`};
+    ${(props) => props.size === 'xsmall' && tw`px-3 py-1.5 text-[11px] rounded-[4px] h-auto`};
+    ${(props) => props.size === 'xlarge' && tw`w-full px-6 py-3 text-[14px] rounded-xl h-[56px]`};
+
+    /* Primary CTA (Default) */
     ${(props) =>
         ((!props.isSecondary && !props.color) || props.color === 'primary') &&
-        css<Props>`
-            ${tw`text-white border-transparent`};
-            background-color: #3b82f6;
-            border-color: #2563eb;
-            box-shadow: none;
-
-            &:hover:not(:disabled) {
-                background-color: #2563eb;
-            }
-        `};
-
-    ${(props) =>
-        props.color === 'grey' &&
         css`
-            ${tw`bg-gradient-to-br from-neutral-400 to-neutral-600 border-neutral-700 text-white shadow-md`};
+            ${tw`text-white shadow-md`};
+            background: linear-gradient(135deg, #ec4899 0%, #7c3aed 100%);
+            box-shadow: 0 14px 30px 0 rgba(168, 85, 247, 0.24);
 
             &:hover:not(:disabled) {
-                ${tw`bg-gradient-to-br from-neutral-500 to-neutral-700 border-neutral-800 shadow-lg`};
+                opacity: 0.9;
+                box-shadow: 0 18px 36px 0 rgba(168, 85, 247, 0.32);
+                transform: translateY(-1px);
+            }
+
+            &:active:not(:disabled) {
+                opacity: 0.85;
+                box-shadow: 0 8px 20px 0 rgba(168, 85, 247, 0.2);
+                transform: translateY(0);
             }
         `};
 
+    /* Secondary Button */
     ${(props) =>
-        props.color === 'green' &&
-        css<Props>`
-            ${tw`bg-gradient-to-br from-green-400 to-green-600 border-green-700 text-white shadow-md`};
+        (props.isSecondary || props.color === 'grey') &&
+        css`
+            ${tw`bg-neutral-100 text-brand-slate border border-neutral-200 shadow-sm`};
+            background-color: #f1f5f9;
 
             &:hover:not(:disabled) {
-                ${tw`bg-gradient-to-br from-green-500 to-green-700 border-green-800 shadow-lg`};
+                ${tw`bg-neutral-200 text-brand-navy`};
+                background-color: #e2e8f0;
             }
 
-            ${(props) =>
-                props.isSecondary &&
-                css`
-                    &:active:not(:disabled) {
-                        ${tw`bg-green-600 border-green-700`};
-                    }
-                `};
+            &:active:not(:disabled) {
+                ${tw`bg-neutral-300 shadow-inner`};
+                background-color: #cbd5e1;
+            }
         `};
 
+    /* Red (Danger) Button */
     ${(props) =>
         props.color === 'red' &&
-        css<Props>`
-            ${tw`bg-gradient-to-br from-red-400 to-red-600 border-red-700 text-white shadow-md`};
+        css`
+            ${tw`bg-status-error text-white shadow-md`};
+            background-color: #ef4444;
 
             &:hover:not(:disabled) {
-                ${tw`bg-gradient-to-br from-red-500 to-red-700 border-red-800 shadow-lg`};
+                filter: brightness(1.1);
+                box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.2);
             }
-
-            ${(props) =>
-                props.isSecondary &&
-                css`
-                    &:active:not(:disabled) {
-                        ${tw`bg-red-600 border-red-700`};
-                    }
-                `};
         `};
 
-    ${(props) => props.size === 'xsmall' && tw`px-3 py-1.5 text-xs rounded-md`};
-    ${(props) => (!props.size || props.size === 'small') && tw`px-5 py-2.5 rounded-md`};
-    ${(props) => props.size === 'large' && tw`px-6 py-3 text-base rounded-lg`};
-    ${(props) => props.size === 'xlarge' && tw`px-6 py-3 w-full text-base rounded-lg`};
-    ${(props) => props.shape === 'oval' && tw`rounded-full`};
-
+    /* Green (Success) Button */
     ${(props) =>
-        props.isSecondary &&
-        css<Props>`
-            ${tw`text-white backdrop-blur-md`};
-            background: rgba(255, 255, 255, 0.25);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        props.color === 'green' &&
+        css`
+            ${tw`bg-status-success text-white shadow-md`};
+            background-color: #10b981;
 
             &:hover:not(:disabled) {
-                background: rgba(255, 255, 255, 0.35);
-                border-color: rgba(255, 255, 255, 0.7);
-                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-                ${(props) =>
-                    props.color === 'red' &&
-                    css`
-                        background: rgba(252, 129, 129, 0.35);
-                        border-color: #fc8181;
-                    `};
-                ${(props) =>
-                    props.color === 'primary' &&
-                    css`
-                        background: rgba(59, 130, 246, 0.3);
-                        border-color: rgba(96, 165, 250, 0.7);
-                    `};
-                ${(props) =>
-                    props.color === 'green' &&
-                    css`
-                        background: rgba(72, 187, 120, 0.35);
-                        border-color: #48bb78;
-                    `};
+                filter: brightness(1.1);
+                box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2);
             }
         `};
 
-    /* Glass variant overrides most color styling */
+    /* Ghost variant */
     ${(props) =>
         props.variant === 'glass' &&
         css`
-            ${tw`bg-white/20 text-neutral-100 backdrop-blur-md`};
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            background-color: rgba(255, 255, 255, 0.2);
-            box-shadow: none;
-            &:hover:not(:disabled) {
-                border-color: rgba(255, 255, 255, 0.7);
-                background-color: rgba(255, 255, 255, 0.28);
-            }
-            &:active:not(:disabled) {
-                background-color: rgba(255, 255, 255, 0.22);
-            }
-        `};
+            ${tw`bg-transparent text-brand-slate shadow-none border-none`};
+            font-size: 11px;
+            font-weight: 600;
 
-    ${(props) =>
-        !props.variant &&
-        props.palette === 'purpleRed' &&
-        css`
-            ${tw`text-white border-transparent`};
-            background-image: linear-gradient(135deg, #a855f7, #ef4444);
             &:hover:not(:disabled) {
-                filter: brightness(1.05);
-            }
-        `};
-
-    ${(props) =>
-        !props.variant &&
-        props.palette === 'indigoPink' &&
-        css`
-            ${tw`text-white border-transparent`};
-            background-color: #6366f1;
-            border-color: #4f46e5;
-            &:hover:not(:disabled) {
-                background-color: #4f46e5;
-            }
-        `};
-
-    ${(props) =>
-        !props.variant &&
-        props.palette === 'cyanBlue' &&
-        css`
-            ${tw`text-white border-transparent`};
-            background-color: #3b82f6;
-            border-color: #2563eb;
-            &:hover:not(:disabled) {
-                background-color: #2563eb;
-            }
-        `};
-
-    ${(props) =>
-        !props.variant &&
-        props.palette === 'sunset' &&
-        css`
-            ${tw`text-white border-transparent`};
-            background-image: linear-gradient(135deg, #f59e0b, #f43f5e);
-            &:hover:not(:disabled) {
-                filter: brightness(1.05);
-            }
-        `};
-
-    ${(props) =>
-        !props.variant &&
-        props.palette === 'rainbow' &&
-        css`
-            ${tw`text-white border-transparent`};
-            background-image: linear-gradient(90deg, #a855f7, #06b6d4, #f59e0b, #f43f5e);
-            &:hover:not(:disabled) {
-                filter: brightness(1.05);
-            }
-        `};
-
-    ${(props) =>
-        !props.variant &&
-        props.palette === 'instagram' &&
-        css`
-            ${tw`text-white border-transparent`};
-            background-color: #f59e0b;
-            border-color: #d97706;
-            &:hover:not(:disabled) {
-                background-color: #d97706;
+                ${tw`text-brand-navy bg-neutral-50`};
+                background-color: #f8fafc;
             }
         `};
 
     &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        filter: saturate(0.7);
+        ${tw`opacity-50 cursor-not-allowed`};
+        box-shadow: none;
+        transform: none;
     }
 `;
 

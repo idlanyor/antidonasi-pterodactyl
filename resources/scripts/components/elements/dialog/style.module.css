@@ -3,34 +3,45 @@
 }
 
 .panel {
-    @apply relative bg-gray-600 rounded max-w-xl w-full mx-auto shadow-lg text-left;
-    @apply ring-4 ring-gray-800 ring-opacity-80;
+    @apply relative bg-white rounded-xl max-w-xl w-full mx-auto shadow-xl text-left;
+    @apply border border-neutral-200;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 .title {
-    @apply font-header text-xl font-medium mb-2 text-gray-50 pr-4;
+    @apply font-header text-2xl font-black mb-2 pr-4 tracking-tight;
+    color: theme('colors.brand-navy');
 }
 
 .close_icon {
-    @apply w-5 h-5 group-hover:rotate-90 transition-transform duration-100;
+    @apply w-6 h-6 group-hover:rotate-90 transition-transform duration-300;
+    color: theme('colors.brand-slate');
 }
 
 .dialog_icon {
-    @apply flex items-center justify-center w-10 h-10 rounded-full mr-4;
+    @apply flex items-center justify-center w-12 h-12 rounded-xl mr-5;
 
     &.danger {
-        @apply bg-red-500 text-red-50;
+        background-color: theme('colors.status-error');
+        @apply bg-opacity-10;
+        color: theme('colors.status-error');
     }
 
     &.warning {
-        @apply bg-yellow-600 text-yellow-50;
+        background-color: theme('colors.status-warning');
+        @apply bg-opacity-10;
+        color: theme('colors.status-warning');
     }
 
     &.success {
-        @apply bg-green-600 text-green-50;
+        background-color: theme('colors.status-success');
+        @apply bg-opacity-10;
+        color: theme('colors.status-success');
     }
 
     &.info {
-        @apply bg-primary-500 text-primary-50;
+        background-color: theme('colors.status-info');
+        @apply bg-opacity-10;
+        color: theme('colors.status-info');
     }
 }

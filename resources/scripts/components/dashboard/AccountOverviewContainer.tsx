@@ -14,14 +14,15 @@ const Container = styled.div`
 `;
 
 const HeaderContainer = styled.div`
-    ${tw`mb-8`};
+    ${tw`mb-10`};
 
     h1 {
-        ${tw`text-3xl font-bold text-neutral-100`};
+        ${tw`text-5xl font-black text-brand-navy tracking-tight`};
+        font-family: 'Satoshi', sans-serif;
     }
 
     p {
-        ${tw`text-neutral-400 mt-2`};
+        ${tw`text-brand-slate mt-3 text-lg font-bold leading-relaxed`};
     }
 `;
 

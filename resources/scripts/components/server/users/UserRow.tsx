@@ -18,39 +18,41 @@ export default ({ subuser }: Props) => {
     const [visible, setVisible] = useState(false);
 
     return (
-        <GreyRowBox css={tw`mb-2`}>
+        <GreyRowBox css={tw`mb-0`}>
             <EditSubuserModal subuser={subuser} visible={visible} onModalDismissed={() => setVisible(false)} />
-            <div css={tw`w-10 h-10 rounded-full bg-white border-2 border-neutral-800 overflow-hidden hidden md:block`}>
-                <img css={tw`w-full h-full`} src={`${subuser.image}?s=400`} />
+            <div
+                css={tw`w-12 h-12 rounded-2xl bg-white border border-neutral-200 overflow-hidden hidden md:block shadow-sm`}
+            >
+                <img css={tw`w-full h-full p-1`} src={`${subuser.image}?s=400`} />
             </div>
-            <div css={tw`ml-4 flex-1 overflow-hidden`}>
-                <p css={tw`text-sm truncate`}>{subuser.email}</p>
+            <div css={tw`ml-6 flex-1 overflow-hidden`}>
+                <p css={tw`text-base font-black text-brand-navy tracking-tight truncate`}>{subuser.email}</p>
             </div>
-            <div css={tw`ml-4`}>
-                <p css={tw`font-medium text-center`}>
-                    &nbsp;
+            <div css={tw`ml-6`}>
+                <p css={tw`font-black text-center text-brand-navy`}>
                     <FontAwesomeIcon
                         icon={subuser.twoFactorEnabled ? faUserLock : faUnlockAlt}
                         fixedWidth
-                        css={!subuser.twoFactorEnabled ? tw`text-red-400` : undefined}
+                        css={!subuser.twoFactorEnabled ? tw`text-status-error` : tw`text-status-success`}
                     />
-                    &nbsp;
                 </p>
-                <p css={tw`text-2xs text-neutral-500 uppercase hidden md:block`}>2FA Enabled</p>
+                <p css={tw`text-[10px] text-brand-slate uppercase font-bold tracking-widest hidden md:block mt-1`}>
+                    2FA Status
+                </p>
             </div>
-            <div css={tw`ml-4 hidden md:block`}>
-                <p css={tw`font-medium text-center`}>
+            <div css={tw`ml-8 hidden md:block`}>
+                <p css={tw`font-black text-center text-brand-navy`}>
                     {subuser.permissions.filter((permission) => permission !== 'websocket.connect').length}
                 </p>
-                <p css={tw`text-2xs text-neutral-500 uppercase`}>Permissions</p>
+                <p css={tw`text-[10px] text-brand-slate uppercase font-bold tracking-widest mt-1`}>Permissions</p>
             </div>
             {subuser.uuid !== uuid && (
-                <>
+                <div css={tw`flex items-center ml-6 gap-2`}>
                     <Can action={'user.update'}>
                         <button
                             type={'button'}
                             aria-label={'Edit subuser'}
-                            css={tw`block text-sm p-1 md:p-2 text-neutral-500 hover:text-neutral-100 transition-colors duration-150 mx-4`}
+                            css={tw`flex items-center justify-center w-10 h-10 rounded-xl text-brand-slate hover:text-accent-purple hover:bg-neutral-50 transition-all duration-300`}
                             onClick={() => setVisible(true)}
                         >
                             <FontAwesomeIcon icon={faPencilAlt} />
@@ -59,7 +61,7 @@ export default ({ subuser }: Props) => {
                     <Can action={'user.delete'}>
                         <RemoveSubuserButton subuser={subuser} />
                     </Can>
-                </>
+                </div>
             )}
         </GreyRowBox>
     );

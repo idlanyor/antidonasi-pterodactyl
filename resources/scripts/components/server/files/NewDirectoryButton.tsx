@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ServerContext } from '@/state/server';
 import { Form, Formik, FormikHelpers } from 'formik';
 import Field from '@/components/elements/Field';
-import { join } from 'pathe';
+import { join } from 'path';
 import { object, string } from 'yup';
 import createDirectory from '@/api/server/files/createDirectory';
 import tw from 'twin.macro';
@@ -86,7 +86,7 @@ const NewDirectoryDialog = asDialog({
                         <Button.Text className={'w-full sm:w-auto'} onClick={close}>
                             Cancel
                         </Button.Text>
-                        <Button className={'w-full sm:w-auto'} onClick={submitForm}>
+                        <Button className={'w-full sm:w-auto'} onClick={submitForm} size={'large'}>
                             Create
                         </Button>
                     </Dialog.Footer>

@@ -103,29 +103,31 @@ const EditSubuserModal = ({ subuser }: Props) => {
             })}
         >
             <Form>
-                <div css={tw`flex justify-between`}>
-                    <h2 css={tw`text-2xl`} ref={ref}>
+                <div css={tw`flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8`}>
+                    <h2 css={tw`text-3xl font-black text-brand-navy tracking-tight`} ref={ref}>
                         {subuser
                             ? `${canEditUser ? 'Modify' : 'View'} permissions for ${subuser.email}`
                             : 'Create new subuser'}
                     </h2>
                     <div>
-                        <Button type={'submit'} css={tw`w-full sm:w-auto`}>
-                            {subuser ? 'Save' : 'Invite User'}
+                        <Button type={'submit'} css={tw`w-full sm:w-auto`} size={'large'}>
+                            {subuser ? 'Save Changes' : 'Invite User'}
                         </Button>
                     </div>
                 </div>
-                <FlashMessageRender byKey={'user:edit'} css={tw`mt-4`} />
+                <FlashMessageRender byKey={'user:edit'} css={tw`mb-6`} />
                 {!isRootAdmin && loggedInPermissions[0] !== '*' && (
-                    <div css={tw`mt-4 pl-4 py-2 border-l-4 border-cyan-400`}>
-                        <p css={tw`text-sm text-neutral-300`}>
+                    <div
+                        css={tw`mb-8 p-4 rounded-xl bg-status-info bg-opacity-10 border border-status-info border-opacity-20`}
+                    >
+                        <p css={tw`text-sm text-status-info font-bold leading-relaxed`}>
                             Only permissions which your account is currently assigned may be selected when creating or
                             modifying other users.
                         </p>
                     </div>
                 )}
                 {!subuser && (
-                    <div css={tw`mt-6`}>
+                    <div css={tw`mb-10`}>
                         <Field
                             name={'email'}
                             label={'User Email'}
@@ -135,32 +137,35 @@ const EditSubuserModal = ({ subuser }: Props) => {
                         />
                     </div>
                 )}
-                <div css={tw`my-6`}>
+                <div css={tw`my-10 flex flex-col gap-6`}>
                     {Object.keys(permissions)
                         .filter((key) => key !== 'websocket')
-                        .map((key, index) => (
+                        .map((key) => (
                             <PermissionTitleBox
                                 key={`permission_${key}`}
                                 title={key}
                                 isEditable={canEditUser}
                                 permissions={Object.keys(permissions[key].keys).map((pkey) => `${key}.${pkey}`)}
-                                css={index > 0 ? tw`mt-4` : undefined}
                             >
-                                <p css={tw`text-sm text-neutral-400 mb-4`}>{permissions[key].description}</p>
-                                {Object.keys(permissions[key].keys).map((pkey) => (
-                                    <PermissionRow
-                                        key={`permission_${key}.${pkey}`}
-                                        permission={`${key}.${pkey}`}
-                                        disabled={!canEditUser || editablePermissions.indexOf(`${key}.${pkey}`) < 0}
-                                    />
-                                ))}
+                                <p css={tw`text-sm text-brand-slate font-bold mb-6 leading-relaxed`}>
+                                    {permissions[key].description}
+                                </p>
+                                <div css={tw`grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2`}>
+                                    {Object.keys(permissions[key].keys).map((pkey) => (
+                                        <PermissionRow
+                                            key={`permission_${key}.${pkey}`}
+                                            permission={`${key}.${pkey}`}
+                                            disabled={!canEditUser || editablePermissions.indexOf(`${key}.${pkey}`) < 0}
+                                        />
+                                    ))}
+                                </div>
                             </PermissionTitleBox>
                         ))}
                 </div>
                 <Can action={subuser ? 'user.update' : 'user.create'}>
-                    <div css={tw`pb-6 flex justify-end`}>
-                        <Button type={'submit'} css={tw`w-full sm:w-auto`}>
-                            {subuser ? 'Save' : 'Invite User'}
+                    <div css={tw`mt-12 pb-6 flex justify-end`}>
+                        <Button type={'submit'} css={tw`w-full sm:w-auto`} size={'large'}>
+                            {subuser ? 'Save Changes' : 'Invite User'}
                         </Button>
                     </div>
                 </Can>

@@ -1,23 +1,24 @@
-enum Shape {
-    Default,
-    IconSquare,
-}
+import { ButtonHTMLAttributes } from 'react';
 
-enum Size {
-    Default,
-    Small,
-    Large,
-}
+export type ButtonSize = 'xsmall' | 'small' | 'large' | 'xlarge';
+export type ButtonColor = 'primary' | 'grey' | 'green' | 'red';
+export type ButtonVariant = 'default' | 'glass';
+export type ButtonShape = 'default' | 'oval';
 
-enum Variant {
-    Primary,
-    Secondary,
-}
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+    isLoading?: boolean;
+    size?: ButtonSize;
+    color?: ButtonColor;
+    isSecondary?: boolean;
+    variant?: ButtonVariant;
+    shape?: ButtonShape;
+    palette?: 'purpleRed' | 'indigoPink' | 'cyanBlue' | 'sunset' | 'rainbow' | 'instagram';
+};
 
-export const Options = { Shape, Size, Variant };
-
-export type ButtonProps = JSX.IntrinsicElements['button'] & {
-    shape?: Shape;
-    size?: Size;
-    variant?: Variant;
+export const Options = {
+    Size: {
+        Small: 'small' as const,
+        Large: 'large' as const,
+        Default: 'small' as const,
+    },
 };

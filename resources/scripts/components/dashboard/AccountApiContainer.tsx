@@ -60,43 +60,43 @@ export default () => {
                         All requests using the <Code>{deleteIdentifier}</Code> key will be invalidated.
                     </Dialog.Confirm>
                     {keys.length === 0 ? (
-                        <p css={tw`text-center text-sm py-4 text-neutral-400`}>
+                        <p css={tw`text-center text-sm py-12 text-brand-slate font-bold`}>
                             {loading ? 'Loading...' : 'No API keys exist for this account.'}
                         </p>
                     ) : (
                         keys.map((key, index) => (
-                            <GreyRowBox
-                                key={key.identifier}
-                                css={[tw`flex items-center`, index > 0 && tw`mt-2`]}
-                                $variant={'glass'}
-                            >
-                                <FontAwesomeIcon icon={faKey} css={tw`text-blue-400`} />
+                            <GreyRowBox key={key.identifier} css={[tw`flex items-center`, index > 0 && tw`mt-3`]}>
+                                <div
+                                    css={tw`flex items-center justify-center w-10 h-10 rounded-xl bg-accent-purple bg-opacity-10 text-accent-purple`}
+                                >
+                                    <FontAwesomeIcon icon={faKey} />
+                                </div>
                                 <div css={tw`ml-4 flex-1 overflow-hidden`}>
-                                    <p css={tw`text-sm break-words text-neutral-100 font-medium`}>{key.description}</p>
-                                    <p css={tw`text-2xs uppercase text-neutral-500`}>
+                                    <p css={tw`text-sm break-words text-brand-navy font-black tracking-tight`}>
+                                        {key.description}
+                                    </p>
+                                    <p css={tw`text-[10px] uppercase text-brand-slate font-bold tracking-widest mt-1`}>
                                         Last used:&nbsp;
                                         {key.lastUsedAt ? format(key.lastUsedAt, 'MMM do, yyyy HH:mm') : 'Never'}
                                     </p>
                                 </div>
                                 <p css={tw`text-sm ml-4 hidden md:block`}>
                                     <code
-                                        css={tw`font-mono py-1 px-2 rounded`}
+                                        css={tw`font-mono py-2 px-3 rounded-lg font-bold text-xs`}
                                         style={{
-                                            background: '#0f172a',
-                                            color: '#e2e8f0',
-                                            border: '1px solid #1f2937',
-                                            fontWeight: 500,
+                                            background: '#F8FAFC',
+                                            color: '#0F172A',
+                                            border: '1px solid #E2E8F0',
                                         }}
                                     >
                                         {key.identifier}
                                     </code>
                                 </p>
-                                <button css={tw`ml-4 p-2 text-sm`} onClick={() => setDeleteIdentifier(key.identifier)}>
-                                    <FontAwesomeIcon
-                                        icon={faTrashAlt}
-                                        css={tw`transition-colors duration-150`}
-                                        style={{ color: '#dc2626' }}
-                                    />
+                                <button
+                                    css={tw`ml-4 p-2 text-sm text-brand-slate hover:text-status-error hover:bg-red-50 rounded-xl transition-all duration-300`}
+                                    onClick={() => setDeleteIdentifier(key.identifier)}
+                                >
+                                    <FontAwesomeIcon icon={faTrashAlt} />
                                 </button>
                             </GreyRowBox>
                         ))

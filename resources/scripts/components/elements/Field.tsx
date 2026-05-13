@@ -31,12 +31,20 @@ const Field = forwardRef<HTMLInputElement, Props>(
                         hasError={!!(touched[field.name] && errors[field.name])}
                     />
                     {touched[field.name] && errors[field.name] ? (
-                        <p className={'input-help error'}>
+                        <p
+                            className={'input-help error'}
+                            style={{ color: '#EF4444', marginTop: '0.5rem', fontSize: '0.75rem', fontWeight: 700 }}
+                        >
                             {(errors[field.name] as string).charAt(0).toUpperCase() +
                                 (errors[field.name] as string).slice(1)}
                         </p>
                     ) : description ? (
-                        <p className={'input-help'}>{description}</p>
+                        <p
+                            className={'input-help'}
+                            style={{ color: '#64748B', marginTop: '0.5rem', fontSize: '0.75rem', fontWeight: 700 }}
+                        >
+                            {description}
+                        </p>
                     ) : null}
                 </div>
             )}

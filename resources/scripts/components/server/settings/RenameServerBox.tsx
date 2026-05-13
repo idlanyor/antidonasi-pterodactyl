@@ -9,7 +9,7 @@ import { object, string } from 'yup';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import { ApplicationStore } from '@/state';
 import { httpErrorToHuman } from '@/api/http';
-import { Button } from '@/components/elements/button/index';
+import Button from '@/components/elements/Button';
 import tw from 'twin.macro';
 import Label from '@/components/elements/Label';
 import FormikFieldWrapper from '@/components/elements/FormikFieldWrapper';
@@ -24,29 +24,23 @@ const RenameServerBox = () => {
     const { isSubmitting } = useFormikContext<Values>();
 
     return (
-        <TitledGreyBox title={'Change Server Details'} css={tw`relative`} glass>
+        <TitledGreyBox title={'Change Server Details'} css={tw`relative`}>
             <SpinnerOverlay visible={isSubmitting} />
             <Form css={tw`mb-0`}>
-                <Field id={'name'} name={'name'} label={'Server Name'} type={'text'} variant={'glass'} />
-                <div css={tw`mt-6`}>
-                    <Label variant={'glass'}>Server Description</Label>
+                <Field id={'name'} name={'name'} label={'Server Name'} type={'text'} />
+                <div css={tw`mt-8`}>
+                    <Label>Server Description</Label>
                     <FormikFieldWrapper name={'description'}>
-                        <FormikField as={Textarea} name={'description'} rows={3} variant={'glass'} />
+                        <FormikField
+                            as={Textarea}
+                            name={'description'}
+                            rows={3}
+                            placeholder={'Add a description for this server...'}
+                        />
                     </FormikFieldWrapper>
                 </div>
-                <div css={tw`mt-8 text-right`}>
-                    <Button
-                        type={'submit'}
-                        style={{
-                            background: 'linear-gradient(135deg, #6366f1, #4f46e5)',
-                            border: '1px solid #4338ca',
-                            color: '#ffffff',
-                            fontWeight: 600,
-                            borderRadius: '0.75rem',
-                            padding: '0.625rem 2rem',
-                            boxShadow: '0 4px 6px -1px rgba(99, 102, 241, 0.3)',
-                        }}
-                    >
+                <div css={tw`mt-10 text-right`}>
+                    <Button type={'submit'} size={'large'} css={tw`w-full sm:w-auto`}>
                         Save Changes
                     </Button>
                 </div>

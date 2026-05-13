@@ -8,7 +8,7 @@ import updateAccountPassword from '@/api/account/updateAccountPassword';
 import { httpErrorToHuman } from '@/api/http';
 import { ApplicationStore } from '@/state';
 import tw from 'twin.macro';
-import { Button } from '@/components/elements/button/index';
+import Button from '@/components/elements/Button';
 
 interface Values {
     current: string;
@@ -70,7 +70,6 @@ export default () => {
                                 type={'password'}
                                 name={'current'}
                                 label={'Current Password'}
-                                variant={'glass'}
                             />
                             <div css={tw`mt-6`}>
                                 <Field
@@ -81,7 +80,6 @@ export default () => {
                                     description={
                                         'Your new password should be at least 8 characters in length and unique to this website.'
                                     }
-                                    variant={'glass'}
                                 />
                             </div>
                             <div css={tw`mt-6`}>
@@ -90,22 +88,10 @@ export default () => {
                                     type={'password'}
                                     name={'confirmPassword'}
                                     label={'Confirm New Password'}
-                                    variant={'glass'}
                                 />
                             </div>
-                            <div css={tw`mt-6`}>
-                                <Button
-                                    disabled={isSubmitting || !isValid}
-                                    style={{
-                                        background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                                        border: '1px solid #1d4ed8',
-                                        color: '#ffffff',
-                                        fontWeight: 600,
-                                        boxShadow: '0 4px 6px -1px rgba(59, 130, 246, 0.5)',
-                                        borderRadius: '0.5rem',
-                                        padding: '0.625rem 1.25rem',
-                                    }}
-                                >
+                            <div css={tw`mt-8 text-right`}>
+                                <Button disabled={isSubmitting || !isValid} size={'large'} css={tw`w-full sm:w-auto`}>
                                     Update Password
                                 </Button>
                             </div>

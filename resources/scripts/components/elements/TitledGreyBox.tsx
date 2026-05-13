@@ -14,25 +14,24 @@ interface Props {
 }
 
 const Container = styled.div<{ glass?: boolean }>`
-    ${tw`rounded-2xl`};
-    background: rgba(17, 24, 39, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(16px);
-    color: #e5e7eb;
+    ${tw`rounded-xl`};
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
+    color: #0f172a;
     transition: all 0.3s ease;
 
     &:hover {
-        border-color: rgba(99, 102, 241, 0.3);
-        background: rgba(17, 24, 39, 0.8);
+        border-color: #cbd5e1;
+        box-shadow: 0 -12px 36px 0 rgba(15, 23, 42, 0.12);
     }
 `;
 
 const Header = styled.div<{ glass?: boolean }>`
-    ${tw`rounded-t-2xl p-4 lg:p-5`};
-    background: rgba(255, 255, 255, 0.03);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    color: #ffffff;
+    ${tw`rounded-t-xl p-4 lg:p-6`};
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    color: #0f172a;
     position: relative;
 `;
 
@@ -40,13 +39,8 @@ const TitledGreyBox = ({ icon, title, children, className, glass }: Props) => (
     <Container glass={glass} className={className}>
         <Header glass={glass}>
             {typeof title === 'string' ? (
-                <p
-                    css={tw`text-sm uppercase font-bold tracking-widest`}
-                    style={{
-                        color: '#ffffff',
-                    }}
-                >
-                    {icon && <FontAwesomeIcon icon={icon} css={tw`mr-3 text-indigo-400`} />}
+                <p css={tw`text-[11px] uppercase font-black tracking-widest text-brand-navy`}>
+                    {icon && <FontAwesomeIcon icon={icon} css={tw`mr-3 text-accent-purple`} />}
                     {title}
                 </p>
             ) : (

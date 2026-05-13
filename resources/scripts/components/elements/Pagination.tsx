@@ -21,10 +21,10 @@ interface Props<T> {
 }
 
 const Block = styled(Button)`
-    ${tw`p-0 w-10 h-10`}
+    ${tw`p-0 w-10 h-10 rounded-xl font-black text-xs transition-all duration-300`}
 
     &:not(:last-of-type) {
-        ${tw`mr-2`};
+        ${tw`mr-3`};
     }
 `;
 
@@ -47,24 +47,33 @@ function Pagination<T>({ data: { items, pagination }, onPageSelect, children }: 
         <>
             {children({ items, isFirstPage, isLastPage })}
             {pages.length > 1 && (
-                <div css={tw`mt-4 flex justify-center`}>
+                <div css={tw`mt-12 flex justify-center`}>
                     {pages[0] > 1 && !isFirstPage && (
-                        <Block isSecondary color={'primary'} onClick={() => onPageSelect(1)}>
+                        <Block isSecondary onClick={() => onPageSelect(1)}>
                             <FontAwesomeIcon icon={faAngleDoubleLeft} />
                         </Block>
                     )}
                     {pages.map((i) => (
                         <Block
                             isSecondary={pagination.currentPage !== i}
-                            color={'primary'}
                             key={`block_page_${i}`}
                             onClick={() => onPageSelect(i)}
+                            style={
+                                pagination.currentPage === i
+                                    ? {
+                                          background: 'linear-gradient(135deg, #EC4899 0%, #7C3AED 100%)',
+                                          border: 'none',
+                                          boxShadow: '0 14px 30px 0 rgba(168, 85, 247, 0.24)',
+                                          color: '#FFFFFF',
+                                      }
+                                    : {}
+                            }
                         >
                             {i}
                         </Block>
                     ))}
                     {pages[4] < pagination.totalPages && !isLastPage && (
-                        <Block isSecondary color={'primary'} onClick={() => onPageSelect(pagination.totalPages)}>
+                        <Block isSecondary onClick={() => onPageSelect(pagination.totalPages)}>
                             <FontAwesomeIcon icon={faAngleDoubleRight} />
                         </Block>
                     )}

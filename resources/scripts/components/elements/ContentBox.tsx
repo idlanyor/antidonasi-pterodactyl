@@ -13,29 +13,30 @@ type Props = Readonly<
     }
 >;
 
-const Glass = styled.div`
-    ${tw`p-6 rounded-2xl relative border`};
-    background: linear-gradient(145deg, #111827, #1f2937);
-    border-color: #374151;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    color: #e5e7eb;
-    transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out;
+const Card = styled.div`
+    ${tw`p-6 rounded-xl relative border shadow-lg`};
+    background-color: #ffffff;
+    border-color: #e2e8f0;
+    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
+    color: #0f172a;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
-        border-color: #4b5563;
+        border-color: #cbd5e1;
+        box-shadow: 0 -12px 36px 0 rgba(15, 23, 42, 0.12);
     }
 `;
 
 const ContentBox = ({ title, borderColor, showFlashes, showLoadingOverlay, children, ...props }: Props) => (
     <div {...props}>
-        {title && <h2 css={tw`mb-4 px-2 text-xl text-neutral-100 font-bold tracking-tight`}>{title}</h2>}
+        {title && <h2 css={tw`mb-4 px-2 text-xl text-brand-navy font-bold tracking-tight`}>{title}</h2>}
         {showFlashes && (
             <FlashMessageRender byKey={typeof showFlashes === 'string' ? showFlashes : undefined} css={tw`mb-4`} />
         )}
-        <Glass css={[!!borderColor && tw`border-t-4`]} style={borderColor ? { borderTopColor: borderColor } : {}}>
+        <Card css={[!!borderColor && tw`border-t-4`]} style={borderColor ? { borderTopColor: borderColor } : {}}>
             <SpinnerOverlay visible={showLoadingOverlay || false} />
             {children}
-        </Glass>
+        </Card>
     </div>
 );
 

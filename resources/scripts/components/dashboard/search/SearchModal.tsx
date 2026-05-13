@@ -22,15 +22,15 @@ interface Values {
 }
 
 const ServerResult = styled(Link)`
-    ${tw`flex items-center bg-neutral-900 p-4 rounded border-l-4 border-neutral-900 no-underline transition-all duration-150`};
+    ${tw`flex items-center bg-neutral-50 p-4 rounded-xl border-l-4 border-neutral-100 no-underline transition-all duration-300 shadow-sm`};
 
     &:hover {
-        ${tw`shadow`};
-        border-color: #dd2a7b;
+        ${tw`shadow-md border-accent-purple bg-white`};
+        transform: translateX(4px);
     }
 
     &:not(:last-of-type) {
-        ${tw`mb-2`};
+        ${tw`mb-3`};
     }
 `;
 
@@ -108,8 +108,8 @@ export default ({ ...props }: Props) => {
                                     onClick={() => props.onDismissed()}
                                 >
                                     <div css={tw`flex-1 mr-4`}>
-                                        <p css={tw`text-sm`}>{server.name}</p>
-                                        <p css={tw`mt-1 text-xs text-neutral-400`}>
+                                        <p css={tw`text-sm font-black text-brand-navy tracking-tight`}>{server.name}</p>
+                                        <p css={tw`mt-1 text-xs text-brand-slate font-bold`}>
                                             {server.allocations
                                                 .filter((alloc) => alloc.isDefault)
                                                 .map((allocation) => (
@@ -121,11 +121,11 @@ export default ({ ...props }: Props) => {
                                     </div>
                                     <div css={tw`flex-none text-right`}>
                                         <span
-                                            css={tw`text-xs py-1 px-2 rounded`}
+                                            css={tw`text-[10px] py-1 px-2 rounded-lg font-black uppercase tracking-widest`}
                                             style={{
-                                                background: 'rgba(221, 42, 123, 0.2)',
-                                                color: '#dd2a7b',
-                                                border: '1px solid rgba(221, 42, 123, 0.4)',
+                                                background: 'rgba(124, 58, 237, 0.1)',
+                                                color: '#7C3AED',
+                                                border: '1px solid rgba(124, 58, 237, 0.2)',
                                             }}
                                         >
                                             {server.node}

@@ -19,6 +19,7 @@ const DashboardRouter = lazy(() => import(/* webpackChunkName: "dashboard" */ '@
 const ServerRouter = lazy(() => import(/* webpackChunkName: "server" */ '@/routers/ServerRouter'));
 const AuthenticationRouter = lazy(() => import(/* webpackChunkName: "auth" */ '@/routers/AuthenticationRouter'));
 const PricingPage = lazy(() => import(/* webpackChunkName: "pricing" */ '@/components/PricingPage'));
+const LandingPage = lazy(() => import(/* webpackChunkName: "landing" */ '@/components/LandingPage'));
 
 interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
@@ -65,6 +66,11 @@ const App = () => {
                 <div css={tw`mx-auto w-auto`}>
                     <Router history={history}>
                         <Switch>
+                            <Route path={'/'} exact>
+                                <Spinner.Suspense>
+                                    <LandingPage />
+                                </Spinner.Suspense>
+                            </Route>
                             <Route path={'/auth'}>
                                 <Spinner.Suspense>
                                     <AuthenticationRouter />
@@ -82,6 +88,12 @@ const App = () => {
                                     </ServerContext.Provider>
                                 </Spinner.Suspense>
                             </AuthenticatedRoute>
+                            <AuthenticatedRoute path={'/dashboard'}>
+                                <Spinner.Suspense>
+                                    <DashboardRouter />
+                                </Spinner.Suspense>
+                            </AuthenticatedRoute>
+                            {/* Fallback route to catch legacy / links that should go to dashboard if authenticated */}
                             <AuthenticatedRoute path={'/'}>
                                 <Spinner.Suspense>
                                     <DashboardRouter />
