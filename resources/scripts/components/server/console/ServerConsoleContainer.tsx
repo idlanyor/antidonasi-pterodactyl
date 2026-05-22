@@ -36,12 +36,12 @@ const ServerConsoleContainer = () => {
                 <div className={'hidden sm:block sm:col-span-2 lg:col-span-3 pr-4'}>
                     <h1
                         className={
-                            'font-header text-4xl leading-tight line-clamp-1 text-brand-navy font-black tracking-tight'
+                            'font-header text-4xl leading-tight line-clamp-1 text-neutral-900 font-black tracking-tight'
                         }
                     >
                         {name}
                     </h1>
-                    <p className={'text-base line-clamp-2 text-brand-slate font-bold mt-1'}>{description}</p>
+                    <p className={'text-base line-clamp-2 text-neutral-500 font-bold mt-1'}>{description}</p>
                 </div>
                 <div className={'col-span-4 sm:col-span-2 lg:col-span-1 self-end'}>
                     <Can action={['control.start', 'control.stop', 'control.restart']} matchAny>

@@ -60,7 +60,7 @@ export default () => {
                         All requests using the <Code>{deleteIdentifier}</Code> key will be invalidated.
                     </Dialog.Confirm>
                     {keys.length === 0 ? (
-                        <p css={tw`text-center text-sm py-12 text-brand-slate font-bold`}>
+                        <p css={tw`text-center text-sm py-12 font-bold`} style={{ color: 'var(--text-secondary)' }}>
                             {loading ? 'Loading...' : 'No API keys exist for this account.'}
                         </p>
                     ) : (
@@ -72,10 +72,10 @@ export default () => {
                                     <FontAwesomeIcon icon={faKey} />
                                 </div>
                                 <div css={tw`ml-4 flex-1 overflow-hidden`}>
-                                    <p css={tw`text-sm break-words text-brand-navy font-black tracking-tight`}>
+                                    <p css={tw`text-sm break-words font-black tracking-tight`} style={{ color: 'var(--text-primary)' }}>
                                         {key.description}
                                     </p>
-                                    <p css={tw`text-[10px] uppercase text-brand-slate font-bold tracking-widest mt-1`}>
+                                    <p css={tw`text-[10px] uppercase font-bold tracking-widest mt-1`} style={{ color: 'var(--text-secondary)' }}>
                                         Last used:&nbsp;
                                         {key.lastUsedAt ? format(key.lastUsedAt, 'MMM do, yyyy HH:mm') : 'Never'}
                                     </p>
@@ -84,16 +84,17 @@ export default () => {
                                     <code
                                         css={tw`font-mono py-2 px-3 rounded-lg font-bold text-xs`}
                                         style={{
-                                            background: '#F8FAFC',
-                                            color: '#0F172A',
-                                            border: '1px solid #E2E8F0',
+                                            background: 'var(--bg-code)',
+                                            color: 'var(--text-primary)',
+                                            border: '1px solid var(--border-primary)',
                                         }}
                                     >
                                         {key.identifier}
                                     </code>
                                 </p>
                                 <button
-                                    css={tw`ml-4 p-2 text-sm text-brand-slate hover:text-status-error hover:bg-red-50 rounded-xl transition-all duration-300`}
+                                    css={tw`ml-4 p-2 text-sm hover:text-status-error hover:bg-red-50 rounded-xl transition-all duration-300`}
+                                    style={{ color: 'var(--text-secondary)' }}
                                     onClick={() => setDeleteIdentifier(key.identifier)}
                                 >
                                     <FontAwesomeIcon icon={faTrashAlt} />

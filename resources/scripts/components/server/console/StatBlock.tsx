@@ -17,13 +17,13 @@ interface StatBlockProps {
 
 const StatCard = styled.div`
     ${tw`flex items-center gap-4 p-4 rounded-xl border transition-all duration-300`};
-    background-color: #ffffff;
-    border-color: #e2e8f0;
-    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
+    background-color: var(--bg-elevated);
+    border-color: var(--border-primary);
+    box-shadow: var(--shadow-lg);
 
     &:hover {
-        border-color: #cbd5e1;
-        box-shadow: 0 -12px 36px 0 rgba(15, 23, 42, 0.12);
+        border-color: var(--border-secondary);
+        box-shadow: var(--shadow-lg-hover);
     }
 `;
 
@@ -41,11 +41,16 @@ export default ({ title, copyOnClick, icon, className, children }: StatBlockProp
                     <Icon icon={icon} className={'w-4 h-4'} />
                 </IconWrapper>
                 <div className={'flex flex-col justify-center overflow-hidden w-full'}>
-                    <p className={'text-[10px] font-black uppercase tracking-widest text-brand-slate'}>{title}</p>
+                    <p
+                        className={'text-[10px] font-black uppercase tracking-widest'}
+                        style={{ color: 'var(--text-secondary)' }}
+                    >
+                        {title}
+                    </p>
                     <div
                         ref={ref}
-                        className={'h-[1.75rem] w-full font-black text-brand-navy truncate tracking-tight'}
-                        style={{ fontSize, fontFamily: "'Satoshi', sans-serif" }}
+                        className={'h-[1.75rem] w-full font-black truncate tracking-tight'}
+                        style={{ fontSize, fontFamily: "'Satoshi', sans-serif", color: 'var(--text-primary)' }}
                     >
                         {children}
                     </div>

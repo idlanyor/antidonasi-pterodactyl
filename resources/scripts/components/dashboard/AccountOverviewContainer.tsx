@@ -17,12 +17,14 @@ const HeaderContainer = styled.div`
     ${tw`mb-10`};
 
     h1 {
-        ${tw`text-5xl font-black text-brand-navy tracking-tight`};
+        ${tw`text-5xl font-black tracking-tight`};
         font-family: 'Satoshi', sans-serif;
+        color: var(--text-primary);
     }
 
     p {
-        ${tw`text-brand-slate mt-3 text-lg font-bold leading-relaxed`};
+        ${tw`mt-3 text-lg font-bold leading-relaxed`};
+        color: var(--text-secondary);
     }
 `;
 

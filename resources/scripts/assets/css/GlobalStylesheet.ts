@@ -3,21 +3,25 @@ import { createGlobalStyle } from 'styled-components/macro';
 
 export default createGlobalStyle`
     body {
-        ${tw`font-sans text-brand-navy bg-neutral-50`};
+        ${tw`font-sans`};
         font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         letter-spacing: 0.015em;
         min-height: 100vh;
-        background-color: #F8FAFC;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     h1, h2, h3, h4, h5, h6 {
-        ${tw`font-bold tracking-tight font-header text-brand-navy`};
+        ${tw`font-bold tracking-tight font-header`};
         font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--text-primary);
     }
 
     p {
-        ${tw`text-brand-slate leading-relaxed font-sans font-bold`};
+        ${tw`leading-relaxed font-sans font-bold`};
         font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--text-secondary);
     }
 
     form {
@@ -46,13 +50,14 @@ export default createGlobalStyle`
     }
 
     ::-webkit-scrollbar-thumb {
-        ${tw`bg-neutral-700 rounded-full`};
+        ${tw`rounded-full`};
+        background-color: var(--scrollbar-thumb);
         border: 2px solid transparent;
         background-clip: content-box;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        ${tw`bg-neutral-600`};
+        background-color: var(--scrollbar-thumb-hover);
     }
 
     ::-webkit-scrollbar-track-piece {

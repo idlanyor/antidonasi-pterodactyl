@@ -19,44 +19,50 @@ import { useLocation } from 'react-router-dom';
 
 const TitleWrapper = styled.div`
     ${tw`relative mb-12 p-10 md:p-16 rounded-3xl overflow-hidden`};
-    background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
-    border: 1px solid rgba(124, 58, 237, 0.1);
-    box-shadow: 0 10px 30px 0 rgba(15, 23, 42, 0.05);
+    background: var(--gradient-hero);
+    border: 1px solid var(--gradient-hero-border);
+    box-shadow: var(--shadow-lg);
+    transition: background 0.3s ease, border-color 0.3s ease;
 
     h1 {
-        ${tw`text-4xl md:text-5xl lg:text-6xl font-black text-brand-navy tracking-tight leading-tight max-w-2xl`};
+        ${tw`text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight max-w-2xl`};
+        color: var(--text-primary);
         font-family: 'Satoshi', sans-serif;
     }
 
     p {
-        ${tw`text-brand-slate mt-4 text-lg md:text-xl font-bold leading-relaxed max-w-xl`};
+        ${tw`mt-4 text-lg md:text-xl font-bold leading-relaxed max-w-xl`};
+        color: var(--text-secondary);
     }
 
     &::after {
         content: '';
         ${tw`absolute top-0 right-0 w-1/2 h-full opacity-30 pointer-events-none hidden md:block`};
-        background: radial-gradient(circle at 100% 50%, rgba(236, 72, 153, 0.2) 0%, transparent 70%);
+        background: var(--gradient-hero-radial);
     }
 `;
 
 const HeaderSection = styled.div`
-    ${tw`mb-12 p-10 rounded-3xl border shadow-lg`};
-    background: #ffffff;
-    border-color: #e2e8f0;
-    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
+    ${tw`mb-12 p-10 rounded-3xl border`};
+    background: var(--bg-elevated);
+    border-color: var(--border-primary);
+    box-shadow: var(--shadow-lg);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 `;
 
 const FilterWrapper = styled.div`
     ${tw`flex items-center gap-4 px-6 py-3 rounded-2xl border`};
-    background: #f1f5f9;
-    border-color: #e2e8f0;
+    background: var(--filter-bg);
+    border-color: var(--filter-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 `;
 
 const EmptyStateWrapper = styled.div`
     ${tw`flex flex-col items-center justify-center py-32 px-6 rounded-3xl border`};
-    background: #ffffff;
-    border-color: #e2e8f0;
-    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
+    background: var(--bg-elevated);
+    border-color: var(--border-primary);
+    box-shadow: var(--shadow-lg);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 `;
 
 export default () => {
@@ -107,20 +113,29 @@ export default () => {
                 <div css={tw`flex flex-wrap items-center justify-between gap-6`}>
                     <div css={tw`flex-1 max-w-md`}>
                         <div css={tw`relative`}>
-                            <div css={tw`absolute left-4 top-1/2 transform -translate-y-1/2 text-brand-slate`}>
+                            <div
+                                css={tw`absolute left-4 top-1/2 transform -translate-y-1/2`}
+                                style={{ color: 'var(--text-secondary)' }}
+                            >
                                 <FontAwesomeIcon icon={faBoxOpen} />
                             </div>
                             <input
                                 type={'text'}
                                 placeholder={'Search servers...'}
-                                css={tw`w-full bg-neutral-100 border border-neutral-200 rounded-2xl py-4 pl-12 pr-4 text-brand-navy font-bold focus:bg-white focus:border-accent-purple transition-all outline-none`}
+                                css={tw`w-full rounded-2xl py-4 pl-12 pr-4 font-bold transition-all outline-none`}
+                                style={{
+                                    backgroundColor: 'var(--bg-tertiary)',
+                                    border: '1px solid var(--border-primary)',
+                                    color: 'var(--text-primary)',
+                                }}
                             />
                         </div>
                     </div>
                     {rootAdmin && (
                         <FilterWrapper>
                             <p
-                                css={tw`text-sm font-black uppercase tracking-widest text-brand-slate flex items-center gap-3`}
+                                css={tw`text-sm font-black uppercase tracking-widest flex items-center gap-3`}
+                                style={{ color: 'var(--text-secondary)' }}
                             >
                                 <FontAwesomeIcon icon={showOnlyAdmin ? faGlobe : faUser} css={tw`text-accent-purple`} />
                                 {showOnlyAdmin ? 'Global View' : 'Personal View'}
@@ -167,11 +182,16 @@ export default () => {
                             </div>
                         ) : (
                             <EmptyStateWrapper>
-                                <div css={tw`text-7xl mb-6 text-neutral-200`}>
+                                <div css={tw`text-7xl mb-6`} style={{ color: 'var(--text-muted)' }}>
                                     <FontAwesomeIcon icon={faBoxOpen} />
                                 </div>
-                                <h2 css={tw`text-2xl font-black mb-3 text-brand-navy`}>No Servers Found</h2>
-                                <p css={tw`text-brand-slate text-center max-w-[400px] font-bold`}>
+                                <h2 css={tw`text-2xl font-black mb-3`} style={{ color: 'var(--text-primary)' }}>
+                                    No Servers Found
+                                </h2>
+                                <p
+                                    css={tw`text-center max-w-[400px] font-bold`}
+                                    style={{ color: 'var(--text-secondary)' }}
+                                >
                                     {showOnlyAdmin
                                         ? 'No other servers are available to display.'
                                         : query

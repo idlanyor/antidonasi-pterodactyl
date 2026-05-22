@@ -14,6 +14,7 @@ const gray = {
 };
 
 module.exports = {
+    darkMode: 'class',
     content: [
         './resources/scripts/**/*.{js,ts,tsx,css}',
     ],

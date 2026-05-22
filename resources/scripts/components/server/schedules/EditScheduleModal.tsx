@@ -90,7 +90,7 @@ const EditScheduleModal = ({ schedule }: Props) => {
         >
             {({ isSubmitting }) => (
                 <Form>
-                    <h3 css={tw`text-3xl font-black text-brand-navy tracking-tight mb-8`}>
+                    <h3 css={tw`text-3xl font-black text-neutral-900 tracking-tight mb-8`}>
                         {schedule ? 'Edit schedule' : 'Create new schedule'}
                     </h3>
                     <FlashMessageRender byKey={'schedule:edit'} css={tw`mb-6`} />
@@ -106,7 +106,7 @@ const EditScheduleModal = ({ schedule }: Props) => {
                         <Field name={'month'} label={'Month'} />
                         <Field name={'dayOfWeek'} label={'Day of week'} />
                     </div>
-                    <p css={tw`text-brand-slate text-xs mt-4 font-bold leading-relaxed`}>
+                    <p css={tw`text-neutral-500 text-xs mt-4 font-bold leading-relaxed`}>
                         The schedule system supports the use of Cronjob syntax when defining when tasks should begin
                         running. Use the fields above to specify when these tasks should begin running.
                     </p>

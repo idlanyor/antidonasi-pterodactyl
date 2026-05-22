@@ -28,7 +28,7 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
                     <p
                         css={tw`text-center text-[10px] uppercase font-black tracking-[0.2em]`}
                         style={{
-                            color: '#CBD5E1',
+                            color: 'var(--text-muted)',
                             fontFamily: "'Satoshi', sans-serif",
                         }}
                     >
@@ -38,13 +38,13 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
                             target={'_blank'}
                             css={tw`no-underline transition-colors duration-300`}
                             style={{
-                                color: '#CBD5E1',
+                                color: 'var(--text-muted)',
                             }}
                             onMouseOver={(e) => {
                                 e.currentTarget.style.color = '#7C3AED';
                             }}
                             onMouseOut={(e) => {
-                                e.currentTarget.style.color = '#CBD5E1';
+                                e.currentTarget.style.color = 'var(--text-muted)';
                             }}
                         >
                             PTERODACTYL

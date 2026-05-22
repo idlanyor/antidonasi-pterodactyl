@@ -65,9 +65,9 @@ const NetworkContainer = () => {
                         <Can action={'allocation.create'}>
                             <SpinnerOverlay visible={loading} />
                             <div css={tw`mt-12 sm:flex items-center justify-end`}>
-                                <p css={tw`text-sm mb-4 sm:mr-8 sm:mb-0 text-brand-slate font-bold`}>
-                                    You are currently using <span className={'text-brand-navy'}>{data.length}</span> of{' '}
-                                    <span className={'text-brand-navy'}>{allocationLimit}</span> allowed allocations for
+                                <p css={tw`text-sm mb-4 sm:mr-8 sm:mb-0 text-neutral-500 font-bold`}>
+                                    You are currently using <span className={'text-neutral-900'}>{data.length}</span> of{' '}
+                                    <span className={'text-neutral-900'}>{allocationLimit}</span> allowed allocations for
                                     this server.
                                 </p>
                                 {allocationLimit > data.length && (

@@ -44,8 +44,12 @@ const ScreenBlock = ({ title, image, message, onBack, onRetry }: ScreenBlockProp
     <PageContentBlock>
         <div css={tw`flex justify-center`}>
             <div
-                css={tw`w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 bg-white rounded-xl border border-neutral-200 shadow-xl text-center relative`}
-                style={{ boxShadow: '0 -10px 30px 0 rgba(15, 23, 42, 0.08)' }}
+                css={tw`w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 rounded-xl border text-center relative`}
+                style={{
+                    backgroundColor: 'var(--bg-elevated)',
+                    borderColor: 'var(--border-primary)',
+                    boxShadow: 'var(--shadow-lg)',
+                }}
             >
                 {(typeof onBack === 'function' || typeof onRetry === 'function') && (
                     <div css={tw`absolute left-0 top-0 ml-6 mt-6`}>
@@ -59,7 +63,7 @@ const ScreenBlock = ({ title, image, message, onBack, onRetry }: ScreenBlockProp
                                 width: '40px',
                                 height: '40px',
                                 borderRadius: '12px',
-                                boxShadow: '0 14px 30px 0 rgba(168, 85, 247, 0.24)',
+                                boxShadow: 'var(--shadow-btn-primary)',
                             }}
                         >
                             <FontAwesomeIcon icon={onRetry ? faSyncAlt : faArrowLeft} />
@@ -67,8 +71,18 @@ const ScreenBlock = ({ title, image, message, onBack, onRetry }: ScreenBlockProp
                     </div>
                 )}
                 <img src={image} css={tw`w-2/3 h-auto select-none mx-auto`} />
-                <h2 css={tw`mt-10 text-brand-navy font-black text-5xl tracking-tight`}>{title}</h2>
-                <p css={tw`text-base text-brand-slate mt-4 font-bold leading-relaxed`}>{message}</p>
+                <h2
+                    css={tw`mt-10 font-black text-5xl tracking-tight`}
+                    style={{ color: 'var(--text-primary)' }}
+                >
+                    {title}
+                </h2>
+                <p
+                    css={tw`text-base mt-4 font-bold leading-relaxed`}
+                    style={{ color: 'var(--text-secondary)' }}
+                >
+                    {message}
+                </p>
             </div>
         </div>
     </PageContentBlock>

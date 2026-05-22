@@ -13,15 +13,9 @@ import tw from 'twin.macro';
 
 const DashboardBackground = styled.div`
     ${tw`min-h-screen w-full relative`};
-    background-color: #f8fafc;
+    background-color: var(--bg-primary);
     overflow-x: hidden;
-
-    &::before {
-        content: '';
-        ${tw`absolute inset-0`};
-        background: linear-gradient(135deg, rgba(236, 72, 153, 0.03) 0%, rgba(124, 58, 237, 0.03) 100%);
-        pointer-events: none;
-    }
+    transition: background-color 0.3s ease;
 `;
 
 export default () => {

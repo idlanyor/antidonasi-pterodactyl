@@ -45,7 +45,7 @@ export default () => {
             ) : (
                 <>
                     {schedules.length === 0 ? (
-                        <p css={tw`text-sm text-center py-20 text-brand-slate font-bold`}>
+                        <p css={tw`text-sm text-center py-20 text-neutral-500 font-bold`}>
                             There are no schedules configured for this server.
                         </p>
                     ) : (

@@ -21,7 +21,7 @@ const SpinnerOverlay: React.FC<Props> = ({ size, fixed, visible, backgroundOpaci
         >
             <Spinner size={size} />
             {children &&
-                (typeof children === 'string' ? <p css={tw`mt-4 text-brand-slate font-bold`}>{children}</p> : children)}
+                (typeof children === 'string' ? <p css={tw`mt-4 text-neutral-500 font-bold`}>{children}</p> : children)}
         </div>
     </Fade>
 );

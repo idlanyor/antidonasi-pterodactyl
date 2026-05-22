@@ -14,22 +14,29 @@ type Props = Readonly<
 >;
 
 const Card = styled.div`
-    ${tw`p-6 rounded-xl relative border shadow-lg`};
-    background-color: #ffffff;
-    border-color: #e2e8f0;
-    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
-    color: #0f172a;
+    ${tw`p-6 rounded-xl relative border`};
+    background-color: var(--bg-elevated);
+    border-color: var(--border-primary);
+    box-shadow: var(--shadow-lg);
+    color: var(--text-primary);
     transition: all 0.3s ease-in-out;
 
     &:hover {
-        border-color: #cbd5e1;
-        box-shadow: 0 -12px 36px 0 rgba(15, 23, 42, 0.12);
+        border-color: var(--border-secondary);
+        box-shadow: var(--shadow-lg-hover);
     }
 `;
 
 const ContentBox = ({ title, borderColor, showFlashes, showLoadingOverlay, children, ...props }: Props) => (
     <div {...props}>
-        {title && <h2 css={tw`mb-4 px-2 text-xl text-brand-navy font-bold tracking-tight`}>{title}</h2>}
+        {title && (
+            <h2
+                css={tw`mb-4 px-2 text-xl font-bold tracking-tight`}
+                style={{ color: 'var(--text-primary)' }}
+            >
+                {title}
+            </h2>
+        )}
         {showFlashes && (
             <FlashMessageRender byKey={typeof showFlashes === 'string' ? showFlashes : undefined} css={tw`mb-4`} />
         )}

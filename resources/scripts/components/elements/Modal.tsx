@@ -22,7 +22,7 @@ export interface ModalProps extends RequiredModalProps {
 
 export const ModalMask = styled.div`
     ${tw`fixed z-50 overflow-auto flex w-full inset-0`};
-    background: rgba(15, 23, 42, 0.6);
+    background: var(--modal-overlay);
     backdrop-filter: blur(4px);
 `;
 
@@ -91,9 +91,9 @@ const Modal: React.FC<ModalProps> = ({
     return (
         <Fade in={render} timeout={150} appear={appear || true} unmountOnExit onExited={() => onDismissed()}>
             <ModalMask
-                onClick={(e) => e.stopPropagation()}
-                onContextMenu={(e) => e.stopPropagation()}
-                onMouseDown={(e) => {
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                onContextMenu={(e: React.MouseEvent) => e.stopPropagation()}
+                onMouseDown={(e: React.MouseEvent) => {
                     if (isDismissable && closeOnBackground) {
                         e.stopPropagation();
                         if (e.target === e.currentTarget) {
@@ -124,15 +124,19 @@ const Modal: React.FC<ModalProps> = ({
                         <Fade timeout={150} appear in>
                             <div
                                 css={tw`absolute w-full h-full rounded-xl flex items-center justify-center`}
-                                style={{ background: 'rgba(255, 255, 255, 0.6)', zIndex: 9999 }}
+                                style={{ background: 'var(--modal-spinner-overlay)', zIndex: 9999 }}
                             >
                                 <Spinner />
                             </div>
                         </Fade>
                     )}
                     <div
-                        css={tw`bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-xl overflow-y-scroll transition-all duration-300 border border-neutral-200`}
-                        style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}
+                        css={tw`p-6 sm:p-8 md:p-10 rounded-xl overflow-y-scroll transition-all duration-300`}
+                        style={{
+                            backgroundColor: 'var(--modal-bg)',
+                            border: '1px solid var(--border-primary)',
+                            boxShadow: 'var(--shadow-xl)',
+                        }}
                     >
                         {children}
                     </div>

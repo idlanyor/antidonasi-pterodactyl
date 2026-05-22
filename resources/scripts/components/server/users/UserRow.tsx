@@ -26,25 +26,25 @@ export default ({ subuser }: Props) => {
                 <img css={tw`w-full h-full p-1`} src={`${subuser.image}?s=400`} />
             </div>
             <div css={tw`ml-6 flex-1 overflow-hidden`}>
-                <p css={tw`text-base font-black text-brand-navy tracking-tight truncate`}>{subuser.email}</p>
+                <p css={tw`text-base font-black text-neutral-900 tracking-tight truncate`}>{subuser.email}</p>
             </div>
             <div css={tw`ml-6`}>
-                <p css={tw`font-black text-center text-brand-navy`}>
+                <p css={tw`font-black text-center text-neutral-900`}>
                     <FontAwesomeIcon
                         icon={subuser.twoFactorEnabled ? faUserLock : faUnlockAlt}
                         fixedWidth
                         css={!subuser.twoFactorEnabled ? tw`text-status-error` : tw`text-status-success`}
                     />
                 </p>
-                <p css={tw`text-[10px] text-brand-slate uppercase font-bold tracking-widest hidden md:block mt-1`}>
+                <p css={tw`text-[10px] text-neutral-500 uppercase font-bold tracking-widest hidden md:block mt-1`}>
                     2FA Status
                 </p>
             </div>
             <div css={tw`ml-8 hidden md:block`}>
-                <p css={tw`font-black text-center text-brand-navy`}>
+                <p css={tw`font-black text-center text-neutral-900`}>
                     {subuser.permissions.filter((permission) => permission !== 'websocket.connect').length}
                 </p>
-                <p css={tw`text-[10px] text-brand-slate uppercase font-bold tracking-widest mt-1`}>Permissions</p>
+                <p css={tw`text-[10px] text-neutral-500 uppercase font-bold tracking-widest mt-1`}>Permissions</p>
             </div>
             {subuser.uuid !== uuid && (
                 <div css={tw`flex items-center ml-6 gap-2`}>
@@ -52,7 +52,7 @@ export default ({ subuser }: Props) => {
                         <button
                             type={'button'}
                             aria-label={'Edit subuser'}
-                            css={tw`flex items-center justify-center w-10 h-10 rounded-xl text-brand-slate hover:text-accent-purple hover:bg-neutral-50 transition-all duration-300`}
+                            css={tw`flex items-center justify-center w-10 h-10 rounded-xl text-neutral-500 hover:text-accent-purple hover:bg-neutral-50 transition-all duration-300`}
                             onClick={() => setVisible(true)}
                         >
                             <FontAwesomeIcon icon={faPencilAlt} />

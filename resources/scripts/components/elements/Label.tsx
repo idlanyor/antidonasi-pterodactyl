@@ -3,14 +3,14 @@ import tw from 'twin.macro';
 
 const Label = styled.label<{ isLight?: boolean; variant?: 'default' | 'glass' }>`
     ${tw`block text-sm mb-2`};
-    color: #0f172a;
+    color: var(--text-primary);
     font-weight: 700;
     font-family: 'Satoshi', sans-serif;
 
     ${(props) =>
         props.variant === 'glass' &&
         `
-        color: #0F172A;
+        color: var(--text-primary);
         font-weight: 900;
     `};
 `;

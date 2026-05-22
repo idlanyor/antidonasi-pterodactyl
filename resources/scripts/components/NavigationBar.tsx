@@ -12,32 +12,38 @@ import http from '@/api/http';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import Tooltip from '@/components/elements/tooltip/Tooltip';
 import Avatar from '@/components/Avatar';
+import ThemeToggle from '@/components/elements/ThemeToggle';
 
 const RightNavigation = styled.div`
     & > a,
     & > button,
     & > .navigation-link {
         ${tw`flex items-center h-full no-underline px-4 cursor-pointer transition-all duration-300 relative`};
-        ${tw`text-brand-slate font-bold text-sm`};
+        color: var(--nav-text);
+        font-weight: 700;
+        font-size: 0.875rem;
 
         &:hover:not(:disabled) {
-            ${tw`text-accent-purple bg-neutral-50`};
-            background-color: #f8fafc;
+            color: var(--nav-text-hover);
+            background-color: var(--nav-hover-bg);
         }
 
         &.active {
-            ${tw`text-accent-purple`};
+            color: var(--nav-text-hover);
             &::after {
                 content: '';
-                ${tw`absolute bottom-0 left-0 w-full h-[2px] bg-accent-purple`};
+                ${tw`absolute bottom-0 left-0 w-full h-[2px]`};
+                background-color: var(--nav-text-hover);
             }
         }
     }
 `;
 const NavWrapper = styled.div`
     ${tw`w-full sticky top-0 z-50`};
-    background-color: #ffffff;
-    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
+    background-color: var(--nav-bg);
+    box-shadow: var(--nav-shadow);
+    border-bottom: 1px solid var(--border-primary);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 `;
 
 export default () => {
@@ -60,10 +66,11 @@ export default () => {
                 <div id={'logo'} className={'flex-1'}>
                     <Link
                         to={'/dashboard'}
-                        className={'text-xl font-black no-underline transition-colors duration-150 text-brand-navy'}
+                        className={'text-xl font-black no-underline transition-colors duration-150'}
                         style={{
                             fontFamily: "'Satoshi', sans-serif",
                             letterSpacing: '-0.03em',
+                            color: 'var(--text-primary)',
                         }}
                     >
                         {name}
@@ -95,6 +102,9 @@ export default () => {
                             </span>
                         </NavLink>
                     </Tooltip>
+                    <div className={'navigation-link flex items-center px-2'}>
+                        <ThemeToggle />
+                    </div>
                     <Tooltip placement={'bottom'} content={'Sign Out'}>
                         <button onClick={onTriggerLogout}>
                             <FontAwesomeIcon icon={faSignOutAlt} />

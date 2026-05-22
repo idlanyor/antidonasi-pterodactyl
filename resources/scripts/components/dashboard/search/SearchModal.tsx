@@ -22,10 +22,14 @@ interface Values {
 }
 
 const ServerResult = styled(Link)`
-    ${tw`flex items-center bg-neutral-50 p-4 rounded-xl border-l-4 border-neutral-100 no-underline transition-all duration-300 shadow-sm`};
+    ${tw`flex items-center p-4 rounded-xl border-l-4 no-underline transition-all duration-300 shadow-sm`};
+    background-color: var(--bg-tertiary);
+    border-left-color: var(--border-primary);
 
     &:hover {
-        ${tw`shadow-md border-accent-purple bg-white`};
+        background-color: var(--bg-hover);
+        border-left-color: #7C3AED;
+        box-shadow: var(--shadow-md);
         transform: translateX(4px);
     }
 
@@ -57,7 +61,6 @@ export default ({ ...props }: Props) => {
     const search = debounce(({ term }: Values, { setSubmitting }: FormikHelpers<Values>) => {
         clearFlashes('search');
 
-        // if (ref.current) ref.current.focus();
         getServers({ query: term, type: isAdmin ? 'admin-all' : undefined })
             .then((servers) => setServers(servers.items.filter((_, index) => index < 5)))
             .catch((error) => {
@@ -74,7 +77,6 @@ export default ({ ...props }: Props) => {
         }
     }, [props.visible]);
 
-    // Formik does not support an innerRef on custom components.
     const InputWithRef = (props: any) => <Input autoFocus {...props} ref={ref} />;
 
     return (
@@ -108,8 +110,16 @@ export default ({ ...props }: Props) => {
                                     onClick={() => props.onDismissed()}
                                 >
                                     <div css={tw`flex-1 mr-4`}>
-                                        <p css={tw`text-sm font-black text-brand-navy tracking-tight`}>{server.name}</p>
-                                        <p css={tw`mt-1 text-xs text-brand-slate font-bold`}>
+                                        <p
+                                            css={tw`text-sm font-black tracking-tight`}
+                                            style={{ color: 'var(--text-primary)' }}
+                                        >
+                                            {server.name}
+                                        </p>
+                                        <p
+                                            css={tw`mt-1 text-xs font-bold`}
+                                            style={{ color: 'var(--text-secondary)' }}
+                                        >
                                             {server.allocations
                                                 .filter((alloc) => alloc.isDefault)
                                                 .map((allocation) => (

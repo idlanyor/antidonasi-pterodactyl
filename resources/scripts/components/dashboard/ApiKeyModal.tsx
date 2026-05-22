@@ -14,13 +14,20 @@ const ApiKeyModal = ({ apiKey }: Props) => {
 
     return (
         <>
-            <h3 css={tw`mb-6 text-3xl font-black text-brand-navy tracking-tight`}>Your API Key</h3>
-            <p css={tw`text-sm mb-8 text-brand-slate font-bold leading-relaxed`}>
+            <h3 css={tw`mb-6 text-3xl font-black tracking-tight`} style={{ color: 'var(--text-primary)' }}>
+                Your API Key
+            </h3>
+            <p css={tw`text-sm mb-8 font-bold leading-relaxed`} style={{ color: 'var(--text-secondary)' }}>
                 The API key you have requested is shown below. Please store this in a safe location, it will not be
                 shown again.
             </p>
             <pre
-                css={tw`text-sm bg-neutral-100 border border-neutral-200 rounded-xl py-4 px-6 font-mono text-brand-navy font-bold shadow-inner`}
+                css={tw`text-sm rounded-xl py-4 px-6 font-mono font-bold shadow-inner`}
+                style={{
+                    backgroundColor: 'var(--bg-code)',
+                    border: '1px solid var(--border-primary)',
+                    color: 'var(--text-primary)',
+                }}
             >
                 <CopyOnClick text={apiKey}>
                     <code css={tw`font-mono`}>{apiKey}</code>

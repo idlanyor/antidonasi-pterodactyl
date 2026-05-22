@@ -23,9 +23,10 @@ import routes from '@/routers/routes';
 
 const SidebarWrapper = styled.aside`
     ${tw`hidden md:block w-64 flex-shrink-0 z-40`};
-    background-color: #ffffff;
-    border-right: 1px solid #e2e8e0;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 `;
 
 const SidebarInner = styled.div`
@@ -33,19 +34,21 @@ const SidebarInner = styled.div`
 `;
 
 const NavItem = styled(NavLink)`
-    ${tw`flex items-center gap-4 px-6 py-4 text-sm font-bold text-brand-slate no-underline transition-all duration-300 relative`};
+    ${tw`flex items-center gap-4 px-6 py-4 text-sm font-bold no-underline transition-all duration-300 relative`};
+    color: var(--sidebar-text);
 
     &:hover {
-        ${tw`text-brand-navy bg-neutral-50`};
-        background-color: #f8fafc;
+        color: var(--sidebar-text-hover);
+        background-color: var(--sidebar-hover-bg);
     }
 
     &.active {
-        ${tw`text-accent-purple`};
-        background-color: rgba(124, 58, 237, 0.05);
+        color: var(--sidebar-text-active);
+        background-color: var(--sidebar-active-bg);
         &::after {
             content: '';
-            ${tw`absolute right-0 top-0 h-full w-[3px] bg-accent-purple`};
+            ${tw`absolute right-0 top-0 h-full w-[3px]`};
+            background-color: var(--sidebar-text-active);
         }
     }
 
@@ -55,11 +58,12 @@ const NavItem = styled(NavLink)`
 `;
 
 const ExternalLink = styled.a`
-    ${tw`flex items-center gap-4 px-6 py-4 text-sm font-bold text-brand-slate no-underline transition-all duration-300`};
+    ${tw`flex items-center gap-4 px-6 py-4 text-sm font-bold no-underline transition-all duration-300`};
+    color: var(--sidebar-text);
 
     &:hover {
-        ${tw`text-brand-navy bg-neutral-50`};
-        background-color: #f8fafc;
+        color: var(--sidebar-text-hover);
+        background-color: var(--sidebar-hover-bg);
     }
 `;
 
@@ -94,7 +98,12 @@ export default () => {
         <SidebarWrapper>
             <SidebarInner>
                 <div css={tw`px-6 py-6`}>
-                    <p css={tw`text-[11px] uppercase font-black tracking-[0.2em] text-brand-navy`}>Management</p>
+                    <p
+                        css={tw`text-[11px] uppercase font-black tracking-[0.2em]`}
+                        style={{ color: 'var(--text-primary)' }}
+                    >
+                        Management
+                    </p>
                 </div>
                 <nav css={tw`flex-1 py-3 flex flex-col`}>
                     {items.map((route) => {

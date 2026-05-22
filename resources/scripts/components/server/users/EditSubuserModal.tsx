@@ -104,7 +104,7 @@ const EditSubuserModal = ({ subuser }: Props) => {
         >
             <Form>
                 <div css={tw`flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8`}>
-                    <h2 css={tw`text-3xl font-black text-brand-navy tracking-tight`} ref={ref}>
+                    <h2 css={tw`text-3xl font-black text-neutral-900 tracking-tight`} ref={ref}>
                         {subuser
                             ? `${canEditUser ? 'Modify' : 'View'} permissions for ${subuser.email}`
                             : 'Create new subuser'}
@@ -147,7 +147,7 @@ const EditSubuserModal = ({ subuser }: Props) => {
                                 isEditable={canEditUser}
                                 permissions={Object.keys(permissions[key].keys).map((pkey) => `${key}.${pkey}`)}
                             >
-                                <p css={tw`text-sm text-brand-slate font-bold mb-6 leading-relaxed`}>
+                                <p css={tw`text-sm text-neutral-500 font-bold mb-6 leading-relaxed`}>
                                     {permissions[key].description}
                                 </p>
                                 <div css={tw`grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2`}>

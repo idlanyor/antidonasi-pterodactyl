@@ -7,13 +7,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBolt, faShieldAlt, faRocket } from '@fortawesome/free-solid-svg-icons';
 
 const Page = styled.div`
-    ${tw`min-h-screen bg-neutral-50 text-brand-navy font-sans`};
-    background-color: #f8fafc;
+    ${tw`min-h-screen font-sans`};
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 `;
 
 const Navigation = styled.nav`
-    ${tw`w-full bg-white border-b border-neutral-200 z-50 sticky top-0`};
-    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
+    ${tw`w-full z-50 sticky top-0 border-b`};
+    background-color: var(--nav-bg);
+    border-color: var(--border-primary);
+    box-shadow: var(--nav-shadow);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 `;
 
 const NavInner = styled.div`
@@ -21,8 +26,9 @@ const NavInner = styled.div`
 `;
 
 const Logo = styled.div`
-    ${tw`text-2xl font-black text-brand-navy tracking-tight flex items-center gap-3`};
+    ${tw`text-2xl font-black tracking-tight flex items-center gap-3`};
     font-family: 'Satoshi', sans-serif;
+    color: var(--text-primary);
 
     img {
         ${tw`w-10 h-10 rounded-xl shadow-sm`};
@@ -33,7 +39,8 @@ const NavLinks = styled.div`
     ${tw`hidden md:flex items-center gap-8`};
 
     a {
-        ${tw`text-base font-bold text-brand-slate hover:text-accent-purple transition-colors duration-300`};
+        ${tw`text-base font-bold hover:text-accent-purple transition-colors duration-300`};
+        color: var(--text-secondary);
     }
 `;
 
@@ -54,20 +61,21 @@ const PrimaryButton = styled(Link)`
 `;
 
 const SecondaryButton = styled(Link)`
-    ${tw`inline-flex items-center justify-center px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest transition-all duration-300`};
-    background-color: #f1f5f9;
-    color: #64748b;
-    border: 1px solid #e2e8f0;
+    ${tw`inline-flex items-center justify-center px-6 py-3 rounded-xl font-black text-sm uppercase tracking-widest transition-all duration-300 border`};
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border-color: var(--border-primary);
 
     &:hover {
-        background-color: #e2e8f0;
-        color: #0f172a;
+        background-color: var(--bg-hover);
+        color: var(--text-primary);
+        border-color: var(--border-secondary);
     }
 `;
 
 const HeroSection = styled.section`
     ${tw`relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden`};
-    background-color: #f8fafc;
+    background-color: var(--bg-primary);
 
     &::before {
         content: '';
@@ -82,16 +90,21 @@ const HeroInner = styled.div`
 `;
 
 const Headline = styled.h1`
-    ${tw`text-5xl md:text-7xl font-black text-brand-navy tracking-tight leading-tight mb-6 max-w-4xl mx-auto`};
+    ${tw`text-5xl md:text-7xl font-black tracking-tight leading-tight mb-6 max-w-4xl mx-auto`};
     font-family: 'Satoshi', sans-serif;
+    color: var(--text-primary);
 `;
 
 const Subheadline = styled.p`
-    ${tw`text-lg md:text-2xl text-brand-slate font-bold mb-10 max-w-2xl mx-auto leading-relaxed`};
+    ${tw`text-lg md:text-2xl font-bold mb-10 max-w-2xl mx-auto leading-relaxed`};
+    color: var(--text-secondary);
 `;
 
 const FeaturesSection = styled.section`
-    ${tw`py-20 bg-white border-t border-neutral-200`};
+    ${tw`py-20 border-t`};
+    background-color: var(--bg-secondary);
+    border-color: var(--border-primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 `;
 
 const FeaturesInner = styled.div`
@@ -103,10 +116,13 @@ const Grid = styled.div`
 `;
 
 const FeatureCard = styled.div`
-    ${tw`bg-neutral-50 rounded-2xl p-8 border border-neutral-200 transition-all duration-300`};
+    ${tw`rounded-2xl p-8 border transition-all duration-300`};
+    background-color: var(--bg-elevated);
+    border-color: var(--border-primary);
 
     &:hover {
-        ${tw`bg-white shadow-xl border-accent-purple`};
+        border-color: var(--border-secondary);
+        box-shadow: var(--shadow-xl);
         transform: translateY(-5px);
     }
 `;
@@ -184,8 +200,13 @@ const LandingPage = () => {
             <FeaturesSection>
                 <FeaturesInner>
                     <div css={tw`text-center mb-16`}>
-                        <h2 css={tw`text-4xl font-black text-brand-navy tracking-tight mb-4`}>Why Choose Us?</h2>
-                        <p css={tw`text-lg text-brand-slate font-bold`}>
+                        <h2
+                            css={tw`text-4xl font-black tracking-tight mb-4`}
+                            style={{ color: 'var(--text-primary)' }}
+                        >
+                            Why Choose Us?
+                        </h2>
+                        <p css={tw`text-lg font-bold`} style={{ color: 'var(--text-secondary)' }}>
                             Built for performance, designed for simplicity.
                         </p>
                     </div>
@@ -194,10 +215,13 @@ const LandingPage = () => {
                             <FeatureIcon>
                                 <FontAwesomeIcon icon={faBolt} />
                             </FeatureIcon>
-                            <h3 css={tw`text-xl font-black text-brand-navy mb-3 tracking-tight`}>
+                            <h3
+                                css={tw`text-xl font-black mb-3 tracking-tight`}
+                                style={{ color: 'var(--text-primary)' }}
+                            >
                                 Ultra-Fast NVMe SSDs
                             </h3>
-                            <p css={tw`text-brand-slate font-bold leading-relaxed`}>
+                            <p css={tw`font-bold leading-relaxed`} style={{ color: 'var(--text-secondary)' }}>
                                 Your servers run on enterprise-grade NVMe drives ensuring lightning-fast load times and
                                 world saves.
                             </p>
@@ -206,8 +230,13 @@ const LandingPage = () => {
                             <FeatureIcon>
                                 <FontAwesomeIcon icon={faShieldAlt} />
                             </FeatureIcon>
-                            <h3 css={tw`text-xl font-black text-brand-navy mb-3 tracking-tight`}>DDoS Protection</h3>
-                            <p css={tw`text-brand-slate font-bold leading-relaxed`}>
+                            <h3
+                                css={tw`text-xl font-black mb-3 tracking-tight`}
+                                style={{ color: 'var(--text-primary)' }}
+                            >
+                                DDoS Protection
+                            </h3>
+                            <p css={tw`font-bold leading-relaxed`} style={{ color: 'var(--text-secondary)' }}>
                                 Advanced 480Gbps DDoS mitigation keeps your server online and your community playing
                                 without interruption.
                             </p>
@@ -216,8 +245,13 @@ const LandingPage = () => {
                             <FeatureIcon>
                                 <FontAwesomeIcon icon={faRocket} />
                             </FeatureIcon>
-                            <h3 css={tw`text-xl font-black text-brand-navy mb-3 tracking-tight`}>Instant Setup</h3>
-                            <p css={tw`text-brand-slate font-bold leading-relaxed`}>
+                            <h3
+                                css={tw`text-xl font-black mb-3 tracking-tight`}
+                                style={{ color: 'var(--text-primary)' }}
+                            >
+                                Instant Setup
+                            </h3>
+                            <p css={tw`font-bold leading-relaxed`} style={{ color: 'var(--text-secondary)' }}>
                                 No waiting. Your server is automatically deployed and ready to play within seconds of
                                 your purchase.
                             </p>
@@ -226,9 +260,15 @@ const LandingPage = () => {
                 </FeaturesInner>
             </FeaturesSection>
 
-            <footer css={tw`bg-brand-navy text-white py-12`}>
+            <footer
+                css={tw`py-12 border-t`}
+                style={{
+                    backgroundColor: 'var(--bg-secondary)',
+                    borderColor: 'var(--border-primary)',
+                }}
+            >
                 <div css={tw`max-w-[1280px] mx-auto px-6 text-center`}>
-                    <p css={tw`font-bold opacity-50`}>
+                    <p css={tw`font-bold opacity-50`} style={{ color: 'var(--text-primary)' }}>
                         &copy; {new Date().getFullYear()} Antidonasi Creative. All rights reserved.
                     </p>
                 </div>

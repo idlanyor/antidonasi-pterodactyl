@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 `;
 
 const Icon = styled.div`
-    ${tw`absolute left-4 top-1/2 transform -translate-y-1/2 text-brand-slate`};
+    ${tw`absolute left-4 top-1/2 transform -translate-y-1/2 text-neutral-500`};
     pointer-events: none;
     & svg {
         ${tw`w-5 h-5`}
@@ -71,7 +71,7 @@ const AuthField: React.FC<Props> = ({
                             (errors[field.name] as string).slice(1)}
                     </p>
                 ) : description ? (
-                    <p className={'input-help'} css={tw`mt-2 text-brand-slate text-xs font-bold`}>
+                    <p className={'input-help'} css={tw`mt-2 text-neutral-500 text-xs font-bold`}>
                         {description}
                     </p>
                 ) : null}

@@ -29,17 +29,17 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
         css`
             ${tw`text-white shadow-md`};
             background: linear-gradient(135deg, #ec4899 0%, #7c3aed 100%);
-            box-shadow: 0 14px 30px 0 rgba(168, 85, 247, 0.24);
+            box-shadow: var(--shadow-btn-primary);
 
             &:hover:not(:disabled) {
                 opacity: 0.9;
-                box-shadow: 0 18px 36px 0 rgba(168, 85, 247, 0.32);
+                box-shadow: var(--shadow-btn-primary-hover);
                 transform: translateY(-1px);
             }
 
             &:active:not(:disabled) {
                 opacity: 0.85;
-                box-shadow: 0 8px 20px 0 rgba(168, 85, 247, 0.2);
+                box-shadow: var(--shadow-md);
                 transform: translateY(0);
             }
         `};
@@ -48,17 +48,20 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         (props.isSecondary || props.color === 'grey') &&
         css`
-            ${tw`bg-neutral-100 text-brand-slate border border-neutral-200 shadow-sm`};
-            background-color: #f1f5f9;
+            ${tw`shadow-sm`};
+            background-color: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-primary);
 
             &:hover:not(:disabled) {
-                ${tw`bg-neutral-200 text-brand-navy`};
-                background-color: #e2e8f0;
+                background-color: var(--bg-hover);
+                color: var(--text-primary);
+                border-color: var(--border-secondary);
             }
 
             &:active:not(:disabled) {
-                ${tw`bg-neutral-300 shadow-inner`};
-                background-color: #cbd5e1;
+                ${tw`shadow-inner`};
+                background-color: var(--border-primary);
             }
         `};
 
@@ -66,7 +69,7 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         props.color === 'red' &&
         css`
-            ${tw`bg-status-error text-white shadow-md`};
+            ${tw`text-white shadow-md`};
             background-color: #ef4444;
 
             &:hover:not(:disabled) {
@@ -79,7 +82,7 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         props.color === 'green' &&
         css`
-            ${tw`bg-status-success text-white shadow-md`};
+            ${tw`text-white shadow-md`};
             background-color: #10b981;
 
             &:hover:not(:disabled) {
@@ -92,13 +95,14 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         props.variant === 'glass' &&
         css`
-            ${tw`bg-transparent text-brand-slate shadow-none border-none`};
+            ${tw`bg-transparent shadow-none border-none`};
+            color: var(--text-secondary);
             font-size: 11px;
             font-weight: 600;
 
             &:hover:not(:disabled) {
-                ${tw`text-brand-navy bg-neutral-50`};
-                background-color: #f8fafc;
+                color: var(--text-primary);
+                background-color: var(--bg-hover);
             }
         `};
 

@@ -49,7 +49,7 @@ export default () => {
                                             background: 'rgba(124, 58, 237, 0.05)',
                                         }}
                                     >
-                                        <p css={tw`text-xs leading-relaxed text-brand-slate font-bold`}>
+                                        <p css={tw`text-xs leading-relaxed text-neutral-500 font-bold`}>
                                             Your SFTP password is the same as the password you use to access this panel.
                                         </p>
                                     </div>
@@ -69,7 +69,7 @@ export default () => {
                     </Can>
                     <TitledGreyBox title={'Debug Information'} css={tw`mb-8 md:mb-12`}>
                         <div css={tw`flex items-center justify-between text-sm`}>
-                            <p css={tw`text-brand-slate font-black uppercase tracking-widest text-[10px]`}>Node</p>
+                            <p css={tw`text-neutral-500 font-black uppercase tracking-widest text-[10px]`}>Node</p>
                             <code
                                 css={tw`font-mono rounded-xl py-1.5 px-4 font-black text-xs`}
                                 style={{
@@ -83,7 +83,7 @@ export default () => {
                         </div>
                         <CopyOnClick text={uuid}>
                             <div css={tw`flex items-center justify-between mt-6 text-sm`}>
-                                <p css={tw`text-brand-slate font-black uppercase tracking-widest text-[10px]`}>
+                                <p css={tw`text-neutral-500 font-black uppercase tracking-widest text-[10px]`}>
                                     Server ID
                                 </p>
                                 <code

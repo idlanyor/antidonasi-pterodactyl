@@ -36,9 +36,9 @@ const PermissionRow = ({ permission, disabled }: Props) => {
                 <Checkbox id={`permission_${permission}`} name={'permissions'} value={permission} disabled={disabled} />
             </div>
             <div css={tw`flex-1 ml-2`}>
-                <p css={tw`text-sm font-black text-brand-navy tracking-tight`}>{pkey}</p>
+                <p css={tw`text-sm font-black text-neutral-900 tracking-tight`}>{pkey}</p>
                 {permissions[key].keys[pkey].length > 0 && (
-                    <p css={tw`text-[11px] text-brand-slate font-bold mt-0.5 leading-relaxed`}>
+                    <p css={tw`text-[11px] text-neutral-500 font-bold mt-0.5 leading-relaxed`}>
                         {permissions[key].keys[pkey]}
                     </p>
                 )}

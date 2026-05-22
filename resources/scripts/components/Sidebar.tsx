@@ -10,7 +10,10 @@ import http from '@/api/http';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 
 const SidebarWrapper = styled.aside`
-    ${tw`w-60 bg-neutral-900 border-r border-neutral-800 flex-shrink-0`};
+    ${tw`w-60 flex-shrink-0`};
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 `;
 
 const SidebarInner = styled.div`
@@ -18,17 +21,28 @@ const SidebarInner = styled.div`
 `;
 
 const NavItem = styled(NavLink)`
-    ${tw`flex items-center gap-3 px-4 py-3 text-sm text-neutral-400 no-underline transition-colors duration-150`};
-    ${tw`hover:text-neutral-100 hover:bg-neutral-800`};
+    ${tw`flex items-center gap-3 px-4 py-3 text-sm no-underline transition-colors duration-150`};
+    color: var(--sidebar-text);
+
+    &:hover {
+        color: var(--sidebar-text-hover);
+        background-color: var(--sidebar-hover-bg);
+    }
 
     &.active {
-        ${tw`text-neutral-100 bg-neutral-800`};
+        color: var(--sidebar-text-active);
+        background-color: var(--sidebar-active-bg);
     }
 `;
 
 const SidebarButton = styled.button`
-    ${tw`flex items-center gap-3 px-4 py-3 text-sm text-neutral-400 w-full text-left transition-colors duration-150`};
-    ${tw`hover:text-neutral-100 hover:bg-neutral-800`};
+    ${tw`flex items-center gap-3 px-4 py-3 text-sm w-full text-left transition-colors duration-150`};
+    color: var(--sidebar-text);
+
+    &:hover {
+        color: var(--sidebar-text-hover);
+        background-color: var(--sidebar-hover-bg);
+    }
 `;
 
 export default () => {
@@ -48,8 +62,12 @@ export default () => {
         <SidebarWrapper>
             <SpinnerOverlay visible={isLoggingOut} />
             <SidebarInner>
-                <div css={tw`px-4 py-5 border-b border-neutral-800`}>
-                    <Link to={'/'} className={'text-lg font-semibold text-neutral-100 no-underline'}>
+                <div css={tw`px-4 py-5`} style={{ borderBottom: '1px solid var(--sidebar-border)' }}>
+                    <Link
+                        to={'/'}
+                        className={'text-lg font-semibold no-underline'}
+                        style={{ color: 'var(--text-primary)' }}
+                    >
                         {name}
                     </Link>
                 </div>
@@ -66,14 +84,25 @@ export default () => {
                         <a
                             href={'/admin'}
                             rel={'noreferrer'}
-                            css={tw`flex items-center gap-3 px-4 py-3 text-sm text-neutral-400 no-underline transition-colors duration-150 hover:text-neutral-100 hover:bg-neutral-800`}
+                            css={tw`flex items-center gap-3 px-4 py-3 text-sm no-underline transition-colors duration-150`}
+                            style={{
+                                color: 'var(--sidebar-text)',
+                            }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.color = 'var(--sidebar-text-hover)';
+                                e.currentTarget.style.backgroundColor = 'var(--sidebar-hover-bg)';
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.color = 'var(--sidebar-text)';
+                                e.currentTarget.style.backgroundColor = 'transparent';
+                            }}
                         >
                             <FontAwesomeIcon icon={faCogs} />
                             Admin
                         </a>
                     )}
                 </nav>
-                <div css={tw`border-t border-neutral-800 py-2`}>
+                <div style={{ borderTop: '1px solid var(--sidebar-border)', padding: '0.5rem 0' }}>
                     <SidebarButton onClick={onTriggerLogout}>
                         <FontAwesomeIcon icon={faSignOutAlt} />
                         Sign Out

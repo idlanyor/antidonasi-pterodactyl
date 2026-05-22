@@ -45,27 +45,27 @@ const pulse = keyframes`
 const StatusIndicatorBox = styled(GreyRowBox)<{ $status: ServerPowerState | undefined }>`
     ${tw`relative flex flex-col md:flex-row h-auto`};
     ${tw`rounded-xl p-0 transition-all duration-300`};
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-lg);
     overflow: hidden;
 
     &:hover {
-        border-color: #cbd5e1;
+        border-color: var(--border-secondary);
         transform: translateY(-2px);
-        box-shadow: 0 -12px 36px 0 rgba(15, 23, 42, 0.12);
+        box-shadow: var(--shadow-lg-hover);
     }
 
     & .status-badge {
         ${tw`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider inline-flex items-center gap-2 mt-1 md:mt-0`};
         ${({ $status }) => {
             if (!$status || $status === 'offline') {
-                return 'background: #FEE2E2; color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.2);';
+                return 'background: var(--status-error-bg); color: var(--status-error-text); border: 1px solid var(--status-error-border);';
             }
             if ($status === 'running') {
-                return 'background: #DCFCE7; color: #10B981; border: 1px solid rgba(16, 185, 129, 0.2);';
+                return 'background: var(--status-success-bg); color: var(--status-success-text); border: 1px solid var(--status-success-border);';
             }
-            return 'background: #FEF3C7; color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.2);';
+            return 'background: var(--status-warning-bg); color: var(--status-warning-text); border: 1px solid var(--status-warning-border);';
         }};
     }
 
@@ -83,7 +83,7 @@ const StatusIndicatorBox = styled(GreyRowBox)<{ $status: ServerPowerState | unde
     & .section-left {
         ${tw`flex items-center gap-4 p-5 md:w-[300px] flex-shrink-0`};
         ${tw`border-b md:border-b-0 md:border-r`};
-        border-color: #f1f5f9;
+        border-color: var(--section-divider);
     }
 
     & .section-middle {
@@ -93,17 +93,17 @@ const StatusIndicatorBox = styled(GreyRowBox)<{ $status: ServerPowerState | unde
     & .section-right {
         ${tw`p-5 md:w-[400px] flex-shrink-0`};
         ${tw`border-t md:border-t-0 md:border-l`};
-        border-color: #f1f5f9;
+        border-color: var(--section-divider);
     }
 
     & .info-card {
         ${tw`px-4 py-2 rounded-xl transition-all duration-200`};
-        background-color: #f8fafc;
-        border: 1px solid #e2e8f0;
+        background-color: var(--info-card-bg);
+        border: 1px solid var(--info-card-border);
 
         &:hover {
-            background-color: #f1f5f9;
-            border-color: #cbd5e1;
+            background-color: var(--info-card-hover-bg);
+            border-color: var(--info-card-hover-border);
         }
     }
 
@@ -112,7 +112,8 @@ const StatusIndicatorBox = styled(GreyRowBox)<{ $status: ServerPowerState | unde
     }
 
     & .mobile-metrics {
-        ${tw`flex items-center gap-3 text-[11px] font-black text-brand-navy`};
+        ${tw`flex items-center gap-3 text-[11px] font-black`};
+        color: var(--text-primary);
 
         & span {
             ${tw`flex items-center gap-1.5`};
@@ -120,7 +121,8 @@ const StatusIndicatorBox = styled(GreyRowBox)<{ $status: ServerPowerState | unde
     }
 
     & .mobile-details {
-        ${tw`mt-3 grid grid-cols-2 gap-2 text-[11px] text-brand-slate font-bold`};
+        ${tw`mt-3 grid grid-cols-2 gap-2 text-[11px] font-bold`};
+        color: var(--text-secondary);
     }
 `;
 
@@ -161,22 +163,27 @@ export default ({ server, className }: { server: Server; className?: string }) =
         alarms.disk = server.limits.disk === 0 ? false : isAlarmState(stats.diskUsageInBytes, server.limits.disk);
     }
 
-    // const diskLimit = server.limits.disk !== 0 ? bytesToString(mbToBytes(server.limits.disk)) : 'Unlimited';
-    // const memoryLimit = server.limits.memory !== 0 ? bytesToString(mbToBytes(server.limits.memory)) : 'Unlimited';
-    // const cpuLimit = server.limits.cpu !== 0 ? server.limits.cpu + ' %' : 'Unlimited';
-
     return (
         <StatusIndicatorBox as={Link} to={`/server/${server.id}`} className={className} $status={stats?.status}>
             {/* Left Section: Icon + Name */}
             <div className='section-left'>
                 <div
-                    css={tw`flex items-center justify-center w-12 h-12 rounded-2xl flex-shrink-0 bg-accent-purple bg-opacity-10 border border-accent-purple border-opacity-20 shadow-sm`}
+                    css={tw`flex items-center justify-center w-12 h-12 rounded-2xl flex-shrink-0 shadow-sm`}
+                    style={{
+                        backgroundColor: 'rgba(124, 58, 237, 0.1)',
+                        border: '1px solid rgba(124, 58, 237, 0.2)',
+                    }}
                 >
                     <FontAwesomeIcon icon={faServer} css={tw`text-accent-purple text-lg`} />
                 </div>
                 <div css={tw`flex-1 min-w-0`}>
                     <div css={tw`flex flex-col md:flex-row md:items-center gap-2 md:gap-4`}>
-                        <p css={tw`text-base font-black truncate text-brand-navy tracking-tight`}>{server.name}</p>
+                        <p
+                            css={tw`text-base font-black truncate tracking-tight`}
+                            style={{ color: 'var(--text-primary)' }}
+                        >
+                            {server.name}
+                        </p>
                         <div className={'status-badge'}>
                             <div className={'status-dot'} />
                             {!stats?.status || stats.status === 'offline'
@@ -226,11 +233,17 @@ export default ({ server, className }: { server: Server; className?: string }) =
                     <div className='info-card'>
                         <div css={tw`flex items-center gap-2 mb-1`}>
                             <FontAwesomeIcon icon={faEthernet} css={tw`text-accent-blue text-[10px]`} />
-                            <span css={tw`text-[10px] font-black uppercase tracking-widest text-brand-slate`}>
+                            <span
+                                css={tw`text-[10px] font-black uppercase tracking-widest`}
+                                style={{ color: 'var(--text-secondary)' }}
+                            >
                                 Connection Endpoint
                             </span>
                         </div>
-                        <p css={tw`text-sm font-mono font-bold truncate text-brand-navy`}>
+                        <p
+                            css={tw`text-sm font-mono font-bold truncate`}
+                            style={{ color: 'var(--text-primary)' }}
+                        >
                             {server.allocations
                                 .filter((alloc) => alloc.isDefault)
                                 .map((allocation) => (
@@ -245,21 +258,45 @@ export default ({ server, className }: { server: Server; className?: string }) =
                     <div css={tw`grid grid-cols-2 gap-2`}>
                         <div className='info-card'>
                             <div css={tw`flex items-center gap-2 mb-1`}>
-                                <FontAwesomeIcon icon={faMapMarkerAlt} css={tw`text-[10px] text-brand-slate`} />
-                                <span css={tw`text-[10px] font-black uppercase tracking-widest text-brand-slate`}>
+                                <FontAwesomeIcon
+                                    icon={faMapMarkerAlt}
+                                    css={tw`text-[10px]`}
+                                    style={{ color: 'var(--text-secondary)' }}
+                                />
+                                <span
+                                    css={tw`text-[10px] font-black uppercase tracking-widest`}
+                                    style={{ color: 'var(--text-secondary)' }}
+                                >
                                     Node
                                 </span>
                             </div>
-                            <p css={tw`text-xs font-bold truncate text-brand-navy`}>{server.node}</p>
+                            <p
+                                css={tw`text-xs font-bold truncate`}
+                                style={{ color: 'var(--text-primary)' }}
+                            >
+                                {server.node}
+                            </p>
                         </div>
                         <div className='info-card'>
                             <div css={tw`flex items-center gap-2 mb-1`}>
-                                <FontAwesomeIcon icon={faGlobe} css={tw`text-[10px] text-brand-slate`} />
-                                <span css={tw`text-[10px] font-black uppercase tracking-widest text-brand-slate`}>
+                                <FontAwesomeIcon
+                                    icon={faGlobe}
+                                    css={tw`text-[10px]`}
+                                    style={{ color: 'var(--text-secondary)' }}
+                                />
+                                <span
+                                    css={tw`text-[10px] font-black uppercase tracking-widest`}
+                                    style={{ color: 'var(--text-secondary)' }}
+                                >
                                     Networks
                                 </span>
                             </div>
-                            <p css={tw`text-xs font-bold text-brand-navy`}>{server.allocations.length} allocated</p>
+                            <p
+                                css={tw`text-xs font-bold`}
+                                style={{ color: 'var(--text-primary)' }}
+                            >
+                                {server.allocations.length} allocated
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -271,7 +308,12 @@ export default ({ server, className }: { server: Server; className?: string }) =
                     <div css={tw`flex items-center justify-center h-full`}>
                         {isSuspended ? (
                             <span
-                                css={tw`rounded-xl px-4 py-2 text-xs font-black bg-status-error bg-opacity-10 text-status-error border border-status-error border-opacity-20 inline-flex items-center gap-2`}
+                                css={tw`rounded-xl px-4 py-2 text-xs font-black inline-flex items-center gap-2`}
+                                style={{
+                                    backgroundColor: 'var(--status-error-bg)',
+                                    color: 'var(--status-error-text)',
+                                    border: '1px solid var(--status-error-border)',
+                                }}
                             >
                                 <FontAwesomeIcon
                                     icon={server.status === 'suspended' ? faExclamationTriangle : faTimesCircle}
@@ -280,7 +322,12 @@ export default ({ server, className }: { server: Server; className?: string }) =
                             </span>
                         ) : server.isTransferring || server.status ? (
                             <span
-                                css={tw`rounded-xl px-4 py-2 text-xs font-black bg-neutral-100 text-brand-slate border border-neutral-200 inline-flex items-center gap-2`}
+                                css={tw`rounded-xl px-4 py-2 text-xs font-black inline-flex items-center gap-2`}
+                                style={{
+                                    backgroundColor: 'var(--bg-tertiary)',
+                                    color: 'var(--text-secondary)',
+                                    border: '1px solid var(--border-primary)',
+                                }}
                             >
                                 <FontAwesomeIcon
                                     icon={
@@ -312,20 +359,24 @@ export default ({ server, className }: { server: Server; className?: string }) =
                             <div css={tw`flex items-center justify-between mb-1.5`}>
                                 <div css={tw`flex items-center gap-2`}>
                                     <Icon icon={faMicrochip} $alarm={alarms.cpu} css={tw`text-[10px]`} />
-                                    <span css={tw`text-[10px] font-black uppercase tracking-widest text-brand-slate`}>
+                                    <span
+                                        css={tw`text-[10px] font-black uppercase tracking-widest`}
+                                        style={{ color: 'var(--text-secondary)' }}
+                                    >
                                         CPU
                                     </span>
                                 </div>
                                 <span
-                                    css={[
-                                        tw`text-[11px] font-black`,
-                                        alarms.cpu ? tw`text-status-error` : tw`text-brand-navy`,
-                                    ]}
+                                    css={tw`text-[11px] font-black`}
+                                    style={{ color: alarms.cpu ? '#EF4444' : 'var(--text-primary)' }}
                                 >
                                     {stats.cpuUsagePercent.toFixed(0)}%
                                 </span>
                             </div>
-                            <div css={tw`w-full h-1.5 rounded-full bg-neutral-100 overflow-hidden`}>
+                            <div
+                                css={tw`w-full h-1.5 rounded-full overflow-hidden`}
+                                style={{ backgroundColor: 'var(--bg-progress-track)' }}
+                            >
                                 <div
                                     css={tw`h-full rounded-full transition-all duration-500`}
                                     style={{
@@ -344,20 +395,24 @@ export default ({ server, className }: { server: Server; className?: string }) =
                             <div css={tw`flex items-center justify-between mb-1.5`}>
                                 <div css={tw`flex items-center gap-2`}>
                                     <Icon icon={faMemory} $alarm={alarms.memory} css={tw`text-[10px]`} />
-                                    <span css={tw`text-[10px] font-black uppercase tracking-widest text-brand-slate`}>
+                                    <span
+                                        css={tw`text-[10px] font-black uppercase tracking-widest`}
+                                        style={{ color: 'var(--text-secondary)' }}
+                                    >
                                         RAM
                                     </span>
                                 </div>
                                 <span
-                                    css={[
-                                        tw`text-[11px] font-black`,
-                                        alarms.memory ? tw`text-status-error` : tw`text-brand-navy`,
-                                    ]}
+                                    css={tw`text-[11px] font-black`}
+                                    style={{ color: alarms.memory ? '#EF4444' : 'var(--text-primary)' }}
                                 >
                                     {bytesToString(stats.memoryUsageInBytes)}
                                 </span>
                             </div>
-                            <div css={tw`w-full h-1.5 rounded-full bg-neutral-100 overflow-hidden`}>
+                            <div
+                                css={tw`w-full h-1.5 rounded-full overflow-hidden`}
+                                style={{ backgroundColor: 'var(--bg-progress-track)' }}
+                            >
                                 <div
                                     css={tw`h-full rounded-full transition-all duration-500`}
                                     style={{
@@ -378,20 +433,24 @@ export default ({ server, className }: { server: Server; className?: string }) =
                             <div css={tw`flex items-center justify-between mb-1.5`}>
                                 <div css={tw`flex items-center gap-2`}>
                                     <Icon icon={faHdd} $alarm={alarms.disk} css={tw`text-[10px]`} />
-                                    <span css={tw`text-[10px] font-black uppercase tracking-widest text-brand-slate`}>
+                                    <span
+                                        css={tw`text-[10px] font-black uppercase tracking-widest`}
+                                        style={{ color: 'var(--text-secondary)' }}
+                                    >
                                         DISK
                                     </span>
                                 </div>
                                 <span
-                                    css={[
-                                        tw`text-[11px] font-black`,
-                                        alarms.disk ? tw`text-status-error` : tw`text-brand-navy`,
-                                    ]}
+                                    css={tw`text-[11px] font-black`}
+                                    style={{ color: alarms.disk ? '#EF4444' : 'var(--text-primary)' }}
                                 >
                                     {bytesToString(stats.diskUsageInBytes)}
                                 </span>
                             </div>
-                            <div css={tw`w-full h-1.5 rounded-full bg-neutral-100 overflow-hidden`}>
+                            <div
+                                css={tw`w-full h-1.5 rounded-full overflow-hidden`}
+                                style={{ backgroundColor: 'var(--bg-progress-track)' }}
+                            >
                                 <div
                                     css={tw`h-full rounded-full transition-all duration-500`}
                                     style={{

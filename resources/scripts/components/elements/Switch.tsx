@@ -12,7 +12,7 @@ const ToggleContainer = styled.div`
         ${tw`hidden`};
 
         &:checked + label {
-            ${tw`bg-accent-purple border-accent-purple shadow-none`};
+            ${tw`shadow-none`};
             background-color: #7c3aed;
             border-color: #7c3aed;
         }
@@ -23,12 +23,14 @@ const ToggleContainer = styled.div`
     }
 
     & > label {
-        ${tw`mb-0 block overflow-hidden cursor-pointer bg-neutral-200 border border-neutral-300 rounded-full h-6 shadow-inner transition-all duration-300`};
-        background-color: #e2e8f0;
-        border-color: #cbd5e1;
+        ${tw`mb-0 block overflow-hidden cursor-pointer rounded-full h-6 shadow-inner transition-all duration-300`};
+        background-color: var(--border-primary);
+        border: 1px solid var(--border-secondary);
 
         &::before {
-            ${tw`absolute block bg-white border h-5 w-5 rounded-full shadow-sm`};
+            ${tw`absolute block border h-5 w-5 rounded-full shadow-sm`};
+            background-color: var(--bg-secondary);
+            border-color: var(--border-primary);
             top: 0.125rem;
             right: calc(50% + 0.125rem);
             content: '';
@@ -69,13 +71,18 @@ const Switch = ({ name, label, description, defaultChecked, readOnly, onChange, 
                 <div css={tw`ml-4 w-full`}>
                     {label && (
                         <Label
-                            css={[tw`cursor-pointer font-black text-brand-navy`, !!description && tw`mb-0`]}
+                            css={[tw`cursor-pointer font-black`, !!description && tw`mb-0`]}
                             htmlFor={uuid}
+                            style={{ color: 'var(--text-primary)' }}
                         >
                             {label}
                         </Label>
                     )}
-                    {description && <p css={tw`text-brand-slate text-sm mt-1 font-bold`}>{description}</p>}
+                    {description && (
+                        <p css={tw`text-sm mt-1 font-bold`} style={{ color: 'var(--text-secondary)' }}>
+                            {description}
+                        </p>
+                    )}
                 </div>
             )}
         </div>

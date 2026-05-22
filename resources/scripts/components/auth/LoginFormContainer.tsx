@@ -19,25 +19,26 @@ const Container = styled.div`
 const Card = styled(motion.div)`
     ${tw`w-full`};
     padding: 2.5rem 2rem;
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-primary);
     border-radius: 12px;
-    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
+    box-shadow: var(--shadow-lg);
     z-index: 1;
     position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 `;
 
 const ModernStyles = styled.div`
     ${tw`relative`};
 
     .auth-label {
-        ${tw`text-brand-navy font-bold text-sm mb-2 block tracking-tight`} !important;
-        color: #0f172a !important;
+        ${tw`font-bold text-sm mb-2 block tracking-tight`} !important;
+        color: var(--text-primary) !important;
     }
 
     .auth-link {
-        ${tw`text-accent-blue text-xs font-bold hover:underline transition-all duration-200`};
-        color: #2299dd !important;
+        ${tw`text-xs font-bold hover:underline transition-all duration-200`};
+        color: var(--text-link) !important;
     }
 `;
 
@@ -46,18 +47,20 @@ const LogoWrapper = styled(motion.div)`
 
     img {
         ${tw`w-16 h-16 rounded-2xl mb-4 shadow-xl`};
-        background: #ffffff;
+        background: var(--bg-elevated);
         padding: 0.5rem;
-        border: 1px solid #e2e8f0;
+        border: 1px solid var(--border-primary);
     }
 
     h1 {
-        ${tw`text-3xl font-black text-brand-navy tracking-tight text-center`};
+        ${tw`text-3xl font-black tracking-tight text-center`};
+        color: var(--text-primary);
         font-family: 'Satoshi', sans-serif;
     }
 
     p {
-        ${tw`text-brand-slate text-sm mt-1 text-center font-bold`};
+        ${tw`text-sm mt-1 text-center font-bold`};
+        color: var(--text-secondary);
     }
 `;
 
@@ -81,19 +84,20 @@ export default forwardRef<HTMLFormElement, Props>(({ title, description, ...prop
             </Card>
         </Form>
         <div className={'mt-8 w-full text-center'}>
-            <p className={'text-sm text-brand-slate font-bold'}>
+            <p className={'text-sm font-bold'} style={{ color: 'var(--text-secondary)' }}>
                 Lihat paket dan harga:{' '}
                 <Link
                     to={'/pricing'}
-                    className={'text-accent-blue hover:text-accent-blue font-bold underline underline-offset-4'}
-                    style={{ textDecorationColor: 'rgba(34, 153, 221, 0.3)' }}
+                    className={'font-bold underline underline-offset-4'}
+                    style={{ color: 'var(--text-link)', textDecorationColor: 'rgba(34, 153, 221, 0.3)' }}
                 >
                     Pricelist Panel
                 </Link>
             </p>
         </div>
         <motion.p
-            css={tw`text-center text-[10px] mt-12 text-neutral-400 uppercase tracking-[0.2em] font-bold`}
+            css={tw`text-center text-[10px] mt-12 uppercase tracking-[0.2em] font-bold`}
+            style={{ color: 'var(--text-muted)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}

@@ -19,6 +19,16 @@
             <meta name="theme-color" content="#0e4688">
         @show
 
+        {{-- Prevent Flash of Unstyled Content (FOUC) for dark mode --}}
+        <script>
+            (function() {
+                var theme = localStorage.getItem('pterodactyl:theme');
+                if (theme === 'dark' || (!theme)) {
+                    document.documentElement.classList.add('dark');
+                }
+            })();
+        </script>
+
         @section('user-data')
             @if(!is_null(Auth::user()))
                 <script>

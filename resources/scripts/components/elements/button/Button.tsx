@@ -40,11 +40,11 @@ const ButtonStyle = styled.button<Omit<ButtonProps, 'isLoading'>>`
     ${(props) =>
         (props.isSecondary || props.color === 'grey') &&
         css`
-            ${tw`bg-neutral-100 text-brand-slate border border-neutral-200 shadow-sm`};
+            ${tw`bg-neutral-50 text-neutral-500 border border-neutral-200 shadow-sm`};
             background-color: #f1f5f9;
 
             &:hover:not(:disabled) {
-                ${tw`bg-neutral-200 text-brand-navy`};
+                ${tw`bg-neutral-200 text-neutral-900`};
                 background-color: #e2e8f0;
             }
 
@@ -84,12 +84,12 @@ const ButtonStyle = styled.button<Omit<ButtonProps, 'isLoading'>>`
     ${(props) =>
         (props.variant === 'glass' || (props as any).isText) &&
         css`
-            ${tw`bg-transparent text-brand-slate shadow-none border-none`};
+            ${tw`bg-transparent text-neutral-500 shadow-none border-none`};
             font-size: 11px;
             font-weight: 600;
 
             &:hover:not(:disabled) {
-                ${tw`text-brand-navy bg-neutral-50`};
+                ${tw`text-neutral-900 bg-neutral-50`};
                 background-color: #f8fafc;
             }
         `};

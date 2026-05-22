@@ -23,16 +23,21 @@ const BottomNav = styled.nav`
 `;
 
 const BottomNavInner = styled.div`
-    ${tw`bg-white border border-neutral-200 rounded-2xl px-2 py-2 flex items-center gap-2 overflow-x-auto`};
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+    ${tw`rounded-2xl px-2 py-2 flex items-center gap-2 overflow-x-auto`};
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-lg);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 `;
 
 const BottomItem = styled(NavLink)`
-    ${tw`flex flex-col items-center justify-center text-[10px] text-brand-slate no-underline px-2 py-2 rounded-xl min-w-[64px] font-bold tracking-wide`};
+    ${tw`flex flex-col items-center justify-center text-[10px] no-underline px-2 py-2 rounded-xl min-w-[64px] font-bold tracking-wide`};
     ${tw`transition-all duration-300`};
+    color: var(--text-secondary);
 
     &.active {
-        ${tw`text-accent-purple bg-neutral-50`};
+        color: var(--sidebar-text-active);
+        background-color: var(--bg-active);
     }
 `;
 

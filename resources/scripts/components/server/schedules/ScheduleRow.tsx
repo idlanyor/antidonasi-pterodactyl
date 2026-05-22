@@ -14,8 +14,8 @@ export default ({ schedule }: { schedule: Schedule }) => (
             <FontAwesomeIcon icon={faCalendarAlt} />
         </div>
         <div css={tw`flex-1 md:ml-6`}>
-            <p css={tw`text-base font-black text-brand-navy tracking-tight`}>{schedule.name}</p>
-            <p css={tw`text-xs text-brand-slate font-bold mt-0.5`}>
+            <p css={tw`text-base font-black text-neutral-900 tracking-tight`}>{schedule.name}</p>
+            <p css={tw`text-xs text-neutral-500 font-bold mt-0.5`}>
                 Last run at: {schedule.lastRunAt ? format(schedule.lastRunAt, "MMM do 'at' h:mma") : 'never'}
             </p>
         </div>
@@ -25,7 +25,7 @@ export default ({ schedule }: { schedule: Schedule }) => (
                     tw`py-1.5 px-4 rounded-full text-[10px] font-black uppercase tracking-widest sm:hidden`,
                     schedule.isActive
                         ? tw`bg-status-success bg-opacity-10 text-status-success`
-                        : tw`bg-neutral-100 text-brand-slate`,
+                        : tw`bg-neutral-50 text-neutral-500`,
                 ]}
             >
                 {schedule.isActive ? 'Active' : 'Inactive'}
@@ -40,7 +40,7 @@ export default ({ schedule }: { schedule: Schedule }) => (
                         ? tw`bg-status-success bg-opacity-10 text-status-success`
                         : schedule.isProcessing
                         ? tw`bg-status-warning bg-opacity-10 text-status-warning`
-                        : tw`bg-neutral-100 text-brand-slate`,
+                        : tw`bg-neutral-50 text-neutral-500`,
                 ]}
             >
                 {schedule.isProcessing ? 'Processing' : schedule.isActive ? 'Active' : 'Inactive'}

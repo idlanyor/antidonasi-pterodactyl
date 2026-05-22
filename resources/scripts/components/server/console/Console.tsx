@@ -221,18 +221,25 @@ export default () => {
                 className={classNames(styles.container, styles.overflows_container, { 'rounded-b': !canSendCommands })}
                 style={{
                     backgroundColor: '#0F172A',
-                    border: '1px solid #E2E8F0',
+                    border: '1px solid var(--border-primary)',
                     borderRadius: '16px',
                     overflow: 'hidden',
-                    boxShadow: '0 -10px 30px 0 rgba(15, 23, 42, 0.08)',
+                    boxShadow: 'var(--shadow-lg)',
                 }}
             >
-                <div className={'flex items-center justify-between mb-4 p-4 bg-white border-b border-neutral-100'}>
+                <div
+                    className={'flex items-center justify-between mb-4 p-4'}
+                    style={{
+                        backgroundColor: 'var(--bg-elevated)',
+                        borderBottom: '1px solid var(--border-primary)',
+                    }}
+                >
                     <div className={'flex items-baseline space-x-3 min-w-0'}>
                         <h3
-                            className={'text-sm font-black truncate text-brand-navy tracking-tight'}
+                            className={'text-sm font-black truncate tracking-tight'}
                             style={{
                                 fontFamily: "'Satoshi', sans-serif",
+                                color: 'var(--text-primary)',
                             }}
                         >
                             {serverName}
@@ -242,17 +249,17 @@ export default () => {
                             style={{
                                 ...(status === 'running'
                                     ? {
-                                          background: '#DCFCE7',
-                                          color: '#10B981',
+                                          background: 'var(--status-success-bg)',
+                                          color: 'var(--status-success-text)',
                                       }
                                     : status === 'offline'
                                     ? {
-                                          background: '#FEE2E2',
-                                          color: '#EF4444',
+                                          background: 'var(--status-error-bg)',
+                                          color: 'var(--status-error-text)',
                                       }
                                     : {
-                                          background: '#FEF3C7',
-                                          color: '#F59E0B',
+                                          background: 'var(--status-warning-bg)',
+                                          color: 'var(--status-warning-text)',
                                       }),
                             }}
                         >
@@ -266,9 +273,9 @@ export default () => {
                                 'px-3 py-1.5 text-[10px] rounded-lg font-black uppercase tracking-widest transition-all duration-300'
                             }
                             style={{
-                                background: '#F1F5F9',
-                                color: '#64748B',
-                                border: '1px solid #E2E8F0',
+                                background: 'var(--bg-tertiary)',
+                                color: 'var(--text-secondary)',
+                                border: '1px solid var(--border-primary)',
                                 fontFamily: "'Satoshi', sans-serif",
                             }}
                         >
@@ -280,9 +287,9 @@ export default () => {
                                 'px-3 py-1.5 text-[10px] rounded-lg font-black uppercase tracking-widest transition-all duration-300'
                             }
                             style={{
-                                background: '#F1F5F9',
-                                color: '#64748B',
-                                border: '1px solid #E2E8F0',
+                                background: 'var(--bg-tertiary)',
+                                color: 'var(--text-secondary)',
+                                border: '1px solid var(--border-primary)',
                                 fontFamily: "'Satoshi', sans-serif",
                             }}
                         >
@@ -298,8 +305,13 @@ export default () => {
                 <div className={classNames('relative mt-4')}>
                     <input
                         className={classNames(
-                            'peer w-full bg-white border border-neutral-200 rounded-xl py-4 pl-12 pr-4 text-brand-navy font-bold focus:border-accent-purple transition-all outline-none shadow-sm'
+                            'peer w-full rounded-xl py-4 pl-12 pr-4 font-bold transition-all outline-none shadow-sm'
                         )}
+                        style={{
+                            backgroundColor: 'var(--bg-input)',
+                            border: '1px solid var(--border-input)',
+                            color: 'var(--text-primary)',
+                        }}
                         type={'text'}
                         placeholder={'Type a command...'}
                         aria-label={'Console command input.'}
@@ -310,8 +322,9 @@ export default () => {
                     />
                     <div
                         className={classNames(
-                            'absolute left-4 top-1/2 transform -translate-y-1/2 text-brand-slate peer-focus:text-accent-purple'
+                            'absolute left-4 top-1/2 transform -translate-y-1/2 peer-focus:text-accent-purple'
                         )}
+                        style={{ color: 'var(--text-secondary)' }}
                     >
                         <ChevronDoubleRightIcon className={'w-5 h-5'} />
                     </div>

@@ -12,13 +12,14 @@ import tw from 'twin.macro';
 
 const AuthBackground = styled.div`
     ${tw`min-h-screen w-full relative flex items-center justify-center`};
-    background-color: #f8fafc;
+    background-color: var(--bg-primary);
     overflow: hidden;
+    transition: background-color 0.3s ease;
 
     &::before {
         content: '';
         ${tw`absolute inset-0`};
-        background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%);
+        background: var(--gradient-hero);
         pointer-events: none;
     }
 `;

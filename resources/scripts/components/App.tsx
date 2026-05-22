@@ -12,6 +12,7 @@ import { history } from '@/components/history';
 import { setupInterceptors } from '@/api/interceptors';
 import AuthenticatedRoute from '@/components/elements/AuthenticatedRoute';
 import { ServerContext } from '@/state/server';
+import { ThemeProvider } from '@/theme';
 import '@/assets/tailwind.css';
 import Spinner from '@/components/elements/Spinner';
 
@@ -59,7 +60,7 @@ const App = () => {
     }
 
     return (
-        <>
+        <ThemeProvider>
             <GlobalStylesheet />
             <StoreProvider store={store}>
                 <ProgressBar />
@@ -106,7 +107,7 @@ const App = () => {
                     </Router>
                 </div>
             </StoreProvider>
-        </>
+        </ThemeProvider>
     );
 };
 

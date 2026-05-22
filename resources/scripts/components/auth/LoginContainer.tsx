@@ -88,7 +88,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                         />
                         <div>
                             <div className={'flex items-center justify-between mb-2'}>
-                                <label className={'text-brand-navy font-bold text-sm tracking-tight'}>Password</label>
+                                <label className={'text-neutral-900 font-bold text-sm tracking-tight'}>Password</label>
                                 <Link to={'/auth/password'} className={'auth-link'}>
                                     Forgot password?
                                 </Link>

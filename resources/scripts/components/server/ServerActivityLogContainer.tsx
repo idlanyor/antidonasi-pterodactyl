@@ -38,7 +38,14 @@ export default () => {
                 <div className={'flex justify-end mb-6'}>
                     <Link
                         to={'#'}
-                        css={tw`inline-flex items-center justify-center px-6 py-2 rounded-xl bg-neutral-100 text-brand-slate font-black text-xs uppercase tracking-widest hover:bg-neutral-200 transition-all duration-300 shadow-sm border border-neutral-200`}
+                        css={tw`inline-flex items-center justify-center px-6 py-2 rounded-xl font-black text-xs uppercase tracking-widest transition-all duration-300 shadow-sm border`}
+                        style={{
+                            backgroundColor: 'var(--bg-tertiary)',
+                            color: 'var(--text-secondary)',
+                            borderColor: 'var(--border-primary)',
+                        }}
+                        onMouseOver={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--bg-hover)'; }}
+                        onMouseOut={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--bg-tertiary)'; }}
                         onClick={() => setFilters((value) => ({ ...value, filters: {} }))}
                     >
                         Clear Filters <XCircleIcon className={'w-4 h-4 ml-2'} />
@@ -48,13 +55,17 @@ export default () => {
             {!data && isValidating ? (
                 <Spinner centered size={'large'} />
             ) : !data?.items.length ? (
-                <p css={tw`text-sm text-center py-20 text-brand-slate font-bold`}>
+                <p css={tw`text-sm text-center py-20 font-bold`} style={{ color: 'var(--text-secondary)' }}>
                     No activity logs available for this server.
                 </p>
             ) : (
                 <div
-                    css={tw`bg-white rounded-xl border border-neutral-200 shadow-lg overflow-hidden`}
-                    style={{ boxShadow: '0 -10px 30px 0 rgba(15, 23, 42, 0.08)' }}
+                    css={tw`rounded-xl overflow-hidden border`}
+                    style={{
+                        backgroundColor: 'var(--bg-elevated)',
+                        borderColor: 'var(--border-primary)',
+                        boxShadow: 'var(--shadow-lg)',
+                    }}
                 >
                     <div className={styles.content}>
                         {data?.items.map((activity) => (

@@ -48,7 +48,7 @@ export default () => {
                 Your server will be stopped and some files may be deleted or modified during this process, are you sure
                 you wish to continue?
             </Dialog.Confirm>
-            <p css={tw`text-sm leading-relaxed text-brand-slate font-bold`}>
+            <p css={tw`text-sm leading-relaxed text-neutral-500 font-bold`}>
                 Reinstalling your server will stop it, and then re-run the installation script that initially set it
                 up.&nbsp;
                 <strong css={tw`font-black text-status-error`}>

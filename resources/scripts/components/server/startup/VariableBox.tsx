@@ -60,7 +60,7 @@ const VariableBox = ({ variable }: Props) => {
     return (
         <TitledGreyBox
             title={
-                <p className='text-[10px] uppercase font-black tracking-widest text-brand-navy'>
+                <p className='text-[10px] uppercase font-black tracking-widest text-neutral-900'>
                     {!variable.isEditable && (
                         <span className='text-[9px] py-1 px-2 rounded-lg mr-3 bg-status-info bg-opacity-10 text-status-info border border-status-info border-opacity-20 font-black'>
                             Read Only
@@ -130,7 +130,7 @@ const VariableBox = ({ variable }: Props) => {
                 )}
             </InputSpinner>
 
-            <p className='mt-4 text-xs text-brand-slate font-bold leading-relaxed'>{variable.description}</p>
+            <p className='mt-4 text-xs text-neutral-500 font-bold leading-relaxed'>{variable.description}</p>
         </TitledGreyBox>
     );
 };

@@ -1,6 +1,6 @@
 .icons {
     @apply flex space-x-1 mx-2 transition-all duration-300;
-    color: theme('colors.brand-slate');
+    color: var(--text-secondary);
 
     & svg {
         @apply px-1 py-px cursor-pointer h-6 w-auto;
@@ -12,12 +12,12 @@
 
 .description {
     @apply mt-2 text-sm break-words line-clamp-2 pr-4;
-    color: theme('colors.brand-navy');
+    color: var(--text-primary);
     font-weight: 700;
     font-family: 'Satoshi', sans-serif;
 
     & strong {
-        color: theme('colors.brand-navy');
+        color: var(--text-primary);
         @apply font-black break-all;
     }
 }

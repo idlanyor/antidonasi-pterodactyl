@@ -23,7 +23,7 @@ import Code from '@/components/elements/Code';
 
 const Label = styled.label`
     ${tw`uppercase text-[10px] mt-1 block px-1 select-none transition-colors duration-150`}
-    color: #64748B;
+    color: var(--text-secondary);
     font-weight: 700;
     letter-spacing: 0.05em;
 `;
@@ -89,9 +89,9 @@ const AllocationRow = ({ allocation }: Props) => {
                 <InputSpinner visible={loading}>
                     <Textarea
                         style={{
-                            background: '#FFFFFF',
-                            borderColor: '#E2E8F0',
-                            color: '#0F172A',
+                            background: 'var(--bg-elevated)',
+                            borderColor: 'var(--border-primary)',
+                            color: 'var(--text-primary)',
                             borderRadius: '10px',
                             minHeight: '44px',
                             padding: '10px 14px',

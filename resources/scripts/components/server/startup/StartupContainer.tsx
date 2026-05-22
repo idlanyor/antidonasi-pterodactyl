@@ -92,9 +92,9 @@ const StartupContainer = () => {
                             <p
                                 css={tw`font-mono rounded-xl py-4 px-6 break-words whitespace-normal text-sm font-bold`}
                                 style={{
-                                    background: '#F8FAFC',
-                                    color: '#0F172A',
-                                    border: '1px solid #E2E8F0',
+                                    background: 'var(--bg-tertiary)',
+                                    color: 'var(--text-primary)',
+                                    border: '1px solid var(--border-primary)',
                                 }}
                                 title={data.invocation}
                             >
@@ -118,7 +118,7 @@ const StartupContainer = () => {
                                         ))}
                                     </Select>
                                 </InputSpinner>
-                                <p css={tw`text-xs mt-3 text-brand-slate font-bold leading-relaxed`}>
+                                <p css={tw`text-xs mt-3 text-neutral-500 font-bold leading-relaxed`}>
                                     This is an advanced feature allowing you to select a Docker image to use when
                                     running this server instance.
                                 </p>
@@ -127,7 +127,7 @@ const StartupContainer = () => {
                             <>
                                 <Input disabled readOnly value={variables.dockerImage} />
                                 {isCustomImage && (
-                                    <p css={tw`text-xs mt-3 text-brand-slate font-bold leading-relaxed`}>
+                                    <p css={tw`text-xs mt-3 text-neutral-500 font-bold leading-relaxed`}>
                                         This {"server's"} Docker image has been manually set by an administrator and
                                         cannot be changed through this UI.
                                     </p>
@@ -137,7 +137,7 @@ const StartupContainer = () => {
                     </TitledGreyBox>
                 </div>
             </Fade>
-            <h3 css={tw`mt-12 mb-6 text-3xl font-black text-brand-navy tracking-tight`}>Variables</h3>
+            <h3 css={tw`mt-12 mb-6 text-3xl font-black text-neutral-900 tracking-tight`}>Variables</h3>
             <div css={tw`grid gap-8 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3`}>
                 {data.variables.map((variable, i) => (
                     <Fade key={variable.envVariable} in appear timeout={180}>

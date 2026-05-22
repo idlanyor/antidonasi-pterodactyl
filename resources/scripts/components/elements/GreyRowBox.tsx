@@ -9,32 +9,32 @@ const floatAnim = keyframes`
 
 export default styled.div<{ $hoverable?: boolean; $variant?: 'default' | 'glass'; $animated?: boolean }>`
     ${tw`flex rounded-xl no-underline items-center p-4 transition-all duration-300 overflow-hidden`};
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    color: #0f172a;
-    box-shadow: 0 -10px 30px 0 rgba(15, 23, 42, 0.08);
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-primary);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-lg);
 
     ${(props) =>
         props.$hoverable !== false &&
         css`
             &:hover {
-                border-color: #cbd5e1;
+                border-color: var(--border-secondary);
                 transform: translateY(-2px);
-                box-shadow: 0 -12px 36px 0 rgba(15, 23, 42, 0.12);
+                box-shadow: var(--shadow-lg-hover);
             }
         `};
 
     & .icon {
         ${tw`rounded-xl w-12 h-12 flex items-center justify-center p-3`};
-        background: #f1f5f9;
+        background: var(--icon-bg);
         color: #7c3aed;
-        border: 1px solid #e2e8f0;
+        border: 1px solid var(--icon-border);
     }
 
     ${(props) =>
         props.$variant === 'glass' &&
         css`
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: var(--bg-elevated);
             backdrop-filter: blur(8px);
         `};
 

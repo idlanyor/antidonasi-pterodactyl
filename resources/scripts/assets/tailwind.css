@@ -1,3 +1,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+ * Dark mode overrides for Tailwind utility classes.
+ * These override the default light-mode utilities when the `dark` class is on <html>.
+ * This is needed because twin.macro doesn't support arbitrary CSS variable values.
+ */
+.dark .bg-white {
+    background-color: var(--bg-elevated) !important;
+}
+
+.dark .bg-neutral-50 {
+    background-color: var(--bg-tertiary) !important;
+}
+
+.dark .bg-neutral-100 {
+    background-color: var(--bg-tertiary) !important;
+}
+
+.dark .bg-neutral-200 {
+    background-color: var(--border-primary) !important;
+}
+
+.dark .text-neutral-900,
+.dark .text-neutral-800,
+.dark .text-neutral-700 {
+    color: var(--text-primary) !important;
+}
+
+.dark .text-neutral-500,
+.dark .text-neutral-600,
+.dark .text-neutral-400 {
+    color: var(--text-secondary) !important;
+}
+
+.dark .text-neutral-300,
+.dark .text-neutral-200 {
+    color: var(--text-muted) !important;
+}
+
+.dark .border-neutral-100,
+.dark .border-neutral-200 {
+    border-color: var(--border-primary) !important;
+}
+
+.dark .border-neutral-300 {
+    border-color: var(--border-secondary) !important;
+}
+
+.dark .border-neutral-800 {
+    border-color: var(--border-primary) !important;
+}
+
+.dark .hover\:bg-neutral-200:hover {
+    background-color: var(--bg-hover) !important;
+}
+
+.dark .hover\:bg-neutral-100:hover {
+    background-color: var(--bg-hover) !important;
+}
+
+.dark .bg-neutral-600\/95 {
+    background-color: var(--bg-tooltip) !important;
+}
+
+.dark .bg-neutral-800 {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Shadow overrides */
+.dark .shadow-lg {
+    box-shadow: var(--shadow-lg) !important;
+}
+
+.dark .shadow-sm {
+    box-shadow: var(--shadow-sm) !important;
+}
