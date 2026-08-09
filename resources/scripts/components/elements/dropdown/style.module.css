@@ -4,19 +4,20 @@
     & .button {
         @apply inline-flex justify-center items-center w-full py-2.5 px-4 rounded-xl font-bold;
         @apply transition-all duration-300;
-        @apply bg-neutral-100;
-        color: theme('colors.brand-navy');
+        background-color: var(--bg-elevated);
+        border: 1px solid var(--border-primary);
+        color: var(--text-primary);
 
         &:hover,
         &[aria-expanded='true'] {
-            @apply bg-neutral-200;
-            color: theme('colors.brand-navy');
+            background-color: var(--bg-hover);
+            color: var(--text-primary);
         }
 
         &:focus,
         &:active {
-            @apply ring-4 ring-opacity-10;
-            --tw-ring-color: theme('colors.accent-purple');
+            @apply ring-4;
+            --tw-ring-color: rgba(var(--accent-rgb), 0.1);
         }
 
         & svg {
@@ -29,8 +30,10 @@
     }
 
     & .items_container {
-        @apply absolute right-0 mt-3 origin-top-right bg-white rounded-xl z-50 border border-neutral-200;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        @apply absolute right-0 mt-3 origin-top-right rounded-xl z-50;
+        background-color: var(--bg-elevated);
+        border: 1px solid var(--border-primary);
+        box-shadow: var(--shadow-xl);
         min-width: 12rem;
         padding: 0.5rem;
     }
@@ -38,32 +41,32 @@
 
 .menu_item {
     @apply flex items-center rounded-lg w-full px-4 py-3 text-sm font-black transition-all duration-300;
-    color: theme('colors.brand-navy');
+    color: var(--text-primary);
 
     & svg {
         @apply w-4 h-4 mr-3;
-        color: theme('colors.brand-slate');
+        color: var(--text-secondary);
     }
 
     &:hover,
     &:focus {
-        @apply bg-neutral-50;
-        color: theme('colors.accent-purple');
+        background-color: var(--bg-hover);
+        color: var(--accent);
 
         & svg {
-            color: theme('colors.accent-purple');
+            color: var(--accent);
         }
     }
 
     &.danger {
-        color: theme('colors.status-error');
+        color: var(--status-error-text);
         &:hover,
         &:focus {
-            @apply bg-red-50;
-            color: theme('colors.status-error');
+            background-color: var(--status-error-bg);
+            color: var(--status-error-text);
 
             & svg {
-                color: theme('colors.status-error');
+                color: var(--status-error-text);
             }
         }
     }

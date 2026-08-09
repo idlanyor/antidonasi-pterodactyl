@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCogs, faLayerGroup, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCogs, faLayerGroup, faShoppingCart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import SearchContainer from '@/components/dashboard/search/SearchContainer';
@@ -68,7 +68,7 @@ export default () => {
                         to={'/dashboard'}
                         className={'text-xl font-black no-underline transition-colors duration-150'}
                         style={{
-                            fontFamily: "'Satoshi', sans-serif",
+                            fontFamily: "'Raleway', sans-serif",
                             letterSpacing: '-0.03em',
                             color: 'var(--text-primary)',
                         }}
@@ -86,6 +86,11 @@ export default () => {
                             }
                         >
                             <FontAwesomeIcon icon={faLayerGroup} />
+                        </NavLink>
+                    </Tooltip>
+                    <Tooltip placement={'bottom'} content={'Store'}>
+                        <NavLink to={'/store'} isActive={(match, location) => location.pathname.startsWith('/store')}>
+                            <FontAwesomeIcon icon={faShoppingCart} />
                         </NavLink>
                     </Tooltip>
                     {rootAdmin && (

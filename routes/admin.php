@@ -68,12 +68,14 @@ Route::group(['prefix' => 'settings'], function () {
     Route::get('/', [Admin\Settings\IndexController::class, 'index'])->name('admin.settings');
     Route::get('/mail', [Admin\Settings\MailController::class, 'index'])->name('admin.settings.mail');
     Route::get('/advanced', [Admin\Settings\AdvancedController::class, 'index'])->name('admin.settings.advanced');
+    Route::get('/landing', [Admin\Settings\LandingController::class, 'index'])->name('admin.settings.landing');
 
     Route::post('/mail/test', [Admin\Settings\MailController::class, 'test'])->name('admin.settings.mail.test');
 
     Route::patch('/', [Admin\Settings\IndexController::class, 'update']);
     Route::patch('/mail', [Admin\Settings\MailController::class, 'update']);
     Route::patch('/advanced', [Admin\Settings\AdvancedController::class, 'update']);
+    Route::patch('/landing', [Admin\Settings\LandingController::class, 'update']);
 });
 
 /*
@@ -225,4 +227,25 @@ Route::group(['prefix' => 'nests'], function () {
     Route::delete('/view/{nest:id}', [Admin\Nests\NestController::class, 'destroy']);
     Route::delete('/egg/{egg:id}', [Admin\Nests\EggController::class, 'destroy']);
     Route::delete('/egg/{egg:id}/variables/{variable:id}', [Admin\Nests\EggVariableController::class, 'destroy']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Store Controller Routes
+|--------------------------------------------------------------------------
+|
+| Endpoint: /admin/store
+|
+*/
+Route::group(['prefix' => 'store'], function () {
+    Route::get('/', [Admin\StoreController::class, 'index'])->name('admin.store.index');
+    Route::get('/new', [Admin\StoreController::class, 'view'])->name('admin.store.new');
+    Route::get('/view/{id}', [Admin\StoreController::class, 'view'])->name('admin.store.edit');
+    Route::get('/settings', [Admin\StoreController::class, 'settings'])->name('admin.store.settings');
+
+    Route::post('/new', [Admin\StoreController::class, 'store']);
+    Route::patch('/view/{id}', [Admin\StoreController::class, 'store']);
+    Route::post('/settings', [Admin\StoreController::class, 'saveSettings']);
+
+    Route::delete('/view/{id}', [Admin\StoreController::class, 'delete']);
 });

@@ -20,16 +20,16 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
     return (
         <CSSTransition timeout={150} classNames={'fade'} appear in>
             <>
-                <ContentContainer css={tw`my-4 sm:my-10`} className={className}>
+                <ContentContainer css={tw`my-4 sm:my-6`} className={className}>
                     {showFlashKey && <FlashMessageRender byKey={showFlashKey} css={tw`mb-4`} />}
                     {children}
                 </ContentContainer>
-                <ContentContainer css={tw`mb-12`}>
+                <ContentContainer css={tw`mb-8`}>
                     <p
                         css={tw`text-center text-[10px] uppercase font-black tracking-[0.2em]`}
                         style={{
                             color: 'var(--text-muted)',
-                            fontFamily: "'Satoshi', sans-serif",
+                            fontFamily: "'Raleway', sans-serif",
                         }}
                     >
                         <a
@@ -41,7 +41,7 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
                                 color: 'var(--text-muted)',
                             }}
                             onMouseOver={(e) => {
-                                e.currentTarget.style.color = '#7C3AED';
+                                e.currentTarget.style.color = 'var(--accent)';
                             }}
                             onMouseOut={(e) => {
                                 e.currentTarget.style.color = 'var(--text-muted)';

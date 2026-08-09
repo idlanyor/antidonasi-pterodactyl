@@ -15,7 +15,7 @@ interface Props {
 
 const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${tw`relative inline-flex items-center justify-center font-bold transition-all duration-300 border-none outline-none cursor-pointer`};
-    font-family: 'Satoshi', sans-serif;
+    font-family: 'Raleway', sans-serif;
 
     /* Sizes */
     ${(props) => (!props.size || props.size === 'small') && tw`px-5 py-2.5 text-[12px] rounded-lg h-[36px]`};
@@ -28,7 +28,7 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
         ((!props.isSecondary && !props.color) || props.color === 'primary') &&
         css`
             ${tw`text-white shadow-md`};
-            background: linear-gradient(135deg, #ec4899 0%, #7c3aed 100%);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent) 100%);
             box-shadow: var(--shadow-btn-primary);
 
             &:hover:not(:disabled) {

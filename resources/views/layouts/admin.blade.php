@@ -16,6 +16,32 @@
         <meta name="msapplication-config" content="/favicons/browserconfig.xml">
         <meta name="theme-color" content="#0e4688">
 
+        <script>
+            // Apply the user's accent color (shared with the React client area) before
+            // the admin CSS paints, avoiding a flash of the wrong color. Default violet.
+            (function () {
+                function hexToRgb(h) {
+                    h = h.replace('#', '');
+                    if (h.length === 3) {
+                        h = h.split('').map(function (c) { return c + c; }).join('');
+                    }
+                    var n = parseInt(h, 16);
+                    return ((n >> 16) & 255) + ', ' + ((n >> 8) & 255) + ', ' + (n & 255);
+                }
+
+                var root = document.documentElement;
+                var accent = '#7C3AED';
+                try {
+                    var stored = localStorage.getItem('pterodactyl:accent');
+                    if (stored && /^#[0-9a-fA-F]{6}$/.test(stored)) {
+                        accent = stored;
+                    }
+                } catch (e) { /* localStorage unavailable */ }
+                root.style.setProperty('--accent', accent);
+                root.style.setProperty('--accent-rgb', hexToRgb(accent));
+            })();
+        </script>
+
         @include('layouts.scripts')
 
         @section('scripts')
@@ -32,7 +58,7 @@
             <style>
                 /* Glassmorph cards for admin boxes */
                 .content-wrapper .box {
-                    background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(59, 130, 246, 0.12));
+                    background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.12), rgba(59, 130, 246, 0.12));
                     border: 1px solid rgba(255, 255, 255, 0.08);
                     -webkit-backdrop-filter: blur(10px);
                     backdrop-filter: blur(10px);
@@ -40,7 +66,7 @@
                     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
                 }
                 .content-wrapper .box .box-header {
-                    background: linear-gradient(135deg, rgba(168, 85, 247, 0.18), rgba(59, 130, 246, 0.18));
+                    background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.18), rgba(59, 130, 246, 0.18));
                     border-bottom-color: rgba(255, 255, 255, 0.12) !important;
                     color: #fff;
                 }
@@ -70,7 +96,7 @@
                     border-color: rgba(255, 255, 255, 0.18);
                 }
                 .content-wrapper .btn-default {
-                    background-image: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(168, 85, 247,0.20));
+                    background-image: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(var(--accent-rgb),0.20));
                     background-color: rgba(255,255,255,0.06);
                 }
                 .content-wrapper .btn-default:hover {
@@ -79,7 +105,7 @@
 
                 /* Sidebar: Modern Glassmorph + Purple/Blue */
                 .main-sidebar {
-                    background: linear-gradient(180deg, rgba(168, 85, 247, 0.15), rgba(59, 130, 246, 0.15));
+                    background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.15), rgba(59, 130, 246, 0.15));
                     -webkit-backdrop-filter: blur(16px);
                     backdrop-filter: blur(16px);
                     border-right: 1px solid rgba(255, 255, 255, 0.1);
@@ -114,19 +140,19 @@
                     background: transparent !important;
                 }
                 .main-sidebar .sidebar-menu > li > a:hover {
-                    background: linear-gradient(90deg, rgba(168, 85, 247, 0.25), rgba(59, 130, 246, 0.15)) !important;
+                    background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.25), rgba(59, 130, 246, 0.15)) !important;
                     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
                     transform: translateX(4px);
                     color: #fff !important;
                 }
                 .main-sidebar .sidebar-menu > li.active > a {
-                    background: linear-gradient(90deg, rgba(168, 85, 247, 0.4), rgba(59, 130, 246, 0.3)) !important;
-                    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
+                    background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.4), rgba(59, 130, 246, 0.3)) !important;
+                    box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.2);
                     font-weight: 600;
                     color: #fff !important;
                 }
                 .main-sidebar .sidebar-menu > li > a:focus {
-                    background: linear-gradient(90deg, rgba(168, 85, 247, 0.25), rgba(59, 130, 246, 0.15)) !important;
+                    background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.25), rgba(59, 130, 246, 0.15)) !important;
                 }
                 /* Left accent bar on active */
                 .main-sidebar .sidebar-menu > li.active > a::before {
@@ -138,7 +164,7 @@
                     width: 4px;
                     background: linear-gradient(180deg, #a855f7, #3b82f6);
                     border-radius: 0 4px 4px 0;
-                    box-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+                    box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.8);
                 }
                 /* Icons inside sidebar */
                 .main-sidebar .sidebar-menu > li > a > i,
@@ -159,7 +185,7 @@
                 .main-sidebar .sidebar-menu > li:hover > a > i {
                     background: rgba(255,255,255,0.15);
                     color: #fff !important;
-                    box-shadow: 0 2px 8px rgba(168, 85, 247, 0.4);
+                    box-shadow: 0 2px 8px rgba(var(--accent-rgb), 0.4);
                 }
                 /* Treeview submenu */
                 .main-sidebar .treeview-menu {
@@ -180,7 +206,7 @@
                 /* Header / Navbar: glassmorph + white text */
                 .main-header,
                 .main-header .navbar {
-                    background: linear-gradient(180deg, rgba(168, 85, 247,0.16), rgba(59,130,246,0.16));
+                    background: linear-gradient(180deg, rgba(var(--accent-rgb),0.16), rgba(59,130,246,0.16));
                     -webkit-backdrop-filter: blur(12px);
                     backdrop-filter: blur(12px);
                     border-bottom: 1px solid rgba(255,255,255,0.12);
@@ -197,7 +223,7 @@
                 .main-header .sidebar-toggle .icon-bar { background-color: #fff !important; }
                 .main-header .navbar a:hover,
                 .main-header .navbar a:focus {
-                    background: linear-gradient(90deg, rgba(59,130,246,0.22), rgba(168, 85, 247,0.18)) !important;
+                    background: linear-gradient(90deg, rgba(59,130,246,0.22), rgba(var(--accent-rgb),0.18)) !important;
                     color: #fff !important;
                 }
 
@@ -220,7 +246,7 @@
 
                 /* Forms: inputs, selects (Bootstrap + Select2) */
                 .content-wrapper .form-control {
-                    background: linear-gradient(135deg, rgba(59,130,246,0.10), rgba(168, 85, 247,0.08));
+                    background: linear-gradient(135deg, rgba(59,130,246,0.10), rgba(var(--accent-rgb),0.08));
                     color: #fff;
                     border: 1px solid rgba(255,255,255,0.18);
                     -webkit-backdrop-filter: blur(8px);
@@ -232,15 +258,26 @@
                     box-shadow: 0 0 0 3px rgba(59,130,246,0.35);
                 }
                 .content-wrapper .input-group-addon {
-                    background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(168, 85, 247,0.10));
+                    background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(var(--accent-rgb),0.10));
                     color: #fff;
                     border: 1px solid rgba(255,255,255,0.18);
+                }
+                /* Native <select> options (Bootstrap) — dark dropdown list */
+                .content-wrapper select.form-control {
+                    background-color: #0b0e14;
+                    background-image: none;
+                    color: #fff;
+                }
+                .content-wrapper select.form-control option,
+                .content-wrapper select.form-control optgroup {
+                    background-color: #0f172a;
+                    color: #fff;
                 }
 
                 /* Select2 adjustments */
                 .select2-container .select2-selection--single,
                 .select2-container .select2-selection--multiple {
-                    background: linear-gradient(135deg, rgba(59,130,246,0.10), rgba(168, 85, 247,0.08));
+                    background: linear-gradient(135deg, rgba(59,130,246,0.10), rgba(var(--accent-rgb),0.08));
                     color: #fff;
                     border: 1px solid rgba(255,255,255,0.18);
                     -webkit-backdrop-filter: blur(8px);
@@ -255,7 +292,7 @@
                 /* Tables: glass rows and white headings */
                 .content-wrapper .table { color: #fff; }
                 .content-wrapper .table > thead > tr > th {
-                    background: linear-gradient(135deg, rgba(168, 85, 247,0.18), rgba(59,130,246,0.18));
+                    background: linear-gradient(135deg, rgba(var(--accent-rgb),0.18), rgba(59,130,246,0.18));
                     color: #fff;
                     border-bottom: 1px solid rgba(255,255,255,0.15);
                 }
@@ -264,7 +301,7 @@
                     transition: background 160ms ease;
                 }
                 .content-wrapper .table > tbody > tr:hover {
-                    background: linear-gradient(90deg, rgba(59,130,246,0.16), rgba(168, 85, 247,0.12));
+                    background: linear-gradient(90deg, rgba(59,130,246,0.16), rgba(var(--accent-rgb),0.12));
                 }
                 .content-wrapper .table > tbody > tr > td { border-top: 1px solid rgba(255,255,255,0.12); }
                 .content-wrapper .table code { color: #fff; background: rgba(0,0,0,0.35); border-radius: 4px; padding: 2px 6px; }
@@ -272,24 +309,24 @@
                 /* Alerts: ensure text contrast */
                 .content-wrapper .alert { color: #fff; }
                 .content-wrapper .alert-danger { background: rgba(239,68,68,0.35); border-color: rgba(239,68,68,0.55); }
-                .content-wrapper .alert-success { background: rgba(168, 85, 247,0.30); border-color: rgba(168, 85, 247,0.55); }
+                .content-wrapper .alert-success { background: rgba(var(--accent-rgb),0.30); border-color: rgba(var(--accent-rgb),0.55); }
                 .content-wrapper .alert-info { background: rgba(14,165,233,0.30); border-color: rgba(14,165,233,0.55); }
                 .content-wrapper .alert-warning { background: rgba(245,158,11,0.30); border-color: rgba(245,158,11,0.55); }
 
                 /* Pagination: glass buttons */
                 .content-wrapper .pagination > li > a,
                 .content-wrapper .pagination > li > span {
-                    background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(168, 85, 247,0.14));
+                    background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(var(--accent-rgb),0.14));
                     color: #fff;
                     border: 1px solid rgba(255,255,255,0.18);
                 }
                 .content-wrapper .pagination > li > a:hover {
                     border-color: rgba(255,255,255,0.28);
-                    background: linear-gradient(135deg, rgba(59,130,246,0.24), rgba(168, 85, 247,0.18));
+                    background: linear-gradient(135deg, rgba(59,130,246,0.24), rgba(var(--accent-rgb),0.18));
                 }
                 .content-wrapper .pagination > .active > a,
                 .content-wrapper .pagination > .active > span {
-                    background: linear-gradient(135deg, rgba(59,130,246,0.30), rgba(168, 85, 247,0.26));
+                    background: linear-gradient(135deg, rgba(59,130,246,0.30), rgba(var(--accent-rgb),0.26));
                     border-color: rgba(255,255,255,0.35);
                 }
                 /* Admin background to solid black */
@@ -401,6 +438,11 @@
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.users') ?: 'active' }}">
                             <a href="{{ route('admin.users') }}">
                                 <i class="fa fa-users"></i> <span>Users</span>
+                            </a>
+                        </li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.store') ?: 'active' }}">
+                            <a href="{{ route('admin.store.index') }}">
+                                <i class="fa fa-shopping-cart"></i> <span>Store</span>
                             </a>
                         </li>
                         <li class="header">SERVICE MANAGEMENT</li>

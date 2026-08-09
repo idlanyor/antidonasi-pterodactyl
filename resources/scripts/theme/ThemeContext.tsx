@@ -1,20 +1,32 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { ThemeMode, lightTheme, darkTheme, ThemeVariables } from '@/theme/themeVariables';
+import {
+    ThemeMode,
+    lightTheme,
+    darkTheme,
+    ThemeVariables,
+    DEFAULT_ACCENT,
+    hexToRgbString,
+} from '@/theme/themeVariables';
 
 const STORAGE_KEY = 'pterodactyl:theme';
+const ACCENT_STORAGE_KEY = 'pterodactyl:accent';
 
 interface ThemeContextValue {
     theme: ThemeMode;
     isDark: boolean;
+    accent: string;
     toggleTheme: () => void;
     setTheme: (mode: ThemeMode) => void;
+    setAccent: (color: string) => void;
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
     theme: 'dark',
     isDark: true,
+    accent: DEFAULT_ACCENT,
     toggleTheme: () => {},
     setTheme: () => {},
+    setAccent: () => {},
 });
 
 /**
@@ -25,6 +37,15 @@ function applyThemeVariables(variables: ThemeVariables): void {
     Object.entries(variables).forEach(([key, value]) => {
         root.style.setProperty(key, value);
     });
+}
+
+/**
+ * Set the accent color (+ its RGB triplet) on the root element.
+ */
+function applyAccent(accent: string): void {
+    const root = document.documentElement;
+    root.style.setProperty('--accent', accent);
+    root.style.setProperty('--accent-rgb', hexToRgbString(accent));
 }
 
 /**
@@ -43,8 +64,24 @@ function getInitialTheme(): ThemeMode {
     return 'dark';
 }
 
+/**
+ * Get the initial accent from localStorage, defaulting to the Pterodactyl violet.
+ */
+function getInitialAccent(): string {
+    try {
+        const stored = localStorage.getItem(ACCENT_STORAGE_KEY);
+        if (stored && /^#[0-9a-fA-F]{6}$/.test(stored)) {
+            return stored;
+        }
+    } catch {
+        // localStorage not available
+    }
+    return DEFAULT_ACCENT;
+}
+
 export const ThemeProvider: React.FC = ({ children }) => {
     const [theme, setThemeState] = useState<ThemeMode>(getInitialTheme);
+    const [accent, setAccentState] = useState<string>(getInitialAccent);
 
     const applyTheme = useCallback((mode: ThemeMode) => {
         const variables = mode === 'dark' ? darkTheme : lightTheme;
@@ -61,13 +98,15 @@ export const ThemeProvider: React.FC = ({ children }) => {
     // Apply on mount and when theme changes
     useEffect(() => {
         applyTheme(theme);
+        applyAccent(accent);
 
         try {
             localStorage.setItem(STORAGE_KEY, theme);
+            localStorage.setItem(ACCENT_STORAGE_KEY, accent);
         } catch {
             // Silently fail if localStorage is unavailable
         }
-    }, [theme, applyTheme]);
+    }, [theme, accent, applyTheme]);
 
     const toggleTheme = useCallback(() => {
         setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
@@ -77,8 +116,12 @@ export const ThemeProvider: React.FC = ({ children }) => {
         setThemeState(mode);
     }, []);
 
+    const setAccent = useCallback((color: string) => {
+        setAccentState(color);
+    }, []);
+
     return (
-        <ThemeContext.Provider value={{ theme, isDark: theme === 'dark', toggleTheme, setTheme }}>
+        <ThemeContext.Provider value={{ theme, isDark: theme === 'dark', accent, toggleTheme, setTheme, setAccent }}>
             {children}
         </ThemeContext.Provider>
     );

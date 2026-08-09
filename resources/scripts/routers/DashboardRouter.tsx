@@ -37,6 +37,19 @@ export default () => {
                     </div>
                 </SubNavigation>
             )}
+            {location.pathname.startsWith('/store') && (
+                <SubNavigation>
+                    <div>
+                        {routes.store
+                            .filter((route) => !!route.name)
+                            .map(({ path, name, exact = false }) => (
+                                <NavLink key={path} to={`/store/${path}`.replace('//', '/')} exact={exact}>
+                                    {name}
+                                </NavLink>
+                            ))}
+                    </div>
+                </SubNavigation>
+            )}
             <TransitionRouter>
                 <React.Suspense fallback={<Spinner centered />}>
                     <Switch location={location}>
@@ -45,6 +58,11 @@ export default () => {
                         </Route>
                         {routes.account.map(({ path, component: Component }) => (
                             <Route key={path} path={`/account/${path}`.replace('//', '/')} exact>
+                                <Component />
+                            </Route>
+                        ))}
+                        {routes.store.map(({ path, component: Component }) => (
+                            <Route key={path} path={`/store/${path}`.replace('//', '/')} exact>
                                 <Component />
                             </Route>
                         ))}

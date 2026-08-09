@@ -13,8 +13,8 @@ const ToggleContainer = styled.div`
 
         &:checked + label {
             ${tw`shadow-none`};
-            background-color: #7c3aed;
-            border-color: #7c3aed;
+            background-color: var(--accent);
+            border-color: var(--accent);
         }
 
         &:checked + label:before {

@@ -14,7 +14,7 @@ type Props = Readonly<
 >;
 
 const Card = styled.div`
-    ${tw`p-6 rounded-xl relative border`};
+    ${tw`p-4 rounded-xl relative border`};
     background-color: var(--bg-elevated);
     border-color: var(--border-primary);
     box-shadow: var(--shadow-lg);
@@ -30,10 +30,7 @@ const Card = styled.div`
 const ContentBox = ({ title, borderColor, showFlashes, showLoadingOverlay, children, ...props }: Props) => (
     <div {...props}>
         {title && (
-            <h2
-                css={tw`mb-4 px-2 text-xl font-bold tracking-tight`}
-                style={{ color: 'var(--text-primary)' }}
-            >
+            <h2 css={tw`mb-3 px-1 text-lg font-bold tracking-tight`} style={{ color: 'var(--text-primary)' }}>
                 {title}
             </h2>
         )}

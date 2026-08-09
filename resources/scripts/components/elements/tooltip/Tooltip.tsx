@@ -95,7 +95,7 @@ export default ({ children, ...props }: Props) => {
                                 position: strategy,
                                 top: `${y || 0}px`,
                                 left: `${x || 0}px`,
-                                fontFamily: "'Satoshi', sans-serif",
+                                fontFamily: "'Raleway', sans-serif",
                             },
                         })}
                     >

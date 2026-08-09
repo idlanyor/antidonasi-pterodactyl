@@ -67,8 +67,8 @@ const NetworkContainer = () => {
                             <div css={tw`mt-12 sm:flex items-center justify-end`}>
                                 <p css={tw`text-sm mb-4 sm:mr-8 sm:mb-0 text-neutral-500 font-bold`}>
                                     You are currently using <span className={'text-neutral-900'}>{data.length}</span> of{' '}
-                                    <span className={'text-neutral-900'}>{allocationLimit}</span> allowed allocations for
-                                    this server.
+                                    <span className={'text-neutral-900'}>{allocationLimit}</span> allowed allocations
+                                    for this server.
                                 </p>
                                 {allocationLimit > data.length && (
                                     <Button css={tw`w-full sm:w-auto`} size={'large'} onClick={onCreateAllocation}>

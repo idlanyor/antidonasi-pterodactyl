@@ -28,7 +28,7 @@ const StatCard = styled.div`
 `;
 
 const IconWrapper = styled.div`
-    ${tw`flex items-center justify-center w-10 h-10 rounded-lg flex-shrink-0 bg-accent-purple bg-opacity-10 text-accent-purple`};
+    ${tw`flex items-center justify-center w-10 h-10 rounded-lg flex-shrink-0 bg-accent-10 text-accent-purple`};
 `;
 
 export default ({ title, copyOnClick, icon, className, children }: StatBlockProps) => {
@@ -50,7 +50,7 @@ export default ({ title, copyOnClick, icon, className, children }: StatBlockProp
                     <div
                         ref={ref}
                         className={'h-[1.75rem] w-full font-black truncate tracking-tight'}
-                        style={{ fontSize, fontFamily: "'Satoshi', sans-serif", color: 'var(--text-primary)' }}
+                        style={{ fontSize, fontFamily: "'Raleway', sans-serif", color: 'var(--text-primary)' }}
                     >
                         {children}
                     </div>

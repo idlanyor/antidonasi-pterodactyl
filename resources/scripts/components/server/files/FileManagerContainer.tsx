@@ -83,10 +83,10 @@ export default () => {
                             <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
                                 <Button
                                     style={{
-                                        background: 'linear-gradient(135deg, #EC4899 0%, #7C3AED 100%)',
+                                        background: 'linear-gradient(135deg, var(--accent) 0%, var(--accent) 100%)',
                                         border: 'none',
                                         borderRadius: '0.75rem',
-                                        boxShadow: '0 14px 30px 0 rgba(168, 85, 247, 0.24)',
+                                        boxShadow: '0 14px 30px 0 rgba(var(--accent-rgb), 0.24)',
                                         color: '#FFFFFF',
                                         fontWeight: 900,
                                         fontSize: '12px',
@@ -106,7 +106,9 @@ export default () => {
             ) : (
                 <>
                     {!files.length ? (
-                        <p css={tw`text-sm text-center py-32 font-bold`} style={{ color: 'var(--text-secondary)' }}>This directory is empty.</p>
+                        <p css={tw`text-sm text-center py-32 font-bold`} style={{ color: 'var(--text-secondary)' }}>
+                            This directory is empty.
+                        </p>
                     ) : (
                         <CSSTransition classNames={'fade'} timeout={150} appear in>
                             <div>

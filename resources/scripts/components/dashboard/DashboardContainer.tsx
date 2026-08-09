@@ -18,20 +18,20 @@ import Pagination from '@/components/elements/Pagination';
 import { useLocation } from 'react-router-dom';
 
 const TitleWrapper = styled.div`
-    ${tw`relative mb-12 p-10 md:p-16 rounded-3xl overflow-hidden`};
+    ${tw`relative mb-6 p-6 md:p-8 rounded-2xl overflow-hidden`};
     background: var(--gradient-hero);
     border: 1px solid var(--gradient-hero-border);
     box-shadow: var(--shadow-lg);
     transition: background 0.3s ease, border-color 0.3s ease;
 
     h1 {
-        ${tw`text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight max-w-2xl`};
+        ${tw`text-2xl md:text-3xl lg:text-4xl font-black tracking-tight leading-tight max-w-2xl`};
         color: var(--text-primary);
-        font-family: 'Satoshi', sans-serif;
+        font-family: 'Raleway', sans-serif;
     }
 
     p {
-        ${tw`mt-4 text-lg md:text-xl font-bold leading-relaxed max-w-xl`};
+        ${tw`mt-2 text-sm md:text-base font-bold leading-relaxed max-w-xl`};
         color: var(--text-secondary);
     }
 
@@ -43,7 +43,7 @@ const TitleWrapper = styled.div`
 `;
 
 const HeaderSection = styled.div`
-    ${tw`mb-12 p-10 rounded-3xl border`};
+    ${tw`mb-6 p-6 rounded-2xl border`};
     background: var(--bg-elevated);
     border-color: var(--border-primary);
     box-shadow: var(--shadow-lg);
@@ -51,14 +51,14 @@ const HeaderSection = styled.div`
 `;
 
 const FilterWrapper = styled.div`
-    ${tw`flex items-center gap-4 px-6 py-3 rounded-2xl border`};
+    ${tw`flex items-center gap-3 px-4 py-2 rounded-xl border`};
     background: var(--filter-bg);
     border-color: var(--filter-border);
     transition: background-color 0.3s ease, border-color 0.3s ease;
 `;
 
 const EmptyStateWrapper = styled.div`
-    ${tw`flex flex-col items-center justify-center py-32 px-6 rounded-3xl border`};
+    ${tw`flex flex-col items-center justify-center py-20 px-6 rounded-2xl border`};
     background: var(--bg-elevated);
     border-color: var(--border-primary);
     box-shadow: var(--shadow-lg);
@@ -110,11 +110,11 @@ export default () => {
             {/* Header Section */}
             <HeaderSection>
                 {/* Search and Filter Controls */}
-                <div css={tw`flex flex-wrap items-center justify-between gap-6`}>
+                <div css={tw`flex flex-wrap items-center justify-between gap-4`}>
                     <div css={tw`flex-1 max-w-md`}>
                         <div css={tw`relative`}>
                             <div
-                                css={tw`absolute left-4 top-1/2 transform -translate-y-1/2`}
+                                css={tw`absolute left-3.5 top-1/2 transform -translate-y-1/2`}
                                 style={{ color: 'var(--text-secondary)' }}
                             >
                                 <FontAwesomeIcon icon={faBoxOpen} />
@@ -122,7 +122,7 @@ export default () => {
                             <input
                                 type={'text'}
                                 placeholder={'Search servers...'}
-                                css={tw`w-full rounded-2xl py-4 pl-12 pr-4 font-bold transition-all outline-none`}
+                                css={tw`w-full rounded-xl py-2.5 pl-10 pr-4 text-sm font-bold transition-all outline-none`}
                                 style={{
                                     backgroundColor: 'var(--bg-tertiary)',
                                     border: '1px solid var(--border-primary)',
@@ -166,7 +166,7 @@ export default () => {
                             return rank(a.status as any) - rank(b.status as any);
                         });
                         return sorted.length > 0 ? (
-                            <div css={tw`flex flex-col gap-4`}>
+                            <div css={tw`flex flex-col gap-3`}>
                                 {sorted.map((server, index) => (
                                     <div
                                         key={server.uuid}
@@ -182,10 +182,10 @@ export default () => {
                             </div>
                         ) : (
                             <EmptyStateWrapper>
-                                <div css={tw`text-7xl mb-6`} style={{ color: 'var(--text-muted)' }}>
+                                <div css={tw`text-5xl mb-4`} style={{ color: 'var(--text-muted)' }}>
                                     <FontAwesomeIcon icon={faBoxOpen} />
                                 </div>
-                                <h2 css={tw`text-2xl font-black mb-3`} style={{ color: 'var(--text-primary)' }}>
+                                <h2 css={tw`text-xl font-black mb-2`} style={{ color: 'var(--text-primary)' }}>
                                     No Servers Found
                                 </h2>
                                 <p

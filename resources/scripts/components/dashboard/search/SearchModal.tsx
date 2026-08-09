@@ -28,7 +28,7 @@ const ServerResult = styled(Link)`
 
     &:hover {
         background-color: var(--bg-hover);
-        border-left-color: #7C3AED;
+        border-left-color: var(--accent);
         box-shadow: var(--shadow-md);
         transform: translateX(4px);
     }
@@ -116,10 +116,7 @@ export default ({ ...props }: Props) => {
                                         >
                                             {server.name}
                                         </p>
-                                        <p
-                                            css={tw`mt-1 text-xs font-bold`}
-                                            style={{ color: 'var(--text-secondary)' }}
-                                        >
+                                        <p css={tw`mt-1 text-xs font-bold`} style={{ color: 'var(--text-secondary)' }}>
                                             {server.allocations
                                                 .filter((alloc) => alloc.isDefault)
                                                 .map((allocation) => (
@@ -133,9 +130,9 @@ export default ({ ...props }: Props) => {
                                         <span
                                             css={tw`text-[10px] py-1 px-2 rounded-lg font-black uppercase tracking-widest`}
                                             style={{
-                                                background: 'rgba(124, 58, 237, 0.1)',
-                                                color: '#7C3AED',
-                                                border: '1px solid rgba(124, 58, 237, 0.2)',
+                                                background: 'rgba(var(--accent-rgb), 0.1)',
+                                                color: 'var(--accent)',
+                                                border: '1px solid rgba(var(--accent-rgb), 0.2)',
                                             }}
                                         >
                                             {server.node}

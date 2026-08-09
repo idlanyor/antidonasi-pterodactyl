@@ -21,10 +21,10 @@ interface Props<T> {
 }
 
 const Block = styled(Button)`
-    ${tw`p-0 w-10 h-10 rounded-xl font-black text-xs transition-all duration-300`}
+    ${tw`p-0 w-8 h-8 rounded-lg font-black text-xs transition-all duration-300`}
 
     &:not(:last-of-type) {
-        ${tw`mr-3`};
+        ${tw`mr-2`};
     }
 `;
 
@@ -61,9 +61,9 @@ function Pagination<T>({ data: { items, pagination }, onPageSelect, children }: 
                             style={
                                 pagination.currentPage === i
                                     ? {
-                                          background: 'linear-gradient(135deg, #EC4899 0%, #7C3AED 100%)',
+                                          background: 'linear-gradient(135deg, var(--accent) 0%, var(--accent) 100%)',
                                           border: 'none',
-                                          boxShadow: '0 14px 30px 0 rgba(168, 85, 247, 0.24)',
+                                          boxShadow: '0 14px 30px 0 rgba(var(--accent-rgb), 0.24)',
                                           color: '#FFFFFF',
                                       }
                                     : {}

@@ -18,7 +18,7 @@ const checkboxStyle = css<Props>`
         background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23FFFFFF' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
         background-color: var(--checkbox-checked-bg);
         border-color: var(--checkbox-checked-bg);
-        box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.4);
+        box-shadow: 0 4px 6px -1px rgba(var(--accent-rgb), 0.4);
     }
 
     &:focus {
@@ -31,11 +31,11 @@ const inputStyle = css<Props>`
     // Reset to normal styling.
     resize: none;
     ${tw`appearance-none outline-none w-full min-w-0`};
-    ${tw`p-4 rounded-xl text-base transition-all duration-300 font-medium`};
+    ${tw`p-3 rounded-lg text-sm transition-all duration-300 font-medium`};
     background-color: var(--bg-input);
     border: 1px solid var(--border-input);
     color: var(--text-primary);
-    font-family: 'Satoshi', sans-serif;
+    font-family: 'Raleway', sans-serif;
     box-shadow: var(--shadow-input);
 
     &::placeholder {

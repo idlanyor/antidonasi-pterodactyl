@@ -48,7 +48,7 @@ export default () => {
                 <ContentBox title={'Create API Key'} css={tw`flex-none w-full md:w-1/2`}>
                     <CreateApiKeyForm onKeyCreated={(key) => setKeys((s) => [...s!, key])} />
                 </ContentBox>
-                <ContentBox title={'API Keys'} css={tw`flex-1 overflow-hidden mt-8 md:mt-0 md:ml-8`}>
+                <ContentBox title={'API Keys'} css={tw`flex-1 overflow-hidden mt-5 md:mt-0 md:ml-6`}>
                     <SpinnerOverlay visible={loading} />
                     <Dialog.Confirm
                         title={'Delete API Key'}
@@ -60,22 +60,28 @@ export default () => {
                         All requests using the <Code>{deleteIdentifier}</Code> key will be invalidated.
                     </Dialog.Confirm>
                     {keys.length === 0 ? (
-                        <p css={tw`text-center text-sm py-12 font-bold`} style={{ color: 'var(--text-secondary)' }}>
+                        <p css={tw`text-center text-sm py-8 font-bold`} style={{ color: 'var(--text-secondary)' }}>
                             {loading ? 'Loading...' : 'No API keys exist for this account.'}
                         </p>
                     ) : (
                         keys.map((key, index) => (
                             <GreyRowBox key={key.identifier} css={[tw`flex items-center`, index > 0 && tw`mt-3`]}>
                                 <div
-                                    css={tw`flex items-center justify-center w-10 h-10 rounded-xl bg-accent-purple bg-opacity-10 text-accent-purple`}
+                                    css={tw`flex items-center justify-center w-10 h-10 rounded-xl bg-accent-10 text-accent-purple`}
                                 >
                                     <FontAwesomeIcon icon={faKey} />
                                 </div>
                                 <div css={tw`ml-4 flex-1 overflow-hidden`}>
-                                    <p css={tw`text-sm break-words font-black tracking-tight`} style={{ color: 'var(--text-primary)' }}>
+                                    <p
+                                        css={tw`text-sm break-words font-black tracking-tight`}
+                                        style={{ color: 'var(--text-primary)' }}
+                                    >
                                         {key.description}
                                     </p>
-                                    <p css={tw`text-[10px] uppercase font-bold tracking-widest mt-1`} style={{ color: 'var(--text-secondary)' }}>
+                                    <p
+                                        css={tw`text-[10px] uppercase font-bold tracking-widest mt-1`}
+                                        style={{ color: 'var(--text-secondary)' }}
+                                    >
                                         Last used:&nbsp;
                                         {key.lastUsedAt ? format(key.lastUsedAt, 'MMM do, yyyy HH:mm') : 'Never'}
                                     </p>

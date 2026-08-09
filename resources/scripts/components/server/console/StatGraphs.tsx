@@ -4,7 +4,7 @@ import { SocketEvent } from '@/components/server/events';
 import useWebsocketEvent from '@/plugins/useWebsocketEvent';
 import { Line } from 'react-chartjs-2';
 import { useChart, useChartTickLabel } from '@/components/server/console/chart';
-import { hexToRgba } from '@/lib/helpers';
+import { useTheme } from '@/theme';
 import { bytesToString } from '@/lib/formatters';
 import { CloudDownloadIcon, CloudUploadIcon } from '@heroicons/react/solid';
 import ChartBlock from '@/components/server/console/ChartBlock';
@@ -14,14 +14,15 @@ export default () => {
     const status = ServerContext.useStoreState((state) => state.status.value);
     const limits = ServerContext.useStoreState((state) => state.server.data!.limits);
     const previous = useRef<Record<'tx' | 'rx', number>>({ tx: -1, rx: -1 });
+    const { accent } = useTheme();
 
     const cpu = useChartTickLabel('CPU', limits.cpu, '%', 2, {
-        border: '#7C3AED',
-        bg: hexToRgba('#7C3AED', 0.1),
+        border: accent,
+        bg: `rgba(var(--accent-rgb), 0.1)`,
     });
     const memory = useChartTickLabel('Memory', limits.memory, 'MiB', undefined, {
-        border: '#EC4899',
-        bg: hexToRgba('#EC4899', 0.1),
+        border: accent,
+        bg: `rgba(var(--accent-rgb), 0.1)`,
     });
     const network = useChart('Network', {
         sets: 2,
@@ -40,8 +41,8 @@ export default () => {
             return {
                 ...opts,
                 label: !index ? 'Network In' : 'Network Out',
-                borderColor: !index ? '#2299DD' : '#7C3AED',
-                backgroundColor: hexToRgba(!index ? '#2299DD' : '#7C3AED', 0.1),
+                borderColor: !index ? '#2299DD' : accent,
+                backgroundColor: `rgba(var(--accent-rgb), 0.1)`,
             };
         },
     });

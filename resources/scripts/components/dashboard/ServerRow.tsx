@@ -14,6 +14,7 @@ import {
     faCog,
     faHistory,
     faPauseCircle,
+    faHourglassHalf,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Server } from '@/api/server/getServer';
@@ -24,6 +25,7 @@ import GreyRowBox from '@/components/elements/GreyRowBox';
 import Spinner from '@/components/elements/Spinner';
 import styled, { keyframes } from 'styled-components/macro';
 import isEqual from 'react-fast-compare';
+import { format } from 'date-fns';
 
 // Determines if the current value is in an alarm threshold so we can show it in red rather
 // than the more faded default style.
@@ -31,7 +33,7 @@ const isAlarmState = (current: number, limit: number): boolean => limit > 0 && c
 
 const Icon = memo(
     styled(FontAwesomeIcon)<{ $alarm: boolean }>`
-        ${(props) => (props.$alarm ? 'color: #EF4444;' : 'color: #7C3AED;')};
+        ${(props) => (props.$alarm ? 'color: #EF4444;' : 'color: var(--accent);')};
     `,
     isEqual
 );
@@ -81,23 +83,23 @@ const StatusIndicatorBox = styled(GreyRowBox)<{ $status: ServerPowerState | unde
     }
 
     & .section-left {
-        ${tw`flex items-center gap-4 p-5 md:w-[300px] flex-shrink-0`};
+        ${tw`flex items-center gap-3 p-4 md:w-[240px] flex-shrink-0`};
         ${tw`border-b md:border-b-0 md:border-r`};
         border-color: var(--section-divider);
     }
 
     & .section-middle {
-        ${tw`flex-1 p-5 bg-transparent`};
+        ${tw`flex-1 p-4 bg-transparent`};
     }
 
     & .section-right {
-        ${tw`p-5 md:w-[400px] flex-shrink-0`};
+        ${tw`p-4 md:w-[320px] flex-shrink-0`};
         ${tw`border-t md:border-t-0 md:border-l`};
         border-color: var(--section-divider);
     }
 
     & .info-card {
-        ${tw`px-4 py-2 rounded-xl transition-all duration-200`};
+        ${tw`px-3 py-1.5 rounded-lg transition-all duration-200`};
         background-color: var(--info-card-bg);
         border: 1px solid var(--info-card-border);
 
@@ -132,6 +134,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
     const interval = useRef<Timer>(null) as React.MutableRefObject<Timer>;
     const [isSuspended, setIsSuspended] = useState(server.status === 'suspended');
     const [stats, setStats] = useState<ServerStats | null>(null);
+    const isExpired = server.expiresAt ? new Date(server.expiresAt).getTime() < Date.now() : false;
 
     const getStats = () =>
         getServerResourceUsage(server.uuid)
@@ -168,18 +171,18 @@ export default ({ server, className }: { server: Server; className?: string }) =
             {/* Left Section: Icon + Name */}
             <div className='section-left'>
                 <div
-                    css={tw`flex items-center justify-center w-12 h-12 rounded-2xl flex-shrink-0 shadow-sm`}
+                    css={tw`flex items-center justify-center w-10 h-10 rounded-xl flex-shrink-0 shadow-sm`}
                     style={{
-                        backgroundColor: 'rgba(124, 58, 237, 0.1)',
-                        border: '1px solid rgba(124, 58, 237, 0.2)',
+                        backgroundColor: 'rgba(var(--accent-rgb), 0.1)',
+                        border: '1px solid rgba(var(--accent-rgb), 0.2)',
                     }}
                 >
-                    <FontAwesomeIcon icon={faServer} css={tw`text-accent-purple text-lg`} />
+                    <FontAwesomeIcon icon={faServer} css={tw`text-accent-purple text-base`} />
                 </div>
                 <div css={tw`flex-1 min-w-0`}>
-                    <div css={tw`flex flex-col md:flex-row md:items-center gap-2 md:gap-4`}>
+                    <div css={tw`flex flex-col md:flex-row md:items-center gap-1 md:gap-3`}>
                         <p
-                            css={tw`text-base font-black truncate tracking-tight`}
+                            css={tw`text-sm font-black truncate tracking-tight`}
                             style={{ color: 'var(--text-primary)' }}
                         >
                             {server.name}
@@ -221,6 +224,13 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     ))}
                             </span>
                             <span>{server.node}</span>
+                            {server.expiresAt && (
+                                <span style={{ color: isExpired ? 'var(--status-error-text)' : 'var(--text-secondary)' }}>
+                                    <FontAwesomeIcon icon={faHourglassHalf} size={'xs'} />{' '}
+                                    {isExpired ? 'Expired ' : 'Expires '}
+                                    {format(new Date(server.expiresAt), 'dd MMM yyyy')}
+                                </span>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -240,10 +250,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                 Connection Endpoint
                             </span>
                         </div>
-                        <p
-                            css={tw`text-sm font-mono font-bold truncate`}
-                            style={{ color: 'var(--text-primary)' }}
-                        >
+                        <p css={tw`text-sm font-mono font-bold truncate`} style={{ color: 'var(--text-primary)' }}>
                             {server.allocations
                                 .filter((alloc) => alloc.isDefault)
                                 .map((allocation) => (
@@ -270,10 +277,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     Node
                                 </span>
                             </div>
-                            <p
-                                css={tw`text-xs font-bold truncate`}
-                                style={{ color: 'var(--text-primary)' }}
-                            >
+                            <p css={tw`text-xs font-bold truncate`} style={{ color: 'var(--text-primary)' }}>
                                 {server.node}
                             </p>
                         </div>
@@ -291,14 +295,39 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                     Networks
                                 </span>
                             </div>
-                            <p
-                                css={tw`text-xs font-bold`}
-                                style={{ color: 'var(--text-primary)' }}
-                            >
+                            <p css={tw`text-xs font-bold`} style={{ color: 'var(--text-primary)' }}>
                                 {server.allocations.length} allocated
                             </p>
                         </div>
                     </div>
+
+                    {server.expiresAt && (
+                        <div
+                            className='info-card'
+                            style={
+                                isExpired
+                                    ? { borderColor: 'var(--status-error-border)', backgroundColor: 'var(--status-error-bg)' }
+                                    : undefined
+                            }
+                        >
+                            <div css={tw`flex items-center gap-2 mb-1`}>
+                                <FontAwesomeIcon
+                                    icon={faHourglassHalf}
+                                    css={tw`text-[10px]`}
+                                    style={{ color: isExpired ? 'var(--status-error-text)' : 'var(--text-secondary)' }}
+                                />
+                                <span
+                                    css={tw`text-[10px] font-black uppercase tracking-widest`}
+                                    style={{ color: isExpired ? 'var(--status-error-text)' : 'var(--text-secondary)' }}
+                                >
+                                    {isExpired ? 'Expired' : 'Expires'}
+                                </span>
+                            </div>
+                            <p css={tw`text-xs font-bold`} style={{ color: isExpired ? 'var(--status-error-text)' : 'var(--text-primary)' }}>
+                                {format(new Date(server.expiresAt), 'dd MMM yyyy')}
+                            </p>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -353,10 +382,10 @@ export default ({ server, className }: { server: Server; className?: string }) =
                         )}
                     </div>
                 ) : (
-                    <div css={tw`flex flex-col md:flex-row items-center gap-6`}>
+                    <div css={tw`flex flex-col md:flex-row items-center gap-4`}>
                         {/* CPU */}
                         <div css={tw`flex-1 w-full md:w-28`}>
-                            <div css={tw`flex items-center justify-between mb-1.5`}>
+                            <div css={tw`flex items-center justify-between mb-1`}>
                                 <div css={tw`flex items-center gap-2`}>
                                     <Icon icon={faMicrochip} $alarm={alarms.cpu} css={tw`text-[10px]`} />
                                     <span
@@ -384,7 +413,9 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                             (stats.cpuUsagePercent / (server.limits.cpu || 100)) * 100,
                                             100
                                         )}%`,
-                                        background: alarms.cpu ? '#EF4444' : 'linear-gradient(90deg, #EC4899, #7C3AED)',
+                                        background: alarms.cpu
+                                            ? '#EF4444'
+                                            : 'linear-gradient(90deg, var(--accent), var(--accent))',
                                     }}
                                 />
                             </div>
@@ -422,7 +453,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                         )}%`,
                                         background: alarms.memory
                                             ? '#EF4444'
-                                            : 'linear-gradient(90deg, #EC4899, #7C3AED)',
+                                            : 'linear-gradient(90deg, var(--accent), var(--accent))',
                                     }}
                                 />
                             </div>
@@ -460,7 +491,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                         )}%`,
                                         background: alarms.disk
                                             ? '#EF4444'
-                                            : 'linear-gradient(90deg, #EC4899, #7C3AED)',
+                                            : 'linear-gradient(90deg, var(--accent), var(--accent))',
                                     }}
                                 />
                             </div>

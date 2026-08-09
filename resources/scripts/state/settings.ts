@@ -1,11 +1,26 @@
 import { action, Action } from 'easy-peasy';
 
+export interface LandingFeature {
+    icon: string;
+    title: string;
+    desc: string;
+}
+
 export interface SiteSettings {
     name: string;
     locale: string;
     recaptcha: {
         enabled: boolean;
         siteKey: string;
+    };
+    landing: {
+        brandName: string;
+        logoUrl: string;
+        heroBadge: string;
+        heroHeadline: string;
+        heroSubheadline: string;
+        features: LandingFeature[];
+        footerText: string;
     };
 }
 

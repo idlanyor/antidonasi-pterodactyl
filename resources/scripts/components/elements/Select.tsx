@@ -16,7 +16,7 @@ const Select = styled.select<Props>`
     background-color: var(--bg-input);
     border: 1px solid var(--border-input);
     color: var(--text-primary);
-    font-family: 'Satoshi', sans-serif;
+    font-family: 'Raleway', sans-serif;
     box-shadow: var(--shadow-input);
 
     &,

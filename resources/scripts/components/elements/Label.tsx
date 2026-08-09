@@ -5,7 +5,7 @@ const Label = styled.label<{ isLight?: boolean; variant?: 'default' | 'glass' }>
     ${tw`block text-sm mb-2`};
     color: var(--text-primary);
     font-weight: 700;
-    font-family: 'Satoshi', sans-serif;
+    font-family: 'Raleway', sans-serif;
 
     ${(props) =>
         props.variant === 'glass' &&

@@ -38,10 +38,7 @@ type ModalType = 'rename' | 'move' | 'chmod';
 const StyledRow = styled.div<{ $danger?: boolean }>`
     ${tw`p-2 flex items-center rounded transition-all duration-200`};
     color: var(--text-primary);
-    ${(props) =>
-        props.$danger
-            ? tw`hover:bg-red-100 hover:text-red-700`
-            : tw`hover:bg-neutral-100`};
+    ${(props) => (props.$danger ? tw`hover:bg-red-100 hover:text-red-700` : tw`hover:bg-neutral-100`)};
 `;
 
 interface RowProps extends React.HTMLAttributes<HTMLDivElement> {

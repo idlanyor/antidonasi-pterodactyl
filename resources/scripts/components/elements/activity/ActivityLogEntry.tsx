@@ -50,8 +50,12 @@ export default ({ activity, children }: Props) => {
             style={{
                 borderColor: 'var(--border-primary)',
             }}
-            onMouseOver={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--bg-hover)'; }}
-            onMouseOut={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = ''; }}
+            onMouseOver={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--bg-hover)';
+            }}
+            onMouseOut={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = '';
+            }}
         >
             <div className={'hidden sm:flex sm:col-span-1 items-center justify-center select-none'}>
                 <div
@@ -66,13 +70,18 @@ export default ({ activity, children }: Props) => {
             </div>
             <div className={'col-span-10 sm:col-span-9 flex'}>
                 <div className={'flex-1 px-6 sm:px-4'}>
-                    <div className={'flex items-center font-black tracking-tight'} style={{ color: 'var(--text-primary)' }}>
+                    <div
+                        className={'flex items-center font-black tracking-tight'}
+                        style={{ color: 'var(--text-primary)' }}
+                    >
                         <Tooltip placement={'top'} content={actor?.email || 'System User'}>
                             <span css={tw`hover:text-accent-purple transition-colors`}>
                                 {actor?.username || 'System'}
                             </span>
                         </Tooltip>
-                        <span className={'opacity-40'} style={{ color: 'var(--text-secondary)' }}>&nbsp;&mdash;&nbsp;</span>
+                        <span className={'opacity-40'} style={{ color: 'var(--text-secondary)' }}>
+                            &nbsp;&mdash;&nbsp;
+                        </span>
                         <Link
                             to={`#${pathTo({ event: activity.event })}`}
                             className={
@@ -95,14 +104,22 @@ export default ({ activity, children }: Props) => {
                             {children}
                         </div>
                     </div>
-                    <p className={classNames(style.description, 'font-bold text-sm mt-1')} style={{ color: 'var(--text-primary)' }}>
+                    <p
+                        className={classNames(style.description, 'font-bold text-sm mt-1')}
+                        style={{ color: 'var(--text-primary)' }}
+                    >
                         <Translate ns={'activity'} values={properties} i18nKey={activity.event.replace(':', '.')} />
                     </p>
-                    <div className={'mt-2 flex items-center text-xs font-bold'} style={{ color: 'var(--text-secondary)' }}>
+                    <div
+                        className={'mt-2 flex items-center text-xs font-bold'}
+                        style={{ color: 'var(--text-secondary)' }}
+                    >
                         {activity.ip && (
                             <span>
                                 {activity.ip}
-                                <span className={'opacity-40'} style={{ color: 'var(--text-secondary)' }}>&nbsp;|&nbsp;</span>
+                                <span className={'opacity-40'} style={{ color: 'var(--text-secondary)' }}>
+                                    &nbsp;|&nbsp;
+                                </span>
                             </span>
                         )}
                         <Tooltip placement={'right'} content={format(activity.timestamp, 'MMM do, yyyy H:mm:ss')}>

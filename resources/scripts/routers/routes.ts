@@ -13,6 +13,8 @@ import AccountApiContainer from '@/components/dashboard/AccountApiContainer';
 import AccountSSHContainer from '@/components/dashboard/ssh/AccountSSHContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
+import StoreContainer from '@/components/store/StoreContainer';
+import StoreOrdersContainer from '@/components/store/StoreOrdersContainer';
 
 // Each of the router files is already code split out appropriately — so
 // all of the items above will only be loaded in when that router is loaded.
@@ -38,6 +40,8 @@ interface ServerRouteDefinition extends RouteDefinition {
 interface Routes {
     // All of the routes available under "/account"
     account: RouteDefinition[];
+    // All of the routes available under "/store"
+    store: RouteDefinition[];
     // All of the routes available under "/server/:id"
     server: ServerRouteDefinition[];
 }
@@ -64,6 +68,19 @@ export default {
             path: '/activity',
             name: 'Activity',
             component: ActivityLogContainer,
+        },
+    ],
+    store: [
+        {
+            path: '/',
+            name: 'Store',
+            component: StoreContainer,
+            exact: true,
+        },
+        {
+            path: '/orders',
+            name: 'Riwayat',
+            component: StoreOrdersContainer,
         },
     ],
     server: [

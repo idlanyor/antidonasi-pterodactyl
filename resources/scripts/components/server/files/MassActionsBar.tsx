@@ -118,8 +118,8 @@ const MassActionsBar = () => {
                                 <Button
                                     onClick={onClickCompress}
                                     style={{
-                                        backgroundColor: '#8b5cf6',
-                                        border: '1px solid #7c3aed',
+                                        backgroundColor: 'var(--accent)',
+                                        border: '1px solid var(--accent)',
                                         color: '#ffffff',
                                         fontWeight: 600,
                                         boxShadow: 'none',

@@ -46,6 +46,21 @@ Route::prefix('/account')->middleware(AccountSubject::class)->group(function () 
 
 /*
 |--------------------------------------------------------------------------
+| Store API
+|--------------------------------------------------------------------------
+|
+| Endpoint: /api/client/store
+|
+*/
+Route::prefix('/store')->group(function () {
+    Route::get('/products', [Client\Store\StoreController::class, 'products']);
+    Route::post('/checkout', [Client\Store\StoreController::class, 'checkout']);
+    Route::post('/retry', [Client\Store\StoreController::class, 'retry']);
+    Route::get('/orders', [Client\Store\StoreController::class, 'orders']);
+});
+
+/*
+|--------------------------------------------------------------------------
 | Client Control API
 |--------------------------------------------------------------------------
 |

@@ -4,7 +4,7 @@ import { createGlobalStyle } from 'styled-components/macro';
 export default createGlobalStyle`
     body {
         ${tw`font-sans`};
-        font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         letter-spacing: 0.015em;
         min-height: 100vh;
         background-color: var(--bg-primary);
@@ -14,13 +14,13 @@ export default createGlobalStyle`
 
     h1, h2, h3, h4, h5, h6 {
         ${tw`font-bold tracking-tight font-header`};
-        font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         color: var(--text-primary);
     }
 
     p {
         ${tw`leading-relaxed font-sans font-bold`};
-        font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         color: var(--text-secondary);
     }
 

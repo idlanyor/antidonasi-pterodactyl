@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import tw from 'twin.macro';
+import { Link } from 'react-router-dom';
+import useSWR from 'swr';
+import Spinner from '@/components/elements/Spinner';
+import { StoreProduct } from '@/api/store';
+import http from '@/api/http';
 
 const Page = styled.div`
     ${tw`min-h-screen font-sans`};
@@ -10,11 +15,11 @@ const Page = styled.div`
 `;
 
 const Container = styled.div`
-    ${tw`max-w-5xl mx-auto px-6 py-16`};
+    ${tw`max-w-5xl mx-auto px-6 py-10`};
 `;
 
 const Card = styled.div`
-    ${tw`rounded-xl p-8 border`};
+    ${tw`rounded-xl p-6 border`};
     background-color: var(--bg-elevated);
     border-color: var(--border-primary);
     box-shadow: var(--shadow-lg);
@@ -32,7 +37,7 @@ const Row = styled.div`
     box-shadow: var(--shadow-sm);
 
     &:hover {
-        border-color: theme('colors.accent-purple');
+        border-color: var(--accent);
         transform: translateY(-2px);
         box-shadow: var(--shadow-md);
     }
@@ -44,110 +49,111 @@ const Badge = styled.span`
     background-color: var(--bg-hover);
 `;
 
-export default () => (
-    <Page>
-        <Container>
-            <div css={tw`mb-12 text-center`}>
-                <h1
-                    css={tw`text-5xl font-black tracking-tight`}
-                    style={{ color: 'var(--text-primary)' }}
-                >
-                    Panel Pricing
-                </h1>
-                <p css={tw`text-lg mt-3 font-bold`} style={{ color: 'var(--text-secondary)' }}>
-                    Premium resources at unbeatable prices.
-                </p>
-            </div>
+const BuyButton = styled(Link)`
+    ${tw`inline-flex items-center justify-center px-4 py-2 rounded-lg text-xs font-black text-white no-underline transition-all duration-300`};
+    background: var(--accent);
+    box-shadow: 0 10px 24px 0 rgba(var(--accent-rgb), 0.24);
 
-            <Card>
-                <Table>
-                    <Row>
-                        <Badge>100% CPU</Badge>
-                        <span css={tw`text-sm font-bold`} style={{ color: 'var(--text-primary)' }}>2 GB RAM · 3 GB Storage</span>
-                        <span css={tw`text-base font-black text-accent-purple`}>10.000</span>
-                    </Row>
-                    <Row>
-                        <Badge>200% CPU</Badge>
-                        <span css={tw`text-sm font-bold`} style={{ color: 'var(--text-primary)' }}>4 GB RAM · 5 GB Storage</span>
-                        <span css={tw`text-base font-black text-accent-purple`}>15.000</span>
-                    </Row>
-                    <Row>
-                        <Badge>300% CPU</Badge>
-                        <span css={tw`text-sm font-bold`} style={{ color: 'var(--text-primary)' }}>6 GB RAM · 7 GB Storage</span>
-                        <span css={tw`text-base font-black text-accent-purple`}>20.000</span>
-                    </Row>
-                    <Row>
-                        <Badge>400% CPU</Badge>
-                        <span css={tw`text-sm font-bold`} style={{ color: 'var(--text-primary)' }}>8 GB RAM · 10 GB Storage</span>
-                        <span css={tw`text-base font-black text-accent-purple`}>25.000</span>
-                    </Row>
-                    <Row>
-                        <Badge>500% CPU</Badge>
-                        <span css={tw`text-sm font-bold`} style={{ color: 'var(--text-primary)' }}>12 GB RAM · 12 GB Storage</span>
-                        <span css={tw`text-base font-black text-accent-purple`}>30.000</span>
-                    </Row>
-                    <Row>
-                        <Badge>600% CPU</Badge>
-                        <span css={tw`text-sm font-bold`} style={{ color: 'var(--text-primary)' }}>13 GB RAM · 20 GB Storage</span>
-                        <span css={tw`text-base font-black text-accent-purple`}>35.000</span>
-                    </Row>
-                    <Row>
-                        <Badge>700% CPU</Badge>
-                        <span css={tw`text-sm font-bold`} style={{ color: 'var(--text-primary)' }}>15 GB RAM · 25 GB Storage</span>
-                        <span css={tw`text-base font-black text-accent-purple`}>50.000</span>
-                    </Row>
-                </Table>
-            </Card>
+    &:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+`;
 
-            <div css={tw`mt-8 grid grid-cols-1 md:grid-cols-2 gap-8`}>
-                <Card>
-                    <h2
-                        css={tw`text-2xl font-black mb-4 tracking-tight`}
-                        style={{ color: 'var(--text-primary)' }}
-                    >
-                        Premium Benefits
-                    </h2>
-                    <ul css={tw`text-base font-bold space-y-3`} style={{ color: 'var(--text-secondary)' }}>
-                        <li className={'flex items-center gap-2'}>
-                            <span className={'text-accent-purple'}>✔</span> Bisa diperpanjang selamanya
-                        </li>
-                        <li className={'flex items-center gap-2'}>
-                            <span className={'text-accent-purple'}>✔</span> Garansi Full 30 Hari
-                        </li>
-                        <li className={'flex items-center gap-2'}>
-                            <span className={'text-accent-purple'}>✔</span> Network Speed 1.5-10 GB/s
-                        </li>
-                        <li className={'flex items-center gap-2'}>
-                            <span className={'text-accent-purple'}>✔</span> AMD Epyc Milan &amp; Intel High-End
-                        </li>
-                    </ul>
-                </Card>
-                <Card>
-                    <h2
-                        css={tw`text-2xl font-black mb-4 tracking-tight`}
-                        style={{ color: 'var(--text-primary)' }}
-                    >
-                        Usage Terms
-                    </h2>
-                    <p css={tw`text-base font-bold`} style={{ color: 'var(--text-secondary)' }}>
-                        Dilarang keras aktivitas ilegal (DDOS, Mining, Exploit). Pelanggaran berakibat suspend permanen.
+const formatPrice = (sen: number): string => 'RM ' + (sen / 100).toFixed(2);
+
+export default () => {
+    const { data: products, error } = useSWR<StoreProduct[]>('/api/store/public/products', () =>
+        http.get('/api/store/public/products').then(({ data }) => data.data)
+    );
+
+    return (
+        <Page>
+            <Container>
+                <div css={tw`mb-8 text-center`}>
+                    <h1 css={tw`text-3xl md:text-4xl font-black tracking-tight`} style={{ color: 'var(--text-primary)' }}>
+                        Panel Pricing
+                    </h1>
+                    <p css={tw`text-base mt-2 font-bold`} style={{ color: 'var(--text-secondary)' }}>
+                        Premium resources at unbeatable prices.
                     </p>
-                    <div css={tw`mt-8`}>
-                        <a
-                            href={'https://wa.me/62895395590009'}
-                            target={'_blank'}
-                            rel={'noreferrer'}
-                            css={tw`inline-flex items-center justify-center w-full py-4 rounded-xl text-white text-base font-black transition-all duration-300 shadow-md`}
-                            style={{
-                                background: 'linear-gradient(135deg, #EC4899 0%, #7C3AED 100%)',
-                                boxShadow: '0 14px 30px 0 rgba(168, 85, 247, 0.24)',
-                            }}
-                        >
-                            Hubungi Admin Sekarang
-                        </a>
-                    </div>
+                </div>
+
+                <Card>
+                    {!products && !error ? (
+                        <Spinner centered />
+                    ) : error ? (
+                        <p css={tw`text-center text-sm font-bold py-8`} style={{ color: 'var(--text-secondary)' }}>
+                            Gagal memuat paket. Coba lagi nanti.
+                        </p>
+                    ) : products!.length === 0 ? (
+                        <p css={tw`text-center text-sm font-bold py-8`} style={{ color: 'var(--text-secondary)' }}>
+                            Belum ada paket tersedia.
+                        </p>
+                    ) : (
+                        <Table>
+                            {products!.map((product) => (
+                                <Row key={product.id}>
+                                    <Badge>{product.cpu}% CPU</Badge>
+                                    <span css={tw`text-sm font-bold`} style={{ color: 'var(--text-primary)' }}>
+                                        {product.memory} MB RAM · {Math.round(product.disk / 1024)} GB Storage
+                                    </span>
+                                    <span css={tw`flex items-center gap-3`}>
+                                        <span css={tw`text-base font-black`} style={{ color: 'var(--accent)' }}>
+                                            {formatPrice(product.price)}
+                                        </span>
+                                        <BuyButton to={`/checkout/${product.id}`}>Beli</BuyButton>
+                                    </span>
+                                </Row>
+                            ))}
+                        </Table>
+                    )}
                 </Card>
-            </div>
-        </Container>
-    </Page>
-);
+
+                <div css={tw`mt-6 grid grid-cols-1 md:grid-cols-2 gap-6`}>
+                    <Card>
+                        <h2 css={tw`text-lg md:text-xl font-black mb-3 tracking-tight`} style={{ color: 'var(--text-primary)' }}>
+                            Premium Benefits
+                        </h2>
+                        <ul css={tw`text-sm font-bold space-y-2.5`} style={{ color: 'var(--text-secondary)' }}>
+                            <li className={'flex items-center gap-2'}>
+                                <span style={{ color: 'var(--accent)' }}>✔</span> Bisa diperpanjang selamanya
+                            </li>
+                            <li className={'flex items-center gap-2'}>
+                                <span style={{ color: 'var(--accent)' }}>✔</span> Garansi Full 30 Hari
+                            </li>
+                            <li className={'flex items-center gap-2'}>
+                                <span style={{ color: 'var(--accent)' }}>✔</span> Network Speed 1.5-10 GB/s
+                            </li>
+                            <li className={'flex items-center gap-2'}>
+                                <span style={{ color: 'var(--accent)' }}>✔</span> AMD Epyc Milan &amp; Intel High-End
+                            </li>
+                        </ul>
+                    </Card>
+                    <Card>
+                        <h2 css={tw`text-2xl font-black mb-4 tracking-tight`} style={{ color: 'var(--text-primary)' }}>
+                            Usage Terms
+                        </h2>
+                        <p css={tw`text-base font-bold`} style={{ color: 'var(--text-secondary)' }}>
+                            Dilarang keras aktivitas ilegal (DDOS, Mining, Exploit). Pelanggaran berakibat suspend permanen.
+                        </p>
+                        <div css={tw`mt-6`}>
+                            <a
+                                href={'https://wa.me/62895395590009'}
+                                target={'_blank'}
+                                rel={'noreferrer'}
+                                css={tw`inline-flex items-center justify-center w-full py-2.5 rounded-xl text-white text-sm font-black transition-all duration-300 shadow-md`}
+                                style={{
+                                    background: 'linear-gradient(135deg, var(--accent) 0%, var(--accent) 100%)',
+                                    boxShadow: '0 14px 30px 0 rgba(var(--accent-rgb), 0.24)',
+                                }}
+                            >
+                                Hubungi Admin Sekarang
+                            </a>
+                        </div>
+                    </Card>
+                </div>
+            </Container>
+        </Page>
+    );
+};

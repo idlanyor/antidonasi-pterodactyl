@@ -131,7 +131,7 @@ const Modal: React.FC<ModalProps> = ({
                         </Fade>
                     )}
                     <div
-                        css={tw`p-6 sm:p-8 md:p-10 rounded-xl overflow-y-scroll transition-all duration-300`}
+                        css={tw`p-5 sm:p-6 md:p-6 rounded-xl overflow-y-scroll transition-all duration-300`}
                         style={{
                             backgroundColor: 'var(--modal-bg)',
                             border: '1px solid var(--border-primary)',

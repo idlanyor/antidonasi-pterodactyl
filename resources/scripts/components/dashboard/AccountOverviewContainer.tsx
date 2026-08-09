@@ -14,16 +14,16 @@ const Container = styled.div`
 `;
 
 const HeaderContainer = styled.div`
-    ${tw`mb-10`};
+    ${tw`mb-6`};
 
     h1 {
-        ${tw`text-5xl font-black tracking-tight`};
-        font-family: 'Satoshi', sans-serif;
+        ${tw`text-2xl md:text-3xl font-black tracking-tight`};
+        font-family: 'Raleway', sans-serif;
         color: var(--text-primary);
     }
 
     p {
-        ${tw`mt-3 text-lg font-bold leading-relaxed`};
+        ${tw`mt-1 text-sm md:text-base font-bold leading-relaxed`};
         color: var(--text-secondary);
     }
 `;

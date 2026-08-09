@@ -43,19 +43,19 @@ const ModernStyles = styled.div`
 `;
 
 const LogoWrapper = styled(motion.div)`
-    ${tw`mb-8 flex flex-col items-center`};
+    ${tw`mb-6 flex flex-col items-center`};
 
     img {
-        ${tw`w-16 h-16 rounded-2xl mb-4 shadow-xl`};
+        ${tw`w-14 h-14 rounded-xl mb-3 shadow-xl`};
         background: var(--bg-elevated);
         padding: 0.5rem;
         border: 1px solid var(--border-primary);
     }
 
     h1 {
-        ${tw`text-3xl font-black tracking-tight text-center`};
+        ${tw`text-2xl font-black tracking-tight text-center`};
         color: var(--text-primary);
-        font-family: 'Satoshi', sans-serif;
+        font-family: 'Raleway', sans-serif;
     }
 
     p {
@@ -83,7 +83,7 @@ export default forwardRef<HTMLFormElement, Props>(({ title, description, ...prop
                 </ModernStyles>
             </Card>
         </Form>
-        <div className={'mt-8 w-full text-center'}>
+        <div className={'mt-6 w-full text-center'}>
             <p className={'text-sm font-bold'} style={{ color: 'var(--text-secondary)' }}>
                 Lihat paket dan harga:{' '}
                 <Link
@@ -96,7 +96,7 @@ export default forwardRef<HTMLFormElement, Props>(({ title, description, ...prop
             </p>
         </div>
         <motion.p
-            css={tw`text-center text-[10px] mt-12 uppercase tracking-[0.2em] font-bold`}
+            css={tw`text-center text-[10px] mt-8 uppercase tracking-[0.2em] font-bold`}
             style={{ color: 'var(--text-muted)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

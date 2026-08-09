@@ -46,12 +46,14 @@ class VerifyReCaptcha
             }
         }
 
-        $this->dispatcher->dispatch(
-            new FailedCaptcha(
-                $request->ip(),
-                !empty($result) ? ($result->hostname ?? null) : null
-            )
-        );
+        if (!empty($result) && ($result->hostname ?? null) !== null) {
+            $this->dispatcher->dispatch(
+                new FailedCaptcha(
+                    $request->ip(),
+                    $result->hostname
+                )
+            );
+        }
 
         throw new HttpException(Response::HTTP_BAD_REQUEST, 'Failed to validate reCAPTCHA data.');
     }

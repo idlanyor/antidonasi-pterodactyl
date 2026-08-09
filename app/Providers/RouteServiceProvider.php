@@ -36,6 +36,9 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('database', Database::class);
 
         $this->routes(function () {
+            // Public store payment webhooks — no auth/session required so gateways can call in.
+            Route::middleware('web')->prefix('/api')->group(base_path('routes/store-callback.php'));
+
             Route::middleware('web')->group(function () {
                 Route::middleware(['auth.session', RequireTwoFactorAuthentication::class])
                     ->group(base_path('routes/base.php'));

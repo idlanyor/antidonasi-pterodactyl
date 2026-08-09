@@ -62,16 +62,16 @@ export default () => {
         <SidebarWrapper>
             <SpinnerOverlay visible={isLoggingOut} />
             <SidebarInner>
-                <div css={tw`px-4 py-5`} style={{ borderBottom: '1px solid var(--sidebar-border)' }}>
+                <div css={tw`px-4 py-3.5`} style={{ borderBottom: '1px solid var(--sidebar-border)' }}>
                     <Link
                         to={'/'}
-                        className={'text-lg font-semibold no-underline'}
+                        className={'text-base font-semibold no-underline'}
                         style={{ color: 'var(--text-primary)' }}
                     >
                         {name}
                     </Link>
                 </div>
-                <nav css={tw`flex-1 py-3`}>
+                <nav css={tw`flex-1 py-2.5`}>
                     <NavItem exact to={'/'}>
                         <FontAwesomeIcon icon={faLayerGroup} />
                         Dashboard

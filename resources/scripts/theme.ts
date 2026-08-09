@@ -11,5 +11,5 @@ export const breakpoint: BreakpointFunction<Breakpoints> = createBreakpoint<Brea
 
 // Re-export theme utilities from the theme/ directory
 export { ThemeProvider, useTheme } from './theme/ThemeContext';
-export { lightTheme, darkTheme } from './theme/themeVariables';
-export type { ThemeMode, ThemeVariables } from './theme/themeVariables';
+export { lightTheme, darkTheme, ACCENT_PRESETS, DEFAULT_ACCENT, hexToRgbString } from './theme/themeVariables';
+export type { ThemeMode, ThemeVariables, AccentPreset } from './theme/themeVariables';

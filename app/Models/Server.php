@@ -198,6 +198,7 @@ class Server extends Model implements Identifiable
         self::UPDATED_AT => 'datetime',
         'deleted_at' => 'datetime',
         'installed_at' => 'datetime',
+        'expires_at' => 'datetime',
     ];
 
     /**

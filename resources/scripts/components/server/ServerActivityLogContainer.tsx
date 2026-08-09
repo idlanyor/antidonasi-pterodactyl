@@ -44,8 +44,12 @@ export default () => {
                             color: 'var(--text-secondary)',
                             borderColor: 'var(--border-primary)',
                         }}
-                        onMouseOver={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--bg-hover)'; }}
-                        onMouseOut={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--bg-tertiary)'; }}
+                        onMouseOver={(e) => {
+                            (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--bg-hover)';
+                        }}
+                        onMouseOut={(e) => {
+                            (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--bg-tertiary)';
+                        }}
                         onClick={() => setFilters((value) => ({ ...value, filters: {} }))}
                     >
                         Clear Filters <XCircleIcon className={'w-4 h-4 ml-2'} />

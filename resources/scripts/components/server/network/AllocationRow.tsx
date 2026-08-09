@@ -65,7 +65,7 @@ const AllocationRow = ({ allocation }: Props) => {
     return (
         <GreyRowBox $hoverable={false} className={'flex-wrap md:flex-nowrap'}>
             <div className={'flex items-center w-full md:w-auto'}>
-                <div className={'pl-4 pr-6'} style={{ color: '#7C3AED' }}>
+                <div className={'pl-4 pr-6'} style={{ color: 'var(--accent)' }}>
                     <FontAwesomeIcon icon={faNetworkWired} />
                 </div>
                 <div className={'mr-4 flex-1 md:w-48'}>

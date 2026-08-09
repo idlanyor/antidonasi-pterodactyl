@@ -8,9 +8,7 @@ import ScheduleCronRow from '@/components/server/schedules/ScheduleCronRow';
 
 export default ({ schedule }: { schedule: Schedule }) => (
     <>
-        <div
-            css={tw`hidden md:flex items-center justify-center w-12 h-12 rounded-xl bg-accent-purple bg-opacity-10 text-accent-purple`}
-        >
+        <div css={tw`hidden md:flex items-center justify-center w-12 h-12 rounded-xl bg-accent-10 text-accent-purple`}>
             <FontAwesomeIcon icon={faCalendarAlt} />
         </div>
         <div css={tw`flex-1 md:ml-6`}>

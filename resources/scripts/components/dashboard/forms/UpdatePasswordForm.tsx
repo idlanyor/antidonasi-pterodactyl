@@ -90,7 +90,7 @@ export default () => {
                                     label={'Confirm New Password'}
                                 />
                             </div>
-                            <div css={tw`mt-8 text-right`}>
+                            <div css={tw`mt-5 text-right`}>
                                 <Button disabled={isSubmitting || !isValid} size={'large'} css={tw`w-full sm:w-auto`}>
                                     Update Password
                                 </Button>

@@ -28,7 +28,7 @@ const Container = styled.div<{ glass?: boolean }>`
 `;
 
 const Header = styled.div<{ glass?: boolean }>`
-    ${tw`rounded-t-xl p-4 lg:p-6`};
+    ${tw`rounded-t-xl p-3.5 lg:p-4`};
     background-color: var(--bg-tertiary);
     border-bottom: 1px solid var(--border-primary);
     color: var(--text-primary);
@@ -39,18 +39,15 @@ const TitledGreyBox = ({ icon, title, children, className, glass }: Props) => (
     <Container glass={glass} className={className}>
         <Header glass={glass}>
             {typeof title === 'string' ? (
-                <p
-                    css={tw`text-[11px] uppercase font-black tracking-widest`}
-                    style={{ color: 'var(--text-primary)' }}
-                >
-                    {icon && <FontAwesomeIcon icon={icon} css={tw`mr-3`} style={{ color: '#7C3AED' }} />}
+                <p css={tw`text-[11px] uppercase font-black tracking-widest`} style={{ color: 'var(--text-primary)' }}>
+                    {icon && <FontAwesomeIcon icon={icon} css={tw`mr-3`} style={{ color: 'var(--accent)' }} />}
                     {title}
                 </p>
             ) : (
                 title
             )}
         </Header>
-        <div css={tw`p-4 lg:p-6`}>{children}</div>
+        <div css={tw`p-4`}>{children}</div>
     </Container>
 );
 

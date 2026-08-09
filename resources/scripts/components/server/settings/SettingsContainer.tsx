@@ -28,25 +28,25 @@ export default () => {
             <div css={tw`md:flex`}>
                 <div css={tw`w-full md:flex-1 md:mr-10`}>
                     <Can action={'file.sftp'}>
-                        <TitledGreyBox title={'SFTP Details'} css={tw`mb-8 md:mb-12`}>
+                        <TitledGreyBox title={'SFTP Details'} css={tw`mb-5 md:mb-8`}>
                             <div>
                                 <Label>Server Address</Label>
                                 <CopyOnClick text={`sftp://${ip(sftp.ip)}:${sftp.port}`}>
                                     <Input type={'text'} value={`sftp://${ip(sftp.ip)}:${sftp.port}`} readOnly />
                                 </CopyOnClick>
                             </div>
-                            <div css={tw`mt-8`}>
+                            <div css={tw`mt-5`}>
                                 <Label>Username</Label>
                                 <CopyOnClick text={`${username}.${id}`}>
                                     <Input type={'text'} value={`${username}.${id}`} readOnly />
                                 </CopyOnClick>
                             </div>
-                            <div css={tw`mt-10 flex flex-col md:flex-row items-center gap-6`}>
+                            <div css={tw`mt-6 flex flex-col md:flex-row items-center gap-4`}>
                                 <div css={tw`flex-1 w-full`}>
                                     <div
-                                        css={tw`p-4 rounded-xl border border-accent-purple border-opacity-20`}
+                                        css={tw`p-4 rounded-xl border border-accent-20`}
                                         style={{
-                                            background: 'rgba(124, 58, 237, 0.05)',
+                                            background: 'rgba(var(--accent-rgb), 0.05)',
                                         }}
                                     >
                                         <p css={tw`text-xs leading-relaxed text-neutral-500 font-bold`}>
@@ -67,15 +67,15 @@ export default () => {
                             </div>
                         </TitledGreyBox>
                     </Can>
-                    <TitledGreyBox title={'Debug Information'} css={tw`mb-8 md:mb-12`}>
+                    <TitledGreyBox title={'Debug Information'} css={tw`mb-5 md:mb-8`}>
                         <div css={tw`flex items-center justify-between text-sm`}>
                             <p css={tw`text-neutral-500 font-black uppercase tracking-widest text-[10px]`}>Node</p>
                             <code
                                 css={tw`font-mono rounded-xl py-1.5 px-4 font-black text-xs`}
                                 style={{
-                                    background: 'rgba(124, 58, 237, 0.1)',
-                                    color: '#7C3AED',
-                                    border: '1px solid rgba(124, 58, 237, 0.2)',
+                                    background: 'rgba(var(--accent-rgb), 0.1)',
+                                    color: 'var(--accent)',
+                                    border: '1px solid rgba(var(--accent-rgb), 0.2)',
                                 }}
                             >
                                 {node}
@@ -89,9 +89,9 @@ export default () => {
                                 <code
                                     css={tw`font-mono rounded-xl py-1.5 px-4 font-black text-xs`}
                                     style={{
-                                        background: 'rgba(236, 72, 153, 0.1)',
-                                        color: '#EC4899',
-                                        border: '1px solid rgba(236, 72, 153, 0.2)',
+                                        background: 'rgba(var(--accent-rgb), 0.1)',
+                                        color: 'var(--accent)',
+                                        border: '1px solid rgba(var(--accent-rgb), 0.2)',
                                     }}
                                 >
                                     {uuid}
@@ -100,9 +100,9 @@ export default () => {
                         </CopyOnClick>
                     </TitledGreyBox>
                 </div>
-                <div css={tw`w-full mt-6 md:flex-1 md:mt-0`}>
+                <div css={tw`w-full mt-5 md:flex-1 md:mt-0`}>
                     <Can action={'settings.rename'}>
-                        <div css={tw`mb-6 md:mb-10`}>
+                        <div css={tw`mb-4 md:mb-6`}>
                             <RenameServerBox />
                         </div>
                     </Can>

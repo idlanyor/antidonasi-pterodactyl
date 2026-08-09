@@ -28,7 +28,7 @@ export default ({ title, legend, children }: ChartBlockProps) => (
         >
             <h3
                 className={'text-xs font-black uppercase tracking-widest'}
-                style={{ fontFamily: "'Satoshi', sans-serif", color: 'var(--text-primary)' }}
+                style={{ fontFamily: "'Raleway', sans-serif", color: 'var(--text-primary)' }}
             >
                 {title}
             </h3>

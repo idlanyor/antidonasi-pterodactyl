@@ -49,7 +49,10 @@ const FileObjectRow = ({ file }: { file: FileObject }) => (
     >
         <SelectFileCheckbox name={file.name} />
         <Clickable file={file}>
-            <div css={tw`flex-none ml-6 mr-4 text-lg pl-3`} style={{ color: file.isFile ? '#7C3AED' : '#10B981' }}>
+            <div
+                css={tw`flex-none ml-6 mr-4 text-lg pl-3`}
+                style={{ color: file.isFile ? 'var(--accent)' : '#10B981' }}
+            >
                 {file.isFile ? (
                     <FontAwesomeIcon
                         icon={file.isSymlink ? faFileImport : file.isArchiveType() ? faFileArchive : faFileAlt}
@@ -58,9 +61,14 @@ const FileObjectRow = ({ file }: { file: FileObject }) => (
                     <FontAwesomeIcon icon={faFolder} />
                 )}
             </div>
-            <div css={tw`flex-1 truncate font-black tracking-tight`} style={{ color: 'var(--text-primary)' }}>{file.name}</div>
+            <div css={tw`flex-1 truncate font-black tracking-tight`} style={{ color: 'var(--text-primary)' }}>
+                {file.name}
+            </div>
             {file.isFile && (
-                <div css={tw`w-1/6 text-right mr-4 hidden sm:block text-xs font-mono font-bold`} style={{ color: 'var(--text-secondary)' }}>
+                <div
+                    css={tw`w-1/6 text-right mr-4 hidden sm:block text-xs font-mono font-bold`}
+                    style={{ color: 'var(--text-secondary)' }}
+                >
                     {bytesToString(file.size)}
                 </div>
             )}

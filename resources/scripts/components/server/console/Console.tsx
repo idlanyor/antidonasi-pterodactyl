@@ -238,7 +238,7 @@ export default () => {
                         <h3
                             className={'text-sm font-black truncate tracking-tight'}
                             style={{
-                                fontFamily: "'Satoshi', sans-serif",
+                                fontFamily: "'Raleway', sans-serif",
                                 color: 'var(--text-primary)',
                             }}
                         >
@@ -276,7 +276,7 @@ export default () => {
                                 background: 'var(--bg-tertiary)',
                                 color: 'var(--text-secondary)',
                                 border: '1px solid var(--border-primary)',
-                                fontFamily: "'Satoshi', sans-serif",
+                                fontFamily: "'Raleway', sans-serif",
                             }}
                         >
                             Clear
@@ -290,7 +290,7 @@ export default () => {
                                 background: 'var(--bg-tertiary)',
                                 color: 'var(--text-secondary)',
                                 border: '1px solid var(--border-primary)',
-                                fontFamily: "'Satoshi', sans-serif",
+                                fontFamily: "'Raleway', sans-serif",
                             }}
                         >
                             Find

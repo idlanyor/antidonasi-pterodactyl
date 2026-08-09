@@ -27,7 +27,7 @@ export default styled.div<{ $hoverable?: boolean; $variant?: 'default' | 'glass'
     & .icon {
         ${tw`rounded-xl w-12 h-12 flex items-center justify-center p-3`};
         background: var(--icon-bg);
-        color: #7c3aed;
+        color: var(--accent);
         border: 1px solid var(--icon-border);
     }
 

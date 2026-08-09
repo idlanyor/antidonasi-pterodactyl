@@ -57,7 +57,7 @@ const ScreenBlock = ({ title, image, message, onBack, onRetry }: ScreenBlockProp
                             onClick={() => (onRetry ? onRetry() : onBack ? onBack() : null)}
                             className={onRetry ? 'hover:spin' : undefined}
                             style={{
-                                background: 'linear-gradient(135deg, #EC4899 0%, #7C3AED 100%)',
+                                background: 'linear-gradient(135deg, var(--accent) 0%, var(--accent) 100%)',
                                 border: 'none',
                                 color: '#FFFFFF',
                                 width: '40px',
@@ -71,16 +71,10 @@ const ScreenBlock = ({ title, image, message, onBack, onRetry }: ScreenBlockProp
                     </div>
                 )}
                 <img src={image} css={tw`w-2/3 h-auto select-none mx-auto`} />
-                <h2
-                    css={tw`mt-10 font-black text-5xl tracking-tight`}
-                    style={{ color: 'var(--text-primary)' }}
-                >
+                <h2 css={tw`mt-10 font-black text-5xl tracking-tight`} style={{ color: 'var(--text-primary)' }}>
                     {title}
                 </h2>
-                <p
-                    css={tw`text-base mt-4 font-bold leading-relaxed`}
-                    style={{ color: 'var(--text-secondary)' }}
-                >
+                <p css={tw`text-base mt-4 font-bold leading-relaxed`} style={{ color: 'var(--text-secondary)' }}>
                     {message}
                 </p>
             </div>

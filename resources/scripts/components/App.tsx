@@ -13,6 +13,7 @@ import { setupInterceptors } from '@/api/interceptors';
 import AuthenticatedRoute from '@/components/elements/AuthenticatedRoute';
 import { ServerContext } from '@/state/server';
 import { ThemeProvider } from '@/theme';
+import FloatingAccentPicker from '@/components/elements/FloatingAccentPicker';
 import '@/assets/tailwind.css';
 import Spinner from '@/components/elements/Spinner';
 
@@ -21,6 +22,8 @@ const ServerRouter = lazy(() => import(/* webpackChunkName: "server" */ '@/route
 const AuthenticationRouter = lazy(() => import(/* webpackChunkName: "auth" */ '@/routers/AuthenticationRouter'));
 const PricingPage = lazy(() => import(/* webpackChunkName: "pricing" */ '@/components/PricingPage'));
 const LandingPage = lazy(() => import(/* webpackChunkName: "landing" */ '@/components/LandingPage'));
+const StoreCheckout = lazy(() => import(/* webpackChunkName: "store-checkout" */ '@/components/store/StoreCheckoutContainer'));
+const StoreCheckoutSuccess = lazy(() => import(/* webpackChunkName: "store-checkout" */ '@/components/store/StoreCheckoutSuccessContainer'));
 
 interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
@@ -64,6 +67,7 @@ const App = () => {
             <GlobalStylesheet />
             <StoreProvider store={store}>
                 <ProgressBar />
+                <FloatingAccentPicker />
                 <div css={tw`mx-auto w-auto`}>
                     <Router history={history}>
                         <Switch>
@@ -80,6 +84,16 @@ const App = () => {
                             <Route path={'/pricing'}>
                                 <Spinner.Suspense>
                                     <PricingPage />
+                                </Spinner.Suspense>
+                            </Route>
+                            <Route path={'/checkout/success/:id'}>
+                                <Spinner.Suspense>
+                                    <StoreCheckoutSuccess />
+                                </Spinner.Suspense>
+                            </Route>
+                            <Route path={'/checkout/:id'}>
+                                <Spinner.Suspense>
+                                    <StoreCheckout />
                                 </Spinner.Suspense>
                             </Route>
                             <AuthenticatedRoute path={'/server/:id'}>

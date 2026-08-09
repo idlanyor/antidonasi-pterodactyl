@@ -40,9 +40,13 @@ export default ({ renderLeft, withinFileEditor, isNewFile }: Props) => {
     return (
         <div
             css={tw`flex flex-grow-0 items-center text-sm overflow-x-hidden`}
-            style={{ color: 'var(--text-secondary)', fontFamily: "'Satoshi', sans-serif" }}
+            style={{ color: 'var(--text-secondary)', fontFamily: "'Raleway', sans-serif" }}
         >
-            {renderLeft || <div css={tw`w-12`} />}/<span css={tw`px-1 font-black`} style={{ color: 'var(--text-primary)' }}>home</span>/
+            {renderLeft || <div css={tw`w-12`} />}/
+            <span css={tw`px-1 font-black`} style={{ color: 'var(--text-primary)' }}>
+                home
+            </span>
+            /
             <NavLink
                 to={`/server/${id}/files`}
                 css={tw`px-1 no-underline transition-colors duration-300 hover:text-accent-purple font-black`}
@@ -70,7 +74,9 @@ export default ({ renderLeft, withinFileEditor, isNewFile }: Props) => {
             )}
             {file && (
                 <React.Fragment>
-                    <span css={tw`px-1 font-black`} style={{ color: 'var(--text-primary)' }}>{file}</span>
+                    <span css={tw`px-1 font-black`} style={{ color: 'var(--text-primary)' }}>
+                        {file}
+                    </span>
                 </React.Fragment>
             )}
         </div>

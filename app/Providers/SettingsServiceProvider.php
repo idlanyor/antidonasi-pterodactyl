@@ -30,6 +30,22 @@ class SettingsServiceProvider extends ServiceProvider
         'pterodactyl:client_features:allocations:enabled',
         'pterodactyl:client_features:allocations:range_start',
         'pterodactyl:client_features:allocations:range_end',
+        // Landing page content (editable via admin panel).
+        'landing:brand_name',
+        'landing:logo_url',
+        'landing:hero_badge',
+        'landing:hero_headline',
+        'landing:hero_subheadline',
+        'landing:feature_1_icon',
+        'landing:feature_1_title',
+        'landing:feature_1_desc',
+        'landing:feature_2_icon',
+        'landing:feature_2_title',
+        'landing:feature_2_desc',
+        'landing:feature_3_icon',
+        'landing:feature_3_title',
+        'landing:feature_3_desc',
+        'landing:footer_text',
     ];
 
     /**

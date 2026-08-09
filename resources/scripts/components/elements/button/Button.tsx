@@ -6,7 +6,7 @@ import { ButtonProps } from '@/components/elements/button/types';
 
 const ButtonStyle = styled.button<Omit<ButtonProps, 'isLoading'>>`
     ${tw`relative inline-flex items-center justify-center font-bold transition-all duration-300 border-none outline-none cursor-pointer`};
-    font-family: 'Satoshi', sans-serif;
+    font-family: 'Raleway', sans-serif;
 
     /* Sizes */
     ${(props) => (!props.size || props.size === 'small') && tw`px-5 py-2.5 text-[12px] rounded-lg h-[36px]`};
@@ -19,19 +19,18 @@ const ButtonStyle = styled.button<Omit<ButtonProps, 'isLoading'>>`
         ((!props.isSecondary && !props.color) || props.color === 'primary') &&
         css`
             ${tw`text-white shadow-md`};
-            background: theme('colors.accent-pink');
-            background: linear-gradient(135deg, #ec4899 0%, #7c3aed 100%);
-            box-shadow: 0 14px 30px 0 rgba(168, 85, 247, 0.24);
+            background: var(--accent);
+            box-shadow: 0 14px 30px 0 rgba(var(--accent-rgb), 0.24);
 
             &:hover:not(:disabled) {
                 opacity: 0.9;
-                box-shadow: 0 18px 36px 0 rgba(168, 85, 247, 0.32);
+                box-shadow: 0 18px 36px 0 rgba(var(--accent-rgb), 0.32);
                 transform: translateY(-1px);
             }
 
             &:active:not(:disabled) {
                 opacity: 0.85;
-                box-shadow: 0 8px 20px 0 rgba(168, 85, 247, 0.2);
+                box-shadow: 0 8px 20px 0 rgba(var(--accent-rgb), 0.2);
                 transform: translateY(0);
             }
         `};

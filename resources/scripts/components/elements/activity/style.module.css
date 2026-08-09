@@ -14,7 +14,7 @@
     @apply mt-2 text-sm break-words line-clamp-2 pr-4;
     color: var(--text-primary);
     font-weight: 700;
-    font-family: 'Satoshi', sans-serif;
+    font-family: 'Raleway', sans-serif;
 
     & strong {
         color: var(--text-primary);
